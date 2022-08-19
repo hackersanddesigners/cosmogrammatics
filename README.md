@@ -39,6 +39,10 @@ Otherwise you can use something like [valet](https://laravel.com/docs/9.x/valet)
 
 Check [Kirby's own guide](https://getkirby.com/docs/guide/quickstart#requirements) as a reference.
 
+## Authors
+
+[Hackers & Designers](https://github.com/hackersanddesigners/cosmo.git) ([André](https://andrefincato.com/), [Anja](https://www.anjagroten.info/), [Karl](https://moubarak.eu/))
+
 ## License
 
 (TBD)
