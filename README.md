@@ -38,3 +38,9 @@ php -S localhost:8000 kirby/router.php
 Otherwise you can use something like [valet](https://laravel.com/docs/9.x/valet) or anything else [listed here](https://getkirby.com/docs/cookbook/setup/development-environment).
 
 Check [Kirby's own guide](https://getkirby.com/docs/guide/quickstart#requirements) as a reference.
+
+## License
+
+(TBD)
+
+Copyleft with a difference: This is a collective work, you are invited to copy, distribute, and modify it under the terms of the [CC4r](./LICENSE).
