@@ -1,0 +1,6 @@
+type: pages
+headline: Articles
+parent: site.find('articles')
+info: "{{ page.title }}"
+template: article
+empty: No article yet

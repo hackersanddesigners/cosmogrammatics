@@ -1,5 +1,12 @@
 title: Site
 
-sections:
-  pages:
-    type: pages
+columns:
+  - width: 1/2
+    sections:
+      pages:
+        label: All pages
+        type: pages
+
+  - width: 1/2
+    sections:
+      articles: sections/article
