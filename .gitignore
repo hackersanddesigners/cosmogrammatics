@@ -54,3 +54,5 @@ Icon
 content
 kirby
 vendor
+
+/site/plugins/*
