@@ -1,4 +1,9 @@
 title: Articles
-options:
-  preview: false
+# options:
+#   preview: false
 
+# fields:
+#   redirect: true
+
+sections:
+  articles: sections/article

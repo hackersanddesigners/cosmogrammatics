@@ -7,6 +7,6 @@ columns:
         label: All pages
         type: pages
 
-  - width: 1/2
+  - width: 1/1
     sections:
       articles: sections/article
