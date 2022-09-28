@@ -1,0 +1,3 @@
+[submodule "kirby-redirect"]
+	path = site/plugins/kirby-redirect
+	url = https://github.com/medienbaecker/kirby-redirect.git

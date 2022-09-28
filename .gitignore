@@ -56,3 +56,5 @@ kirby
 vendor
 
 /site/plugins/*
+!/site/plugins/kirby-redirect
+

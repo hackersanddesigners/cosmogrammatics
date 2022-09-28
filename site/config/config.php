@@ -1,6 +1,9 @@
 <?php 
 return [
     'debug' => true,
+    // 'panel' => [
+    //     'css' => 'assets/css/styles-panel.css'
+    // ],
     'gearsdigital.enhanced-toolbar-link-dialog' => [
         'title' => '{{ page.title }}',
         'filter' => null,
