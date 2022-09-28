@@ -9,6 +9,8 @@ columns:
         fieldsets:
           - heading
           - text
+          - quote
+          - list
           - image
           - gallery
 
