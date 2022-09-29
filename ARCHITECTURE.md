@@ -32,3 +32,64 @@ The most straightforward way to go with this would be to ouput Kirby block's ID 
 We probably need a second ID (eg a sequence number) to order and count the comments added to a certain block, so that we can save and display them in the correct order.
 
 A full spec of the SQL table will be added soon once more work is done.
+
+## SQLite structure
+
+We need several tables to store comments from a specific article, roughly following this schema:
+
++ table comment
+  - id INT
+  - user VARCHAR (30) // set max length based on UUID or hash max size?
+  - timestamp INTEGER (unix time)
+  - text TEXT
+  - slug VARCHAR (185) // set max lenght
+  - title VARCHAR (185)
+  - status VARCHAR (8)
+  - children_id (table) INT
+    FOREIGN KEY (children_id) REFERENCES children (children_id)
+  - anchor_id (table) INT 
+    FOREIGN KEY (anchor_id) REFERENCES anchor (anchor_id)
+
++ table anchor
+  - id INT ?
+  - cosmogram id (slug?) INT / VARCHAR
+  - block id INT / VARCHAR
+  - block_type VARCHAR (?)
+  - selection_text (table) INT
+    FOREIGN KEY (selection_text) REFERENCES text (selection_text)
+  - selection_image (table) INT
+    FOREIGN KEY (selection_image) REFERENCES image (selection_image)
+  - selection_audio (table) INT
+    FOREIGN KEY (selection_audio) REFERENCES audio (selection_audio)
+  - selection_video (table) INT
+    FOREIGN KEY (selection_video) REFERENCES video (selection_video)
+    
++ table text 
+  - id INT ?
+  - x1 INT
+  - x2 INT
+
++ table image
+  - id INT ?
+  - x1 INT
+  - x2 INT
+  - y1 INT
+  - y2 INT
+
++ table audio
+  - id INT ?
+  - t1 INT
+  - t2 INT
+
++ table video
+  - id INT ?
+  - x1 INT
+  - y1 INT
+  - t1 INT
+  - y2 INT
+  - y2 INT
+  - t2 INT
+
++ table children
+  - id INT
+
