@@ -45,14 +45,12 @@ We need several tables to store comments from a specific article, roughly follow
   - slug VARCHAR (185) // set max lenght
   - title VARCHAR (185)
   - status VARCHAR (8)
-  - children_id (table) INT
-    FOREIGN KEY (children_id) REFERENCES children (children_id)
   - anchor_id (table) INT 
     FOREIGN KEY (anchor_id) REFERENCES anchor (anchor_id)
 
 + table anchor
   - id INT ?
-  - cosmogram id (slug?) INT / VARCHAR
+  - cosmogram id (= comment.slug?) INT / VARCHAR
   - block id INT / VARCHAR
   - block_type VARCHAR (?)
   - selection_text (table) INT
@@ -89,7 +87,3 @@ We need several tables to store comments from a specific article, roughly follow
   - y2 INT
   - y2 INT
   - t2 INT
-
-+ table children
-  - id INT
-
