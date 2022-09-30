@@ -1,0 +1,8 @@
+title: Comments
+
+sections:
+  comments:
+    label: Comments
+    type: pages
+    info: "{{ page.user }}"
+    template: comment

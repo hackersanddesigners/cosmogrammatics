@@ -39,13 +39,13 @@ We need several tables to store comments from a specific article, roughly follow
 
 + table comment
   - id INT
-  - user VARCHAR (30) // set max length based on UUID or hash max size?
+  - user VARCHAR (32) // set max length based on UUID or hash max size?
   - timestamp INTEGER (unix time)
   - text TEXT
   - slug VARCHAR (185) // set max lenght
   - title VARCHAR (185)
   - status VARCHAR (8)
-  - anchor_id (table) INT 
+  - anchor_id (table) INT,
     FOREIGN KEY (anchor_id) REFERENCES anchor (anchor_id)
 
 + table anchor
@@ -53,13 +53,13 @@ We need several tables to store comments from a specific article, roughly follow
   - cosmogram id (= comment.slug?) INT / VARCHAR
   - block id INT / VARCHAR
   - block_type VARCHAR (?)
-  - selection_text (table) INT
+  - selection_text (table) INT,
     FOREIGN KEY (selection_text) REFERENCES text (selection_text)
-  - selection_image (table) INT
+  - selection_image (table) INT,
     FOREIGN KEY (selection_image) REFERENCES image (selection_image)
-  - selection_audio (table) INT
+  - selection_audio (table) INT,
     FOREIGN KEY (selection_audio) REFERENCES audio (selection_audio)
-  - selection_video (table) INT
+  - selection_video (table) INT,
     FOREIGN KEY (selection_video) REFERENCES video (selection_video)
     
 + table text 
