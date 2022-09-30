@@ -1,0 +1,99 @@
+type: group
+fields:
+  user:
+    label: User
+    type: text
+  timestamp:
+    label: Timestamp
+    type: date
+    time: true
+
+  article_slug:
+    label Article slug
+    type: slug
+  block_id:
+    label: Block ID
+    type: text
+
+  text:
+    label: Text
+    type: textarea
+
+  selection_type:
+    label: Selection type
+    type: select
+    options:
+      text: Text
+      image: Image
+      audio: Audio
+      video: Video
+
+  selection_text:
+    label: Text selection
+    type: structure 
+    fields:
+      x:
+        label: x
+        type: number
+      y:
+        label: y
+        type: number
+    when:
+      selection_type: text
+
+  selection_image:
+    label: Image selection
+    type: structure 
+    fields:
+      x1:
+        label: x1
+        type: number
+      y1:
+        label: y1
+        type: number
+      x2:
+        label: x2
+        type: number
+      y2:
+        label: y2
+        type: number
+    when:
+      selection_type: image
+  
+  selection_audio:
+    label: Audio selection
+    type: structure 
+    fields:
+      t1:
+        label: t1
+        type: number
+      t2:
+        label: t2
+        type: number
+    when:
+      selection_type: audio
+    
+  selection_video:
+    label: Video selection
+    type: structure 
+    fields:
+      x1:
+        label: x1
+        type: number
+      y1:
+        label: y1
+        type: number
+      t1:
+        label: t1
+        type: number
+      x2:
+        label: x2
+        type: number
+      y2:
+        label: y2
+        type: number
+      t2:
+        label: t2
+        type: number
+    when:
+      selection_type: video

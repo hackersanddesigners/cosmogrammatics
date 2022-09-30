@@ -1,18 +1,7 @@
 title: Comment
 
-options:
-  changeTitle: false
-  changeStatus: false
-  changeSlug: false
-
 fields:
-  user:
-    label: User
-    type: text
-  text:
-    label: Text
-    type: textarea
-  status:
-    label: Status
-    type: text
-    disabled: true
+  comment: fields/comment
+    
+  
+  
