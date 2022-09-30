@@ -9,7 +9,7 @@ fields:
     time: true
 
   article_slug:
-    label Article slug
+    label: Article slug
     type: slug
   block_id:
     label: Block ID

@@ -4,5 +4,10 @@ sections:
   comments:
     label: Comments
     type: pages
-    info: "{{ page.user }}"
+    info: "{{ page.text }}"
     template: comment
+    layout: table
+    columns:
+      slug:
+        value: '{{ page.article_slug }}'
+        
