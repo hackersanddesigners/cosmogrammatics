@@ -37,4 +37,12 @@ return [
             }
         ], 
     ],
+
+    'hooks' => [
+        'page.create:after' => function ($page) {
+            buildPageTree($page);
+        }
+    ],
+
+
 ];

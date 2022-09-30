@@ -1,0 +1,10 @@
+type: pages
+headline: Comments
+parent: page.find('comments')
+template: comment
+empty: No comment yet
+layout: table
+image: false
+columns:
+  selection_type:
+    label: Selection Type

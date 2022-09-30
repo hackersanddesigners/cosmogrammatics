@@ -3,17 +3,21 @@ fields:
   user:
     label: User
     type: text
+    width: 1/2
   timestamp:
     label: Timestamp
     type: date
     time: true
+    width: 1/2
 
   article_slug:
     label: Article slug
     type: slug
+    width: 1/2
   block_id:
     label: Block ID
     type: text
+    width: 1/2
 
   text:
     label: Text
@@ -27,19 +31,21 @@ fields:
       image: Image
       audio: Audio
       video: Video
+    width: 1/2
 
   selection_text:
     label: Text selection
     type: structure 
     fields:
       x:
-        label: x
+        label: Offset start
         type: number
       y:
-        label: y
+        label: Offset end
         type: number
     when:
       selection_type: text
+    width: 1/2
 
   selection_image:
     label: Image selection
@@ -59,6 +65,7 @@ fields:
         type: number
     when:
       selection_type: image
+    width: 1/2
   
   selection_audio:
     label: Audio selection
@@ -72,6 +79,7 @@ fields:
         type: number
     when:
       selection_type: audio
+    width: 1/2
     
   selection_video:
     label: Video selection
@@ -97,3 +105,4 @@ fields:
         type: number
     when:
       selection_type: video
+    width: 1/2
