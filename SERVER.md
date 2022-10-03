@@ -19,7 +19,7 @@ done
 - `sudo mkdir -p /var/www/<repo>`
 - make new user group `cosmo`: `sudo groupadd cosmo`
 - add group to each user: `sudo usermod -a -G cosmo <user>`
-- install ACL: `sudo apt-get install acl`
+- install ACL: `sudo apt install acl`
 - add ACL rules:
   - `sudo setfacl -Rdm g:cosmo:rwx /var/www/<repo>`
   - `sudo setfacl -Rm g:cosmo:rwx /var/www/<repo>`
