@@ -11,6 +11,7 @@
     <!-- TODO could wrap all this logic inside comments -->
     <?php if($comments->hasListedChildren()): ?>
     <aside>
+      <h3>Comments</h3>
       <?php snippet('comments') ?>
     </aside>
     <?php endif ?>
