@@ -21,7 +21,7 @@ This action can either be on an entire block, or on a portion of it: eg, the use
 
 As of <2022-08-22>, after discussing comment threading, we first want to go with a more simple flat thread. Eg, A user can comment below the first comment, and any subsequent comment will be displayed as if responding to the opening post (the first comment). More variations of it might happen once the basics are in place and we can iterate more concretely on it.
 
-<2022-10-03> After a first attempt to connect Kirby CMS to a SQLite database, we are realised more pieces are needed to comfortably manage the db (eg, a plugin to programmatically create, update, delete and migrate tables), so we are leaning towards do a first iteration with simply using Kirby
+<2022-10-03> After a first attempt to connect Kirby CMS to a SQLite database, we realised more pieces are needed to comfortably manage the db (eg, a plugin to programmatically create, update, delete and migrate tables), so we are leaning towards do a first iteration with simply using Kirby
 
 The way to bind a comment to a specific "block" in the article is by using Kirby's blocks. Each block comes with an ID (in the form on an hash it seems). 
 
