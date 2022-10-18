@@ -1,3 +1,113 @@
+:root {
+
+  /* colors */
+  --back: white;
+  --fore: black;
+
+  /* speeds */
+  --fast: 200ms;
+
+  /* timing functions */
+  --linear: linear;
+
+}
+
+/* Accessibility media queries */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    opacity: unset !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --back: white;
+    --fore: black;
+  }
+  *:focus {
+    outline: 0.5rem solid;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --back: black;
+    --fore: white;
+  }
+}
+
+
+/* browser support coming soon */
+/* https://drafts.csswg.org/mediaqueries-5/#mf-user-preferences */
+
+@media (inverted-colors: inverted) { }
+@media (prefers-reduced-data: no-preference) { }
+@media (prefers-reduced-transparency: reduce) { }
+
+
+/* saving myself a lot of headaches */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  position: relative;
+}
+
 img {
   max-width: 100%;
+}
+
+html {
+  background-color: var(--back);
+  color: var(--fore);
+}
+
+
+/* header */
+
+header nav {
+  display: flex;
+}
+
+header a.skip-to-main {
+  position: absolute;
+  background-color: var(--back);
+  transform: translateY(-200%);
+  transition: transform var(--fast) var(--linear);
+  z-index: 1;
+}
+
+header a.skip-to-main:focus {
+  transform: translateY(0);
+}
+
+
+
+
+/* main as article */
+
+body.article main {
+  max-width: min( 100%, 50rem );
+}
+
+body.article aside {
+  position: absolute;
+  max-width: 15rem;
+  top: 0;
+  right: -15rem;
+}
+
+body.article aside article {
+  padding: 1rem;
+  border: 1px solid;
+}
+
+body.article aside p {
+  margin-block: 0;
 }

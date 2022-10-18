@@ -1,22 +1,18 @@
-<?php snippet('header') ?>
+<?php snippet('head') ?>
 
-<main>
-  <article>
-    <head>
-      <h1><?= $page->title()->html() ?></h1>
-    </head>
+<body class="<?= $page->template() ?>">
 
+  <?php snippet('header') ?>
+
+  <script>
+
+  </script>
+
+  <main id="main">
+    <h1><?= $page->title()->html() ?></h1>
     <?php snippet('blocks') ?>
+  </main>
 
-    <!-- TODO could wrap all this logic inside comments -->
-    <?php if($comments->hasListedChildren()): ?>
-    <aside>
-      <h3>Comments</h3>
-      <?php snippet('comments') ?>
-    </aside>
-    <?php endif ?>
-  </article>
-</main>
+  <?php snippet('footer') ?>
 
-
-<?php snippet('footer') ?>
+</body>

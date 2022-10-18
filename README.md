@@ -22,12 +22,14 @@ composer update getkirby/cms
 To upgrade everything (eg kirby and any other plugin), run:
 
 ```
-composer update 
+composer update
 ```
 
 We don't track the `kirby` folder into git, but instead handle it as a normal dependency.
 
 ## Run
+
+Before running the server, make sure you have a content folder.
 
 To run the backend, Kirby suggests to setup a full-on server environment (eg with nginx etc). This is not stricly necessary for the most part. So that you can simply run the backend by doing (from the root of the website folder):
 
