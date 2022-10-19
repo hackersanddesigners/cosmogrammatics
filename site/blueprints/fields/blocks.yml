@@ -48,3 +48,12 @@ fieldsets:
       text:
         label: Text
         type: textarea
+
+settings:
+  fields:
+    bg_image:
+      label: Backround Image
+      type: files
+    bg_color:
+      label: Background Color
+      type: colors

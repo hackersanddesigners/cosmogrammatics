@@ -6,7 +6,15 @@
       <h1><?= $page->title()->html() ?></h1>
     </head>
 
-    <?php snippet('blocks') ?>
+    <?php foreach ($page->builder()->toLayouts() as $layout): ?>
+    <section data-bg-image="" data-bg-color="">
+      <?php foreach ($layout->columns() as $column): ?>
+        <div class="blocks" data-col-span="<?= $column->span() ?>" data-col-width="<?= $column->width() ?>">
+          <?php snippet('blocks', ['column' => $column]) ?>
+        </div>
+      <?php endforeach ?>
+    </section>
+    <?php endforeach ?>
 
     <!-- TODO could wrap all this logic inside comments -->
     <?php if($comments->hasListedChildren()): ?>
