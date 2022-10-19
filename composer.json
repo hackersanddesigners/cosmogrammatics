@@ -25,7 +25,8 @@
     "php": ">=7.4.0 <8.2.0",
     "getkirby/cms": "^3.6",
     "gearsdigital/enhanced-toolbar-link-dialog": "^3.1",
-    "sylvainjule/embed": "^1.0"
+    "sylvainjule/embed": "^1.0",
+    "hananils/kirby-colors": "^1.6"
   },
   "config": {
     "allow-plugins": {
