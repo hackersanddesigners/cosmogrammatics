@@ -21,6 +21,7 @@
     <aside>
       <h3>Comments</h3>
       <?php snippet('comments') ?>
+      <?php snippet('comment-add') ?>
     </aside>
     <?php endif ?>
   </article>
