@@ -1,0 +1,7 @@
+fields:
+  about:
+    label: About
+    type: textarea
+  website:
+    label: Website
+    type: url

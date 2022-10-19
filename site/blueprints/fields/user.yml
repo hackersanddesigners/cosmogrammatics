@@ -1,0 +1,8 @@
+type: group
+fields:
+  about:
+    label: About
+    type: textarea
+  url:
+    label: Website
+    type: url
