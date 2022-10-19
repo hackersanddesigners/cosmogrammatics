@@ -48,6 +48,7 @@ Icon*
 # ---------------
 
 /site/config/.license
+/site/config/env.php
 
 # ---
 
