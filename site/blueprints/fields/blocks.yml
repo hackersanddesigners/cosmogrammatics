@@ -42,13 +42,6 @@ fieldsets:
         label: Video (url)
         type: embed
 
-  footnote:
-    name: Footnote
-    fields:
-      text:
-        label: Text
-        type: textarea
-
 settings:
   fields:
     bg_image:
