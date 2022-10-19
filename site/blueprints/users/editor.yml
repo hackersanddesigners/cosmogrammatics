@@ -1,0 +1,10 @@
+title: Editor
+description: Editor user contributing articles
+
+permissions:
+  access:
+    panel: true
+    site: true
+    languages: false
+    system: false
+    users: false
