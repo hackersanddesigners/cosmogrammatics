@@ -1,5 +1,8 @@
 title: Comments
 
+permissions:
+  extends: options/permissions
+
 sections:
   comments:
     label: Comments
