@@ -6,15 +6,14 @@ subpage_builder:
     template: comments
     num: 1
 
-columns:
-  - width: 2/3
+tabs:
+  
+  article:
+    label: Article
+
     fields:
       builder: fields/blocks
-        
-  - width: 1/3
-    sections:
-      files:
-        label: Files
-        type: files
 
+  comments:  
+    sections:
       comments: sections/comment
