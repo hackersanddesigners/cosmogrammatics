@@ -5,7 +5,9 @@
       snippet( 'comments/comment', [ 'comment' => $comment ] );
     } ?>
 
-    <?php snippet( 'comments/form' ) ?>
+    <?php snippet( 'comments/form', [
+      'block'    => $block,
+    ] ) ?>
 
   </aside>
 <?php } ?>

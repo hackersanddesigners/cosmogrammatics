@@ -4,6 +4,10 @@
     method="post"
     name="comment_form"
     class="comment_form"
+    data-auth-user="<?= $kirby->option('env')['api_user'] ?>"
+    data-auth-pass="<?= $kirby->option('env')['api_pass'] ?>"
+    data-block-id="<?= $block->id() ?>"
+    data-article-slug="<?= $page ?>"
   >
 
     <input

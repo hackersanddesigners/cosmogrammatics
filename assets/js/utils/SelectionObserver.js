@@ -43,21 +43,20 @@ export default class SelectionObserver {
   }
   set selection( selection ) {
     if ( selection ) {
-
-      this.clear_wrappers()
-      let safe_ranges = get_safe_ranges( selection )
-      for ( const safe_range of safe_ranges ) {
-        this.wrap( safe_range )
+      const range = selection.getRangeAt(0)
+      if ( range ) {
+        this.clear_wrappers()
+        let safe_ranges = get_safe_ranges( range )
+        for ( const safe_range of safe_ranges ) {
+          this.wrap( safe_range )
+        }
       }
-
-
-
     }
-    this._selection = selection
+    this._SELECTION = selection
   }
 
   capture_selection( e ) {
-    this.selection = window.getSelection().getRangeAt(0)
+    this.selection = window.getSelection()
   }
 
 

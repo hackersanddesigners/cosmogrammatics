@@ -1,4 +1,4 @@
-<article>
+<article tabindex="0">
   <section>
     <?= $comment->text()->html() ?>
   </section>

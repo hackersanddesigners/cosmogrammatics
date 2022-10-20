@@ -23,14 +23,15 @@ body main .row .column .block {
   padding: 0.5rem;
 }
 
-body aside {
+body main .row .column .block aside {
   position: absolute;
   max-width: 15rem;
   top: 0;
   right: -16rem;
+  z-index: 1;
 }
 
-body aside article {
+body main .row .column .block aside article {
   padding: 1rem;
   border-radius: 1rem;
   background-color: rgb(251, 233, 255);
@@ -38,9 +39,22 @@ body aside article {
   margin-bottom: 1rem;
 }
 
-body aside article form input {
+body main .row .column .block aside article form input {
   background-color: inherit;
   width: 100%;
+}
+
+body main .row .column .block:focus,
+body main .row .column .block:focus-within,
+body main .row .column .block aside article:focus,
+body main .row .column .block aside article:focus-within {
+  box-shadow: 0 0 2rem 0 rgb(222, 199, 227);
+}
+
+body main .row .column .block:focus aside ,
+body main .row .column .block:focus-within aside  {
+  right: -14rem;
+  top: 1rem;
 }
 
 body aside p {

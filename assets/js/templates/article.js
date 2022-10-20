@@ -18,12 +18,21 @@ function post_comment( e ) {
   e.preventDefault()
   console.log( e )
 
-  const auth = btoa([
-    "<?= $kirby->option('env')['api_user'] ?>",
-    "<?= $kirby->option('env')['api_pass'] ?>"
-  ].join(':'))
+  const form         = e.target
+  const api_user     = form.getAttribute( 'data-auth-user' )
+  const api_pass     = form.getAttribute( 'data-auth-pass' )
+  const block_id     = form.getAttribute( 'data-block-id' )
+  const article_slug = form.getAttribute( 'data-article-slug' )
+  const author       = Array.from( form.children ).find( c => c.name == 'author' ).value
+  const text         = Array.from( form.children ).find( c => c.name == 'body' ).value
+  const selection    = selection_observer.selection
 
-  console.log( auth )
+  console.log( selection )
+
+
+  const auth = btoa([ api_user, api_pass ].join(':'))
+
+  console.log( api_user, api_pass, auth )
 
   const url = 'comments'
 
@@ -35,11 +44,11 @@ function post_comment( e ) {
     title: '',
     template: 'comment',
     content: {
-      user: 'sh',
+      user: author,
       timestamp: ts,
-      article_slug: '',
-      block_id: '',
-      text: '',
+      article_slug: article_slug,
+      block_id: block_id,
+      text: text,
       selection_type: '',
       selection_text: {
         x: '',

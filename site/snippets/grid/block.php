@@ -7,6 +7,7 @@
 ?>
 
 <section
+  tabindex="0"
   class="block <?= $block->type() ?>"
   id="<?= 'b_' . $block->id() ?>"
   data-type="block-<?= $block->type() ?>"
@@ -14,7 +15,10 @@
 
   <?= $block ?>
   <?php if ( $comments->hasListedChildren() ) {
-    snippet( 'comments/index', [ 'comments' => $block_comments ] );
+    snippet( 'comments/index', [
+      'block'    => $block,
+      'comments' => $block_comments
+    ] );
   } ?>
 
 </section>
