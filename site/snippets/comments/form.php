@@ -28,3 +28,5 @@
     value="post"
   />
 </form>
+
+<?php snippet('comment-add') ?>
