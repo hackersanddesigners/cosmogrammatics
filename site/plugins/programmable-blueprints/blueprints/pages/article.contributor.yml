@@ -1,0 +1,10 @@
+title: Article
+
+subpage_builder:
+  - title: Comments
+    uid: comments
+    template: comments
+    num: 1
+
+fields:
+  builder: fields/blocks

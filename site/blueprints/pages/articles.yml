@@ -1,9 +1,7 @@
 title: Articles
-# options:
-#   preview: false
 
-# fields:
-#   redirect: true
+permissions:
+  extends: options/permissions
 
 sections:
   articles: sections/article

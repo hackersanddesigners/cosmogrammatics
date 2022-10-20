@@ -11,6 +11,12 @@ Testing out if the kirby CMS can be stretched to build what we need.
 
 We fetch a copy of Kirby's plainkit (via zip download or git), eventually remove the previous `.git` folder, re-init git and start tracking our own history.
 
+To setup the REST API workflow from the frontned (javascript):
+
+- make a new user account with role API
+- copy `site/config/env.sample.php` and rename it to `site/config/env.php`
+- set above user's email and password to it
+
 ### Upgrade
 
 To upgrade Kirby, run in a terminal the following:

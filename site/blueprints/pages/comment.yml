@@ -1,5 +1,8 @@
 title: Comment
 
+permissions:
+  extends: options/permissions
+
 fields:
   comment: fields/comments
     

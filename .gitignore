@@ -48,6 +48,7 @@ Icon*
 # ---------------
 
 /site/config/.license
+/site/config/env.php
 
 # ---
 
@@ -57,5 +58,6 @@ vendor
 
 /site/plugins/*
 !/site/plugins/kirby-redirect
+!/site/plugins/programmable-blueprints
 .env
 *.sqlite

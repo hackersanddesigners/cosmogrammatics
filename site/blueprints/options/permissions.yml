@@ -1,0 +1,19 @@
+options:
+  changeSlug:
+    admin: true
+    contributor: false
+  changeStatus:
+    admin: true
+    contributor: false
+  changeTemplate:
+    admin: true
+    contributor: false
+  changeTitle:
+    admin: true
+    contributor: false
+  update:
+    admin: true
+    contributor: false
+  delete:
+    admin: true
+    contributor: false

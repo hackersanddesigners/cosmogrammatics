@@ -1,0 +1,5 @@
+title: Admin
+description: User with full control of the website
+
+fields:
+  user: fields/user

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "61942a0c7e3c6a408338cb0161450e8d",
+    "content-hash": "bf64a86b522c3f85fc8821a614a6ddbe",
     "packages": [
         {
             "name": "claviska/simpleimage",
@@ -537,6 +537,46 @@
                 }
             ],
             "time": "2020-12-28T12:54:39+00:00"
+        },
+        {
+            "name": "hananils/kirby-colors",
+            "version": "1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hananils/kirby-colors.git",
+                "reference": "f0f1ce26e6a3b3182188de8f52d20d63e47d8f4f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hananils/kirby-colors/zipball/f0f1ce26e6a3b3182188de8f52d20d63e47d8f4f",
+                "reference": "f0f1ce26e6a3b3182188de8f52d20d63e47d8f4f",
+                "shasum": ""
+            },
+            "require": {
+                "getkirby/composer-installer": "^1.2"
+            },
+            "type": "kirby-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Hananils\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "hana+nils · Büro für Gestaltung",
+                    "email": "buero@hananils.de"
+                }
+            ],
+            "description": "A color field for Kirby 3",
+            "support": {
+                "issues": "https://github.com/hananils/kirby-colors/issues/",
+                "source": "https://github.com/hananils/kirby-colors/tree/1.6.0"
+            },
+            "time": "2022-01-25T17:03:20+00:00"
         },
         {
             "name": "laminas/laminas-escaper",
