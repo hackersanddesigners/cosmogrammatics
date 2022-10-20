@@ -13,4 +13,13 @@
   <meta name="description" content="">
 
   <?= css('assets/css/styles.css') ?>
+
+  <?= js([
+    '@auto'
+    ], [
+      'defer' => true,
+      'type' => 'module'
+    ]) ?>
+
+
 </head>

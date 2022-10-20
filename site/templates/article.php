@@ -4,15 +4,11 @@
 
   <?php snippet('header') ?>
 
-  <script>
-
-  </script>
-
   <main id="main">
     <h1><?= $page->title()->html() ?></h1>
-    <?php snippet('blocks') ?>
+    <?php snippet( 'blocks/index' ) ?>
   </main>
 
-  <?php snippet('footer') ?>
+  <?php snippet( 'footer' ) ?>
 
 </body>

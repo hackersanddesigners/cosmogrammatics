@@ -111,3 +111,8 @@ body.article aside article {
 body.article aside p {
   margin-block: 0;
 }
+
+body.article section .highlight {
+  display: inline;
+  background-color: yellow;
+}
