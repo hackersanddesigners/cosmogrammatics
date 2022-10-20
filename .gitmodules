@@ -1,3 +1,6 @@
 [submodule "kirby-redirect"]
 	path = site/plugins/kirby-redirect
 	url = https://github.com/medienbaecker/kirby-redirect.git
+[submodule "site/plugins/kirby-writer-marks"]
+	path = site/plugins/kirby-writer-marks
+	url = https://github.com/johannschopplich/kirby-writer-marks.git

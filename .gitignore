@@ -59,5 +59,7 @@ vendor
 /site/plugins/*
 !/site/plugins/kirby-redirect
 !/site/plugins/programmable-blueprints
+!/site/plugins/kirby-writer-marks
+
 .env
 *.sqlite
