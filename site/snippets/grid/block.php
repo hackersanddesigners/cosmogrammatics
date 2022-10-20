@@ -7,15 +7,10 @@
 ?>
 
 <section
-  id="<?= $block->id() ?>"
+  class="block <?= $block->type() ?>"
+  id="<?= 'b_' . $block->id() ?>"
   data-type="block-<?= $block->type() ?>"
 >
-
-  <!-- <code>
-    <pre>
-      <?= var_dump( $block->toHTML() ) ?>
-    </pre>
-  </code> -->
 
   <?= $block ?>
   <?php if ( $comments->hasListedChildren() ) {

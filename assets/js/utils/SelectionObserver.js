@@ -8,8 +8,9 @@ export default class SelectionObserver {
   constructor( target ) {
     for ( const event of [
       'mousedown',
-      'mouseup',
       'mousemove',
+      'mouseup',
+      'keyup'
     ]) {
       target.addEventListener( event, e => { this[ `${ event }_handler` ]( e ) } )
     }
@@ -19,13 +20,19 @@ export default class SelectionObserver {
   mousedown_handler( e ) {
     this.dragging = true
   }
+  mousemove_handler( e ) {
+    if ( !this.dragging ) {
+      return
+    }
+  }
   mouseup_handler( e ) {
     this.capture_selection( e )
     this.dragging = false
   }
-  mousemove_handler( e ) {
-    if ( !this.dragging ) {
-      return
+  keyup_handler( e ) {
+    // TODO
+    if ( e.shiftKey ) {
+      this.capture_selection( e )
     }
   }
 
@@ -36,11 +43,15 @@ export default class SelectionObserver {
   }
   set selection( selection ) {
     if ( selection ) {
+
       this.clear_wrappers()
       let safe_ranges = get_safe_ranges( selection )
       for ( const safe_range of safe_ranges ) {
         this.wrap( safe_range )
       }
+
+
+
     }
     this._selection = selection
   }

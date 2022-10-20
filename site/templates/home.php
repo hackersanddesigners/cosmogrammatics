@@ -5,16 +5,16 @@
   <?php snippet('header') ?>
 
   <main id="main">
-    <?php foreach ($articles as $article): ?>
-    <p>Published articles:</p>
+    <h2>Published articles:</h2>
     <ul>
+    <?php foreach ($articles as $article): ?>
       <li>
         <a href="<?= $article->url() ?>">
           <?= $article->title()->html() ?>
         </a>
       </li>
+      <?php endforeach ?>
     </ul>
-    <?php endforeach ?>
   </main>
 
   <?php snippet('footer') ?>

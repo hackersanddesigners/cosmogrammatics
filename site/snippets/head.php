@@ -12,14 +12,16 @@
 
   <meta name="description" content="">
 
-  <?= css('assets/css/styles.css') ?>
+  <?= css( [
+    'assets/css/base.css',
+    '@auto'
+  ]) ?>
 
   <?= js([
     '@auto'
-    ], [
-      'defer' => true,
-      'type' => 'module'
-    ]) ?>
+  ], [
+    'type'  => 'module'
+  ]) ?>
 
 
 </head>

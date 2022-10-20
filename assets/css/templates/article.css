@@ -1,0 +1,53 @@
+/* main as article */
+
+body main {
+  max-width: min( 100%, 50rem );
+}
+
+body main section {
+
+}
+
+body main .row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+body main .row .column {
+  width: 100%;
+}
+
+body main .row .column .block {
+  border: 1px solid;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+}
+
+body aside {
+  position: absolute;
+  max-width: 15rem;
+  top: 0;
+  right: -16rem;
+}
+
+body aside article {
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: rgb(251, 233, 255);
+  box-shadow: 0 0 1rem 0 rgb(251, 233, 255);
+  margin-bottom: 1rem;
+}
+
+body aside article form input {
+  background-color: inherit;
+  width: 100%;
+}
+
+body aside p {
+  margin-block: 0;
+}
+
+body section .highlight {
+  display: inline;
+  background-color: yellow;
+}
