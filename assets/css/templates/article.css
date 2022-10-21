@@ -1,7 +1,8 @@
 /* main as article */
 
 body main {
-  max-width: min( 100%, 50rem );
+  --main-width: min( 100%, 50rem );
+  max-width: var(--main-width);
 }
 
 body main section {
@@ -33,7 +34,6 @@ body main .row .column .block aside {
 
 body main .row .column .block aside article {
   padding: 1rem;
-  border-radius: 1rem;
   background-color: rgb(251, 233, 255);
   box-shadow: 0 0 1rem 0 rgb(251, 233, 255);
   margin-bottom: 1rem;
