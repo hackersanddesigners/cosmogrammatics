@@ -1,13 +1,17 @@
 <?php if ( count($comments) !== 0 ) { ?>
   <aside>
 
-    <?php foreach ($comments as $comment) {
-      snippet( 'comments/comment', [ 'comment' => $comment ] );
-    } ?>
+    <?php
 
-    <?php snippet( 'comments/form', [
-      'block'    => $block,
-    ] ) ?>
+      foreach ($comments as $comment) {
+        snippet( 'comments/comment', [ 'comment' => $comment ] );
+      }
+
+      snippet( 'comments/form', [
+        'block'    => $block,
+      ] )
+
+    ?>
 
   </aside>
 <?php } ?>
