@@ -1,5 +1,7 @@
 <article tabindex="0">
-  <section>
+  <section
+    @click="notify( `<?= 'block id' . $comment->block_id() ?>` )"
+  >
     <?= $comment->text()->html() ?>
   </section>
   <footer>

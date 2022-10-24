@@ -12,7 +12,6 @@
   id="<?= 'b_' . $block->id() ?>"
   data-type="block-<?= $block->type() ?>"
 >
-
   <?= $block ?>
   <?php if ( $comments->hasListedChildren() ) {
     snippet( 'comments/index', [
@@ -20,5 +19,4 @@
       'comments' => $block_comments
     ] );
   } ?>
-
 </section>

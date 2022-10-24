@@ -1,8 +1,11 @@
 import {
   $,
   $$,
-  SelectionObserver
+  SelectionObserver,
+  vue,
 } from '../utils/index.js'
+
+import Rows from './article/Rows.js'
 
 const article_element    = $( 'main' )
 const comment_forms      = $$( '.comment_form' )
@@ -11,6 +14,44 @@ const selection_observer = new SelectionObserver( article_element )
 for ( const comment_form of comment_forms ) {
   comment_form.onsubmit = post_comment
 }
+
+
+
+console.log( data )
+
+const { createApp, ref } = vue
+
+const app = createApp({
+  components: {
+    Rows,
+  },
+  setup() {
+
+    const message = ref('Hello World!')
+
+
+    function notify( msg = message ) {
+      console.log( msg )
+      alert( msg )
+    }
+
+
+    return {
+      data,
+      message,
+      notify
+    }
+
+  }
+}).mount( article_element )
+
+
+
+
+
+
+
+
 
 
 
