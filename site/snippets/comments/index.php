@@ -3,12 +3,15 @@
 
     <?php
 
+
+
       foreach ($comments as $comment) {
         snippet( 'comments/comment', [ 'comment' => $comment ] );
       }
 
       snippet( 'comments/form', [
-        'block'    => $block,
+        'block'     => $block,
+        // 'selection' => $selection
       ] )
 
     ?>
