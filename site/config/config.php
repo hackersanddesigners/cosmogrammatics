@@ -1,10 +1,11 @@
-<?php 
+<?php
 
 return [
     'debug' => true,
     'env' => require_once 'env.php',
     'api' => [
-        'basicAuth' => true
+        'basicAuth' => true,
+        'allowInsecure' => true
     ],
 
     'gearsdigital.enhanced-toolbar-link-dialog' => [
@@ -38,7 +39,7 @@ return [
     //         'action'  => function() {
     //             return go('sitemap.xml', 301);
     //         }
-    //     ], 
+    //     ],
     // ],
 
     // 'hooks' => [
