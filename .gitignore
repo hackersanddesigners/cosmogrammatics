@@ -56,8 +56,5 @@ content
 kirby
 vendor
 
-/site/plugins/*
-!/site/plugins/kirby-redirect
-!/site/plugins/programmable-blueprints
 .env
 *.sqlite
