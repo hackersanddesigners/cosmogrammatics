@@ -10,11 +10,21 @@ layouts:
 
 fieldsets:
   - heading
-  - text
   - quote
   - list
   - image
   - gallery
+
+  text:
+    extends: blocks/text
+    fields:
+      footnotes:
+        label: Footnotes
+        type: structure
+        fields:
+          footnote:
+            label: Footnote
+            type: writer
 
   soundblock:
     name: Audio

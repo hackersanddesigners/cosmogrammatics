@@ -7,3 +7,6 @@
 [submodule "enhanced-toolbar-link-dialog"]
 	path = enhanced-toolbar-link-dialog
 	url = https://github.com/gearsdigital/enhanced-toolbar-link-dialog.git
+[submodule "site/plugins/kirby-writer-marks"]
+	path = site/plugins/kirby-writer-marks
+	url = https://github.com/johannschopplich/kirby-writer-marks.git
