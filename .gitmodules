@@ -7,6 +7,3 @@
 [submodule "enhanced-toolbar-link-dialog"]
 	path = enhanced-toolbar-link-dialog
 	url = https://github.com/gearsdigital/enhanced-toolbar-link-dialog.git
-[submodule "site/plugins/kirby-footnote-mark"]
-	path = site/plugins/kirby-footnote-mark
-	url = ./site/plugins/kirby-footnote-mark/
