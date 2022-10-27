@@ -1,14 +1,60 @@
 label: Blocks
-type: layout
-layouts:
-  - "1/1"
-  - "1/2, 1/2"
-  - "1/4, 1/4, 1/4, 1/4"
-  - "1/3, 2/3",
-  - "2/3, 1/3"
-  - "1/3, 1/3, 1/3"
+type: blocks
 
 fieldsets:
+  columns:
+    extends: blocks/columns
+    fields:
+      layout:
+        layouts:
+          - "1/1"
+          - "1/2, 1/2"
+          - "1/4, 1/4, 1/4, 1/4"
+        fieldsets:
+          - columns
+          - heading
+          - quote
+          - list
+          - image
+          - gallery
+
+          text:
+            extends: blocks/text
+            fields:
+              footnotes:
+                label: Footnotes
+                type: structure
+                fields:
+                  note:
+                    label: Note
+                    type: writer
+
+          soundblock:
+            name: Audio
+            fields:
+              soundfile:
+                label: Audio (file)
+                type: files
+                options: audio
+              soundurl:
+                label: Audio (url)
+                type: embed
+
+           videoblock:
+             name: Video
+             snippet: videoblock
+             fields:
+               videofile:
+                 label: Video (file)
+                 type: files
+                 options: videos
+               videoposter:
+                 label: Cover (file)
+                 type: files
+               videourl:
+                 label: Video (url)
+                 type: embed
+
   - heading
   - quote
   - list
