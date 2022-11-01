@@ -35,8 +35,8 @@ class DefaultBlock extends Block
                         static $ref = 0;
                         $ref++;
 
-                        $ft_ref = 'ft-' . $ref;
-                        $ft_note = '#note-ref-' . $ref;
+                        $ft_ref = 'ft-' . $this->id() . '-' . $ref;
+                        $ft_note = '#note-ref-' . $this->id() . '-' . $ref;
 
                         $replacement = $matches[1] . '<a id="' . $ft_ref . '" href="' . $ft_note . '" class="ref-ft"><span>[' . $ref . ']</span></a>';
 
