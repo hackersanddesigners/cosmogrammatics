@@ -10,17 +10,18 @@ class DefaultBlock extends Block
     {
 
         $client = new Client();
+        $uuid = $client->generateId($size = 21);
 
         if ($this->type() === 'text') {
+
+            // -- footnote refs
+            // regex against `<article-footnote>` tag and replace it with:
+            // - `{content <article-footnote>} <a href="<short-hash-id>">{counter ref}</a>`
+
             $text = $this->content()->text();
 
-            // regex against `<article-footnote>` tag and replace it with:
-            // - <li><a href="<short-hash-id>"></a></li>
-
-            $uuid = $client->generateId($size = 21);
-
             $pattern = '/\<article-footnote>(.*)<\/article-footnote>/m';
-            $replacement = '<a href="#ref-' . $uuid . '">$1</a>';
+            $replacement = '$1 <a href="#ref-' . $uuid . '" class="ref"><span>[*]</span></a>';
 
             $new_text = preg_replace($pattern, $replacement, $text);
 
