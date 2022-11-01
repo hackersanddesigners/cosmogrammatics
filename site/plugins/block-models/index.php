@@ -5,8 +5,10 @@ use Kirby\Cms\Content;
 
 class DefaultBlock extends Block
 {
-    public function id(): string
+    public function content()
     {
+
+        $content = $this->content->toArray();
 
         // check if block is of type `text`, else skip
         if ($this->type() === 'text') {
@@ -19,11 +21,11 @@ class DefaultBlock extends Block
             // if yes, start matching any `<article-footnote` found in
             // $this->content->text
 
-            $footnotes_count = $this->content()->footnotes()->toStructure()->count();
+            $footnotes_count = $this->content->footnotes()->toStructure()->count();
 
             if ($footnotes_count > 0) {
 
-                $in = $this->content()->text();
+                $in = $this->content->text();
                 $pattern = '/<article-footnote>(.*)<\/article-footnote>/mU';
 
                 // <https://stackoverflow.com/a/11174818>
@@ -42,28 +44,13 @@ class DefaultBlock extends Block
                     },
                     $in);
 
-
-                // var_dump($out);
-
-                // TODO: this replaces the actual text in the file
-                // does it make sense to instead replace the produced HTML
-                // used in the template? (maybe with caching?)
-                
-                // $content = $this->content()->toArray();
-                // $content['text'] = $out;
-                // $content_update = $this->content()->update($content, true);
+                $content['text'] = $out;
 
             }
-
-            return parent::id();
-
-            // return $this->content();
-
-        } else {
-            return parent::id();
-
-            // return $this->content();
         }
+
+        return new Content($content);
+
     }
 }
 
