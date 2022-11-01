@@ -1,16 +1,11 @@
 <?php
 
 use Kirby\Cms\Block;
-use Hidehalo\Nanoid\Client;
-use Hidehalo\Nanoid\GeneratorInterface;
 
 class DefaultBlock extends Block
 {
     public function id(): string
     {
-
-        $client = new Client();
-        $uuid = $client->generateId($size = 21);
 
         if ($this->type() === 'text') {
 
