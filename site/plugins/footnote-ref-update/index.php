@@ -28,7 +28,7 @@ Kirby::plugin('cosmo/footnote-ref', [
 
                     $blockUpdated = new Kirby\Cms\Block([
                         'content' => [
-                            'text' => $block->text(),
+                            'text' => $block->text()->value(),
                             'footnotes' => $footnotes,
                         ],
                         'type' => 'text',
@@ -41,13 +41,12 @@ Kirby::plugin('cosmo/footnote-ref', [
                 }
             };
 
-            // $newBlocks = $blocks->add(new Kirby\Cms\Blocks($updatedBlocks));
             $newBlocks = new Kirby\Cms\Blocks($updatedBlocks);
 
             // -- write to file
             kirby()->impersonate('kirby');
             $newPage->update([
-                'Build' => json_encode($newBlocks->toArray()),
+                'Builder' => json_encode($newBlocks->toArray()),
             ]);
 
         }
