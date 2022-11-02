@@ -28,6 +28,11 @@ fieldsets:
                   note:
                     label: Note
                     type: writer
+                  ref:
+                    label: Ref
+                    type: text
+                    default: '0'
+                    disabled: true
 
           soundblock:
             name: Audio
@@ -68,9 +73,14 @@ fieldsets:
         label: Footnotes
         type: structure
         fields:
-          footnote:
+          note:
             label: Footnote
             type: writer
+          ref:
+            label: Ref
+            type: text
+            default: '0'
+            disabled: true
 
   soundblock:
     name: Audio
