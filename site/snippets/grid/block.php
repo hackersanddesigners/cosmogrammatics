@@ -43,7 +43,9 @@
   data-type="block-<?= $block->type() ?>"
 >
 
-  <?= $block ?>
+  <div class="contents">
+    <?= $block ?>
+  </div>
 
   <?php snippet( 'comments/index', [
     'block'    => $block,

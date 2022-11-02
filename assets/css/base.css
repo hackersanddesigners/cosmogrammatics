@@ -1,14 +1,45 @@
+@font-face {
+  font-family: authentic;
+  src: url(/assets/css/fonts/AUTHENTICSans-60.otf);
+}
+
+@font-face {
+  font-family: 'murmure';
+  src: url(/assets/css/fonts/le-murmure.otf);
+}
+
+@font-face {
+  font-family: 'sporting';
+  src: url(/assets/css/fonts/Sporting_Grotesque-Bold.ttf);
+}
+
 :root {
 
   /* colors */
   --back: white;
   --fore: black;
+  --cyan: rgb(12, 206, 255);
+
+  /* borders */
+  --thin: 0.25px solid;
+  --grid: var(--thin) var(--cyan);
 
   /* speeds */
   --fast: 200ms;
 
   /* timing functions */
   --linear: linear;
+
+  /* math */
+
+  --radical2: 1.41421356;
+
+  /* default mesaurements */
+  --header-height: 5rem;
+  --main-width: min( 100%, 50rem );
+  --header-child-collapsed-width: var(--header-height);
+  --header-child-expanded-width: calc(  var(--main-width) - var(--header-height) );
+
 
 }
 
@@ -63,26 +94,160 @@ img {
   max-width: 100%;
 }
 
-html {
+html, body {
+  margin: 0; padding: 0;
   background-color: var(--back);
   color: var(--fore);
+  font-family: 'authentic';
 }
 
 
 /* header */
 
-header nav {
+header {
   display: flex;
+  align-items: center;
+  height: var(--header-height);
+  border-bottom: var(--thin);
+  z-index: 1;
+  font-size: 1.5rem;
 }
 
 header a.skip-to-main {
-  position: absolute;
-  background-color: var(--back);
-  transform: translateY(-200%);
-  transition: transform var(--fast) var(--linear);
   z-index: 1;
+  --header-child-collapsed-width: 0;
+  --header-child-expanded-width: calc(  var(--main-width) - var(--header-height) );
 }
 
-header a.skip-to-main:focus {
-  transform: translateY(0);
+header nav ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 1rem;
+  overflow: hidden;
+}
+
+header a {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: var(--fore);
+}
+
+header form {
+  width: 100%;
+}
+header form input[type="search"] {
+  width : inherit;
+  height: inherit;
+  background-color: inherit;
+  border-radius: inherit;
+  border: unset;
+  padding: inherit;
+  font-size: inherit;
+}
+
+header form input[type="submit"] {
+  display: none;
+}
+
+header .title {
+  display: flex;
+  align-items: center;
+  padding-inline: 1rem;
+}
+
+header .title a {
+  text-decoration: none;
+  font-size: 3rem;
+  font-weight: lighter;
+  text-transform: lowercase;
+
+}
+
+
+
+
+
+
+header .collapsible {
+  /* width: 100%; */
+  height: 100%;
+  max-width: var(--header-child-collapsed-width);
+  /* overflow: hidden; */
+  transition:
+    max-width var(--fast) var(--linear),
+    padding var(--fast) var(--linear),
+    border var(--fast) var(--linear)
+  ;
+  display: flex;
+  align-items: center;
+  border-radius: var( --header-height );
+  border: var(--thin) transparent;
+
+}
+
+
+header nav.collapsible::after,
+header form.collapsible::after {
+  border: var(--thin);
+  content: '';
+  position: absolute;
+  top: -0.25px; right: 0;
+  height: var( --header-height ); width: var( --header-height );
+  background-color: var(--back);
+  /* background-image: url( "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4'%3E%3Cpath d='M0%2C0 L1%2C0 M0%2C0.5 L1%2C0.5 M0%2C1 L1%2C1'/%3E%3C/svg%3E" ) */
+  /* M0,0 L1,0 M0,0.5 L1,0.5 M0,1 L1,1 */
+  border-radius: var( --header-height );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity var(--fast) var(--linear);
+}
+
+header nav.collapsible::after {
+  content: '≡';
+  padding-top: 0.25rem;
+  font-size: 4rem;
+  font-weight: 100;
+}
+
+header form.collapsible::before {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  /* https://math.stackexchange.com/questions/377234/circle-in-square-calculate-distance-from-squares-corner-to-circles-perimeter */
+  --length: calc( 0.5 * var(--header-height) * ( var(--radical2) - 1 )  );
+  width: var(--length); height:0;
+  rotate: 45deg;
+  transform-origin: bottom right;
+  border-top: var(--thin);
+  background-color: red;
+}
+
+header .collapsible.expanded,
+header .collapsible:focus-within {
+  padding-inline: 1rem;
+  border: var(--thin);
+  max-width: var(--header-child-expanded-width);
+}
+
+header form.collapsible.expanded,
+header form.collapsible:focus-within {
+  padding-inline: unset;
+}
+
+header form.collapsible.expanded input[type="search"],
+header form.collapsible:focus-within input[type="search"] {
+  padding-inline: 1rem;
+}
+
+header nav.collapsible.expanded::after,
+header form.collapsible.expanded::after,
+header nav.collapsible:focus-within::after,
+header form.collapsible:focus-within::after {
+  opacity: 0;
+  border: unset;
+  pointer-events: none;
 }
