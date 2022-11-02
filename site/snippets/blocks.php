@@ -20,8 +20,9 @@
 <?php if($footnotes_all): ?>
    <ol>
    <?php
+       foreach($footnotes_all as $footnote):
        $ref = $block->id() . '-' . $footnote->ref();
-       foreach($footnotes_all as $footnote): ?>
+       ?>
        <li id="note-ref-<?= $ref ?>"><?= $footnote->note() ?><a href="#ft-<?= $ref ?>">↩</a></li>
    <?php endforeach ?>
    </ol>
