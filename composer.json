@@ -26,7 +26,8 @@
     "getkirby/cms": "^3.6",
     "sylvainjule/embed": "^1.0",
     "hananils/kirby-colors": "^1.6",
-    "microman/kirby-column-blocks": "^1.0"
+    "microman/kirby-column-blocks": "^1.0",
+    "hidehalo/nanoid-php": "^1.1"
   },
   "config": {
     "allow-plugins": {
