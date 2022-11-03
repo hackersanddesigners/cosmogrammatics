@@ -4,7 +4,16 @@ use Hidehalo\Nanoid\Client;
 use Hidehalo\Nanoid\GeneratorInterface;
 
 
-function parseBlocks($blocks, $client) {
+function makeRef($client, $ref) {
+    if ($ref === '0') {
+        return $client->generateId($size = 21);
+    } else {
+        return $ref;
+    }
+}
+
+
+function parseBlocks($blocks, $client, $type, $blockWidth) {
 
     $updatedBlocks = [];
 
@@ -22,9 +31,10 @@ function parseBlocks($blocks, $client) {
             $footnotes_new = [];
             foreach($footnotes as $footnote) {
 
+                $ref_new = makeRef($client, $footnote->ref()->value());
                 $new_footnote = array(
                     'note' => $footnote->note()->value(),
-                    'ref' => $client->generateId($size = 21),
+                    'ref' => $ref_new, 
                 );
 
                 array_push($footnotes_new, $new_footnote);
