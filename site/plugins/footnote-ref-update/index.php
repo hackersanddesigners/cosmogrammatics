@@ -12,6 +12,34 @@ function makeRef($client, $ref) {
     }
 }
 
+function replaceFootnotePlaceholder ($text_in, $footnotes_new) {
+    // this code should run only once, during the first
+    // transform operation from `<article-footnote>` to
+    // `<a href="{ref}">{ref}</a>`
+
+    $pattern = '/<article-footnote>(.*)<\/article-footnote>/mU';
+
+    // <https://stackoverflow.com/a/11174818>
+    $callback = function ($matches) use ($footnotes_new) {
+
+        static $count = -1;
+        $count++;
+
+        $ref = $footnotes_new[$count]['ref'];
+
+        $ft_ref = 'ft-' . '-' . $ref;
+        $ft_note = '#note-ref-' . '-' . $ref;
+
+        $replacement = $matches[1] . '<a id="' . $ft_ref . '" href="' . $ft_note . '" class="ref-ft"><span>[' . $ref . ']</span></a>';
+
+        return $replacement;
+    };
+
+    $text_out = preg_replace_callback($pattern, $callback, $text_in);
+    
+    return $text_out;
+}
+
 
 function parseBlocks($blocks, $client, $type) {
 
@@ -79,47 +107,16 @@ function parseBlocks($blocks, $client, $type) {
                 array_push($footnotes_new, $new_footnote);
             }
 
-
             // -- footnote refs
-            // regex against `<article-footnote>` tag and replace it with:
-            // - `{content <article-footnote>} <a href="<short-hash-id>">{counter ref}</a>`
-
             // check if text->footnotes has any note
             // if yes, start matching any `<article-footnote` found in
-            // $block->text()
-
-            $text_new = $block->text();
+            // $block->text()->value()
+            $text_new = $block->text()->value();
 
             if ($footnotes_count > 0) {
-
-                // this code should run only once, during the first
-                // transform operation from `<article-footnote>` to
-                // `<a href="{ref}">{ref}</a>`
-
-                $text_in = $block->text();
-                $pattern = '/<article-footnote>(.*)<\/article-footnote>/mU';
-
-                // <https://stackoverflow.com/a/11174818>
-                $callback = function ($matches) use ($footnotes_new) {
-
-                    static $count = 0;
-                    $count++;
-
-                    $ref = $footnotes_new[$count]['ref'];
-
-                    $ft_ref = 'ft-' . '-' . $ref;
-                    $ft_note = '#note-ref-' . '-' . $ref;
-
-                    $replacement = $matches[1] . '<a id="' . $ft_ref . '" href="' . $ft_note . '" class="ref-ft"><span>[' . $ref . ']</span></a>';
-
-                    return $replacement;
-                };
-
-                $text_out = preg_replace_callback($pattern, $callback, $text_in);
-                $text_new = $text_out;
-
+                $text_in = $block->text()->value();
+                $text_new = replaceFootnotePlaceholder($text_in, $footnotes_new);
             } 
-
 
             // -- update block
             $blockUpdated = [
@@ -158,7 +155,6 @@ Kirby::plugin('cosmo/footnote-ref', [
             //    with actual <a href"{ref}">{ref}</a>
             //    as well as post-update footnote list ref element
             //    with same {ref}; {ref} is a UUID generated for each footnote
-
 
             // init UUID plugin
             $client = new Client();
