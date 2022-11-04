@@ -13,7 +13,7 @@ function makeRef($client, $ref) {
 }
 
 
-function parseBlocks($blocks, $client, $type, $blockWidth) {
+function parseBlocks($blocks, $client, $type) {
 
     $updatedBlocks = [];
 
@@ -21,7 +21,46 @@ function parseBlocks($blocks, $client, $type, $blockWidth) {
 
         $blockType = $block->type();
 
-        if ($blockType === 'text') {
+        if ($blockType === 'columns') {
+
+            // we have one layout per block, no need to loop over
+            $layout = $block->layout()->toLayouts()->first();
+
+            $columnsNew = [];
+            foreach($layout->columns() as $column) {
+                // we need to:
+                // - parse the layout blocks
+                // - reconstruct the layout with updated blocks
+                // - convert it back to a layout object
+
+                $subblocks = $column->blocks();
+                $updatedSubblocks = parseBlocks($subblocks, $client, 'layout');
+                $subblocksNew = new Kirby\Cms\Blocks($updatedSubblocks);
+
+                $columnNew = new Kirby\Cms\LayoutColumn(
+                    [
+                        'blocks' => $subblocksNew->toArray(),
+                        'width' => $column->width(),
+                    ]
+                );
+                
+                array_push($columnsNew, $columnNew);
+            };
+
+            $layoutColumnsNew = new Kirby\Cms\LayoutColumns($columnsNew);
+            $blockLayoutNew = Kirby\Cms\Layout::factory([
+                [
+                    'columns' => $layoutColumnsNew->toArray(),
+                ]
+            ]);
+
+            $updatedLayouts = [$blockLayoutNew];
+            $layoutsNew = new Kirby\Cms\Layouts($updatedLayouts);
+
+            array_push($updatedBlocks, $layoutsNew);
+
+        } else 
+            if ($blockType === 'text') {
 
             $footnotes = $block->footnotes()->toStructure();
             $footnotes_count = $footnotes->count();
@@ -49,7 +88,13 @@ function parseBlocks($blocks, $client, $type, $blockWidth) {
             // if yes, start matching any `<article-footnote` found in
             // $block->text()
 
+            $text_new = $block->text();
+
             if ($footnotes_count > 0) {
+
+                // this code should run only once, during the first
+                // transform operation from `<article-footnote>` to
+                // `<a href="{ref}">{ref}</a>`
 
                 $text_in = $block->text();
                 $pattern = '/<article-footnote>(.*)<\/article-footnote>/mU';
@@ -71,18 +116,23 @@ function parseBlocks($blocks, $client, $type, $blockWidth) {
                 };
 
                 $text_out = preg_replace_callback($pattern, $callback, $text_in);
+                $text_new = $text_out;
 
             } 
 
 
             // -- update block
-            $blockUpdated = new Kirby\Cms\Block([
+            $blockUpdated = [
                 'content' => [
-                    'text' => $text_out,
+                    'text' => $text_new,
                     'footnotes' => $footnotes_new,
                 ],
-                'type' => 'text',
-            ]);
+                'type' => $block->type(),
+            ];
+
+            // if ($type === 'block') {
+            $blockUpdated = new Kirby\Cms\Block($blockUpdated);
+            // }
 
             array_push($updatedBlocks, $blockUpdated);
 
@@ -98,7 +148,7 @@ function parseBlocks($blocks, $client, $type, $blockWidth) {
 }
 
 
-// footnote insertion: add incremental footnote number
+// footnote insertion: add UUID for each footnote
 // <https://getkirby.com/docs/cookbook/templating/update-blocks-programmatically>
 Kirby::plugin('cosmo/footnote-ref', [
     'hooks' => [
@@ -115,33 +165,21 @@ Kirby::plugin('cosmo/footnote-ref', [
 
             // check if builder blocks have either type -> text
             // or type -> columns, if the latter map down to find
-            // if each sub block is of type -> type
+            // if each sub block is of type -> text and pass blocks
+            // to same function (recursive-like, but 1 level only)
+            // else if blocks are of either type, simply return them
+            // as-is.
             $blocks = $newPage->builder()->toBlocks();
-            $updatedBlocks = parseBlocks($blocks, $client);
-
-            // foreach($blocks as $block) {
-
-            //     $blockType = $block->type(); 
-
-            //     if ($blockType === 'columns') {
-
-            //         foreach($layout->columns() as $column) {
-            //             $subblocks = $column->blocks();
-
-            //             // run functions for blocks as below
-            //         };
-
-            //     };
-
-            // }; // -- end block foreach
-
+            $updatedBlocks = parseBlocks($blocks, $client, 'block');
 
             $newBlocks = new Kirby\Cms\Blocks($updatedBlocks);
+            // var_dump($updatedBlocks);
+
 
             // -- write to file
             kirby()->impersonate('kirby');
             $newPage->update([
-                'Builder' => json_encode($newBlocks->toArray()),
+                'builder' => json_encode($newBlocks->toArray()),
             ]);
 
         }
