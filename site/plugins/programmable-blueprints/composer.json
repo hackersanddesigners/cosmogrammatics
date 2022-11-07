@@ -1,0 +1,12 @@
+{
+    "name": "hd/programmable-blueprints",
+    "description": "Implementation of <https://getkirby.com/docs/cookbook/panel/programmable-blueprints>: define different blueprints based on the user role.",
+    "version": "1.0.0",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "André Fincato",
+            "email": "andre@hackersanddesigners.nl"
+        }
+    ]
+}
