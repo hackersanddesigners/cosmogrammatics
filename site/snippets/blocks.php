@@ -49,7 +49,7 @@
    <ol>
    <?php
        foreach($footnotes_all as $footnote):
-       $ref = $block->id() . '-' . $footnote->ref();
+       $ref = $footnote->ref();
        ?>
        <li id="note-ref-<?= $ref ?>"><?= $footnote->note() ?><a href="#ft-<?= $ref ?>">↩</a></li>
    <?php endforeach ?>
