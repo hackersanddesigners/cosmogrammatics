@@ -71,24 +71,21 @@ function parseBlocks($blocks, $client, $type) {
                         'width' => $column->width(),
                     ]
                 );
-                
+
                 array_push($columnsNew, $columnNew);
             };
 
             $layoutColumnsNew = new Kirby\Cms\LayoutColumns($columnsNew);
+            
             $blockLayoutNew = Kirby\Cms\Layout::factory([
-                [
-                    'columns' => $layoutColumnsNew->toArray(),
-                ]
+                'columns' => $layoutColumnsNew->toArray(),
             ]);
 
-            $updatedLayouts = [$blockLayoutNew];
-            $layoutsNew = new Kirby\Cms\Layouts($updatedLayouts);
+            $layoutsNew = new Kirby\Cms\Layouts([$blockLayoutNew]);
 
             array_push($updatedBlocks, $layoutsNew);
 
-        } else 
-            if ($blockType === 'text') {
+        } else if ($blockType === 'text') {
 
             $footnotes = $block->footnotes()->toStructure();
             $footnotes_count = $footnotes->count();
@@ -127,10 +124,7 @@ function parseBlocks($blocks, $client, $type) {
                 'type' => $block->type(),
             ];
 
-            // if ($type === 'block') {
             $blockUpdated = new Kirby\Cms\Block($blockUpdated);
-            // }
-
             array_push($updatedBlocks, $blockUpdated);
 
         } else {
@@ -166,17 +160,17 @@ Kirby::plugin('cosmo/footnote-ref', [
             // else if blocks are of either type, simply return them
             // as-is.
             $blocks = $newPage->builder()->toBlocks();
+
             $updatedBlocks = parseBlocks($blocks, $client, 'block');
+            $blocksNew = new Kirby\Cms\Blocks($updatedBlocks);
 
-            $newBlocks = new Kirby\Cms\Blocks($updatedBlocks);
-            // var_dump($updatedBlocks);
+            echo json_encode($blocksNew->toArray());
 
-
-            // -- write to file
-            kirby()->impersonate('kirby');
-            $newPage->update([
-                'builder' => json_encode($newBlocks->toArray()),
-            ]);
+            // // -- write to file
+            // kirby()->impersonate('kirby');
+            // $newPage->update([
+            //     'builder' => json_encode($blocksNew->toArray()),
+            // ]);
 
         }
     ]
