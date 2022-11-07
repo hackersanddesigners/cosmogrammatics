@@ -77,13 +77,22 @@ function parseBlocks($blocks, $client, $type) {
 
             $layoutColumnsNew = new Kirby\Cms\LayoutColumns($columnsNew);
             
-            $blockLayoutNew = Kirby\Cms\Layout::factory([
+            $layoutNew = Kirby\Cms\Layout::factory([
                 'columns' => $layoutColumnsNew->toArray(),
             ]);
 
-            $layoutsNew = new Kirby\Cms\Layouts([$blockLayoutNew]);
+            $layoutsNew = new Kirby\Cms\Layouts([$layoutNew]);
 
-            array_push($updatedBlocks, $layoutsNew);
+            // -- update block
+            $blockLayoutUpdated = [
+                'content' => [
+                    'layout' => $layoutsNew->toArray(),
+                ],
+                'type' => 'columns',
+            ];
+
+            $blockLayoutNew = new Kirby\Cms\Block($blockLayoutUpdated);
+            array_push($updatedBlocks, $blockLayoutNew);
 
         } else if ($blockType === 'text') {
 
@@ -164,13 +173,11 @@ Kirby::plugin('cosmo/footnote-ref', [
             $updatedBlocks = parseBlocks($blocks, $client, 'block');
             $blocksNew = new Kirby\Cms\Blocks($updatedBlocks);
 
-            echo json_encode($blocksNew->toArray());
-
-            // // -- write to file
-            // kirby()->impersonate('kirby');
-            // $newPage->update([
-            //     'builder' => json_encode($blocksNew->toArray()),
-            // ]);
+            // -- write to file
+            kirby()->impersonate('kirby');
+            $newPage->update([
+                'builder' => json_encode($blocksNew->toArray()),
+            ]);
 
         }
     ]
