@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bf64a86b522c3f85fc8821a614a6ddbe",
+    "content-hash": "a2d1eea741786330365b061e16a7cc01",
     "packages": [
         {
             "name": "claviska/simpleimage",
@@ -357,52 +357,17 @@
             "time": "2022-01-07T12:00:00+00:00"
         },
         {
-            "name": "gearsdigital/enhanced-toolbar-link-dialog",
-            "version": "3.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/gearsdigital/enhanced-toolbar-link-dialog.git",
-                "reference": "a3dc354d616c7d372c0b6073f0fc217713bc18bd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/gearsdigital/enhanced-toolbar-link-dialog/zipball/a3dc354d616c7d372c0b6073f0fc217713bc18bd",
-                "reference": "a3dc354d616c7d372c0b6073f0fc217713bc18bd",
-                "shasum": ""
-            },
-            "require": {
-                "getkirby/composer-installer": "^1.1"
-            },
-            "type": "kirby-plugin",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Steffen Giers",
-                    "email": "steffen.giers@gmail.com"
-                }
-            ],
-            "description": "Enhanced Toolbar Link Dialog is a Kirby 3 plugin that extends the default link dialog with a search functionality. This makes it possible, to create links to _existing_ or _external_ pages.",
-            "support": {
-                "issues": "https://github.com/gearsdigital/enhanced-toolbar-link-dialog/issues",
-                "source": "https://github.com/gearsdigital/enhanced-toolbar-link-dialog/tree/v3.1.2"
-            },
-            "time": "2022-08-17T13:55:59+00:00"
-        },
-        {
             "name": "getkirby/cms",
-            "version": "3.8.0",
+            "version": "3.8.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getkirby/kirby.git",
-                "reference": "3e5899b628a2b59c1833a8d79eda292a7fe06843"
+                "reference": "04ef75b140ef67ad2de37895ab438e7f4649f072"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getkirby/kirby/zipball/3e5899b628a2b59c1833a8d79eda292a7fe06843",
-                "reference": "3e5899b628a2b59c1833a8d79eda292a7fe06843",
+                "url": "https://api.github.com/repos/getkirby/kirby/zipball/04ef75b140ef67ad2de37895ab438e7f4649f072",
+                "reference": "04ef75b140ef67ad2de37895ab438e7f4649f072",
                 "shasum": ""
             },
             "require": {
@@ -421,10 +386,10 @@
                 "ext-simplexml": "*",
                 "filp/whoops": "2.14.5",
                 "getkirby/composer-installer": "^1.2.1",
-                "laminas/laminas-escaper": "2.10.0",
+                "laminas/laminas-escaper": "2.12.0",
                 "michelf/php-smartypants": "1.8.1",
                 "php": ">=8.0.0 <8.2.0",
-                "phpmailer/phpmailer": "6.6.4",
+                "phpmailer/phpmailer": "6.6.5",
                 "symfony/polyfill-intl-idn": "1.26.0",
                 "symfony/polyfill-mbstring": "1.26.0"
             },
@@ -489,7 +454,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2022-10-06T09:42:24+00:00"
+            "time": "2022-10-25T09:54:29+00:00"
         },
         {
             "name": "getkirby/composer-installer",
@@ -579,33 +544,90 @@
             "time": "2022-01-25T17:03:20+00:00"
         },
         {
-            "name": "laminas/laminas-escaper",
-            "version": "2.10.0",
+            "name": "hidehalo/nanoid-php",
+            "version": "1.1.12",
             "source": {
                 "type": "git",
-                "url": "https://github.com/laminas/laminas-escaper.git",
-                "reference": "58af67282db37d24e584a837a94ee55b9c7552be"
+                "url": "https://github.com/hidehalo/nanoid-php.git",
+                "reference": "3229400d7e69b127a9e4f8fdad2e498e64cdaae4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-escaper/zipball/58af67282db37d24e584a837a94ee55b9c7552be",
-                "reference": "58af67282db37d24e584a837a94ee55b9c7552be",
+                "url": "https://api.github.com/repos/hidehalo/nanoid-php/zipball/3229400d7e69b127a9e4f8fdad2e498e64cdaae4",
+                "reference": "3229400d7e69b127a9e4f8fdad2e498e64cdaae4",
+                "shasum": ""
+            },
+            "require": {
+                "paragonie/random_compat": ">=2.0",
+                "php": "~5.6|~7.0|~8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=5.6",
+                "squizlabs/php_codesniffer": "^2.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hidehalo\\Nanoid\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "hidehalo",
+                    "email": "tianchen_cc@yeah.net",
+                    "homepage": "https://github.com/hidehalo",
+                    "role": "Owner"
+                }
+            ],
+            "description": "A copy of nanoid in PHP",
+            "homepage": "https://github.com/hidehalo/nanoid-php",
+            "keywords": [
+                "hidehalo",
+                "nanoid-php"
+            ],
+            "support": {
+                "issues": "https://github.com/hidehalo/nanoid-php/issues",
+                "source": "https://github.com/hidehalo/nanoid-php/tree/1.1.12"
+            },
+            "time": "2021-12-30T07:27:43+00:00"
+        },
+        {
+            "name": "laminas/laminas-escaper",
+            "version": "2.12.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laminas/laminas-escaper.git",
+                "reference": "ee7a4c37bf3d0e8c03635d5bddb5bb3184ead490"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laminas/laminas-escaper/zipball/ee7a4c37bf3d0e8c03635d5bddb5bb3184ead490",
+                "reference": "ee7a4c37bf3d0e8c03635d5bddb5bb3184ead490",
                 "shasum": ""
             },
             "require": {
                 "ext-ctype": "*",
                 "ext-mbstring": "*",
-                "php": "^7.4 || ~8.0.0 || ~8.1.0"
+                "php": "^7.4 || ~8.0.0 || ~8.1.0 || ~8.2.0"
             },
             "conflict": {
                 "zendframework/zend-escaper": "*"
             },
             "require-dev": {
                 "infection/infection": "^0.26.6",
-                "laminas/laminas-coding-standard": "~2.3.0",
+                "laminas/laminas-coding-standard": "~2.4.0",
                 "maglnet/composer-require-checker": "^3.8.0",
                 "phpunit/phpunit": "^9.5.18",
-                "psalm/plugin-phpunit": "^0.16.1",
+                "psalm/plugin-phpunit": "^0.17.0",
                 "vimeo/psalm": "^4.22.0"
             },
             "type": "library",
@@ -638,7 +660,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2022-03-08T20:15:36+00:00"
+            "time": "2022-10-10T10:11:09+00:00"
         },
         {
             "name": "league/color-extractor",
@@ -753,17 +775,102 @@
             "time": "2016-12-13T01:01:17+00:00"
         },
         {
-            "name": "phpmailer/phpmailer",
-            "version": "v6.6.4",
+            "name": "microman/kirby-column-blocks",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "a94fdebaea6bd17f51be0c2373ab80d3d681269b"
+                "url": "https://github.com/youngcut/kirby-column-blocks.git",
+                "reference": "18c00d9a07e48adad052ed89ae90df73eb4635f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/a94fdebaea6bd17f51be0c2373ab80d3d681269b",
-                "reference": "a94fdebaea6bd17f51be0c2373ab80d3d681269b",
+                "url": "https://api.github.com/repos/youngcut/kirby-column-blocks/zipball/18c00d9a07e48adad052ed89ae90df73eb4635f4",
+                "reference": "18c00d9a07e48adad052ed89ae90df73eb4635f4",
+                "shasum": ""
+            },
+            "require": {
+                "getkirby/composer-installer": "^1.0"
+            },
+            "type": "kirby-plugin",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roman Gsponer",
+                    "email": "mail@microman.ch"
+                }
+            ],
+            "description": "Use columns in block fields based on the layout field.",
+            "support": {
+                "issues": "https://github.com/youngcut/kirby-column-blocks/issues",
+                "source": "https://github.com/youngcut/kirby-column-blocks/tree/1.0.0"
+            },
+            "time": "2022-10-25T09:38:18+00:00"
+        },
+        {
+            "name": "paragonie/random_compat",
+            "version": "v9.99.100",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paragonie/random_compat.git",
+                "reference": "996434e5492cb4c3edcb9168db6fbb1359ef965a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/996434e5492cb4c3edcb9168db6fbb1359ef965a",
+                "reference": "996434e5492cb4c3edcb9168db6fbb1359ef965a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">= 7"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*|5.*",
+                "vimeo/psalm": "^1"
+            },
+            "suggest": {
+                "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paragon Initiative Enterprises",
+                    "email": "security@paragonie.com",
+                    "homepage": "https://paragonie.com"
+                }
+            ],
+            "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
+            "keywords": [
+                "csprng",
+                "polyfill",
+                "pseudorandom",
+                "random"
+            ],
+            "support": {
+                "email": "info@paragonie.com",
+                "issues": "https://github.com/paragonie/random_compat/issues",
+                "source": "https://github.com/paragonie/random_compat"
+            },
+            "time": "2020-10-15T08:29:30+00:00"
+        },
+        {
+            "name": "phpmailer/phpmailer",
+            "version": "v6.6.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPMailer/PHPMailer.git",
+                "reference": "8b6386d7417526d1ea4da9edb70b8352f7543627"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/8b6386d7417526d1ea4da9edb70b8352f7543627",
+                "reference": "8b6386d7417526d1ea4da9edb70b8352f7543627",
                 "shasum": ""
             },
             "require": {
@@ -787,8 +894,8 @@
                 "hayageek/oauth2-yahoo": "Needed for Yahoo XOAUTH2 authentication",
                 "league/oauth2-google": "Needed for Google XOAUTH2 authentication",
                 "psr/log": "For optional PSR-3 debug logging",
-                "stevenmaguire/oauth2-microsoft": "Needed for Microsoft XOAUTH2 authentication",
-                "symfony/polyfill-mbstring": "To support UTF-8 if the Mbstring PHP extension is not enabled (^1.2)"
+                "symfony/polyfill-mbstring": "To support UTF-8 if the Mbstring PHP extension is not enabled (^1.2)",
+                "thenetworg/oauth2-azure": "Needed for Microsoft XOAUTH2 authentication"
             },
             "type": "library",
             "autoload": {
@@ -820,7 +927,7 @@
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
             "support": {
                 "issues": "https://github.com/PHPMailer/PHPMailer/issues",
-                "source": "https://github.com/PHPMailer/PHPMailer/tree/v6.6.4"
+                "source": "https://github.com/PHPMailer/PHPMailer/tree/v6.6.5"
             },
             "funding": [
                 {
@@ -828,7 +935,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-08-22T09:22:00+00:00"
+            "time": "2022-10-07T12:23:10+00:00"
         },
         {
             "name": "psr/log",
@@ -882,20 +989,20 @@
         },
         {
             "name": "sylvainjule/embed",
-            "version": "1.0.5",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sylvainjule/kirby-embed.git",
-                "reference": "5b94c6dd1f172ee1e268b246dc0efd2800829a7d"
+                "reference": "eaa140e62da201f835c7fa8289329e67ef143426"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sylvainjule/kirby-embed/zipball/5b94c6dd1f172ee1e268b246dc0efd2800829a7d",
-                "reference": "5b94c6dd1f172ee1e268b246dc0efd2800829a7d",
+                "url": "https://api.github.com/repos/sylvainjule/kirby-embed/zipball/eaa140e62da201f835c7fa8289329e67ef143426",
+                "reference": "eaa140e62da201f835c7fa8289329e67ef143426",
                 "shasum": ""
             },
             "require": {
-                "embed/embed": "^3.4",
+                "embed/embed": "3.4.18",
                 "getkirby/composer-installer": "^1.1"
             },
             "type": "kirby-plugin",
@@ -915,9 +1022,9 @@
             "description": "Embed field for Kirby 3",
             "support": {
                 "issues": "https://github.com/sylvainjule/kirby-embed/issues",
-                "source": "https://github.com/sylvainjule/kirby-embed/tree/1.0.5"
+                "source": "https://github.com/sylvainjule/kirby-embed/tree/1.0.6"
             },
-            "time": "2022-04-27T08:38:48+00:00"
+            "time": "2022-10-29T10:00:48+00:00"
         },
         {
             "name": "symfony/polyfill-intl-idn",
