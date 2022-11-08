@@ -1,3 +1,3 @@
-<?php foreach ( $page->builder()->toLayouts() as $row ) {
+<?php foreach ( $rows as $row ) {
   snippet( 'grid/row', [ 'row' => $row ] );
 } ?>

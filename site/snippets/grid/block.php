@@ -43,8 +43,14 @@
   data-type="block-<?= $block->type() ?>"
 >
 
+
   <div class="contents">
-    <?= $block ?>
+    <?php
+    if ( $block->layout()->isNotEmpty() ) {
+      snippet( 'grid/index', [ 'rows' => $block->layout()->toLayouts() ] );
+    } else {
+      echo $block;
+    } ?>
   </div>
 
   <?php snippet( 'comments/index', [

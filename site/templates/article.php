@@ -15,7 +15,7 @@
         </div>
       </div>
     </div>
-    <?php snippet( 'grid/index' ) ?>
+    <?php snippet( 'grid/index', [ 'rows' => $page->builder()->toLayouts() ] ) ?>
   </main>
 
   <?php snippet( 'footer' ) ?>

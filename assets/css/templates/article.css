@@ -27,8 +27,11 @@ main section {
 
 main .row {
   display: flex;
-  padding-inline: calc( var(--header-height) / 2 );
   border-top: var(--grid);
+}
+
+main > .row {
+  padding-inline: calc( var(--header-height) / 2 );
 }
 
 main .row .column {
@@ -67,6 +70,13 @@ main .block {
   /* height: 100%; */
   /* padding-block: 0rem; */
 }
+
+/* if a block will contain a nested alyopuit inside it, remvoe padding */
+main .block.columns {
+  padding: 0;
+  /* box-shadow: unset; */
+}
+
 
 main .row .column .block .contents {
   max-width: var(--main-width);
