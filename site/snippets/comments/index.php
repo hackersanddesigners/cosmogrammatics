@@ -1,4 +1,4 @@
-<?php if ( count($comments) !== 0 ) { ?>
+<?php if ( $comments && count($comments) !== 0 ) { ?>
   <aside>
 
     <?php
