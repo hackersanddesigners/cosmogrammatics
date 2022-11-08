@@ -34,10 +34,7 @@
     </ul>
   </nav>
   <?php snippet( 'search' ) ?>
-  <span
-    tabindex="0"
-    class="title"
-  >
+  <span class="title">
     <a href="<?= $site->url() ?>">
       <?= $site->title()->html() ?>
     </a>

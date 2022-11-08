@@ -108,6 +108,7 @@ header {
   display: flex;
   align-items: center;
   height: var(--header-height);
+  /* border-top: var(--thin); */
   border-bottom: var(--thin);
   z-index: 1;
   font-size: 1.5rem;
@@ -146,6 +147,7 @@ header form input[type="search"] {
   border: unset;
   padding: inherit;
   font-size: inherit;
+  padding-inline: 1rem;
 }
 
 header form input[type="submit"] {
@@ -213,6 +215,10 @@ header nav.collapsible::after {
   font-weight: 100;
 }
 
+header form.collapsible::after {
+  pointer-events: none;
+}
+
 header form.collapsible::before {
   content: '';
   position: absolute;
@@ -240,7 +246,6 @@ header form.collapsible:focus-within {
 
 header form.collapsible.expanded input[type="search"],
 header form.collapsible:focus-within input[type="search"] {
-  padding-inline: 1rem;
 }
 
 header nav.collapsible.expanded::after,
