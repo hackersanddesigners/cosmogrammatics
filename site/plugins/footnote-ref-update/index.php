@@ -27,8 +27,8 @@ function replaceFootnotePlaceholder ($text_in, $footnotes_new) {
 
         $ref = $footnotes_new[$count]['ref'];
 
-        $ft_ref = 'ft-' . '-' . $ref;
-        $ft_note = '#note-ref-' . '-' . $ref;
+        $ft_ref = 'ft-' . $ref;
+        $ft_note = '#note-ref-' . $ref;
 
         $replacement = $matches[1] . '<a id="' . $ft_ref . '" href="' . $ft_note . '" class="ref-ft"><span>[' . $ref . ']</span></a>';
 
