@@ -7,13 +7,19 @@ subpage_builder:
     num: 1
 
 tabs:
-  
-  article:
-    label: Article
 
+  article:
+    label: ✍️ Article 📑
     fields:
       builder: fields/blocks
 
-  comments:  
+  skin:
+    label: 💅 Fashun 💄
+    fields:
+      skin: fields/skins
+
+
+  comments:
+    label: 🗣️ Comments 💬
     sections:
       comments: sections/comment

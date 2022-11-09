@@ -1,23 +1,34 @@
+/*
+
+
+@font-face {
+  font-family: 'sporting';
+  src: url(/assets/css/fonts/Sporting_Grotesque-Bold.ttf);
+} */
+
+
 /* main as article */
 
 main {
 }
+
+
 
 main h1 {
   font-size: 6rem;
   text-align: center;
   margin-block: 0;
   margin-inline: 1rem;
-  font-family: 'murmure';
+  font-family: var(--title);
   /* width: 100%; */
   /* padding: 0.5rem; */
   /* margin-inline: calc( var(--header-height) / 2); */
-  /* box-shadow:0 0 0 1px var(--cyan); */
+  /* box-shadow:var(--gridshadow); */
 }
 
 main .stats {
   text-align: right;
-  font-family: 'sporting';
+  font-family: var(--comments);
 }
 
 main section {
@@ -27,7 +38,7 @@ main section {
 
 main .row {
   display: flex;
-  border-top: var(--grid);
+  border-top: var(--gridline);
 }
 
 main > .row {
@@ -65,7 +76,7 @@ main .block {
   /* border: var(--grid); */
   /* border-bottom: none; */
   background-color: var(--back);
-  box-shadow:0 0 0 1px var(--cyan);
+  box-shadow:var(--gridshadow);
   padding: 0.5rem;
   /* height: 100%; */
   /* padding-block: 0rem; */
@@ -74,7 +85,6 @@ main .block {
 /* if a block will contain a nested alyopuit inside it, remvoe padding */
 main .block.columns {
   padding: 0;
-  /* box-shadow: unset; */
 }
 
 
@@ -103,6 +113,7 @@ main .row .column .block aside article {
   background-color: rgb(251, 233, 255);
   box-shadow: 0 0 1rem 0 rgb(251, 233, 255);
   margin-bottom: 1rem;
+  font-family: var(--comments);
 }
 
 main .row .column .block aside article form input {
@@ -110,19 +121,18 @@ main .row .column .block aside article form input {
   width: 100%;
 }
 
-main .row .column .block:focus-within,
-main .row .column .block:focus-within aside article,
-main .row .column .block aside article:focus-within {
-  box-shadow: 0 0 2rem 0 rgb(222, 199, 227);
+main .row .column .block:not(.columns):focus-within,
+main .row .column .block:not(.columns):focus-within aside article,
+main .row .column .block:not(.columns) aside article:focus-within {
+  box-shadow: 0 0 2rem 0 var(--accent);
 }
 
-main .row .column .block:focus-within {
+main .row .column .block:not(.columns):focus-within {
   z-index: 1;
-  box-shadow: 0 0 2rem 0 rgb(222, 199, 227), 0 0 0 1px var(--cyan) ;
+  box-shadow: 0 0 2rem 0 var(--accent), var(--gridshadow);
 }
 
-main .row .column .block:focus aside ,
-main .row .column .block:focus-within aside  {
+main .row .column .block:not(.columns):focus-within aside  {
   right: -14rem;
   top: 1rem;
 }
