@@ -26,4 +26,5 @@
   <?php if ( $page->template() == 'article' ) {
     snippet( 'head/style/index' );
   } ?>
+
 </head>
