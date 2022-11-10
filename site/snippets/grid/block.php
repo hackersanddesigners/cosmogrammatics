@@ -38,7 +38,7 @@
 
 
   <div class="contents">
-    <span><?= $block->uid() ?></span>
+    <span><code><?= $block->bid() ?></code></span>
     <?php
     if ( $block->layout()->isNotEmpty() ) {
       snippet( 'grid/index', [ 'rows' => $block->layout()->toLayouts() ] );
