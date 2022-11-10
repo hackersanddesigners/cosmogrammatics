@@ -4,7 +4,7 @@
     method="post"
     name="comment_form"
     class="comment_form"
-    data-block-id="<?= $block->id() ?>"
+    data-block-id="<?= isset( $block ) ? $block->id() : NULL ?>"
     data-article-slug="<?= $page->slug() ?>"
     data-csrf="<?= csrf() ?>"
   >

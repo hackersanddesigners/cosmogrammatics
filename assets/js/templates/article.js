@@ -80,6 +80,7 @@ function post_comment( e ) {
   .then(response => {
     const page = response.data;
     console.log('kirby-api page =>', page)
+    form.reset()
   })
   .catch(error => {
     console.error(error)
