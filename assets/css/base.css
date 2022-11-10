@@ -3,16 +3,6 @@
   src: url(/assets/css/fonts/AUTHENTICSans-60.otf);
 }
 
-@font-face {
-  font-family: 'murmure';
-  src: url(/assets/css/fonts/le-murmure.otf);
-}
-
-@font-face {
-  font-family: 'sporting';
-  src: url(/assets/css/fonts/Sporting_Grotesque-Bold.ttf);
-}
-
 :root {
 
   /* colors */
