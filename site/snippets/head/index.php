@@ -12,19 +12,8 @@
 
   <meta name="description" content="">
 
-  <?= css( [
-    'assets/css/base.css',
-    '@auto'
-  ]) ?>
-
-  <?= js([
-    '@auto'
-  ], [
-    'type'  => 'module'
-  ]) ?>
-
-  <?php if ( $page->template() == 'article' ) {
-    snippet( 'head/style/index' );
-  } ?>
+  <?= css([ 'assets/css/base.css', '@auto' ]) ?>
+  <?= js([ '@auto' ], [ 'type'  => 'module' ]) ?>
+  <?= snippet( 'head/style/index' ) ?>
 
 </head>
