@@ -33,57 +33,10 @@ fields:
       video: Video
     width: 1/2
 
-  selection_text:
-    label: Text selection
-    type: structure 
-    fields:
-      x1:
-        label: Offset start
-        type: number
-      y2:
-        label: Offset end
-        type: number
-    when:
-      selection_type: text
-    width: 1/2
-
-  selection_image:
-    label: Image selection
-    type: structure 
-    fields:
-      x1:
-        label: x1
-        type: number
-      y1:
-        label: y1
-        type: number
-      x2:
-        label: x2
-        type: number
-      y2:
-        label: y2
-        type: number
-    when:
-      selection_type: image
-    width: 1/2
   
-  selection_audio:
-    label: Audio selection
-    type: structure 
-    fields:
-      t1:
-        label: t1
-        type: number
-      t2:
-        label: t2
-        type: number
-    when:
-      selection_type: audio
-    width: 1/2
-    
-  selection_video:
-    label: Video selection
-    type: structure 
+  selection_coords:
+    label: Selection coordinates
+    type: structure
     fields:
       x1:
         label: x1
@@ -91,18 +44,17 @@ fields:
       y1:
         label: y1
         type: number
-      t1:
-        label: t1
-        type: number
       x2:
         label: x2
         type: number
       y2:
         label: y2
         type: number
+      t1:
+        label: t1
+        type: number
       t2:
         label: t2
         type: number
-    when:
-      selection_type: video
+      
     width: 1/2
