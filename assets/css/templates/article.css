@@ -131,7 +131,9 @@ aside p {
   margin-block: 0;
 }
 
+.comment-highlight,
 section .highlight {
   display: inline;
   background-color: yellow;
+  color: var(--cyan);
 }

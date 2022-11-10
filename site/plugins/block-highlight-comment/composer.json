@@ -1,0 +1,12 @@
+{
+    "name": "hd/block-highlight-comment",
+    "description": "parse block-text and wrap text selection that's been commented around a span tag in order to manipulate it visually with CSS; works across Kirby's builder blocks.",
+    "version": "1.0.0",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "André Fincato",
+            "email": "andre@hackersanddesigners.nl"
+        }
+    ]
+}
