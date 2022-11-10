@@ -2,12 +2,6 @@
 
 return [
     'debug' => true,
-    'env' => require_once 'env.php',
-    'api' => [
-        'basicAuth' => true,
-        'allowInsecure' => true
-    ],
-
     'gearsdigital.enhanced-toolbar-link-dialog' => [
         'title' => '{{ page.title }}',
         'filter' => null,

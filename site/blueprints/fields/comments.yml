@@ -37,10 +37,10 @@ fields:
     label: Text selection
     type: structure 
     fields:
-      x:
+      x1:
         label: Offset start
         type: number
-      y:
+      y2:
         label: Offset end
         type: number
     when:
