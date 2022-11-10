@@ -171,61 +171,61 @@ function parseBlockSelection($blocks, $block_id, $comments, $offset, $type) {
 }
 
 
-// parse block-text and wrap comments pointing to a specific text offset
-// inside a span tag in order to manipulate it visually with CSS in the frontend
-// similarly to the `cosmo/footnote-ref` plugin, we need to map through
-// block-text as well as block->columns->block-text
-Kirby::plugin('cosmo/block-highlight-comment', [
-    'hooks' => [
-        'route:after' => function ($route, $path, $method) {
+// // parse block-text and wrap comments pointing to a specific text offset
+// // inside a span tag in order to manipulate it visually with CSS in the frontend
+// // similarly to the `cosmo/footnote-ref` plugin, we need to map through
+// // block-text as well as block->columns->block-text
+// Kirby::plugin('cosmo/block-highlight-comment', [
+//     'hooks' => [
+//         'route:after' => function ($route, $path, $method) {
 
-            $kirby = kirby();
-            $request = $kirby->request();
+//             $kirby = kirby();
+//             $request = $kirby->request();
 
-            // url => api/pages/articles+tottoaa+comments/children
-            if (Str::startsWith($path, 'api/pages/articles+')
-                && Str::endsWith($path, '+comments/children')
-                && $method == "POST") {
+//             // url => api/pages/articles+tottoaa+comments/children
+//             if (Str::startsWith($path, 'api/pages/articles+')
+//                 && Str::endsWith($path, '+comments/children')
+//                 && $method == "POST") {
 
-                // <https://getkirby.com/docs/cookbook/forms/user-registration>
+//                 // <https://getkirby.com/docs/cookbook/forms/user-registration>
 
-                // check if CSRF token is valid
-                $csrf = $request->csrf();
-                if (csrf($csrf) === true) {
+//                 // check if CSRF token is valid
+//                 $csrf = $request->csrf();
+//                 if (csrf($csrf) === true) {
 
-                    $body = $request->body();
+//                     $body = $request->body();
 
-                    // set a new empty collection
-                    // and then update the var with any comments
-                    // part of the current article
-                    $comments = new Collection();
-                    $page = page($body->get('fullpath'));
+//                     // set a new empty collection
+//                     // and then update the var with any comments
+//                     // part of the current article
+//                     $comments = new Collection();
+//                     $page = page($body->get('fullpath'));
 
-                    // filter article comments by block_id if any
-                    // else skip
-                    if ($page->hasChildren()) {
-                        $block_id = $body->get('content')['block_id'];
+//                     // filter article comments by block_id if any
+//                     // else skip
+//                     if ($page->hasChildren()) {
+//                         $block_id = $body->get('content')['block_id'];
 
-                        if ($block_id != '') {
-                            $comments = $page->children()->drafts()->filterBy('block_id', $block_id);
+//                         if ($block_id != '') {
+//                             $comments = $page->children()->drafts()->filterBy('block_id', $block_id);
 
-                            $offset = $body->get('content')['selection_text'];
+//                             $offset = $body->get('content')['selection_text'];
 
-                            $blocks = $page->builder()->toBlocks();
-                            $updatedBlocks = parseBlockSelection($blocks, $block_id, $comments, $offset, 'block');
-                            $blocksNew = new Kirby\Cms\Blocks($updatedBlocks);
+//                             $blocks = $page->builder()->toBlocks();
+//                             $updatedBlocks = parseBlockSelection($blocks, $block_id, $comments, $offset, 'block');
+//                             $blocksNew = new Kirby\Cms\Blocks($updatedBlocks);
 
-                            // // -- write to file
-                            // kirby()->impersonate('kirby');
-                            // $page->update([
-                            //     'builder' => json_encode($blocksNew->toArray()),
-                            // ]);
+//                             // // -- write to file
+//                             // kirby()->impersonate('kirby');
+//                             // $page->update([
+//                             //     'builder' => json_encode($blocksNew->toArray()),
+//                             // ]);
 
-                        }
-                    }
+//                         }
+//                     }
 
-                } // -- end 
-            }
-        }
-    ]
-]);
+//                 } // -- end 
+//             }
+//         }
+//     ]
+// ]);
