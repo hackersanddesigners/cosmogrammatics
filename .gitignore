@@ -58,3 +58,5 @@ vendor
 
 .env
 *.sqlite
+
+*/fonts/*
