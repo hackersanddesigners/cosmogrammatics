@@ -49,6 +49,7 @@
 
     const csrf = "<?= csrf() ?>"
 
+    console.log(`/api/pages/${url}/children`, articleSlug)
     fetch(`/api/pages/${url}/children`, {
       method: "POST",
       headers: {
