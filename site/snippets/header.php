@@ -40,31 +40,3 @@
     </a>
   </span>
 </header>
-
-<!--
-<script type="module">
-
-import { $$ } from '/assets/js/utils/index.js'
-const header_children = Array.from( $$( 'header .collapsible' ) )
-const EXPANDED_CLASS = 'expanded'
-
-header_children.map( header_child => {
-
-  header_child.onclick = select_child
-
-  function select_child( e ) {
-    console.log( e.target )
-    header_children.map( c => collapse( c ) )
-    expand( e.target )
-  }
-
-  function expand( el ) {
-    el.classList.add( EXPANDED_CLASS )
-  }
-  function collapse( el ) {
-    el.classList.remove( EXPANDED_CLASS )
-  }
-
-})
-
-</script> -->
