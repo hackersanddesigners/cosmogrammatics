@@ -2,9 +2,6 @@
   <aside>
 
     <?php
-
-
-
       foreach ($comments as $comment) {
         snippet( 'comments/comment', [ 'comment' => $comment ] );
       }
@@ -13,7 +10,6 @@
         'block'     => $block,
         // 'selection' => $selection
       ] )
-
     ?>
 
   </aside>

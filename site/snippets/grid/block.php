@@ -11,8 +11,6 @@
     // an array of "threads" each being an array of comments,
     // threads share: selection type, and selection coordinates
 
-
-
     foreach ( $block_comments as $comment ) {
       $selection_type   = $comment -> selection_type();
       $selection_coords = $comment -> { 'selection_' . $selection_type }();
@@ -27,12 +25,7 @@
                       -> filterBy( 'selection_coords', '==', $selection_coords )
                       // andré help <\3
       ];
-
-
-
-
     }
-
   }
 ?>
 
@@ -45,6 +38,7 @@
 
 
   <div class="contents">
+    <span><?= $block->uid() ?></span>
     <?php
     if ( $block->layout()->isNotEmpty() ) {
       snippet( 'grid/index', [ 'rows' => $block->layout()->toLayouts() ] );
