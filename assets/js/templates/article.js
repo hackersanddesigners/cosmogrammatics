@@ -9,32 +9,39 @@ const comment_forms      = $$( '.comment_form' )
 const selection_observer = new SelectionObserver( article_element )
 
 for ( const comment_form of comment_forms ) {
-  comment_form.onsubmit = post_comment
+  comment_form.onsubmit = respond_to_comment
 }
 
-
-
-function post_comment( e ) {
+function respond_to_comment( e ) {
   e.preventDefault()
+  const form    = e.target
+  const chilren = Array.from( form.children )
+  post_comment({
+    article_slug   : form.getAttribute( 'data-article-slug' ),
+    block_id       : form.getAttribute( 'data-block-id' ),
+    csrf           : form.getAttribute( 'data-csrf' ),
+    author         : chilren.find( c => c.name == 'author' ).value,
+    text           : chilren.find( c => c.name == 'body' ).value,
+    selection_type : 'text',
+  })
+  .then( response => {
+    form.reset()
+  })
+}
 
-  const form           = e.target
-  const form_chilren   = Array.from( form.children )
-  const block_id       = form.getAttribute( 'data-block-id' )
-  const article_slug   = form.getAttribute( 'data-article-slug' )
-  const csrf           = form.getAttribute( 'data-csrf' )
-  const author         = form_chilren.find( c => c.name == 'author' ).value
-  const selection_type = 'text'
-  const text           = form_chilren.find( c => c.name == 'body' ).value
-  const selection      = selection_observer.selection
-  const url            = `/api/pages/articles+${ article_slug }+comments/children`
+function post_comment( comment ) {
 
+  const {
+    article_slug,
+    block_id,
+    csrf,
+    author,
+    text,
+    selection_type
+  } = comment
 
-  // console.log( selection )
-
-
-  // convert this to local timezone? or at least in the kirby panel
-  const ts = new Date().toISOString().split('.')[0]+"Z"
-
+  const ts   = new Date().toISOString().split('.')[0]+"Z"
+  const url  = `/api/pages/articles+${ article_slug }+comments`
   const body = {
     slug: `test-${ ts }`,
     title: '',
@@ -71,19 +78,24 @@ function post_comment( e ) {
     }
   }
 
-  fetch( url , {
+  return fetch( `${ url }/children` , {
     method: "POST",
     headers: { "X-CSRF": csrf },
     body: JSON.stringify( body )
   })
   .then(response => response.json())
   .then(response => {
-    const page = response.data;
-    console.log('kirby-api page =>', page)
-    form.reset()
+    fetch( `${ url }+${ response.data.slug }/status`, {
+      method: "PATCH",
+      headers: { "X-CSRF": csrf },
+      body: JSON.stringify( { status: 'listed' } )
+    })
+    .then(response => response.json())
+    .then( response => response )
+    .catch( error => console.error( error ) )
   })
-  .catch(error => {
-    console.error(error)
-  })
-  // return false
+  .then(response => response )
+  .catch(error => console.error(error) )
+
+
 }
