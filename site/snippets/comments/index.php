@@ -6,7 +6,7 @@
         snippet( 'comments/comment', [ 'comment' => $comment ] );
       }
 
-      snippet( 'comments/form', [
+      snippet( 'comments/add', [
         'block'     => $block,
         // 'selection' => $selection
       ] )

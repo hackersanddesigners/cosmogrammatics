@@ -1,13 +1,12 @@
 <article>
   <form
-    action=""
+    action="/<?= $page ?>"
     method="post"
     name="comment_form"
     class="comment_form"
-    data-auth-user="<?= $kirby->option('env')['api_user'] ?>"
-    data-auth-pass="<?= $kirby->option('env')['api_pass'] ?>"
     data-block-id="<?= $block->id() ?>"
-    data-article-slug="<?= $page ?>"
+    data-article-slug="<?= $page->slug() ?>"
+    data-csrf="<?= csrf() ?>"
   >
 
     <input
@@ -34,5 +33,6 @@
   </form>
 </article>
 
+<!-- action="/api/pages/articles+<?= $page->slug() ?>+comments/children" -->
 <!-- action="<?= "/" . $page . "/comments" ?>" -->
 <!-- action="/api/pages/comments/children" -->

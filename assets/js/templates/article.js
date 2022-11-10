@@ -16,25 +16,21 @@ for ( const comment_form of comment_forms ) {
 
 function post_comment( e ) {
   e.preventDefault()
-  console.log( e )
 
-  const form         = e.target
-  const api_user     = form.getAttribute( 'data-auth-user' )
-  const api_pass     = form.getAttribute( 'data-auth-pass' )
-  const block_id     = form.getAttribute( 'data-block-id' )
-  const article_slug = form.getAttribute( 'data-article-slug' )
-  const author       = Array.from( form.children ).find( c => c.name == 'author' ).value
-  const text         = Array.from( form.children ).find( c => c.name == 'body' ).value
-  const selection    = selection_observer.selection
+  const form           = e.target
+  const form_chilren   = Array.from( form.children )
+  const block_id       = form.getAttribute( 'data-block-id' )
+  const article_slug   = form.getAttribute( 'data-article-slug' )
+  const csrf           = form.getAttribute( 'data-csrf' )
+  const author         = form_chilren.find( c => c.name == 'author' ).value
+  const selection_type = 'text'
+  const text           = form_chilren.find( c => c.name == 'body' ).value
+  const selection      = selection_observer.selection
+  const url            = `/api/pages/articles+${ article_slug }+comments/children`
 
-  console.log( selection )
 
+  // console.log( selection )
 
-  const auth = btoa([ api_user, api_pass ].join(':'))
-
-  console.log( api_user, api_pass, auth )
-
-  const url = 'comments'
 
   // convert this to local timezone? or at least in the kirby panel
   const ts = new Date().toISOString().split('.')[0]+"Z"
@@ -49,7 +45,7 @@ function post_comment( e ) {
       article_slug: article_slug,
       block_id: block_id,
       text: text,
-      selection_type: '',
+      selection_type: selection_type,
       selection_text: {
         x: '',
         y: ''
@@ -75,11 +71,9 @@ function post_comment( e ) {
     }
   }
 
-  fetch(`/api/pages/${ url }/children`, {
+  fetch( url , {
     method: "POST",
-    headers: {
-      Authorization: `Basic ${ auth }`
-    },
+    headers: { "X-CSRF": csrf },
     body: JSON.stringify( body )
   })
   .then(response => response.json())
@@ -88,7 +82,7 @@ function post_comment( e ) {
     console.log('kirby-api page =>', page)
   })
   .catch(error => {
-    console.log('err =>', err)
+    console.error(error)
   })
-  return false
+  // return false
 }
