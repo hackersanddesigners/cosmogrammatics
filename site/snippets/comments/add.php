@@ -7,6 +7,8 @@
     data-block-id="<?= isset( $block ) ? $block->id() : NULL ?>"
     data-article-slug="<?= $page->slug() ?>"
     data-csrf="<?= csrf() ?>"
+    data-selection-type="<?= $selection_type ?? NULL ?>"
+    data-selection-text="<?= $selection_text ?? NULL ?>"
   >
 
     <input
@@ -23,9 +25,9 @@
 
     <label for="comment_input">
     </label>
-    <!-- <p>
+    <p>
       <small><em>Press ENTER to post.</em></small>
-    </p> -->
+    </p>
     <input
       type="submit"
       value="post"
