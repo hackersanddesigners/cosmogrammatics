@@ -1,4 +1,4 @@
-<?php snippet('head') ?>
+<?php snippet('head/index') ?>
 
 <body class="<?= $page->template() ?>">
 
