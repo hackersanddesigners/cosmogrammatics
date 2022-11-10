@@ -16,13 +16,8 @@ function wrapSelectedText ($text_in, $offset) {
     $center_side = str_slice($text_in, $offset['x1'], $offset['y1']);
     $right_side = str_slice($text_in, $offset['y1']);
 
-    // var_dump([$text_in, $left_side, $center_side, $right_side]);
- 
     $wrap_before = '<span class="comment-highlight">';
     $wrap_after = '</span>';
-
-    // var_dump(Str::startsWith($left_side, $wrap_before));
-    // var_dump(Str::startsWith($right_side, $wrap_before));
 
     // // check if wrapping is done already
     // if (Str::startsWith($left_side, $wrap_before)
@@ -87,15 +82,13 @@ function str_slice() {
 };
 
 
-function parseBlockSelection($blocks, $block_id, $comments, $offset, $type) {
+function parseBlockSelection($blocks, $block_bid, $comments, $offset, $type) {
 
     $updatedBlocks = [];
 
     foreach($blocks as $block) {
 
         $blockType = $block->type();
-
-        var_dump([$block->id(), $block_id]);
 
         if ($blockType === 'columns') {
 
@@ -110,7 +103,7 @@ function parseBlockSelection($blocks, $block_id, $comments, $offset, $type) {
                 // - convert it back to a layout object
 
                 $subblocks = $column->blocks();
-                $updatedSubblocks = parseBlockSelection($subblocks, $block_id, $comments, $offset, 'layout');
+                $updatedSubblocks = parseBlockSelection($subblocks, $block_bid, $comments, $offset, 'layout');
                 $subblocksNew = new Kirby\Cms\Blocks($updatedSubblocks);
 
                 $columnNew = new Kirby\Cms\LayoutColumn(
@@ -142,7 +135,7 @@ function parseBlockSelection($blocks, $block_id, $comments, $offset, $type) {
             $blockLayoutNew = new Kirby\Cms\Block($blockLayoutUpdated);
             array_push($updatedBlocks, $blockLayoutNew);
 
-        } else if ($blockType === 'text' && $block->id() === $block_id) {
+        } else if ($blockType === 'text' && $block->bid() === $block_bid) {
 
             $text_in = $block->text()->value();
             $text_new = wrapSelectedText($text_in, $offset);
@@ -204,15 +197,15 @@ function parseBlockSelection($blocks, $block_id, $comments, $offset, $type) {
 //                     // filter article comments by block_id if any
 //                     // else skip
 //                     if ($page->hasChildren()) {
-//                         $block_id = $body->get('content')['block_id'];
+//                         $block_bid = $body->get('content')['block_bid'];
 
-//                         if ($block_id != '') {
-//                             $comments = $page->children()->drafts()->filterBy('block_id', $block_id);
+//                         if ($block_bid != '') {
+//                             $comments = $page->children()->drafts()->filterBy('block_bid', $block_bid);
 
 //                             $offset = $body->get('content')['selection_text'];
 
 //                             $blocks = $page->builder()->toBlocks();
-//                             $updatedBlocks = parseBlockSelection($blocks, $block_id, $comments, $offset, 'block');
+//                             $updatedBlocks = parseBlockSelection($blocks, $block_bid, $comments, $offset, 'block');
 //                             $blocksNew = new Kirby\Cms\Blocks($updatedBlocks);
 
 //                             // // -- write to file

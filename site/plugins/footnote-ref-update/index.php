@@ -158,6 +158,7 @@ function parseBlocks($blocks, $client, $type) {
 
 // footnote insertion: add UUID for each footnote
 // <https://getkirby.com/docs/cookbook/templating/update-blocks-programmatically>
+// TODO change plugin name as we update also block->bid in here?
 Kirby::plugin('cosmo/footnote-ref', [
     'hooks' => [
         'page.update:after' => function ($newPage, $oldPage) {
