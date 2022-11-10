@@ -1,0 +1,92 @@
+type: group
+fields:
+
+  colors:
+    label: Colors
+    type: entity
+    icon: brush
+    width: 1/2
+    fields:
+      back:
+        label: Background
+        width: 1/2
+        type: colors
+        default: "#ffffff"
+        # contrast: {{ page.fore.value }}
+      fore:
+        label: Foreground
+        width: 1/2
+        type: colors
+        default: "#000000"
+      accent:
+        label: Accent
+        width: 1/2
+        type: colors
+        default: "#dfc9e4"
+      grid:
+        label: Gridlines
+        width: 1/2
+        type: colors
+        default: "#0aceff"
+
+  fonts:
+    label: Typefaces
+    type: entity
+    icon: headline
+    width: 1/2
+    fields:
+      title:
+        label: Title
+        type: files
+        multiple: false
+        uploads: font
+        width: 1/2
+        # help: Accessible via the .title selector
+      body:
+        label: Body
+        type: files
+        multiple: false
+        uploads: font
+        width: 1/2
+        # help: Accessible via the .content selector
+      comments:
+        label: Comments
+        type: files
+        multiple: false
+        uploads: font
+        width: 1/2
+        # help: Accessible via the .comment selector
+      footnotes:
+        label: Footnotes
+        type: files
+        multiple: false
+        uploads: font
+        width: 1/2
+        # help: Accessible via the .footnote sel  rector
+
+  css:
+    label: Rules
+    type: structure
+    width: 1/2
+    empty: No custom CSS rules yet
+    fields:
+      selector:
+        label: selector
+        font: monospace
+        type: text
+        placeholder: e.g. main .block .comment
+      declarations:
+        label: declarations
+        type: structure
+        empty: No declarations for this selector yet
+        fields:
+          property:
+            label: property
+            type: text
+            width: 1/2
+          value:
+            label: value
+            type: text
+            width: 1/2
+    help: |
+      The CSS classes available to you are: .title, .row, .column, .block, .content, .comment, .footnote

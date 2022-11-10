@@ -27,7 +27,10 @@
     "sylvainjule/embed": "^1.0",
     "hananils/kirby-colors": "^1.6",
     "microman/kirby-column-blocks": "^1.0",
-    "hidehalo/nanoid-php": "^1.1"
+    "hidehalo/nanoid-php": "^1.1",
+    "getkirby/cli": "^1.0",
+    "timoetting/kirby-color": "^1.0",
+    "oblik/kirby-entity-field": "^2.0"
   },
   "config": {
     "allow-plugins": {
