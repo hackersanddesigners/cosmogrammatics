@@ -21,6 +21,11 @@ fieldsets:
           text:
             extends: blocks/text
             fields:
+              uid:
+                label: Unique ID
+                type: text
+                disabled: true
+                
               footnotes:
                 label: Footnotes
                 type: structure 
@@ -74,6 +79,11 @@ fieldsets:
   text:
     extends: blocks/text
     fields:
+      id:
+        label: Unique ID
+        type: text
+        default: 0
+        disabled: true
       footnotes:
         label: Footnotes
         type: structure
