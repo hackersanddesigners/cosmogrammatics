@@ -9,7 +9,7 @@
       <div class="column">
         <div class="block">
           <div class="contents">
-            <p class="stats"><?= size( $comments->children() ) ?> comments</h5>
+            <p class="stats"><?= $comments->count() ?> comments</h5>
             <h1><?= $page->title()->html() ?></h1>
           </div>
         </div>
