@@ -16,6 +16,7 @@
       </div>
     </div>
     <?php snippet( 'grid/index', [ 'rows' => $page->builder()->toLayouts() ] ) ?>
+    <?php snippet('comments/comment-add') ?>
   </main>
 
   <?php snippet( 'footer' ) ?>
