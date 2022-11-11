@@ -3,7 +3,7 @@
   method="post"
   name="comment_form"
   class="comment_form"
-  data-block-id="<?= isset( $block ) ? $block->id() : NULL ?>"
+  data-block-id="<?= isset( $block ) ? $block->bid() : NULL ?>"
   data-article-slug="<?= $page->slug() ?>"
   data-csrf="<?= csrf() ?>"
   data-selection-type="<?= $selection_type ?? NULL ?>"
