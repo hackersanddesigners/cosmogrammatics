@@ -54,11 +54,9 @@
             if ($matches->count() > 0) {
 
                 $thread = [
-                    'selection' => [
-                        'type'   => $selection_type,
-                        'coords' => $block_comment->selection_coords()->toStructure(),
-                    ],
-                    'comments' => $matches
+                  'selection_type'   => $selection_type,
+                  'selection_coords' => $block_comment->selection_coords(),
+                  'comments'         => $matches
                 ];
 
                 array_push($block_threads, $thread);

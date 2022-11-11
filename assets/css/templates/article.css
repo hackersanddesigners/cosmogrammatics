@@ -97,6 +97,7 @@ main .row .column .block aside {
   max-width: 15rem;
   top: 1rem;
   right: -16rem;
+  width: var(--side-width);
   z-index: 1;
   border-radius: calc( var(--header-height) / 4);
 }
@@ -153,6 +154,7 @@ main .row .column .block form {
   overflow: hidden;
   border-radius: inherit;
   color: transparent;
+  left: 0;
 }
 
 main .row .column .block form:focus-within {
@@ -179,7 +181,8 @@ main .row .column .block form p {
 }
 
 
-main .row .column .block aside .thread form:focus-within ,
+main .row .column .block:not(.columns):focus-within aside .thread:first-of-type form,
+main .row .column .block aside .thread form:focus-within,
 main .row .column .block aside .thread:focus-within form  {
   display: block;
   /* position: absolute; */
