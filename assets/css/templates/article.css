@@ -108,11 +108,6 @@ main .row .column .block aside article {
   font-family: var(--comments);
 }
 
-main .row .column .block aside article form input {
-  background-color: inherit;
-  width: 100%;
-}
-
 main .row .column .block:not(.columns):focus-within,
 main .row .column .block:not(.columns):focus-within aside article,
 main .row .column .block:not(.columns) aside article:focus-within {
@@ -136,9 +131,55 @@ aside p {
 .comment-highlight,
 section .highlight {
   display: inline;
-  background-color: yellow;
-  color: var(--cyan);
+  background-color: var(--accent);
 }
+
+
+main .row .column .block form {
+  background-color: var(--grid);
+  display: none;
+  padding: 0.25rem;
+  max-height: var(--form-base-height);
+  max-width: var(--form-base-width);
+  overflow: hidden;
+}
+
+main .row .column .block form:focus-within {
+  max-height: var(--form-expanded-height);
+  max-width: var(--form-expanded-width);
+}
+
+main .row .column .block form input[type="text"] {
+  background-color: inherit;
+  width: 100%;
+  border: unset;
+  padding: 0.25rem;
+}
+
+main .row .column .block form p {
+  font-size: 0.7rem;
+  font-style: italic;
+  font-family: var(--comments);
+  opacity: 0.7rem;
+  margin: 0;
+}
+
+
+main .row .column .block:focus-within form  {
+  display: block;
+  position: absolute;
+}
+
+
+main .row .column .block .toolbar {
+  position: absolute;
+  width: var(--side-width);
+  /* bottom: calc( 1 * var(--form-base-height) ); */
+  bottom: -0.25rem;
+}
+
+
+
 
 
 /* <2022-11-11T11:12> andré: move this where it makes more sense to you karlito */
