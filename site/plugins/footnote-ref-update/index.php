@@ -40,6 +40,13 @@ function replaceFootnotePlaceholder ($text_in, $footnotes_new) {
     return $text_out;
 }
 
+function setBID($client, $bid) {
+    if ($bid === '0') {
+        return $client->generateId($size = 21);;
+    } else {
+        return $bid;
+    }
+}
 
 function parseBlocks($blocks, $client, $type) {
 
@@ -128,6 +135,7 @@ function parseBlocks($blocks, $client, $type) {
             $blockUpdated = [
                 'content' => [
                     'text' => $text_new,
+                    'bid' => setBID($client, $block->bid()->value()),
                     'footnotes' => $footnotes_new,
                 ],
                 'type' => $block->type(),
@@ -150,6 +158,7 @@ function parseBlocks($blocks, $client, $type) {
 
 // footnote insertion: add UUID for each footnote
 // <https://getkirby.com/docs/cookbook/templating/update-blocks-programmatically>
+// TODO change plugin name as we update also block->bid in here?
 Kirby::plugin('cosmo/footnote-ref', [
     'hooks' => [
         'page.update:after' => function ($newPage, $oldPage) {
@@ -182,6 +191,3 @@ Kirby::plugin('cosmo/footnote-ref', [
         }
     ]
 ]);
-
-
-

@@ -1,28 +1,30 @@
 <h3>Add comment</h3>
 
 <script>
-    const auth = btoa([
-      "<?= $kirby->option('env')['api_user'] ?>", "<?= $kirby->option('env')['api_pass'] ?>"
-    ].join(':'))
+    const currentURL = window.location.pathname
+    const targetURL = currentURL.slice(1).replace('/', '+')
+    let url = `${targetURL}+comments`
 
-    let url = 'comments'
     // conver this to local timezone? or at least in the kirby panel
     let ts = new Date().toISOString().split('.')[0]+"Z"
 
+    const articleSlug = currentURL.split('/').pop()
+
     let body = {
       'slug': `test-${ts}`,
+      'fullpath': `${currentURL.slice(1)}`,
       'title': '',
       'template': 'comment',
       'content': {
         'user': 'ah',
         'timestamp': ts,
-        'article_slug': '',
-        'block_id': '',
-        'text': '',
+        'article_slug': articleSlug,
+        'block_id': '27bc9c7e-659a-4242-b970-03030c09ec41',
+        'text': `posting a comment ${ts}`,
         'selection_type': '',
         'selection_text': {
-          'x': '',
-          'y': ''
+          'x1': '3',
+          'y1': '7'
         },
         'selection_image': {
           'x1': '',
@@ -45,10 +47,13 @@
       }
     }
 
+    const csrf = "<?= csrf() ?>"
+
+    console.log(`/api/pages/${url}/children`, articleSlug)
     fetch(`/api/pages/${url}/children`, {
       method: "POST",
       headers: {
-        Authorization: `Basic ${auth}`
+        "X-CSRF": csrf
       },
       body: JSON.stringify(body)
     })
@@ -57,7 +62,7 @@
     const page = response.data;
     console.log('kirby-api page =>', page)
   })
-  .catch(error => {
+  .catch(err => {
     console.log('err =>', err)
   })
 </script>

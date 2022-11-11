@@ -358,20 +358,19 @@
         },
         {
             "name": "getkirby/cli",
-            "version": "1.0.1",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getkirby/cli.git",
-                "reference": "9182f924454a7d00e586b6b9e82266557c94abb4"
+                "reference": "5c7a9cf627ae5ecfc62954ad94ed38484d222b70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getkirby/cli/zipball/9182f924454a7d00e586b6b9e82266557c94abb4",
-                "reference": "9182f924454a7d00e586b6b9e82266557c94abb4",
+                "url": "https://api.github.com/repos/getkirby/cli/zipball/5c7a9cf627ae5ecfc62954ad94ed38484d222b70",
+                "reference": "5c7a9cf627ae5ecfc62954ad94ed38484d222b70",
                 "shasum": ""
             },
             "require": {
-                "composer-runtime-api": "^2.2",
                 "ext-zip": "*",
                 "guzzlehttp/guzzle": "^7.5",
                 "league/climate": "^3.8",
@@ -417,7 +416,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2022-10-05T13:54:32+00:00"
+            "time": "2022-10-02T12:02:53+00:00"
         },
         {
             "name": "getkirby/cms",
@@ -1949,16 +1948,16 @@
         },
         {
             "name": "symfony/polyfill-intl-normalizer",
-            "version": "v1.26.0",
+            "version": "v1.27.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-normalizer.git",
-                "reference": "219aa369ceff116e673852dce47c3a41794c14bd"
+                "reference": "19bd1e4fcd5b91116f14d8533c57831ed00571b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-normalizer/zipball/219aa369ceff116e673852dce47c3a41794c14bd",
-                "reference": "219aa369ceff116e673852dce47c3a41794c14bd",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-normalizer/zipball/19bd1e4fcd5b91116f14d8533c57831ed00571b6",
+                "reference": "19bd1e4fcd5b91116f14d8533c57831ed00571b6",
                 "shasum": ""
             },
             "require": {
@@ -1970,7 +1969,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.26-dev"
+                    "dev-main": "1.27-dev"
                 },
                 "thanks": {
                     "name": "symfony/polyfill",
@@ -2013,7 +2012,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-normalizer/tree/v1.26.0"
+                "source": "https://github.com/symfony/polyfill-intl-normalizer/tree/v1.27.0"
             },
             "funding": [
                 {
@@ -2029,7 +2028,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-05-24T11:49:31+00:00"
+            "time": "2022-11-03T14:55:06+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -2168,5 +2167,5 @@
         "php": ">=7.4.0 <8.2.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.0.0"
 }

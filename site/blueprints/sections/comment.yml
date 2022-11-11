@@ -6,5 +6,9 @@ empty: No comment yet
 layout: table
 image: false
 columns:
-  selection_type:
-    label: Selection Type
+  user:
+    label: User
+  timestamp:
+    label: Timestamp
+  text:
+    label: Text
