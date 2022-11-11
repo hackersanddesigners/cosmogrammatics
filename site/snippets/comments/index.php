@@ -1,6 +1,5 @@
-<?php if ($comments && $comments->count() > 0) { ?>
+<?php if ($comments && $comments->count() > 0): ?>
   <aside>
-
     <?php
       foreach ($comments as $comment) {
         snippet( 'comments/comment', [ 'comment' => $comment ] );
@@ -11,6 +10,5 @@
         'selection_text' => $comments->first()->selection_text()
       ])
     ?>
-
   </aside>
-<?php } ?>
+<?php endif ?>
