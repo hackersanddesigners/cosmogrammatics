@@ -4,16 +4,17 @@ function respond_comment( e ) {
   const form    = e.target
   const chilren = Array.from( form.children )
   post_comment({
-    csrf           : form.getAttribute( 'data-csrf' ),
-    article_slug   : form.getAttribute( 'data-article-slug' ),
-    block_id       : form.getAttribute( 'data-block-id' ),
-    selection_type : form.getAttribute( 'data-selection-type' ),
-    selection_text : form.getAttribute( 'data-selection-text' ),
-    author         : chilren.find( c => c.name == 'author' ).value,
-    text           : chilren.find( c => c.name == 'body' ).value,
+    csrf             : form.getAttribute( 'data-csrf' ),
+    article_slug     : form.getAttribute( 'data-article-slug' ),
+    block_id         : form.getAttribute( 'data-block-id' ),
+    selection_type   : form.getAttribute( 'data-selection-type' ),
+    selection_coords : form.getAttribute( 'data-selection-coords' ),
+    author           : chilren.find( c => c.name == 'author' ).value,
+    text             : chilren.find( c => c.name == 'body' ).value,
   })
   .then( response => {
     form.reset()
+    // andré queryselctor any .comment and replace fields, insert at article slug / nlovkid
   })
 }
 

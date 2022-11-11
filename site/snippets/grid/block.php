@@ -52,14 +52,15 @@
                      ->filterBy('selection_coords', '==', $selection_coord);
 
             if ($matches->count() > 0) {
-
-                $thread = [
-                  'selection_type'   => $selection_type,
-                  'selection_coords' => $block_comment->selection_coords(),
-                  'comments'         => $matches
-                ];
-
-                array_push($block_threads, $thread);
+              $thread = [
+                'selection_type'   => $selection_type,
+                'selection_coords' => $block_comment->selection_coords(),
+                'comments'         => $matches
+              ];
+              // if block thread does not have this thread {
+                // $found = $block_threads->find
+                $block_threads[] = $thread;
+              // }
             }
         };
     }

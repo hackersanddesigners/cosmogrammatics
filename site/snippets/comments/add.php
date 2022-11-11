@@ -7,7 +7,7 @@
   data-article-slug="<?= $page->slug() ?>"
   data-csrf="<?= csrf() ?>"
   data-selection-type="<?= $selection_type ?? NULL ?>"
-  data-selection-text="<?= $selection_text ?? NULL ?>"
+  data-selection-coords="<?= $selection_coords ?? NULL ?>"
 >
 
   <input
