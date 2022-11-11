@@ -1,6 +1,6 @@
 <aside>
   <?php
-    $non_threaded_comments = $comments->filterBy('selection_coords', '==', 'NULL');
+    $non_threaded_comments = $comments->filterBy('selection_coords', '==', NULL);
     $non_threaded_thread = [
       'selection_type'   => NULL,
       'selection_coords' => NULL,
