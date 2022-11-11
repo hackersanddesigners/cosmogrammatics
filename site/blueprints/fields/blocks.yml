@@ -17,6 +17,7 @@ fieldsets:
           - list
           - image
           - gallery
+          - audio
 
           text:
             extends: blocks/text
@@ -44,17 +45,6 @@ fieldsets:
                   note:
                     width: 1/1
 
-          soundblock:
-            name: Audio
-            fields:
-              soundfile:
-                label: Audio (file)
-                type: files
-                options: audio
-              soundurl:
-                label: Audio (url)
-                type: embed
-
            videoblock:
              name: Video
              snippet: videoblock
@@ -75,6 +65,7 @@ fieldsets:
   - list
   - image
   - gallery
+  - audio
 
   text:
     extends: blocks/text
@@ -101,17 +92,6 @@ fieldsets:
           columns:
             note:
               width: 1/1
-
-  soundblock:
-    name: Audio
-    fields:
-      soundfile:
-        label: Audio (file)
-        type: files
-        options: audio
-      soundurl:
-        label: Audio (url)
-        type: embed
 
   videoblock:
     name: Video
