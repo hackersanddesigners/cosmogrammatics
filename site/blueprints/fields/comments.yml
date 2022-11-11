@@ -6,8 +6,7 @@ fields:
     width: 1/2
   timestamp:
     label: Timestamp
-    type: date
-    time: true
+    type: text
     width: 1/2
 
   article_slug:
