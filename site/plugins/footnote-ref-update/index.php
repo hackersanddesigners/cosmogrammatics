@@ -30,7 +30,7 @@ function replaceFootnotePlaceholder ($text_in, $footnotes_new) {
         $ft_ref = 'ft-' . $ref;
         $ft_note = '#note-ref-' . $ref;
 
-        $replacement = $matches[1] . '<a id="' . $ft_ref . '" href="' . $ft_note . '" class="ref-ft"><span>[' . $ref . ']</span></a>';
+        $replacement = $matches[1] . '<a id="' . $ft_ref . '" href="' . $ft_note . '" class="ref-ft"></a>';
 
         return $replacement;
     };

@@ -137,3 +137,11 @@ section .highlight {
   display: inline;
   background-color: yellow;
 }
+
+
+/* <2022-11-11T11:12> andré: move this where it makes more sense to you karlito */
+.ref-ft:after {
+    counter-increment: footnote;
+    content: "(" counter(footnote) ")";
+    padding-left: 0.15rem;
+}

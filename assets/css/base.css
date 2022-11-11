@@ -105,6 +105,11 @@ html, body {
   font-family: 'authentic';
 }
 
+body {
+  counter-reset: footnote;
+}
+
+
 
 /* header */
 
