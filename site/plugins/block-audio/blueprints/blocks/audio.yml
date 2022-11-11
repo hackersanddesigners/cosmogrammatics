@@ -22,7 +22,7 @@ tabs:
   file_embed:
     label: File embed
     fields:
-      source_url:
+      source_embed:
         label: Embed URL
         type: embed
       title:
