@@ -898,16 +898,16 @@
         },
         {
             "name": "hananils/kirby-colors",
-            "version": "1.6.0",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hananils/kirby-colors.git",
-                "reference": "f0f1ce26e6a3b3182188de8f52d20d63e47d8f4f"
+                "reference": "6b49acf525cdd987e6063de7ee33f4035a2d5824"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hananils/kirby-colors/zipball/f0f1ce26e6a3b3182188de8f52d20d63e47d8f4f",
-                "reference": "f0f1ce26e6a3b3182188de8f52d20d63e47d8f4f",
+                "url": "https://api.github.com/repos/hananils/kirby-colors/zipball/6b49acf525cdd987e6063de7ee33f4035a2d5824",
+                "reference": "6b49acf525cdd987e6063de7ee33f4035a2d5824",
                 "shasum": ""
             },
             "require": {
@@ -932,9 +932,9 @@
             "description": "A color field for Kirby 3",
             "support": {
                 "issues": "https://github.com/hananils/kirby-colors/issues/",
-                "source": "https://github.com/hananils/kirby-colors/tree/1.6.0"
+                "source": "https://github.com/hananils/kirby-colors/tree/1.7.0"
             },
-            "time": "2022-01-25T17:03:20+00:00"
+            "time": "2022-11-11T11:15:13+00:00"
         },
         {
             "name": "hidehalo/nanoid-php",
