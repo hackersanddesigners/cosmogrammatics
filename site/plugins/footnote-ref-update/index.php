@@ -105,7 +105,6 @@ function parseBlocks($blocks, $client, $type) {
 
             $footnotes = $block->footnotes()->toStructure();
             $footnotes_count = $footnotes->count();
-            $ref = '';
 
             // -- footnote notes
             $footnotes_new = [];
