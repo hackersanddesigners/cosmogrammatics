@@ -98,6 +98,13 @@ main .row .column .block aside {
   top: 1rem;
   right: -16rem;
   z-index: 1;
+  border-radius: calc( var(--header-height) / 4);
+}
+
+main .row .column .block aside .thread {
+  border-radius: inherit;
+  margin-bottom: 1rem;
+
 }
 
 main .row .column .block aside article {
@@ -106,6 +113,7 @@ main .row .column .block aside article {
   box-shadow: 0 0 1rem 0 rgb(251, 233, 255);
   margin-bottom: 1rem;
   font-family: var(--comments);
+  border-radius: inherit;
 }
 
 main .row .column .block:not(.columns):focus-within,
@@ -135,6 +143,7 @@ section .highlight {
 }
 
 
+
 main .row .column .block form {
   background-color: var(--grid);
   display: none;
@@ -142,11 +151,14 @@ main .row .column .block form {
   max-height: var(--form-base-height);
   max-width: var(--form-base-width);
   overflow: hidden;
+  border-radius: inherit;
+  color: transparent;
 }
 
 main .row .column .block form:focus-within {
   max-height: var(--form-expanded-height);
   max-width: var(--form-expanded-width);
+  color: var(--accent);
 }
 
 main .row .column .block form input[type="text"] {
@@ -154,6 +166,8 @@ main .row .column .block form input[type="text"] {
   width: 100%;
   border: unset;
   padding: 0.25rem;
+  color: inherit;
+  border-radius: inherit;
 }
 
 main .row .column .block form p {
@@ -165,18 +179,19 @@ main .row .column .block form p {
 }
 
 
-main .row .column .block:focus-within form  {
+main .row .column .block aside .thread form:focus-within ,
+main .row .column .block aside .thread:focus-within form  {
   display: block;
-  position: absolute;
+  /* position: absolute; */
 }
 
 
-main .row .column .block .toolbar {
-  position: absolute;
-  width: var(--side-width);
+/* main .row .column .block .toolbar { */
+  /* position: absolute; */
+  /* width: var(--side-width); */
   /* bottom: calc( 1 * var(--form-base-height) ); */
-  bottom: -0.25rem;
-}
+  /* bottom: -0.25rem; */
+/* } */
 
 
 

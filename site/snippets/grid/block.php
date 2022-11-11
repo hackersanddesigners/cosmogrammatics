@@ -21,12 +21,12 @@
     // <2022-11-10T20:55> andré: don't know how to put this inside a
     // controller for blocks, not sure there's such a thing yet...
     // on the upside, not having to do nested loops is good!
-    $block_comments = $comments->filterBy('block_id', $block->bid());
+    $block_comments = $comments->filterBy('block_id', $block->id());
 
     $block_threads = [];
     if ($comments) {
 
-        $block_comments = $comments->filterBy('block_id', $block->bid());
+        $block_comments = $comments->filterBy('block_id', $block->id());
 
         // foreach ($block_comments as $comment) {
         //     $selection_type = $comment->selection_type();
@@ -73,6 +73,5 @@
     ] )
 ?>
 
-<?= snippet( 'toolbar/index', [ 'block' => $block ] ) ?>
 
 </section>
