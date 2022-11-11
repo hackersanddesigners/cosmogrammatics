@@ -14,5 +14,9 @@ const comment_forms      = $$( '.comment_form' )
 // const selection_observer = new SelectionObserver( article_element )
 
 for ( const comment_form of comment_forms ) {
+  comment_form.addEventListener('focusin', (e) => {
+    comment_form.classList.add('focus-in')
+  })
+
   comment_form.onsubmit = respond_comment
 }

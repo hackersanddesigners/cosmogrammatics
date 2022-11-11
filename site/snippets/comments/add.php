@@ -30,7 +30,3 @@
     value="post"
   />
 </form>
-
-<!-- action="/api/pages/articles+<?= $page->slug() ?>+comments/children" -->
-<!-- action="<?= "/" . $page . "/comments" ?>" -->
-<!-- action="/api/pages/comments/children" -->
