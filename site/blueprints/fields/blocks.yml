@@ -21,10 +21,13 @@ fieldsets:
           text:
             extends: blocks/text
             fields:
-              uid:
+              bid:
                 label: Unique ID
                 type: text
+                default: 0
                 disabled: true
+                when:
+                  footnote
                 
               footnotes:
                 label: Footnotes
@@ -79,11 +82,14 @@ fieldsets:
   text:
     extends: blocks/text
     fields:
-      id:
+      bid:
         label: Unique ID
         type: text
         default: 0
         disabled: true
+        when:
+          footnote
+
       footnotes:
         label: Footnotes
         type: structure

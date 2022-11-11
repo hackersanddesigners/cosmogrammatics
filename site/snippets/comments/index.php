@@ -1,14 +1,21 @@
-<?php if ($comments && $comments->count() > 0): ?>
-  <aside>
-    <?php
-      foreach ($comments as $comment) {
-        snippet( 'comments/comment', [ 'comment' => $comment ] );
-      }
-      snippet( 'comments/add', [
-        'block'          => $block,
-        'selection_type' => $comments->first()->selection_type(),
-        'selection_text' => $comments->first()->selection_text()
-      ])
-    ?>
-  </aside>
-<?php endif ?>
+<aside>
+  <?php
+    // $non_threaded_comments = $comments->filterBy('selection_coords', '==', NULL);
+    $non_threaded_comments = $comments;
+    $non_threaded_thread = [
+      'selection_type'   => NULL,
+      'selection_coords' => NULL,
+      'comments'         => $non_threaded_comments
+    ];
+    snippet( 'comments/thread', [
+      'thread'         => $non_threaded_thread,
+      'block'          => $block,
+    ]);
+    // foreach( $threads as $thread ) {
+    //   snippet( 'comments/thread', [
+    //     'thread'         => $thread,
+    //     'block'          => $block,
+    //   ]);
+    // }
+  ?>
+</aside>
