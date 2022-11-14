@@ -203,7 +203,10 @@ main .row .column .block:not(.columns) aside .thread:focus-within form  {
 .ref-ft {
   text-decoration: none;
   color: var(--fore);
+  vertical-align: super;
+  font-size: smaller;
 }
+
 
 .ref-ft:after {
     counter-increment: footnote;
@@ -238,6 +241,13 @@ main .notes.column[data-col-width="1/1"] {
     text-align: right;
     padding: 0 0.3rem 0 0;
     width: 1.5rem;
+}
+
+.notes ol li:target {
+  outline-color: var(--accent);
+  outline-offset: 3px;
+  outline-style: solid;
+  outline-width: 2px;
 }
 
 .notes ol li p {

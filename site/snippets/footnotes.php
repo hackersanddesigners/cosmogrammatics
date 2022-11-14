@@ -4,9 +4,12 @@
    <?php
        foreach($footnotes as $footnote):
        $ref = $footnote->ref();
-       ?>
-       <li id="note-ref-<?= $ref ?>"><?= $footnote->note() ?><a href="#ft-<?= $ref ?>" class="note-ref-backlink">↩</a></li>
-   <?php endforeach ?>
+    ?>
+        <li id="note-ref-<?= $ref ?>">
+            <a href="#ft-<?= $ref ?>" class="note-ref-backlink">↩</a>
+            <?= $footnote->note() ?>
+        </li>
+    <?php endforeach ?>
    </ol>
 <?php endif ?>
 </section>
