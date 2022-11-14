@@ -100,10 +100,14 @@ main .row .column .block aside {
   position: absolute;
   max-width: 15rem;
   top: 1rem;
-  right: -15rem;
+  right: calc( -1 * var(--side-width) - 1rem );
   width: var(--side-width);
   z-index: 1;
   border-radius: calc( var(--header-height) / 4);
+}
+
+main .row .column .block.columns .block aside {
+  /* right: -14rem; */
 }
 
 main .row .column .block aside .thread {
@@ -150,9 +154,8 @@ main .row .column .block:focus-within::before {
   pointer-events: none;
 }
 
-main .row .column .block:not(.columns):focus-within aside  {
-  right: -14rem;
-  top: 1rem;
+main .row .column .block:focus-within > aside  {
+  /* right: calc( -1 * var(--side-width) ); */
 }
 
 aside p {
