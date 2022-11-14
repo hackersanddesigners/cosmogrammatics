@@ -7,62 +7,67 @@
 
 
   <div class="contents">
-  <?php
-      if ( $block->layout()->isNotEmpty() ) {
-          snippet( 'grid/index', [ 'rows' => $block->layout()->toLayouts() ] );
-      } else {
-          echo $block;
-      } ?>
+    <?php if ( $block->layout()->isNotEmpty() ) {
+      snippet( 'grid/index', [ 'rows' => $block->layout()->toLayouts() ] );
+    } else {
+      echo $block;
+    } ?>
   </div>
 
 
-<?php
+  <?php
 
     // <2022-11-10T20:55> andré: don't know how to put this inside a
     // controller for blocks, not sure there's such a thing yet...
     // on the upside, not having to do nested loops is good!
-    $block_comments = $comments->filterBy('block_id', $block->bid());
 
-    $block_threads = [];
-    if ($comments) {
+    $block_comments = [];
+    $block_threads  = [];
 
-        $block_comments = $comments->filterBy('block_id', $block->bid());
+    if ( $comments ) {
 
-        // foreach ($block_comments as $comment) {
-        //     $selection_type = $comment->selection_type();
-        //     // magic trick to call $comment->selection{text, image, audio, video}()
-        //     // => eg $comment->selection_text();
-        //     $selection_coords_key = 'selection_' . $selection_type;
-        //     $selection_coords = $comment->{ $selection_coords_key }();
-        //     $selection_coords_data = $selection_coords->toStructure();
-        // }
+      // get all comments related to this block
 
-        // for each block comment selection, check how many
-        // comments there are
-        foreach($block_comments as $block_comment) {
+      $block_comments = $comments->filterBy('block_id', $block->bid());
 
-            $selection_type = $block_comment->selection_type();
-            $selection_coord = $block_comment->selection_coords()->first()->value();
+      // for each block_comment check if there are comments
+      // that belong to the same "thread", meaning they share
+      // a selection type and coords
 
-            // testing with selection_text for now
-            // while figuring out decent way to filter out
-            $matches = $block_comments
-                     ->filterBy('selection_type', 'text')
-                     ->filterBy('selection_coords', '!=', 'NULL')
-                     ->filterBy('selection_coords', '==', $selection_coord);
+      foreach( $block_comments as $block_comment ) {
 
-            if ($matches->count() > 0) {
-              $thread = [
-                'selection_type'   => $selection_type,
-                'selection_coords' => $block_comment->selection_coords(),
-                'comments'         => $matches
-              ];
-              // if block thread does not have this thread {
-                // $found = $block_threads->find
-                $block_threads[] = $thread;
-              // }
-            }
-        };
+        $selection_type   = $block_comment->selection_type();
+        $selection_coords = $block_comment->selection_coords();
+
+        // first, check if thread has already been created.
+        // It can be uniquely identified by its selection type
+        // and coords.
+
+        $thread_exists = FALSE;
+        foreach ( $block_threads as $thr ) {
+          if (
+            $thr['selection_type']->value() == $selection_type->value() &&
+            $thr['selection_coords']->value() == $selection_coords->value()
+          ) {
+            $thread_exists = TRUE;
+            break;
+          }
+        }
+
+        // if the thread doesn't exist, we proceed with it's
+        // creation and addition to the $block_threads array.
+
+        if ( !$thread_exists ) {
+          $block_threads[] = [
+            'selection_type'   => $selection_type,
+            'selection_coords' => $selection_coords,
+            'comments'         => $block_comments
+              ->filterBy('selection_type', $selection_type )
+              ->filterBy('selection_coords', $selection_coords )
+          ];
+        }
+
+      };
     }
 
     snippet( 'comments/index', [
@@ -70,7 +75,8 @@
         'comments' => $block_comments,
         'threads'  => $block_threads,
     ] )
-?>
 
+
+  ?>
 
 </section>

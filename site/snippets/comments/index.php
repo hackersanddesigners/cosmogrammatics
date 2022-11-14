@@ -1,21 +1,23 @@
 <aside>
   <?php
-    // $non_threaded_comments = $comments->filterBy('selection_coords', '==', NULL);
-    $non_threaded_comments = $comments;
-    $non_threaded_thread = [
-      'selection_type'   => NULL,
-      'selection_coords' => NULL,
-      'comments'         => $non_threaded_comments
-    ];
-    snippet( 'comments/thread', [
-      'thread'         => $non_threaded_thread,
-      'block'          => $block,
-    ]);
-    // foreach( $threads as $thread ) {
-    //   snippet( 'comments/thread', [
-    //     'thread'         => $thread,
-    //     'block'          => $block,
-    //   ]);
-    // }
+
+    // If the block does not have any comments yet, we create
+    // one empy thread to hold the comment/add form and any
+    // comments that will be added in during browser session.
+
+    if ( empty( $threads ) ) {
+      snippet( 'comments/thread', [
+        'block'  => $block,
+        'thread' => NULL,
+      ]);
+    }
+
+    foreach( $threads as $thread ) {
+      snippet( 'comments/thread', [
+        'block'  => $block,
+        'thread' => $thread,
+      ]);
+    }
+
   ?>
 </aside>

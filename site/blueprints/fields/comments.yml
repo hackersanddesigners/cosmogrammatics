@@ -32,28 +32,34 @@ fields:
       video: Video
     width: 1/2
 
-  
+
   selection_coords:
     label: Selection coordinates
-    type: structure
+    type: entity
     fields:
       x1:
         label: x1
         type: number
+        width: 1/2
       y1:
         label: y1
         type: number
+        width: 1/2
       x2:
         label: x2
         type: number
+        width: 1/2
       y2:
         label: y2
         type: number
+        width: 1/2
       t1:
         label: t1
         type: number
+        width: 1/2
       t2:
         label: t2
         type: number
-      
+        width: 1/2
+
     width: 1/2
