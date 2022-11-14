@@ -181,9 +181,10 @@ main .row .column .block form p {
 }
 
 
+main .row .column .block:not(.columns):hover form,
 main .row .column .block:not(.columns):focus-within aside .thread:first-of-type form,
-main .row .column .block aside .thread form:focus-within,
-main .row .column .block aside .thread:focus-within form  {
+main .row .column .block:not(.columns) aside .thread form:focus-within,
+main .row .column .block:not(.columns) aside .thread:focus-within form  {
   display: block;
   /* position: absolute; */
 }
