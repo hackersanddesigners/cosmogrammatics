@@ -5,17 +5,19 @@
   data-type="block-<?= $block->type() ?>"
 >
 
+  <?php $threads = $block->threads( $comments ) ?>
+
   <div class="contents">
     <?php if ( $block->layout()->isNotEmpty() ) {
       snippet( 'grid/index', [ 'rows' => $block->layout()->toLayouts() ] );
     } else {
-      echo $block;
+      echo $block->highlightComments( $threads );
     } ?>
   </div>
 
   <?php snippet( 'comments/index', [
     'block'   => $block,
-    'threads' => $block->threads( $comments )
+    'threads' => $threads
   ]) ?>
 
 </section>

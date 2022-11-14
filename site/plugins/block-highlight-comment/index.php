@@ -279,9 +279,61 @@ Kirby::plugin('cosmo/block-methods', [
 
       return $threads;
 
+    },
+
+
+
+    'highlightComments' => function ( $threads ) {
+
+      // original text content of the block
+
+      $updated = $this;
+      $text_in = $this->text()->value();
+
+      foreach ( $threads as $thread ) {
+
+        // if a selection exists and the thread does not target
+        // the block as a whole
+
+        if (
+          $thread['selection_type']->value() &&
+          $thread['selection_coords']->value()
+        ) {
+
+          // We get the coordinate values in a format that is
+          // compatible with andré's wrapSelectedText method.
+
+          $coords = $thread['selection_coords']->toEntity();
+          $offset = [
+            'x1' => $coords->x1()->value(),
+            'y1' => $coords->y1()->value()
+          ];
+
+          // We create a new block, with updated text content
+          // that has been highlighted with the selection from
+          // this thread of comments.
+
+          $updated = new Kirby\Cms\Block([
+            'type' => $this->type(),
+            'content' => [
+              'text'      => wrapSelectedText( $text_in, $offset ),
+              'footnotes' => $this->footnotes()->toArray(),
+            ]
+          ]);
+
+          // and most important: we reset $text_in to be the
+          // text value of the newly updated block, so we are
+          // incrementing each loop with the new contents.
+
+          $text_in = $updated->text()->value();
+
+        }
+      }
+
+
+
+      return $updated;
     }
-
-
 
   ]
 ]);
