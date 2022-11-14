@@ -1,8 +1,8 @@
 <section
-    tabindex="0"
-    class="block <?= $block->type() ?>"
-    id="<?= 'b_' . $block->bid() ?>"
-    data-type="block-<?= $block->type() ?>"
+  tabindex="0"
+  class="block <?= $block->type() ?>"
+  id="<?= 'b_' . $block->bid() ?>"
+  data-type="block-<?= $block->type() ?>"
 >
 
   <div class="contents">
@@ -15,7 +15,7 @@
 
   <?php snippet( 'comments/index', [
     'block'   => $block,
-    'threads' => get_block_threads( $block, $comments )
+    'threads' => $block->threads( $comments )
   ]) ?>
 
 </section>

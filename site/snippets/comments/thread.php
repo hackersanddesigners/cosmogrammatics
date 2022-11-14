@@ -8,7 +8,7 @@
     ];
 
     foreach ($thread['comments'] as $comment) {
-      snippet( 'comments/comment', [ 'comment' => $comment ] );
+      snippet( 'comments/comment', [ 'comment' => $comment ]);
     }
 
     snippet( 'comments/add', [

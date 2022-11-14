@@ -117,7 +117,7 @@ function parseBlockSelection($blocks, $block_bid, $comments, $offset, $type) {
             };
 
             $layoutColumnsNew = new Kirby\Cms\LayoutColumns($columnsNew);
-            
+
             $layoutNew = Kirby\Cms\Layout::factory([
                 'columns' => $layoutColumnsNew->toArray(),
             ]);
@@ -217,8 +217,71 @@ function parseBlockSelection($blocks, $block_bid, $comments, $offset, $type) {
 //                         }
 //                     }
 
-//                 } // -- end 
+//                 } // -- end
 //             }
 //         }
 //     ]
 // ]);
+
+
+
+Kirby::plugin('cosmo/block-methods', [
+  'blockMethods' => [
+
+    'threads' => function ( $comments = [] ) {
+
+      $threads = [];
+
+      // get all comments related to this block
+
+      if ( $comments ) {
+        $block_comments = $comments->filterBy('block_id', $this->bid());
+
+        // for each block_comment check if there are comments
+        // that belong to the same "thread", meaning they share
+        // a selection type and coords
+
+        foreach( $block_comments as $block_comment ) {
+
+          $selection_type   = $block_comment->selection_type();
+          $selection_coords = $block_comment->selection_coords();
+
+          // first, check if thread has already been created.
+          // It can be uniquely identified by its selection type
+          // and coords.
+
+          $thread_exists = FALSE;
+          foreach ( $threads as $thr ) {
+            if (
+              $thr['selection_type']->value() == $selection_type->value() &&
+              $thr['selection_coords']->value() == $selection_coords->value()
+            ) {
+              $thread_exists = TRUE;
+              break;
+            }
+          }
+
+          // if the thread doesn't exist, we proceed with it's
+          // creation and addition to the $threads array.
+
+          if ( !$thread_exists ) {
+            $threads[] = [
+              'selection_type'   => $selection_type,
+              'selection_coords' => $selection_coords,
+              'comments'         => $block_comments
+                ->filterBy('selection_type', $selection_type )
+                ->filterBy('selection_coords', $selection_coords )
+            ];
+          }
+
+        };
+      }
+
+      return $threads;
+
+    }
+
+
+
+  ]
+]);
