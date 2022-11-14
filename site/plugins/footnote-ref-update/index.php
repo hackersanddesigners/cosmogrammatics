@@ -3,6 +3,14 @@
 use Kirby\Uuid\Uuid;
 
 
+function setBID($bid) {
+    if ($bid === '0') {
+        return Uuid::generate();
+    } else {
+        return $bid;
+    }
+}
+
 function makeRef($ref) {
     if ($ref === '0') {
         return UUid::generate();
@@ -125,7 +133,7 @@ function parseBlocks($blocks, $type) {
             $blockUpdated = [
                 'content' => [
                     'text' => $text_new,
-                    'bid' => $block->bid(),
+                    'bid' => setBID($block->bid()),
                     'footnotes' => $footnotes_new,
                 ],
                 'type' => $block->type(),
