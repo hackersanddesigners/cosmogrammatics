@@ -79,6 +79,10 @@ main .block.columns {
   padding: 0;
 }
 
+main .block a {
+  color: var(--accent);
+}
+
 
 main .row .column .block .contents {
   max-width: var(--main-width);
@@ -96,15 +100,20 @@ main .row .column .block aside {
   position: absolute;
   max-width: 15rem;
   top: 1rem;
-  right: -16rem;
+  right: calc( -1 * var(--side-width) - 1rem );
   width: var(--side-width);
   z-index: 1;
   border-radius: calc( var(--header-height) / 4);
 }
 
+main .row .column .block.columns .block aside {
+  /* right: -14rem; */
+}
+
 main .row .column .block aside .thread {
   border-radius: inherit;
   margin-bottom: 1rem;
+  z-index: 1;
 
 }
 
@@ -117,20 +126,36 @@ main .row .column .block aside article {
   border-radius: inherit;
 }
 
-main .row .column .block:not(.columns):focus-within,
+/* main .row .column .block:not(.columns):focus-within,
 main .row .column .block:not(.columns):focus-within aside article,
-main .row .column .block:not(.columns) aside article:focus-within {
+main .row .column .block:not(.columns) aside article:focus-within { */
+main .row .column .block:focus-within,
+main .row .column .block:focus-within aside article,
+main .row .column .block aside article:focus-within {
   box-shadow: 0 0 2rem 0 var(--accent);
 }
 
-main .row .column .block:not(.columns):focus-within {
-  z-index: 1;
+main .row .column .block:focus-within {
+  z-index: 10;
   box-shadow: 0 0 2rem 0 var(--accent), var(--gridshadow);
+  /* filter: drop-shadow(0 0 500rem var(--grid)); */
 }
 
-main .row .column .block:not(.columns):focus-within aside  {
-  right: -14rem;
-  top: 1rem;
+
+main .row .column .block:focus-within::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--back);
+  opacity: 0.5;
+  z-index: 0;
+  pointer-events: none;
+}
+
+main .row .column .block:focus-within > aside  {
+  /* right: calc( -1 * var(--side-width) ); */
 }
 
 aside p {
