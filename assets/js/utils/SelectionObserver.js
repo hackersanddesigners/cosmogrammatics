@@ -5,7 +5,7 @@ export default class SelectionObserver {
   wrappers = []
   dragging = false
 
-  constructor( target ) {
+  constructor( target, toolbar ) {
     for ( const event of [
       'mousedown',
       'mousemove',
@@ -14,7 +14,8 @@ export default class SelectionObserver {
     ]) {
       target.addEventListener( event, e => { this[ `${ event }_handler` ]( e ) } )
     }
-    this.target = target
+    this.target  = target
+    this.toolbar = toolbar
   }
 
   mousedown_handler( e ) {
@@ -41,9 +42,10 @@ export default class SelectionObserver {
   get selection() {
     return this._SELECTION
   }
-  set selection( selection ) {
+  set selection({ selection, e }) {
     if ( selection ) {
       const range = selection.getRangeAt(0)
+      this.toggle_toolbar( range, e )
       if ( range ) {
         this.clear_wrappers()
         let safe_ranges = get_safe_ranges( range )
@@ -56,7 +58,10 @@ export default class SelectionObserver {
   }
 
   capture_selection( e ) {
-    this.selection = window.getSelection()
+    this.selection = {
+      selection: window.getSelection(),
+      e
+    }
   }
 
 
@@ -82,7 +87,16 @@ export default class SelectionObserver {
   wrap( range ) {
     const wrapper = this.create_wrapper()
     range.surroundContents( wrapper )
+    wrapper.appendChild( this.toolbar )
     this.wrappers.push( wrapper )
+  }
+
+  toggle_toolbar( range, e ) {
+    if ( range.endOffset < range.startOffset ) {
+      this.toolbar.classList.remove( 'hidden' )
+    } else {
+      this.toolbar.classList.add( 'hidden' )
+    }
   }
 
 

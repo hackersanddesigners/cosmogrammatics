@@ -170,7 +170,7 @@ section .highlight {
 
 
 
-main .row .column .block form {
+main form.comment_form {
   background-color: var(--grid);
   display: none;
   padding: 0.25rem;
@@ -182,16 +182,16 @@ main .row .column .block form {
   left: 0;
 }
 
-main .row .column .block form:focus-within {
+main form.comment_form:focus-within {
   max-height: var(--form-expanded-height);
   max-width: var(--form-expanded-width);
   color: var(--fore);
   overflow: visible;
 }
-main .row .column .block form input {
+main form.comment_form input {
   margin: 0.25rem;
 }
-main .row .column .block form input[type="text"] {
+main form.comment_form input[type="text"] {
   background-color: inherit;
   width: calc(100% - 0.5rem);
   border: unset;
@@ -200,7 +200,7 @@ main .row .column .block form input[type="text"] {
   border-radius: inherit;
 }
 
-main .row .column .block form p {
+main form.comment_form p {
   font-size: 0.7rem;
   font-style: italic;
   font-family: var(--comments);
@@ -209,21 +209,14 @@ main .row .column .block form p {
 }
 
 
-main .row .column .block:not(.columns):hover form,
-main .row .column .block:not(.columns):focus-within aside .thread:first-of-type form,
-main .row .column .block:not(.columns) aside .thread form:focus-within,
-main .row .column .block:not(.columns) aside .thread:focus-within form  {
+main .row .column .block:not(.columns):hover form.comment_form,
+main .row .column .block:not(.columns):focus-within aside .thread:first-of-type form.comment_form,
+main .row .column .block:not(.columns) aside .thread form.comment_form:focus-within,
+main .row .column .block:not(.columns) aside .thread:focus-within form.comment_form  {
   display: block;
   /* position: absolute; */
 }
 
-
-/* main .row .column .block .toolbar { */
-  /* position: absolute; */
-  /* width: var(--side-width); */
-  /* bottom: calc( 1 * var(--form-base-height) ); */
-  /* bottom: -0.25rem; */
-/* } */
 
 
 
@@ -286,4 +279,19 @@ main .notes.column[data-col-width="1/1"] {
 
 .note-ref-backlink {
   padding-left: 0.3rem;
+}
+
+
+
+main .toolbar {
+  position: absolute;
+  width: var(--side-width);
+  height: var(--side-width);
+  top: 0;
+  left: 0;
+}
+
+main .toolbar.hidden {
+  top: -999px;
+  left: -999px;
 }

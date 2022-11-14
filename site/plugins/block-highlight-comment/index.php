@@ -5,7 +5,7 @@ use Kirby\Cms\Collection;
 use Kirby\Exception\PermissionException;
 
 
-function wrapSelectedText ($text_in, $offset) {
+function wrapSelectedText ($text_in, $offset, $id) {
     // regex match text inside HTML (w/o DOM tags?)
     // using given offset from text-selection
     // and wrap this text selection around an extra pair of tags
@@ -16,7 +16,7 @@ function wrapSelectedText ($text_in, $offset) {
     $center_side = str_slice($text_in, $offset['x1'], $offset['y1']);
     $right_side = str_slice($text_in, $offset['y1']);
 
-    $wrap_before = '<span class="comment-highlight">';
+    $wrap_before = '<span class="comment-highlight" id="' . $id .'" >';
     $wrap_after = '</span>';
 
     // // check if wrapping is done already
@@ -143,8 +143,8 @@ function parseBlockSelection($blocks, $block_bid, $comments, $offset, $type) {
             // -- update block
             $blockUpdated = [
                 'content' => [
-                    'text' => $text_new,
-                    'footnotes' => $block->footnotes()->toArray(),
+                  'text' => $text_new,
+                  'footnotes' => $block->footnotes()->toArray(),
                 ],
                 'type' => $block->type(),
             ];
@@ -235,7 +235,7 @@ Kirby::plugin('cosmo/block-methods', [
       // get all comments related to this block
 
       if ( $comments ) {
-        $block_comments = $comments->filterBy('block_id', $this->bid());
+        $block_comments = $comments->filterBy('block_id', $this->bid() );
 
         // for each block_comment check if there are comments
         // that belong to the same "thread", meaning they share
@@ -243,20 +243,21 @@ Kirby::plugin('cosmo/block-methods', [
 
         foreach( $block_comments as $block_comment ) {
 
-          $selection_type   = $block_comment->selection_type();
-          $selection_coords = $block_comment->selection_coords();
+          $type   = $block_comment->selection_type();
+          $coords = $block_comment->selection_coords();
+          $id     = 'b_' . $this->bid() . '_sel_' . $type . $coords ;
 
           // first, check if thread has already been created.
           // It can be uniquely identified by its selection type
           // and coords.
 
-          $thread_exists = FALSE;
+          $exists = FALSE;
           foreach ( $threads as $thr ) {
             if (
-              $thr['selection_type']->value() == $selection_type->value() &&
-              $thr['selection_coords']->value() == $selection_coords->value()
+              $thr['selection_type']->value() == $type->value() &&
+              $thr['selection_coords']->value() == $coords->value()
             ) {
-              $thread_exists = TRUE;
+              $exists = TRUE;
               break;
             }
           }
@@ -264,13 +265,14 @@ Kirby::plugin('cosmo/block-methods', [
           // if the thread doesn't exist, we proceed with it's
           // creation and addition to the $threads array.
 
-          if ( !$thread_exists ) {
+          if ( !$exists ) {
             $threads[] = [
-              'selection_type'   => $selection_type,
-              'selection_coords' => $selection_coords,
+              'selection_type'   => $type,
+              'selection_coords' => $coords,
+              'selection_id'     => $id,
               'comments'         => $block_comments
-                ->filterBy('selection_type', $selection_type )
-                ->filterBy('selection_coords', $selection_coords )
+                ->filterBy('selection_type', $type )
+                ->filterBy('selection_coords', $coords )
             ];
           }
 
@@ -303,6 +305,7 @@ Kirby::plugin('cosmo/block-methods', [
           // We get the coordinate values in a format that is
           // compatible with andré's wrapSelectedText method.
 
+          $id     = $thread['selection_id'];
           $coords = $thread['selection_coords']->toEntity();
           $offset = [
             'x1' => $coords->x1()->value(),
@@ -316,7 +319,7 @@ Kirby::plugin('cosmo/block-methods', [
           $updated = new Kirby\Cms\Block([
             'type' => $this->type(),
             'content' => [
-              'text'      => wrapSelectedText( $text_in, $offset ),
+              'text'      => wrapSelectedText( $text_in, $offset, $id ),
               'footnotes' => $this->footnotes()->toArray(),
             ]
           ]);
