@@ -14,53 +14,60 @@ function respond_comment( e ) {
     author           : chilren.find( c => c.name == 'author' ).value,
     text             : chilren.find( c => c.name == 'body' ).value,
   })
-    .then( response => {
-      if (response.status === 'ok') {
+  .then( response => {
+    if (response.status === 'ok') {
 
-        // -- form: reset and hide form
-        form.reset()
-        form.classList.remove('focus-in')
+      // -- form: reset and hide form
+      form.reset()
+      form.blur()
 
-        // add newly posted comment into DOM
-        const data = response.data
+      // create newly posted comment
+      const article = make_comment( response.data )
 
-        // -- section
-        const text_comment = document.createElement('section')
-        const section_text = data.content.text
-        text_comment.append(section_text)
-        
-        // -- footer
-        const footer = document.createElement('footer')
-        const date = document.createElement('p')
-        const timestamp = document.createElement('time')
-        // TODO set correct datetime format for timestamp `yyyy-mm-dd hh:mm:ss`
-        timestamp.setAttribute('datetime', data.content.timestamp)
-        date.append(timestamp)
-        date.innerHTML = `On ${data.content.timestamp}`
-        
-        const user = document.createElement('p')
-        user.innerHTML = `by ${data.content.user}`
+      // append new comment to comment thread
+      // before <form> (blue circle)
+      const thread = form.parentNode
+      thread.insertBefore(article, form)
 
-        footer.append(date)
-        footer.append(user)
+      article.focus()
 
-        // -- append everything to <article>
-        const article = document.createElement('article')
-        article.setAttribute('tabindex', '0')
-
-        article.append(text_comment)
-        article.append(footer)
-
-        
-        // append new comment to comment thread
-        // before <form> (blue circle)
-        const aside_threads = document.querySelector('.thread')
-        aside_threads.insertBefore(article, aside_threads.querySelector('form'))
-        
-      }
-    })
+    }
+  })
 }
 
+
+function make_comment( data ) {
+
+  // -- section
+  const text_comment = document.createElement('section')
+  const section_text = data.content.text
+  text_comment.append(section_text)
+
+  // -- footer
+  const footer = document.createElement('footer')
+  const date = document.createElement('p')
+  const timestamp = document.createElement('time')
+  // TODO set correct datetime format for timestamp `yyyy-mm-dd hh:mm:ss`
+  timestamp.setAttribute('datetime', data.content.timestamp)
+  date.append(timestamp)
+  date.innerHTML = `On ${data.content.timestamp}`
+
+  const user = document.createElement('p')
+  user.innerHTML = `by ${data.content.user}`
+
+  footer.append(date)
+  footer.append(user)
+
+  // -- append everything to <article>
+  const article = document.createElement('article')
+  article.setAttribute('tabindex', '0')
+
+  article.append(text_comment)
+  article.append(footer)
+
+  return article
+
+}
 
 
 function post_comment( comment ) {

@@ -157,8 +157,7 @@ main .row .column .block form {
   left: 0;
 }
 
-/* main .row .column .block form:focus-within { */
-main .row .column .block form.focus-in {
+main .row .column .block form:focus-within {
   max-height: var(--form-expanded-height);
   max-width: var(--form-expanded-width);
   color: var(--fore);
