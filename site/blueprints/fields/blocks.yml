@@ -104,9 +104,9 @@ fieldsets:
             disabled: true
             when:
               note:
-          columns:
-            note:
-              width: 1/1
+        columns:
+          note:
+            width: 1/1
 
   soundblock:
     name: Audio
