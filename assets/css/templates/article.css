@@ -186,11 +186,14 @@ main .row .column .block form:focus-within {
   max-height: var(--form-expanded-height);
   max-width: var(--form-expanded-width);
   color: var(--fore);
+  overflow: visible;
 }
-
+main .row .column .block form input {
+  margin: 0.25rem;
+}
 main .row .column .block form input[type="text"] {
   background-color: inherit;
-  width: 100%;
+  width: calc(100% - 0.5rem);
   border: unset;
   padding: 0.25rem;
   color: inherit;
