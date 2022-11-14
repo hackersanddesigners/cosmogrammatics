@@ -24,7 +24,7 @@
 
   <label for="comment_input">
   </label>
-  <p>Press ENTER to post.</p>
+    <p>Press ENTER to post.</p>
   <input
     type="submit"
     value="post"
