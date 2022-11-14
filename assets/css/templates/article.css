@@ -199,11 +199,53 @@ main .row .column .block aside .thread:focus-within form  {
 
 
 
-
-
 /* <2022-11-11T11:12> andré: move this where it makes more sense to you karlito */
+.ref-ft {
+  text-decoration: none;
+  color: var(--fore);
+}
+
 .ref-ft:after {
     counter-increment: footnote;
-    content: "(" counter(footnote) ")";
+    content: "[" counter(footnote) "]";
     padding-left: 0.15rem;
+}
+
+/* <2022-11-14T10:58> andré: bad CSS */
+
+main .notes.column[data-col-width="1/1"] {
+  max-width: calc( var(--main-width) / 1 );
+  padding: 0 0 0 calc( var(--header-height) / 2 );
+  width: 100%;
+}
+
+.notes ol {
+    padding-left: 0;
+    display: inline-table;
+    list-style: none;
+}
+
+.notes ol li {
+    padding: 0.5rem;
+    display: table-row;
+    counter-increment: number-list;
+    font-family:  var(--footnotes);
+}
+
+.notes ol li::before {
+    content: counter(number-list) '.';
+    display: table-cell;
+    text-align: right;
+    padding: 0 0.3rem 0 0;
+    width: 1.5rem;
+}
+
+.notes ol li p {
+    margin: 0;
+    padding: 0.25rem;
+    display: inline;
+}
+
+.note-ref-backlink {
+  padding-left: 0.3rem;
 }

@@ -4,6 +4,6 @@ body {
 
 .ref-ft:after {
     counter-increment: footnote;
-    content: "(" counter(footnote) ")";
+    content: "[" counter(footnote) "]";
     padding-left: 0.15rem;
 }
