@@ -30,7 +30,8 @@
     "hidehalo/nanoid-php": "^1.1",
     "getkirby/cli": "^1.0",
     "timoetting/kirby-color": "^1.0",
-    "oblik/kirby-entity-field": "^2.0"
+    "oblik/kirby-entity-field": "^2.0",
+    "oblik/kirby-link-field": "^4.0"
   },
   "config": {
     "allow-plugins": {

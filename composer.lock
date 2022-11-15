@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "948ea9f13d6f1cdf971ace42fecd8645",
+    "content-hash": "e865349bfd43bc4aa62674c29012a02d",
     "packages": [
         {
             "name": "claviska/simpleimage",
@@ -1315,6 +1315,61 @@
                 "source": "https://github.com/OblikStudio/kirby-entity-field"
             },
             "time": "2022-08-12T07:37:14+00:00"
+        },
+        {
+            "name": "oblik/kirby-link-field",
+            "version": "4.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/OblikStudio/kirby-link-field.git",
+                "reference": "d7f6422c57c6cdc55fa418555eb36949515c3438"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/OblikStudio/kirby-link-field/zipball/d7f6422c57c6cdc55fa418555eb36949515c3438",
+                "reference": "d7f6422c57c6cdc55fa418555eb36949515c3438",
+                "shasum": ""
+            },
+            "require": {
+                "getkirby/cms": "^3.7.0-rc.2",
+                "getkirby/composer-installer": "^1.1"
+            },
+            "type": "kirby-plugin",
+            "extra": {
+                "installer-name": "link-field"
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oblik Studio",
+                    "email": "hello@oblik.studio",
+                    "homepage": "https://oblik.studio/"
+                },
+                {
+                    "name": "Hristiyan Dodov",
+                    "email": "h.dodov@gmail.com",
+                    "homepage": "https://dodov.dev/"
+                }
+            ],
+            "description": "Kirby 3 field for all types of links.",
+            "keywords": [
+                "kirby",
+                "kirby-plugin"
+            ],
+            "support": {
+                "issues": "https://github.com/OblikStudio/kirby-link-field/issues",
+                "source": "https://github.com/OblikStudio/kirby-link-field"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/OblikStudio",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-06-28T18:18:46+00:00"
         },
         {
             "name": "paragonie/random_compat",
