@@ -58,20 +58,29 @@ fieldsets:
                 label: Audio (url)
                 type: embed
 
-           videoblock:
-             name: Video
-             snippet: videoblock
-             fields:
-               videofile:
-                 label: Video (file)
-                 type: files
-                 options: videos
-               videoposter:
-                 label: Cover (file)
-                 type: files
-               videourl:
-                 label: Video (url)
-                 type: embed
+          videoblock:
+            name: Video
+            snippet: videoblock
+            fields:
+              videofile:
+                label: Video (file)
+                type: files
+                options: videos
+              videoposter:
+                label: Cover (file)
+                type: files
+              videourl:
+                label: Video (url)
+                type: embed
+
+          pageblock:
+            name: Page Embed
+            fieds:
+              pageurl:
+                type: link
+                label: Page Embed
+                linkTypes:
+                  - page
 
   - heading
   - quote
@@ -133,6 +142,16 @@ fieldsets:
       videourl:
         label: Video (url)
         type: embed
+
+  pageblock:
+    name: Page Embed
+    fields:
+      pageurl:
+        type: link
+        label: Page Embed
+        linkTypes:
+          - page
+
 
 settings:
   fields:
