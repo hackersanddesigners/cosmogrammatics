@@ -1,10 +1,11 @@
 <template>
   <div>
-    <div v-if="source.url">
-      <h1>{{ content.title }}</h1>
+    <div v-if="source">
       <audio controls style="width: 100%">
         <source :src="source.url" type="audio/mpeg">
       </audio>
+      <h3>{{ content.title }}</h3>
+      <p>{{ content.caption }}</p>
     </div>
     <div v-else>No audio selected</div>
   </div>
@@ -15,9 +16,9 @@ export default {
    computed: {
      source() {
        if (this.content.source_file[0]) {
-         return this.content.source_file[0]
+         return this.content.source_file[0];
        } else {
-         {}
+         {};
        }
      }
    }

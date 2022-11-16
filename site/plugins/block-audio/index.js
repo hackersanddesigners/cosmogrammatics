@@ -65,7 +65,7 @@
   };
   var _sfc_render = function render() {
     var _vm = this, _c = _vm._self._c;
-    return _c("div", [_vm.source.url ? _c("div", [_c("h1", [_vm._v(_vm._s(_vm.content.title))]), _c("audio", { staticStyle: { "width": "100%" }, attrs: { "controls": "" } }, [_c("source", { attrs: { "src": _vm.source.url, "type": "audio/mpeg" } })])]) : _c("div", [_vm._v("No audio selected")])]);
+    return _c("div", [_vm.source ? _c("div", [_c("audio", { staticStyle: { "width": "100%" }, attrs: { "controls": "" } }, [_c("source", { attrs: { "src": _vm.source.url, "type": "audio/mpeg" } })]), _c("h3", [_vm._v(_vm._s(_vm.content.title))]), _c("p", [_vm._v(_vm._s(_vm.content.caption))])]) : _c("div", [_vm._v("No audio selected")])]);
   };
   var _sfc_staticRenderFns = [];
   _sfc_render._withStripped = true;
