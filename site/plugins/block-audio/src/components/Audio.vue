@@ -1,19 +1,17 @@
 <template>
   <k-block-figure
-    :is-empty="!source"
+    :is-empty="!source.url"
     empty-icon="audio-file"
     empty-text="No audio selected yet …"
     @open="open"
     @update="update"
   >
     <div class="k-block-type-audio-wrapper">
-      <div v-if="source">
-        <audio class="k-block-type-audio-element" controls>
-          <source :src="source.url" :type="mime">
-        </audio>
-        <h3>{{ content.title }}</h3>
-        <p>{{ content.caption }}</p>
-      </div>
+      <audio class="k-block-type-audio-element" controls>
+        <source :src="source.url" :type="mime">
+      </audio>
+      <h3>{{ content.title }}</h3>
+      <p>{{ content.caption }}</p>
     </div>
   </k-block-figure>
 </template>
