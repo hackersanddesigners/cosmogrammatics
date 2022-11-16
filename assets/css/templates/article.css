@@ -295,3 +295,7 @@ main .toolbar.hidden {
   top: -999px;
   left: -999px;
 }
+
+main .toolbar form.comment_form {
+  display: unset;
+}
