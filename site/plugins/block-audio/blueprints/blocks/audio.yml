@@ -1,35 +1,17 @@
 name: Audio
 icon: file-audio
-tabs:
-  file_upload:
+fields:
+  source_file:
     label: File upload
-    fields:
-      source_file:
-        label: File upload
-        type: files
-        query: page.audio.template('audio')
-        uploads: audio
-        multiple: false
-      title:
-        type: text
-        placeholder: Title
-      caption:
-        type: writer
-        icone: text
-        inline: true
-        placeholder: Caption
-
-  file_embed:
-    label: File embed
-    fields:
-      source_embed:
-        label: Embed URL
-        type: embed
-      title:
-        type: text
-        placeholder: Title
-      caption:
-        type: writer
-        icone: text
-        inline: true
-        placeholder: Caption
+    type: files
+    query: page.audio.template('audio')
+    uploads: audio
+    multiple: false
+  title:
+    type: text
+    placeholder: Title
+  caption:
+    type: writer
+    icone: text
+    inline: true
+    placeholder: Caption
