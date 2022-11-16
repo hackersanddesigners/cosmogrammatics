@@ -1,26 +1,57 @@
 <template>
-  <div>
-    <div v-if="source">
-      <audio controls style="width: 100%">
-        <source :src="source.url" type="audio/mpeg">
-      </audio>
-      <h3>{{ content.title }}</h3>
-      <p>{{ content.caption }}</p>
+  <k-block-figure
+    :is-empty="!source"
+    empty-icon="audio-file"
+    empty-text="No audio selected yet …"
+    @open="open"
+    @update="update"
+  >
+    <div class="k-block-type-audio-wrapper">
+      <div v-if="source">
+        <audio class="k-block-type-audio-element" controls>
+          <source :src="source.url" :type="mime">
+        </audio>
+        <h3>{{ content.title }}</h3>
+        <p>{{ content.caption }}</p>
+      </div>
     </div>
-    <div v-else>No audio selected</div>
-  </div>
+  </k-block-figure>
 </template>
 
 <script>
 export default {
+   data() {
+     return {
+       mime: null
+     };
+   },
    computed: {
      source() {
        if (this.content.source_file[0]) {
          return this.content.source_file[0];
        } else {
-         {};
+         // we return empty object because above we return first item in array
+         return {};
        }
+     }
+   },
+   watch: {
+     "source.link": {
+       handler (link) {
+         if (link) {
+           this.$api.get(link).then(file => {
+             this.mime = file.mime;
+           });
+         }
+       },
+       immediate: true
      }
    }
 };
 </script>
+
+<style>
+.k-block-type-audio-element {
+  width: 100%;
+}
+</style>
