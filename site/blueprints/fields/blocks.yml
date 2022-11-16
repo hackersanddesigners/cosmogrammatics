@@ -17,6 +17,7 @@ fieldsets:
           - list
           - image
           - gallery
+          - page_embed
 
           text:
             extends: blocks/text
@@ -73,20 +74,12 @@ fieldsets:
                 label: Video (url)
                 type: embed
 
-          pageblock:
-            name: Page Embed
-            fieds:
-              pageurl:
-                type: link
-                label: Page Embed
-                linkTypes:
-                  - page
-
   - heading
   - quote
   - list
   - image
   - gallery
+  - page_embed
 
   text:
     extends: blocks/text
@@ -142,16 +135,6 @@ fieldsets:
       videourl:
         label: Video (url)
         type: embed
-
-  pageblock:
-    name: Page Embed
-    fields:
-      pageurl:
-        type: link
-        label: Page Embed
-        linkTypes:
-          - page
-
 
 settings:
   fields:
