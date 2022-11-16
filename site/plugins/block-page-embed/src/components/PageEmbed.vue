@@ -7,7 +7,10 @@
     @update="update"
   >
     <div>
-      <div v-if="page.value">
+      <header class="k-field-header">
+        <label class="k-field-label">Page Embed</label>
+      </header>
+      <div v-if="page.value" class="k-blocks k-block-container k-block-container-type-page-embed">
         {{ content.pageurl.value[0]['text'] }}
       </div>
     </div>
@@ -28,3 +31,25 @@ export default {
 };
 
 </script>
+
+<style>
+.k-field-label {
+  font-size: .8em;
+  padding-bottom: 0;
+  color: var(--color-text-light);
+}
+
+.k-block-container {
+  position: relative;
+  padding: .75rem;
+  background: var(--color-white);
+  border-radius: var(--rounded)
+}
+
+.k-block-container-type-page-embed {
+  border-color: var(--color-purple);                                 
+  border-width: 1px;
+  border-style: solid;
+}
+
+</style>
