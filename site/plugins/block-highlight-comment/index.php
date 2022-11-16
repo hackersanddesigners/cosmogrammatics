@@ -290,7 +290,7 @@ Kirby::plugin('cosmo/block-methods', [
       // original text content of the block
 
       $updated = $this;
-      $text_in = $this->text()->value();
+      $text_in = $this->text();
 
       foreach ( $threads as $thread ) {
 
@@ -328,7 +328,7 @@ Kirby::plugin('cosmo/block-methods', [
           // text value of the newly updated block, so we are
           // incrementing each loop with the new contents.
 
-          $text_in = $updated->text()->value();
+          $text_in = $updated->text();
 
         }
       }
