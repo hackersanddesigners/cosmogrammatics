@@ -11,21 +11,7 @@
       if ( $block->layout()->isNotEmpty() ) {
           snippet( 'grid/index', [ 'rows' => $block->layout()->toLayouts() ] );
       } else {
-          if ($block->type() == 'pageblock') {
-
-              // we can... simply fetch the data via
-              // Kirby's page() function and render it as needed
-              // no need to do iframes or other stuff.
-              $link = $block->pageurl()->toLinkObject();
-
-              // this gives `page-url` that we can feed to
-              // page() => $pageEmbed = page($link->value());
-              echo $link->value(); 
-
-
-          } else {
-              echo $block;
-          }
+          echo $block;
       } ?>
   </div>
 
