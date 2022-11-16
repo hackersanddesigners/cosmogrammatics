@@ -28,7 +28,6 @@ export default {
        if (this.content.source_file[0]) {
          return this.content.source_file[0];
        } else {
-         // we return empty object because above we return first item in array
          return {};
        }
      }
