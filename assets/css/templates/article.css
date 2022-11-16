@@ -79,6 +79,10 @@ main .block.columns {
   padding: 0;
 }
 
+main .block a {
+  color: var(--accent);
+}
+
 
 main .row .column .block .contents {
   max-width: var(--main-width);
@@ -96,8 +100,21 @@ main .row .column .block aside {
   position: absolute;
   max-width: 15rem;
   top: 1rem;
-  right: -16rem;
+  right: calc( -1 * var(--side-width) - 1rem );
+  width: var(--side-width);
   z-index: 1;
+  border-radius: calc( var(--header-height) / 4);
+}
+
+main .row .column .block.columns .block aside {
+  /* right: -14rem; */
+}
+
+main .row .column .block aside .thread {
+  border-radius: inherit;
+  margin-bottom: 1rem;
+  z-index: 1;
+
 }
 
 main .row .column .block aside article {
@@ -106,27 +123,39 @@ main .row .column .block aside article {
   box-shadow: 0 0 1rem 0 rgb(251, 233, 255);
   margin-bottom: 1rem;
   font-family: var(--comments);
+  border-radius: inherit;
 }
 
-main .row .column .block aside article form input {
-  background-color: inherit;
-  width: 100%;
-}
-
-main .row .column .block:not(.columns):focus-within,
+/* main .row .column .block:not(.columns):focus-within,
 main .row .column .block:not(.columns):focus-within aside article,
-main .row .column .block:not(.columns) aside article:focus-within {
+main .row .column .block:not(.columns) aside article:focus-within { */
+main .row .column .block:focus-within,
+main .row .column .block:focus-within aside article,
+main .row .column .block aside article:focus-within {
   box-shadow: 0 0 2rem 0 var(--accent);
 }
 
-main .row .column .block:not(.columns):focus-within {
-  z-index: 1;
+main .row .column .block:focus-within {
+  z-index: 10;
   box-shadow: 0 0 2rem 0 var(--accent), var(--gridshadow);
+  /* filter: drop-shadow(0 0 500rem var(--grid)); */
 }
 
-main .row .column .block:not(.columns):focus-within aside  {
-  right: -14rem;
-  top: 1rem;
+
+main .row .column .block:focus-within::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--back);
+  opacity: 0.5;
+  z-index: 0;
+  pointer-events: none;
+}
+
+main .row .column .block:focus-within > aside  {
+  /* right: calc( -1 * var(--side-width) ); */
 }
 
 aside p {
@@ -136,14 +165,125 @@ aside p {
 .comment-highlight,
 section .highlight {
   display: inline;
-  background-color: yellow;
-  color: var(--cyan);
+  background-color: var(--accent);
 }
 
 
+
+main .row .column .block form {
+  background-color: var(--grid);
+  display: none;
+  padding: 0.25rem;
+  max-height: var(--form-base-height);
+  max-width: var(--form-base-width);
+  overflow: hidden;
+  border-radius: inherit;
+  color: transparent;
+  left: 0;
+}
+
+main .row .column .block form:focus-within {
+  max-height: var(--form-expanded-height);
+  max-width: var(--form-expanded-width);
+  color: var(--fore);
+  overflow: visible;
+}
+main .row .column .block form input {
+  margin: 0.25rem;
+}
+main .row .column .block form input[type="text"] {
+  background-color: inherit;
+  width: calc(100% - 0.5rem);
+  border: unset;
+  padding: 0.25rem;
+  color: inherit;
+  border-radius: inherit;
+}
+
+main .row .column .block form p {
+  font-size: 0.7rem;
+  font-style: italic;
+  font-family: var(--comments);
+  opacity: 0.7rem;
+  margin: 0;
+}
+
+
+main .row .column .block:not(.columns):hover form,
+main .row .column .block:not(.columns):focus-within aside .thread:first-of-type form,
+main .row .column .block:not(.columns) aside .thread form:focus-within,
+main .row .column .block:not(.columns) aside .thread:focus-within form  {
+  display: block;
+  /* position: absolute; */
+}
+
+
+/* main .row .column .block .toolbar { */
+  /* position: absolute; */
+  /* width: var(--side-width); */
+  /* bottom: calc( 1 * var(--form-base-height) ); */
+  /* bottom: -0.25rem; */
+/* } */
+
+
+
 /* <2022-11-11T11:12> andré: move this where it makes more sense to you karlito */
+.ref-ft {
+  text-decoration: none;
+  color: var(--fore);
+  vertical-align: super;
+  font-size: smaller;
+}
+
+
 .ref-ft:after {
     counter-increment: footnote;
-    content: "(" counter(footnote) ")";
+    content: "[" counter(footnote) "]";
     padding-left: 0.15rem;
+}
+
+/* <2022-11-14T10:58> andré: bad CSS */
+
+main .notes.column[data-col-width="1/1"] {
+  max-width: calc( var(--main-width) / 1 );
+  padding: 0 0 0 calc( var(--header-height) / 2 );
+  width: 100%;
+}
+
+.notes ol {
+    padding-left: 0;
+    display: inline-table;
+    list-style: none;
+}
+
+.notes ol li {
+    padding: 0.5rem;
+    display: table-row;
+    counter-increment: number-list;
+    font-family:  var(--footnotes);
+}
+
+.notes ol li::before {
+    content: counter(number-list) '.';
+    display: table-cell;
+    text-align: right;
+    padding: 0 0.3rem 0 0;
+    width: 1.5rem;
+}
+
+.notes ol li:target {
+  outline-color: var(--accent);
+  outline-offset: 3px;
+  outline-style: solid;
+  outline-width: 2px;
+}
+
+.notes ol li p {
+    margin: 0;
+    padding: 0.25rem;
+    display: inline;
+}
+
+.note-ref-backlink {
+  padding-left: 0.3rem;
 }

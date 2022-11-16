@@ -2,6 +2,9 @@
 
 return [
     'debug' => true,
+    'panel' => [
+        'css' => 'assets/css/panel.css'
+    ],
 
     'gearsdigital.enhanced-toolbar-link-dialog' => [
         'title' => '{{ page.title }}',
@@ -37,11 +40,13 @@ return [
     //     ],
     // ],
 
-    // 'hooks' => [
-    //     'page.create:after' => function ($page) {
-    //         buildPageTree($page);
-    //     }
-    // ],
+    // enable subpage-builder from blueprint settings
+    // <https://getkirby.com/docs/cookbook/extensions/subpage-builder>
+    'hooks' => [
+        'page.create:after' => function ($page) {
+            buildPageTree($page);
+        }
+    ],
 
 
 ];

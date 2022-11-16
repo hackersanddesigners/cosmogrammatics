@@ -33,10 +33,15 @@
 
   /* default mesaurements */
   --header-height: 5rem;
-  --main-width: min( 100%, 50rem );
   --header-child-collapsed-width: var(--header-height);
   --header-child-expanded-width: calc(  var(--main-width) - var(--header-height) );
+  --main-width: min( 100%, 50rem );
+  --side-width: min( 100%, 15rem );
 
+  --form-base-height: 2rem;
+  --form-base-width: 2rem;
+  --form-expanded-height: 6rem;
+  --form-expanded-width: var(--side-width);
 
 }
 

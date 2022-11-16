@@ -18,14 +18,18 @@ fieldsets:
           - image
           - gallery
           - audio
+          - page_embed
 
           text:
             extends: blocks/text
             fields:
-              uid:
+              bid:
                 label: Unique ID
                 type: text
+                default: 0
                 disabled: true
+                when:
+                  footnote
                 
               footnotes:
                 label: Footnotes
@@ -66,15 +70,19 @@ fieldsets:
   - image
   - gallery
   - audio
+  - page_embed
 
   text:
     extends: blocks/text
     fields:
-      id:
+      bid:
         label: Unique ID
         type: text
         default: 0
         disabled: true
+        when:
+          footnote
+
       footnotes:
         label: Footnotes
         type: structure
@@ -89,9 +97,9 @@ fieldsets:
             disabled: true
             when:
               note:
-          columns:
-            note:
-              width: 1/1
+        columns:
+          note:
+            width: 1/1
 
   videoblock:
     name: Video

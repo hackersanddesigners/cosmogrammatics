@@ -1,54 +1,25 @@
 <?php
 
-use Hidehalo\Nanoid\Client;
-use Hidehalo\Nanoid\GeneratorInterface;
+use Kirby\Uuid\Uuid;
 
 
-function makeRef($client, $ref) {
-    if ($ref === '0') {
-        return $client->generateId($size = 21);
-    } else {
-        return $ref;
-    }
-}
-
-function replaceFootnotePlaceholder ($text_in, $footnotes_new) {
-    // this code should run only once, during the first
-    // transform operation from `<article-footnote>` to
-    // `<a href="{ref}">{ref}</a>`
-
-    $pattern = '/<article-footnote>(.*)<\/article-footnote>/mU';
-
-    // <https://stackoverflow.com/a/11174818>
-    $callback = function ($matches) use ($footnotes_new) {
-
-        static $count = -1;
-        $count++;
-
-        $ref = $footnotes_new[$count]['ref'];
-
-        $ft_ref = 'ft-' . $ref;
-        $ft_note = '#note-ref-' . $ref;
-
-        $replacement = $matches[1] . '<a id="' . $ft_ref . '" href="' . $ft_note . '" class="ref-ft"></a>';
-
-        return $replacement;
-    };
-
-    $text_out = preg_replace_callback($pattern, $callback, $text_in);
-    
-    return $text_out;
-}
-
-function setBID($client, $bid) {
+function setBID($bid) {
     if ($bid === '0') {
-        return $client->generateId($size = 21);;
+        return Uuid::generate();
     } else {
         return $bid;
     }
 }
 
-function parseBlocks($blocks, $client, $type) {
+function makeRef($ref) {
+    if ($ref === '0') {
+        return UUid::generate();
+    } else {
+        return $ref;
+    }
+}
+
+function parseBlocks($blocks, $type) {
 
     $updatedBlocks = [];
 
@@ -69,7 +40,7 @@ function parseBlocks($blocks, $client, $type) {
                 // - convert it back to a layout object
 
                 $subblocks = $column->blocks();
-                $updatedSubblocks = parseBlocks($subblocks, $client, 'layout');
+                $updatedSubblocks = parseBlocks($subblocks, 'layout');
                 $subblocksNew = new Kirby\Cms\Blocks($updatedSubblocks);
 
                 $columnNew = new Kirby\Cms\LayoutColumn(
@@ -105,13 +76,12 @@ function parseBlocks($blocks, $client, $type) {
 
             $footnotes = $block->footnotes()->toStructure();
             $footnotes_count = $footnotes->count();
-            $ref = '';
 
             // -- footnote notes
             $footnotes_new = [];
             foreach($footnotes as $footnote) {
 
-                $ref_new = makeRef($client, $footnote->ref()->value());
+                $ref_new = makeRef($footnote->ref()->value());
                 $new_footnote = array(
                     'note' => $footnote->note()->value(),
                     'ref' => $ref_new, 
@@ -120,22 +90,11 @@ function parseBlocks($blocks, $client, $type) {
                 array_push($footnotes_new, $new_footnote);
             }
 
-            // -- footnote refs
-            // check if text->footnotes has any note
-            // if yes, start matching any `<article-footnote` found in
-            // $block->text()->value()
-            $text_new = $block->text()->value();
-
-            if ($footnotes_count > 0) {
-                $text_in = $block->text()->value();
-                $text_new = replaceFootnotePlaceholder($text_in, $footnotes_new);
-            } 
-
             // -- update block
             $blockUpdated = [
                 'content' => [
-                    'text' => $text_new,
-                    'bid' => setBID($client, $block->bid()->value()),
+                    'text' => $block->text()->value(),
+                    'bid' => setBID($block->bid()),
                     'footnotes' => $footnotes_new,
                 ],
                 'type' => $block->type(),
@@ -168,9 +127,6 @@ Kirby::plugin('cosmo/footnote-ref', [
             //    as well as post-update footnote list ref element
             //    with same {ref}; {ref} is a UUID generated for each footnote
 
-            // init UUID plugin
-            $client = new Client();
-
             // check if builder blocks have either type -> text
             // or type -> columns, if the latter map down to find
             // if each sub block is of type -> text and pass blocks
@@ -179,7 +135,7 @@ Kirby::plugin('cosmo/footnote-ref', [
             // as-is.
             $blocks = $newPage->builder()->toBlocks();
 
-            $updatedBlocks = parseBlocks($blocks, $client, 'block');
+            $updatedBlocks = parseBlocks($blocks, 'block');
             $blocksNew = new Kirby\Cms\Blocks($updatedBlocks);
 
             // -- write to file

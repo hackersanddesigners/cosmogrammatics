@@ -1,8 +1,8 @@
 {
-	"name": "oblik/kirby-entity-field",
-	"description": "Kirby field that acts as a one-entry structure.",
+	"name": "oblik/kirby-link-field",
+	"description": "Kirby 3 field for all types of links.",
 	"license": "MIT",
-	"version": "2.0.0",
+	"version": "4.0.1",
 	"type": "kirby-plugin",
 	"keywords": [
 		"kirby",
@@ -21,11 +21,15 @@
 		}
 	],
 	"support": {
-		"issues": "https://github.com/OblikStudio/kirby-entity-field/issues",
-		"source": "https://github.com/OblikStudio/kirby-entity-field"
+		"issues": "https://github.com/OblikStudio/kirby-link-field/issues",
+		"source": "https://github.com/OblikStudio/kirby-link-field"
+	},
+	"scripts": {
+		"fix": "php-cs-fixer fix",
+		"test": "phpunit"
 	},
 	"require": {
-		"getkirby/cms": "^3.7",
+		"getkirby/cms": "^3.7.0-rc.2",
 		"getkirby/composer-installer": "^1.1"
 	},
 	"extra": {
