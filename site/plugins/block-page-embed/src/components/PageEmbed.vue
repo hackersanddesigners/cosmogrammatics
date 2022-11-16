@@ -1,7 +1,7 @@
 <template>
   <k-block-figure
     :is-empty="!page.url"
-    empty-icon="page"
+    empty-icon="book"
     empty-text="No page selected yet …"
     @open="open"
     @update="update"

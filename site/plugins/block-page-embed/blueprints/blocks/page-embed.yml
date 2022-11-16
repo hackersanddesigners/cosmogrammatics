@@ -1,4 +1,5 @@
 name: Page Embed
+icon: book 
 fields:
   pageurl:
     type: link
