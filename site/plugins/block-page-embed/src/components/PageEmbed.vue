@@ -1,7 +1,7 @@
 <template>
   <k-block-figure
-    :is-empty="!page.value"
-    empty-icon="audio-file"
+    :is-empty="!page.url"
+    empty-icon="page"
     empty-text="No page selected yet …"
     @open="open"
     @update="update"
@@ -10,8 +10,8 @@
       <header class="k-field-header">
         <label class="k-field-label">Page Embed</label>
       </header>
-      <div v-if="page.value" class="k-blocks k-block-container k-block-container-type-page-embed">
-        {{ content.pageurl.value[0]['text'] }}
+      <div class="k-blocks k-block-container k-block-container-type-page-embed">
+        {{ page.text }}
       </div>
     </div>
   </k-block-figure>
@@ -21,15 +21,16 @@
 export default {
   computed: {
     page() {
-      if (this.content.pageurl) {
-        return this.content.pageurl
+      if (this.content.pageurl
+          && this.content.pageurl.value
+          && this.content.pageurl.value[0]) {
+        return this.content.pageurl.value[0]
       } else {
         return {}
       }
     }
-  }
+  },
 };
-
 </script>
 
 <style>
