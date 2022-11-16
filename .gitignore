@@ -60,3 +60,5 @@ vendor
 *.sqlite
 
 */fonts/*
+
+*.mjs
