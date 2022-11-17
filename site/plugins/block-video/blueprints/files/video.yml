@@ -1,0 +1,5 @@
+title: Video
+
+accept:
+  mime: video/*
+  type: video

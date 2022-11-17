@@ -1,0 +1,17 @@
+name: Video
+icon: file-video
+fields:
+  source_file:
+    label: File upload
+    type: files
+    query: page.video.template('video')
+    uploads: video
+    multiple: false
+  title:
+    type: text
+    placeholder: Title
+  caption:
+    type: writer
+    icone: text
+    inline: true
+    placeholder: Caption

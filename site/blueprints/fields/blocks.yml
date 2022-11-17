@@ -18,6 +18,7 @@ fieldsets:
           - image
           - gallery
           - audio
+          - video
           - page_embed
 
           text:
@@ -49,27 +50,13 @@ fieldsets:
                   note:
                     width: 1/1
 
-          videoblock:
-            name: Video
-            snippet: videoblock
-            fields:
-              videofile:
-                label: Video (file)
-                type: files
-                options: videos
-              videoposter:
-                label: Cover (file)
-                type: files
-              videourl:
-                label: Video (url)
-                type: embed
-
   - heading
   - quote
   - list
   - image
   - gallery
   - audio
+  - video
   - page_embed
 
   text:
@@ -100,21 +87,6 @@ fieldsets:
         columns:
           note:
             width: 1/1
-
-  videoblock:
-    name: Video
-    snippet: videoblock
-    fields:
-      videofile:
-        label: Video (file)
-        type: files
-        options: videos
-      videoposter:
-        label: Cover (file)
-        type: files
-      videourl:
-        label: Video (url)
-        type: embed
 
 settings:
   fields:
