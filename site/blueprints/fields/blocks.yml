@@ -19,6 +19,7 @@ fieldsets:
           - gallery
           - audio
           - video
+          - embed
           - page_embed
 
           text:
@@ -57,6 +58,7 @@ fieldsets:
   - gallery
   - audio
   - video
+  - embed
   - page_embed
 
   text:
