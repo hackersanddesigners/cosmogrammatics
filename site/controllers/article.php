@@ -37,10 +37,6 @@ return function ($page) {
         }
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> main
     $skin = [
       'colors' => $page->colors()->toEntity(),
       'fonts'  => $page->fonts()->toEntity(),
@@ -48,15 +44,9 @@ return function ($page) {
     ];
 
     return [
-<<<<<<< HEAD
       'comments'  => $comments,
-      'footnotes' => $footnotes,
+      'footnotes' => $footnotes_list,
       'skin'      => $skin
-=======
-        'comments' => $comments,
-        'footnotes' => $footnotes_list,
-        'skin'     => $skin
->>>>>>> main
     ];
 
 };
