@@ -1,7 +1,7 @@
 <template>
   <k-block-figure
     :is-empty="!source.url"
-    empty-icon="audio-file"
+    empty-icon="file-audio"
     empty-text="No audio selected yet …"
     @open="open"
     @update="update"
