@@ -46,11 +46,14 @@ export default class SelectionObserver {
     console.log(selection)
     if ( selection ) {
       let range = selection.getRangeAt(0)
+      console.log( range )
       if ( range ) {
         this.clear_wrappers()
         let safe_ranges = get_safe_ranges( range )
         for ( const safe_range of safe_ranges ) {
-          this.wrap( safe_range )
+          if ( !safe_range.collapsed ) {
+            this.wrap( safe_range )
+          }
         }
         // range = safe_ranges
       }
