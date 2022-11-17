@@ -170,24 +170,21 @@ section .highlight {
 
 
 
+/* comment form */
+
 main form.comment_form {
   background-color: var(--grid);
-  display: none;
-  padding: 0.25rem;
   max-height: var(--form-base-height);
   max-width: var(--form-base-width);
+  border-radius: calc( var(--header-height) / 4);
+  padding: 0.25rem;
+  /* width: 100%;
+  height: 100%; */
+  display: none;
   overflow: hidden;
-  border-radius: inherit;
   color: transparent;
-  left: 0;
 }
 
-main form.comment_form:focus-within {
-  max-height: var(--form-expanded-height);
-  max-width: var(--form-expanded-width);
-  color: var(--fore);
-  overflow: visible;
-}
 main form.comment_form input {
   margin: 0.25rem;
 }
@@ -199,7 +196,6 @@ main form.comment_form input[type="text"] {
   color: inherit;
   border-radius: inherit;
 }
-
 main form.comment_form p {
   font-size: 0.7rem;
   font-style: italic;
@@ -208,6 +204,34 @@ main form.comment_form p {
   margin: 0;
 }
 
+
+main .toolbar {
+  position: absolute;
+  width: var(--side-width);
+  height: var(--side-width);
+  z-index: 10;
+  --top: 0;
+  --left: 0;
+  top: var(--top);
+  left: var(--left);
+}
+main .toolbar form.comment_form {
+  /* display: unset; */
+}
+
+main .toolbar:not(.hidden) form.comment_form,
+main form.comment_form:focus-within {
+  max-height: var(--form-expanded-height);
+  max-width: var(--form-expanded-width);
+  color: var(--fore);
+  display: block;
+  overflow: visible;
+}
+
+main .toolbar.hidden {
+  --top: -999px;
+  --left: -999px;
+}
 
 main .row .column .block:not(.columns):hover form.comment_form,
 main .row .column .block:not(.columns):focus-within aside .thread:first-of-type form.comment_form,
@@ -279,23 +303,4 @@ main .notes.column[data-col-width="1/1"] {
 
 .note-ref-backlink {
   padding-left: 0.3rem;
-}
-
-
-
-main .toolbar {
-  position: absolute;
-  width: var(--side-width);
-  height: var(--side-width);
-  top: 0;
-  left: 0;
-}
-
-main .toolbar.hidden {
-  top: -999px;
-  left: -999px;
-}
-
-main .toolbar form.comment_form {
-  display: unset;
 }

@@ -43,16 +43,18 @@ export default class SelectionObserver {
     return this._SELECTION
   }
   set selection({ selection, e }) {
+    console.log(selection)
     if ( selection ) {
-      const range = selection.getRangeAt(0)
-      this.toggle_toolbar( range, e )
+      let range = selection.getRangeAt(0)
       if ( range ) {
         this.clear_wrappers()
         let safe_ranges = get_safe_ranges( range )
         for ( const safe_range of safe_ranges ) {
           this.wrap( safe_range )
         }
+        // range = safe_ranges
       }
+      this.toggle_toolbar( range, e )
     }
     this._SELECTION = selection
   }
@@ -87,15 +89,22 @@ export default class SelectionObserver {
   wrap( range ) {
     const wrapper = this.create_wrapper()
     range.surroundContents( wrapper )
-    wrapper.appendChild( this.toolbar )
     this.wrappers.push( wrapper )
   }
 
   toggle_toolbar( range, e ) {
-    if ( range.endOffset < range.startOffset ) {
+    // console.log( range )
+    // console.log( range.startContainer == range.endContainer )
+    // if ( Math.abs( range.endOffset - range.startOffset ) > 1 ) {
+    if ( this.wrappers.length ) {
       this.toolbar.classList.remove( 'hidden' )
+      const wrapper = this.wrappers[ this.wrappers.length - 1 ]
+      this.toolbar.style.setProperty( '--top', wrapper.getBoundingClientRect().top + document.documentElement.scrollTop + 'px' )
+      this.toolbar.style.setProperty( '--left', wrapper.getBoundingClientRect().left + document.documentElement.scrollLeft + 'px' )
     } else {
       this.toolbar.classList.add( 'hidden' )
+      this.toolbar.style.setProperty( '--top', 0 )
+      this.toolbar.style.setProperty( '--left', 0 )
     }
   }
 
