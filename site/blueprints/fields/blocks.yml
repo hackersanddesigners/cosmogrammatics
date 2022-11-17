@@ -17,6 +17,10 @@ fieldsets:
           - list
           - image
           - gallery
+          - audio
+          - video
+          - embed
+          - page_embed
 
           text:
             extends: blocks/text
@@ -24,7 +28,6 @@ fieldsets:
               bid:
                 label: Unique ID
                 type: text
-                default: 0
                 disabled: true
                 when:
                   footnote
@@ -47,37 +50,15 @@ fieldsets:
                   note:
                     width: 1/1
 
-          soundblock:
-            name: Audio
-            fields:
-              soundfile:
-                label: Audio (file)
-                type: files
-                options: audio
-              soundurl:
-                label: Audio (url)
-                type: embed
-
-           videoblock:
-             name: Video
-             snippet: videoblock
-             fields:
-               videofile:
-                 label: Video (file)
-                 type: files
-                 options: videos
-               videoposter:
-                 label: Cover (file)
-                 type: files
-               videourl:
-                 label: Video (url)
-                 type: embed
-
   - heading
   - quote
   - list
   - image
   - gallery
+  - audio
+  - video
+  - embed
+  - page_embed
 
   text:
     extends: blocks/text
@@ -85,7 +66,6 @@ fieldsets:
       bid:
         label: Unique ID
         type: text
-        default: 0
         disabled: true
         when:
           footnote
@@ -107,32 +87,6 @@ fieldsets:
         columns:
           note:
             width: 1/1
-
-  soundblock:
-    name: Audio
-    fields:
-      soundfile:
-        label: Audio (file)
-        type: files
-        options: audio
-      soundurl:
-        label: Audio (url)
-        type: embed
-
-  videoblock:
-    name: Video
-    snippet: videoblock
-    fields:
-      videofile:
-        label: Video (file)
-        type: files
-        options: videos
-      videoposter:
-        label: Cover (file)
-        type: files
-      videourl:
-        label: Video (url)
-        type: embed
 
 settings:
   fields:

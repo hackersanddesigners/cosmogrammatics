@@ -1,0 +1,14 @@
+name: Embed
+icon: file-code
+fields:
+  source_url:
+    label: Embed
+    type: embed
+  title:
+    type: text
+    placeholder: Title
+  caption:
+    type: writer
+    icone: text
+    inline: true
+    placeholder: Caption

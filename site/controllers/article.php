@@ -6,7 +6,7 @@ return function ($page) {
     $comments = $page->children()->children()->listed();
 
     // footnotes
-    $footnotes_all = [];
+    $footnotes_list = [];
 
     $blocks = $page->builder()->toBlocks();
     foreach($blocks as $block) {
@@ -22,7 +22,7 @@ return function ($page) {
                         $subfootnotes = $subblock->footnotes()->toStructure();
 
                         foreach($subfootnotes as $subfootnote) {
-                            array_push($footnotes_all, $subfootnote);
+                            array_push($footnotes_list, $subfootnote);
                         };
                     }
                 };
@@ -32,11 +32,15 @@ return function ($page) {
             $footnotes = $block->footnotes()->toStructure();
 
             foreach($footnotes as $footnote) {
-                array_push($footnotes_all, $footnote);
+                array_push($footnotes_list, $footnote);
             };
         }
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
     $skin = [
       'colors' => $page->colors()->toEntity(),
       'fonts'  => $page->fonts()->toEntity(),
@@ -44,9 +48,15 @@ return function ($page) {
     ];
 
     return [
+<<<<<<< HEAD
       'comments'  => $comments,
       'footnotes' => $footnotes,
       'skin'      => $skin
+=======
+        'comments' => $comments,
+        'footnotes' => $footnotes_list,
+        'skin'     => $skin
+>>>>>>> main
     ];
 
 };

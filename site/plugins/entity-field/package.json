@@ -1,0 +1,15 @@
+{
+	"scripts": {
+		"dev": "kirbyup src/index.js --watch",
+		"build": "kirbyup src/index.js"
+	},
+	"devDependencies": {
+		"kirbyup": "^1.0.2"
+	},
+	"prettier": {
+		"htmlWhitespaceSensitivity": "ignore"
+	},
+	"volta": {
+		"node": "18.7.0"
+	}
+}

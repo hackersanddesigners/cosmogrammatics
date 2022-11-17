@@ -1,0 +1,8 @@
+name: Page Embed
+icon: book 
+fields:
+  pageurl:
+    type: link
+    label: Page Embed
+    linkTypes:
+      - page

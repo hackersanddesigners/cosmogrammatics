@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "948ea9f13d6f1cdf971ace42fecd8645",
+    "content-hash": "588a9adadd52dda5888eb96bb5431fc7",
     "packages": [
         {
             "name": "claviska/simpleimage",
@@ -358,19 +358,20 @@
         },
         {
             "name": "getkirby/cli",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getkirby/cli.git",
-                "reference": "5c7a9cf627ae5ecfc62954ad94ed38484d222b70"
+                "reference": "9182f924454a7d00e586b6b9e82266557c94abb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getkirby/cli/zipball/5c7a9cf627ae5ecfc62954ad94ed38484d222b70",
-                "reference": "5c7a9cf627ae5ecfc62954ad94ed38484d222b70",
+                "url": "https://api.github.com/repos/getkirby/cli/zipball/9182f924454a7d00e586b6b9e82266557c94abb4",
+                "reference": "9182f924454a7d00e586b6b9e82266557c94abb4",
                 "shasum": ""
             },
             "require": {
+                "composer-runtime-api": "^2.2",
                 "ext-zip": "*",
                 "guzzlehttp/guzzle": "^7.5",
                 "league/climate": "^3.8",
@@ -416,20 +417,20 @@
                     "type": "custom"
                 }
             ],
-            "time": "2022-10-02T12:02:53+00:00"
+            "time": "2022-10-05T13:54:32+00:00"
         },
         {
             "name": "getkirby/cms",
-            "version": "3.8.1.1",
+            "version": "3.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getkirby/kirby.git",
-                "reference": "04ef75b140ef67ad2de37895ab438e7f4649f072"
+                "reference": "f16b0b41db19ab5dbcf22e27f4aa2c35cb2c490c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getkirby/kirby/zipball/04ef75b140ef67ad2de37895ab438e7f4649f072",
-                "reference": "04ef75b140ef67ad2de37895ab438e7f4649f072",
+                "url": "https://api.github.com/repos/getkirby/kirby/zipball/f16b0b41db19ab5dbcf22e27f4aa2c35cb2c490c",
+                "reference": "f16b0b41db19ab5dbcf22e27f4aa2c35cb2c490c",
                 "shasum": ""
             },
             "require": {
@@ -516,7 +517,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2022-10-25T09:54:29+00:00"
+            "time": "2022-11-15T12:18:18+00:00"
         },
         {
             "name": "getkirby/composer-installer",
@@ -937,63 +938,6 @@
             "time": "2022-11-11T11:15:13+00:00"
         },
         {
-            "name": "hidehalo/nanoid-php",
-            "version": "1.1.12",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/hidehalo/nanoid-php.git",
-                "reference": "3229400d7e69b127a9e4f8fdad2e498e64cdaae4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/hidehalo/nanoid-php/zipball/3229400d7e69b127a9e4f8fdad2e498e64cdaae4",
-                "reference": "3229400d7e69b127a9e4f8fdad2e498e64cdaae4",
-                "shasum": ""
-            },
-            "require": {
-                "paragonie/random_compat": ">=2.0",
-                "php": "~5.6|~7.0|~8.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": ">=5.6",
-                "squizlabs/php_codesniffer": "^2.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Hidehalo\\Nanoid\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "hidehalo",
-                    "email": "tianchen_cc@yeah.net",
-                    "homepage": "https://github.com/hidehalo",
-                    "role": "Owner"
-                }
-            ],
-            "description": "A copy of nanoid in PHP",
-            "homepage": "https://github.com/hidehalo/nanoid-php",
-            "keywords": [
-                "hidehalo",
-                "nanoid-php"
-            ],
-            "support": {
-                "issues": "https://github.com/hidehalo/nanoid-php/issues",
-                "source": "https://github.com/hidehalo/nanoid-php/tree/1.1.12"
-            },
-            "time": "2021-12-30T07:27:43+00:00"
-        },
-        {
             "name": "laminas/laminas-escaper",
             "version": "2.12.0",
             "source": {
@@ -1317,54 +1261,59 @@
             "time": "2022-08-12T07:37:14+00:00"
         },
         {
-            "name": "paragonie/random_compat",
-            "version": "v9.99.100",
+            "name": "oblik/kirby-link-field",
+            "version": "4.0.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "996434e5492cb4c3edcb9168db6fbb1359ef965a"
+                "url": "https://github.com/OblikStudio/kirby-link-field.git",
+                "reference": "d7f6422c57c6cdc55fa418555eb36949515c3438"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/996434e5492cb4c3edcb9168db6fbb1359ef965a",
-                "reference": "996434e5492cb4c3edcb9168db6fbb1359ef965a",
+                "url": "https://api.github.com/repos/OblikStudio/kirby-link-field/zipball/d7f6422c57c6cdc55fa418555eb36949515c3438",
+                "reference": "d7f6422c57c6cdc55fa418555eb36949515c3438",
                 "shasum": ""
             },
             "require": {
-                "php": ">= 7"
+                "getkirby/cms": "^3.7.0-rc.2",
+                "getkirby/composer-installer": "^1.1"
             },
-            "require-dev": {
-                "phpunit/phpunit": "4.*|5.*",
-                "vimeo/psalm": "^1"
+            "type": "kirby-plugin",
+            "extra": {
+                "installer-name": "link-field"
             },
-            "suggest": {
-                "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
-            },
-            "type": "library",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "authors": [
                 {
-                    "name": "Paragon Initiative Enterprises",
-                    "email": "security@paragonie.com",
-                    "homepage": "https://paragonie.com"
+                    "name": "Oblik Studio",
+                    "email": "hello@oblik.studio",
+                    "homepage": "https://oblik.studio/"
+                },
+                {
+                    "name": "Hristiyan Dodov",
+                    "email": "h.dodov@gmail.com",
+                    "homepage": "https://dodov.dev/"
                 }
             ],
-            "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
+            "description": "Kirby 3 field for all types of links.",
             "keywords": [
-                "csprng",
-                "polyfill",
-                "pseudorandom",
-                "random"
+                "kirby",
+                "kirby-plugin"
             ],
             "support": {
-                "email": "info@paragonie.com",
-                "issues": "https://github.com/paragonie/random_compat/issues",
-                "source": "https://github.com/paragonie/random_compat"
+                "issues": "https://github.com/OblikStudio/kirby-link-field/issues",
+                "source": "https://github.com/OblikStudio/kirby-link-field"
             },
-            "time": "2020-10-15T08:29:30+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/OblikStudio",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-06-28T18:18:46+00:00"
         },
         {
             "name": "phpmailer/phpmailer",

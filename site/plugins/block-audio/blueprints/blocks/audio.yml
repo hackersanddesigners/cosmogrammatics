@@ -1,0 +1,17 @@
+name: Audio
+icon: file-audio
+fields:
+  source_file:
+    label: File upload
+    type: files
+    query: page.audio.template('audio')
+    uploads: audio
+    multiple: false
+  title:
+    type: text
+    placeholder: Title
+  caption:
+    type: writer
+    icone: text
+    inline: true
+    placeholder: Caption
