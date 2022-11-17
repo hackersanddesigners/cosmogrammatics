@@ -4,7 +4,7 @@ use Kirby\Uuid\Uuid;
 
 
 function setBID($bid) {
-    if ($bid === '0') {
+    if ($bid->isEmpty()) {
         return Uuid::generate();
     } else {
         return $bid;

@@ -28,7 +28,6 @@ fieldsets:
               bid:
                 label: Unique ID
                 type: text
-                default: 0
                 disabled: true
                 when:
                   footnote
@@ -67,7 +66,6 @@ fieldsets:
       bid:
         label: Unique ID
         type: text
-        default: 0
         disabled: true
         when:
           footnote
