@@ -1,7 +1,7 @@
 import {
   $,
   $$,
-  SelectionObserver
+  // SelectionObserver
 } from '../utils/index.js'
 
 import {
@@ -17,6 +17,6 @@ for ( const comment_form of comment_forms ) {
 }
 
 
-const article_element    = $( 'main' )
-const selection_toolbar  = $( '.toolbar' )
-const selection_observer = new SelectionObserver( article_element, selection_toolbar )
+// const article_element    = $( 'main' )
+// const selection_toolbar  = $( '.toolbar' )
+// const selection_observer = new SelectionObserver( article_element, selection_toolbar )
