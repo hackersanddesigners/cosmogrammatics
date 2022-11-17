@@ -29,8 +29,8 @@
     "microman/kirby-column-blocks": "^1.0",
     "getkirby/cli": "^1.0",
     "timoetting/kirby-color": "^1.0",
-    "oblik/kirby-entity-field": "^2.0",
-    "oblik/kirby-link-field": "^4.0"
+    "oblik/kirby-link-field": "^4.0",
+    "oblik/kirby-entity-field": "^2.0"
   },
   "config": {
     "allow-plugins": {
