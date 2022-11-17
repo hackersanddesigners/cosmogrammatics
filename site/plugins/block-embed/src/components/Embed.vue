@@ -7,7 +7,7 @@
     @update="update"
   >
     <div class="k-block-type-embed-wrapper">
-      <div class="block-embed-container">
+      <div class="block-embed-container" :data-provider="provider">
         <div v-html="source" class="block-embed-preview"></div>
         <div class="block-embed-preview-background"></div>
       </div>
@@ -28,6 +28,15 @@ export default {
        } else {
          return ''
        }
+     },
+     provider() {
+       if (this.content.source_url
+           && this.content.source_url.media
+           && this.content.source_url.media.providerName) {
+         return this.content.source_url.media.providerName.toLocaleLowerCase()
+       } else {
+         return ''
+       }
      }
    }
 };
@@ -40,21 +49,20 @@ export default {
 
 .block-embed-preview {
   position: relative;
-  overflow: hidden;
-  width: 100%;
-  padding-top: 56.25%; /* 16:9 */
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .block-embed-preview iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+  max-width: 100% !important;
+}
+
+.block-embed-container[data-provider="youtube"] .block-embed-preview iframe, .block-embed-container[data-provider="vimeo"] .block-embed-preview iframe {
   width: 100%;
-  height: 100%;
-  max-width: 100%;
-  z-index: 1;
+  aspect-ratio: 16/9;
+  height: auto;
 }
 
 .block-embed-preview-background {

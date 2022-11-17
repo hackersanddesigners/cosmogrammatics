@@ -1,6 +1,6 @@
 <?php if ($embed = $block->source_url()->toEmbed()): ?>
 <div class="embed-wrapper">
-  <div class="block-embed-container">
+  <div class="block-embed-container" data-provider="<?= $embed->providerName()->lower() ?>">
     <div class="block-embed-preview"><?= $embed->code() ?></div>
     <div class="block-embed-preview-background"></div>
   </div>
