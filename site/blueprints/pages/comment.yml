@@ -1,5 +1,9 @@
 title: Comment
 
+status:
+    draft: Draft
+    listed: Published
+
 permissions:
   extends: options/permissions
 
