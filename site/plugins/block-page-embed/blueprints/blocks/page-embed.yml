@@ -6,3 +6,7 @@ fields:
     label: Page Embed
     linkTypes:
       - page
+    pages:
+      query: page.siblings
+      image:
+        cover: true
