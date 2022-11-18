@@ -1,7 +1,7 @@
 <section
   tabindex="0"
   class="block <?= $block->type() ?>"
-  id="<?= 'b_' . $block->bid() ?>"
+  id="<?= $block->bid() ?>"
   data-type="block-<?= $block->type() ?>"
 >
 

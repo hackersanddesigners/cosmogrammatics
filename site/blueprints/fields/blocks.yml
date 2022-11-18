@@ -11,16 +11,105 @@ fieldsets:
           - "1/2, 1/2"
           - "1/4, 1/4, 1/4, 1/4"
         fieldsets:
-          - columns
-          - heading
-          - quote
-          - list
-          - image
-          - gallery
-          - audio
-          - video
-          - embed
-          - page_embed
+          columns:
+            extends: blocks/columns
+            fields:
+              bid:
+                label: Unique ID
+                type: text
+                disabled: true
+                when:
+                  footnote
+
+          heading:
+            extends: blocks/heading
+            fields:
+              bid:
+                label: Unique ID
+                type: text
+                disabled: true
+                when:
+                  footnote
+
+          quote:
+            extends: blocks/quote
+            fields:
+              bid:
+                label: Unique ID
+                type: text
+                disabled: true
+                when:
+                  footnote
+
+          list:
+            extends: blocks/list
+            fields:
+              bid:
+                label: Unique ID
+                type: text
+                disabled: true
+                when:
+                  footnote
+
+          image:
+            extends: blocks/image
+            fields:
+              bid:
+                label: Unique ID
+                type: text
+                disabled: true
+                when:
+                  footnote
+
+          gallery:
+            extends: blocks/gallery
+            fields:
+              bid:
+                label: Unique ID
+                type: text
+                disabled: true
+                when:
+                  footnote
+
+          audio:
+            extends: blocks/audio
+            fields:
+              bid:
+                label: Unique ID
+                type: text
+                disabled: true
+                when:
+                  footnote
+
+          video:
+            extends: blocks/video
+            fields:
+              bid:
+                label: Unique ID
+                type: text
+                disabled: true
+                when:
+                  footnote
+
+          embed:
+            extends: blocks/embed
+            fields:
+              bid:
+                label: Unique ID
+                type: text
+                disabled: true
+                when:
+                  footnote
+
+          page_embed:
+            extends: blocks/page_embed
+            fields:
+              bid:
+                label: Unique ID
+                type: text
+                disabled: true
+                when:
+                  footnote
 
           text:
             extends: blocks/text
@@ -50,15 +139,107 @@ fieldsets:
                   note:
                     width: 1/1
 
-  - heading
-  - quote
-  - list
-  - image
-  - gallery
-  - audio
-  - video
-  - embed
-  - page_embed
+
+
+  columns:
+    extends: blocks/columns
+    fields:
+      bid:
+        label: Unique ID
+        type: text
+        disabled: true
+        when:
+          footnote
+
+  heading:
+    extends: blocks/heading
+    fields:
+      bid:
+        label: Unique ID
+        type: text
+        disabled: true
+        when:
+          footnote
+
+  quote:
+    extends: blocks/quote
+    fields:
+      bid:
+        label: Unique ID
+        type: text
+        disabled: true
+        when:
+          footnote
+
+  list:
+    extends: blocks/list
+    fields:
+      bid:
+        label: Unique ID
+        type: text
+        disabled: true
+        when:
+          footnote
+
+  image:
+    extends: blocks/image
+    fields:
+      bid:
+        label: Unique ID
+        type: text
+        disabled: true
+        when:
+          footnote
+
+  gallery:
+    extends: blocks/gallery
+    fields:
+      bid:
+        label: Unique ID
+        type: text
+        disabled: true
+        when:
+          footnote
+
+  audio:
+    extends: blocks/audio
+    fields:
+      bid:
+        label: Unique ID
+        type: text
+        disabled: true
+        when:
+          footnote
+
+  video:
+    extends: blocks/video
+    fields:
+      bid:
+        label: Unique ID
+        type: text
+        disabled: true
+        when:
+          footnote
+
+  embed:
+    extends: blocks/embed
+    fields:
+      bid:
+        label: Unique ID
+        type: text
+        disabled: true
+        when:
+          footnote
+
+  page_embed:
+    extends: blocks/page_embed
+    fields:
+      bid:
+        label: Unique ID
+        type: text
+        disabled: true
+        when:
+          footnote
 
   text:
     extends: blocks/text

@@ -4,8 +4,8 @@ use Kirby\Uuid\Uuid;
 
 
 function setBID($bid) {
-    if ($bid->isEmpty()) {
-        return Uuid::generate();
+    if ($bid == NULL || $bid->exists() == false || $bid->isEmpty()) {
+        return 'b_' . Uuid::generate();
     } else {
         return $bid;
     }
@@ -27,7 +27,7 @@ function parseBlocks($blocks, $type) {
 
         $blockType = $block->type();
 
-        if ($blockType === 'columns') {
+        if ($blockType === 'columns') { 
 
             // we have one layout per block, no need to loop over
             $layout = $block->layout()->toLayouts()->first();
@@ -65,6 +65,7 @@ function parseBlocks($blocks, $type) {
             $blockLayoutUpdated = [
                 'content' => [
                     'layout' => $layoutsNew->toArray(),
+                    'bid' => setBID($block->bid()),
                 ],
                 'type' => 'columns',
             ];
@@ -104,7 +105,22 @@ function parseBlocks($blocks, $type) {
             array_push($updatedBlocks, $blockUpdated);
 
         } else {
-            array_push($updatedBlocks, $block);
+
+            $blockContent = $block->content()->toArray();
+            array_walk($blockContent, function (&$value, $key) use ($block) {
+                if($key == 'bid'){ 
+                    $value = setBID($block->bid()); 
+                }
+            });
+
+            $blockUpdated = [
+                'content' => $blockContent,
+                'type' => $block->type(),
+            ];
+
+            $blockUpdated = new Kirby\Cms\Block($blockUpdated);
+            array_push($updatedBlocks, $blockUpdated);
+
         }
 
     }; // -- end blocks foreach
