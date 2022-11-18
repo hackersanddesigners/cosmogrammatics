@@ -8,18 +8,18 @@
   // is scoped with the embedded pages' styles.
 
   if ( $block->type() == 'page_embed' ) {
-    $link      = $block->pageurl()->toLinkObject();
-    $pageEmbed = page($link->value());
-    if ( $link && $pageEmbed ) {
-      $page_id   = 'p_' . $pageEmbed->slug();
-      $page_skin = [
-        'colors' => $pageEmbed->colors()->toEntity(),
-        'fonts'  => $pageEmbed->fonts()->toEntity(),
-        'rules'  => $pageEmbed->css()->toStructure(),
-        'prefix' => $page_id
-      ];
-      snippet( 'style/tag', $page_skin );
-    }
+      if ($link = $block->pageurl()->toLinkObject()) {
+          if ($pageEmbed = page($link->value())) {
+              $page_id   = 'p_' . $pageEmbed->slug();
+              $page_skin = [
+                  'colors' => $pageEmbed->colors()->toEntity(),
+                  'fonts'  => $pageEmbed->fonts()->toEntity(),
+                  'rules'  => $pageEmbed->css()->toStructure(),
+                  'prefix' => $page_id
+              ];
+              snippet( 'style/tag', $page_skin );
+          }
+      }
   }
 ?>
 
