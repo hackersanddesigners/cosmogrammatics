@@ -30,10 +30,10 @@ main section {
 
 main .row {
   display: flex;
-  border-top: var(--gridline);
 }
 
 main > .row {
+  border-top: var(--gridline);
   padding-inline: calc( var(--header-height) / 2 );
 }
 
@@ -94,6 +94,19 @@ main .row .column .block .contents > *:nth-child(1) {
 
 main .row .column .block .contents > *:nth-last-child(1) {
   margin-block-end: 0;
+}
+
+main .block video,
+main .block audio {
+  width: 100%;
+}
+main .block figcaption,
+main .block .caption {
+  font-style: italic;
+}
+
+main .block figure {
+  margin-inline: unset;
 }
 
 main .row .column .block aside {
