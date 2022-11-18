@@ -14,6 +14,13 @@
 
   <?= css([ 'assets/css/base.css', '@auto' ]) ?>
   <?= js([ '@auto' ], [ 'type'  => 'module' ]) ?>
-  <?= snippet( 'head/style/index' ) ?>
+
+  <?php if ( isset( $skin ) ) {
+    snippet( 'style/tag', [
+      'colors' => $skin[ 'colors' ],
+      'fonts'  => $skin[ 'fonts' ],
+      'rules'  => $skin[ 'rules' ]
+    ]);
+  } ?>
 
 </head>

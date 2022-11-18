@@ -40,7 +40,7 @@ return function ($page) {
     $skin = [
       'colors' => $page->colors()->toEntity(),
       'fonts'  => $page->fonts()->toEntity(),
-      'css'    => $page->css()->toStructure()
+      'rules'  => $page->css()->toStructure()
     ];
 
     return [

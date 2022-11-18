@@ -68,6 +68,7 @@ main .block {
   /* border: var(--grid); */
   /* border-bottom: none; */
   background-color: var(--back);
+  color: var(--fore);
   box-shadow:var(--gridshadow);
   padding: 0.5rem;
   /* height: 100%; */

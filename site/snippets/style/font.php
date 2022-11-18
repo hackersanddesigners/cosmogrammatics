@@ -1,0 +1,3 @@
+<?php if ( $value ) { ?>
+  --<?= $key ?> : <?= $value->name() ?>;
+<?php } ?>
