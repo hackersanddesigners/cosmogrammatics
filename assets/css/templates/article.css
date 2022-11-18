@@ -105,9 +105,15 @@ main .block figcaption,
 main .block .caption {
   font-style: italic;
 }
-
 main .block figure {
   margin-inline: unset;
+}
+main .block.page_embed a {
+  text-decoration: none;
+  color: var(--fore)
+}
+
+main .block.page_embed a h1 {
 }
 
 main .row .column .block aside {

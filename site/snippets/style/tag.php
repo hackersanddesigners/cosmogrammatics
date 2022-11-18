@@ -2,7 +2,7 @@
   $font_names  = [ 'title', 'body', 'comments', 'footnotes' ];
   $color_names = [ 'back', 'fore', 'accent', 'grid' ];
   $prefix      = isset( $prefix ) ? $prefix : NULL;
-  $selector    = $prefix ? '#' . $prefix : ':root';
+  $selector    = $prefix ? '.' . $prefix : ':root';
 ?>
 
 <style>

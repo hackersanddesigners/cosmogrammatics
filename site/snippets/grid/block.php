@@ -1,6 +1,31 @@
+<?php
+
+  // page identifier used as class for styling
+
+  $page_id = 'p_' . $page->slug();
+
+  // if the block is an embed, make another <style> tag that
+  // is scoped with the embedded pages' styles.
+
+  if ( $block->type() == 'page_embed' ) {
+    $link      = $block->pageurl()->toLinkObject();
+    $pageEmbed = page($link->value());
+    if ( $link && $pageEmbed ) {
+      $page_id   = 'p_' . $pageEmbed->slug();
+      $page_skin = [
+        'colors' => $pageEmbed->colors()->toEntity(),
+        'fonts'  => $pageEmbed->fonts()->toEntity(),
+        'rules'  => $pageEmbed->css()->toStructure(),
+        'prefix' => $page_id
+      ];
+      snippet( 'style/tag', $page_skin );
+    }
+  }
+?>
+
 <section
   tabindex="0"
-  class="block <?= $block->type() ?>"
+  class="block <?= $block->type() ?> <?= $page_id ?>"
   id="<?= 'b_' . $block->bid() ?>"
   data-type="block-<?= $block->type() ?>"
 >
