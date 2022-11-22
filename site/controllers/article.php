@@ -13,20 +13,21 @@ return function ($page) {
         if ($block->type() === 'columns') {
 
             // collect eventual block text footnotes
-            $layout = $block->layout()->toLayouts()->first();
-            foreach($layout->columns() as $column) {
-                $subblocks = $column->blocks();
-                foreach($subblocks as $subblock) {
+            if ($layout = $block->layout()->toLayouts()->first()) {
+                foreach($layout->columns() as $column) {
+                    $subblocks = $column->blocks();
+                    foreach($subblocks as $subblock) {
 
-                    if ($subblock->type() === 'text') {
-                        $subfootnotes = $subblock->footnotes()->toStructure();
+                        if ($subblock->type() === 'text') {
+                            $subfootnotes = $subblock->footnotes()->toStructure();
 
-                        foreach($subfootnotes as $subfootnote) {
-                            array_push($footnotes_list, $subfootnote);
-                        };
-                    }
+                            foreach($subfootnotes as $subfootnote) {
+                                array_push($footnotes_list, $subfootnote);
+                            };
+                        }
+                    };
                 };
-            };
+            }
 
         } else if ($block->type() === 'text') {
             $footnotes = $block->footnotes()->toStructure();

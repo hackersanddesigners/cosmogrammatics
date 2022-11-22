@@ -30,48 +30,49 @@ function parseBlocks($blocks, $type) {
         if ($blockType === 'columns') { 
 
             // we have one layout per block, no need to loop over
-            $layout = $block->layout()->toLayouts()->first();
+            if ($layout = $block->layout()->toLayouts()->first()) {
 
-            $columnsNew = [];
-            foreach($layout->columns() as $column) {
-                // we need to:
-                // - parse the layout blocks
-                // - reconstruct the layout with updated blocks
-                // - convert it back to a layout object
+                $columnsNew = [];
+                foreach($layout->columns() as $column) {
+                    // we need to:
+                    // - parse the layout blocks
+                    // - reconstruct the layout with updated blocks
+                    // - convert it back to a layout object
 
-                $subblocks = $column->blocks();
-                $updatedSubblocks = parseBlocks($subblocks, 'layout');
-                $subblocksNew = new Kirby\Cms\Blocks($updatedSubblocks);
+                    $subblocks = $column->blocks();
+                    $updatedSubblocks = parseBlocks($subblocks, 'layout');
+                    $subblocksNew = new Kirby\Cms\Blocks($updatedSubblocks);
 
-                $columnNew = new Kirby\Cms\LayoutColumn(
-                    [
-                        'blocks' => $subblocksNew->toArray(),
-                        'width' => $column->width(),
-                    ]
-                );
+                    $columnNew = new Kirby\Cms\LayoutColumn(
+                        [
+                            'blocks' => $subblocksNew->toArray(),
+                            'width' => $column->width(),
+                        ]
+                    );
 
-                array_push($columnsNew, $columnNew);
-            };
+                    array_push($columnsNew, $columnNew);
+                };
 
-            $layoutColumnsNew = new Kirby\Cms\LayoutColumns($columnsNew);
+                $layoutColumnsNew = new Kirby\Cms\LayoutColumns($columnsNew);
             
-            $layoutNew = Kirby\Cms\Layout::factory([
-                'columns' => $layoutColumnsNew->toArray(),
-            ]);
+                $layoutNew = Kirby\Cms\Layout::factory([
+                    'columns' => $layoutColumnsNew->toArray(),
+                ]);
 
-            $layoutsNew = new Kirby\Cms\Layouts([$layoutNew]);
+                $layoutsNew = new Kirby\Cms\Layouts([$layoutNew]);
 
-            // -- update block
-            $blockLayoutUpdated = [
-                'content' => [
-                    'layout' => $layoutsNew->toArray(),
-                    'bid' => setBID($block->bid()),
-                ],
-                'type' => 'columns',
-            ];
+                // -- update block
+                $blockLayoutUpdated = [
+                    'content' => [
+                        'layout' => $layoutsNew->toArray(),
+                        'bid' => setBID($block->bid()),
+                    ],
+                    'type' => 'columns',
+                ];
 
-            $blockLayoutNew = new Kirby\Cms\Block($blockLayoutUpdated);
-            array_push($updatedBlocks, $blockLayoutNew);
+                $blockLayoutNew = new Kirby\Cms\Block($blockLayoutUpdated);
+                array_push($updatedBlocks, $blockLayoutNew);
+            }
 
         } else if ($blockType === 'text') {
 
