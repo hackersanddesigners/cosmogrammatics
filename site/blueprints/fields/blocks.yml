@@ -2,73 +2,57 @@ label: Blocks
 type: blocks
 
 fieldsets:
-  columns:
-    extends: blocks/columns
+  columns: blocks/columns
+
+  heading:
+    extends: blocks/heading
     fields:
-      layout:
-        layouts:
-          - "1/1"
-          - "1/2, 1/2"
-          - "1/4, 1/4, 1/4, 1/4"
-        fieldsets:
-          - columns
-          - heading
-          - quote
-          - list
-          - image
-          - gallery
-          - audio
-          - video
-          - embed
-          - page_embed
+      bid: fields/bid
 
-          text:
-            extends: blocks/text
-            fields:
-              bid:
-                label: Unique ID
-                type: text
-                disabled: true
-                when:
-                  footnote
-                
-              footnotes:
-                label: Footnotes
-                type: structure 
-                fields:
-                  note:
-                    label: Note
-                    type: writer
-                  ref:
-                    label: Ref
-                    type: text
-                    default: 0
-                    disabled: true
-                    when:
-                      note:
-                columns:
-                  note:
-                    width: 1/1
+  quote:
+    extends: blocks/quote
+    fields:
+      bid: fields/bid
 
-  - heading
-  - quote
-  - list
-  - image
-  - gallery
-  - audio
-  - video
-  - embed
-  - page_embed
+  list:
+    extends: blocks/list
+    fields:
+      bid: fields/bid
+
+  image:
+    extends: blocks/image
+    fields:
+      bid: fields/bid
+
+  gallery:
+    extends: blocks/gallery
+    fields:
+      bid: fields/bid
+
+  audio:
+    extends: blocks/audio
+    fields:
+      bid: fields/bid
+
+  video:
+    extends: blocks/video
+    fields:
+      bid: fields/bid
+
+  embed:
+    extends: blocks/embed
+    fields:
+      bid: fields/bid
+
+  page_embed:
+    extends: blocks/page_embed
+    fields:
+      bid: fields/bid
 
   text:
     extends: blocks/text
     fields:
-      bid:
-        label: Unique ID
-        type: text
-        disabled: true
-        when:
-          footnote
+      bid: fields/bid
 
       footnotes:
         label: Footnotes

@@ -25,8 +25,8 @@
 
 <section
   tabindex="0"
-  class="block <?= $block->type() ?> <?= $page_id ?>"
-  id="<?= 'b_' . $block->bid() ?>"
+  class="block <?= $block->type() ?>"
+  id="<?= $block->bid() ?>"
   data-type="block-<?= $block->type() ?>"
 >
 

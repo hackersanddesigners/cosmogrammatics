@@ -29,7 +29,7 @@ return function ($page) {
                         };
                     };
                 };
-            };
+            }
 
         } else if ($block->type() === 'text') {
             $footnotes = $block->footnotes()->toStructure();

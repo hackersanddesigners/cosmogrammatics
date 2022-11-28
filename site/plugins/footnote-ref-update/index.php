@@ -4,8 +4,8 @@ use Kirby\Uuid\Uuid;
 
 
 function setBID($bid) {
-    if ($bid->isEmpty()) {
-        return Uuid::generate();
+    if ($bid == NULL || $bid->exists() == false || $bid->isEmpty()) {
+        return 'b_' . Uuid::generate();
     } else {
         return $bid;
     }
@@ -27,50 +27,52 @@ function parseBlocks($blocks, $type) {
 
         $blockType = $block->type();
 
-        if ($blockType === 'columns') {
+        if ($blockType === 'columns') { 
 
             // we have one layout per block, no need to loop over
-            $layout = $block->layout()->toLayouts()->first();
+            if ($layout = $block->layout()->toLayouts()->first()) {
 
-            $columnsNew = [];
-            foreach($layout->columns() as $column) {
-                // we need to:
-                // - parse the layout blocks
-                // - reconstruct the layout with updated blocks
-                // - convert it back to a layout object
+                $columnsNew = [];
+                foreach($layout->columns() as $column) {
+                    // we need to:
+                    // - parse the layout blocks
+                    // - reconstruct the layout with updated blocks
+                    // - convert it back to a layout object
 
-                $subblocks = $column->blocks();
-                $updatedSubblocks = parseBlocks($subblocks, 'layout');
-                $subblocksNew = new Kirby\Cms\Blocks($updatedSubblocks);
+                    $subblocks = $column->blocks();
+                    $updatedSubblocks = parseBlocks($subblocks, 'layout');
+                    $subblocksNew = new Kirby\Cms\Blocks($updatedSubblocks);
 
-                $columnNew = new Kirby\Cms\LayoutColumn(
-                    [
-                        'blocks' => $subblocksNew->toArray(),
-                        'width' => $column->width(),
-                    ]
-                );
+                    $columnNew = new Kirby\Cms\LayoutColumn(
+                        [
+                            'blocks' => $subblocksNew->toArray(),
+                            'width' => $column->width(),
+                        ]
+                    );
 
-                array_push($columnsNew, $columnNew);
-            };
+                    array_push($columnsNew, $columnNew);
+                };
 
-            $layoutColumnsNew = new Kirby\Cms\LayoutColumns($columnsNew);
+                $layoutColumnsNew = new Kirby\Cms\LayoutColumns($columnsNew);
             
-            $layoutNew = Kirby\Cms\Layout::factory([
-                'columns' => $layoutColumnsNew->toArray(),
-            ]);
+                $layoutNew = Kirby\Cms\Layout::factory([
+                    'columns' => $layoutColumnsNew->toArray(),
+                ]);
 
-            $layoutsNew = new Kirby\Cms\Layouts([$layoutNew]);
+                $layoutsNew = new Kirby\Cms\Layouts([$layoutNew]);
 
-            // -- update block
-            $blockLayoutUpdated = [
-                'content' => [
-                    'layout' => $layoutsNew->toArray(),
-                ],
-                'type' => 'columns',
-            ];
+                // -- update block
+                $blockLayoutUpdated = [
+                    'content' => [
+                        'layout' => $layoutsNew->toArray(),
+                        'bid' => setBID($block->bid()),
+                    ],
+                    'type' => 'columns',
+                ];
 
-            $blockLayoutNew = new Kirby\Cms\Block($blockLayoutUpdated);
-            array_push($updatedBlocks, $blockLayoutNew);
+                $blockLayoutNew = new Kirby\Cms\Block($blockLayoutUpdated);
+                array_push($updatedBlocks, $blockLayoutNew);
+            }
 
         } else if ($blockType === 'text') {
 
@@ -104,7 +106,39 @@ function parseBlocks($blocks, $type) {
             array_push($updatedBlocks, $blockUpdated);
 
         } else {
-            array_push($updatedBlocks, $block);
+
+            $blockContent = $block->content()->toArray();
+
+            // if we first make a block-column and then add
+            // a block inside the column, we `bid` field is not
+            // added yet to the block. let's check if it
+            // exists and if not, let's create it first
+
+            if (array_key_exists('bid', $blockContent)) {
+                array_walk($blockContent, function (&$value, $key) use ($block) {
+                    if($key == 'bid'){ 
+                        $value = setBID($block->bid()); 
+                    }
+                });
+
+            } else {
+                // add new `bid` key-value pair to array
+                $blockContent['bid'] = '';
+                $blockContent['bid'] = setBID('');
+            }
+
+            $blockUpdated = [
+                'content' => $blockContent,
+                'type' => $block->type(),
+            ];
+
+            // here newly added bid value is present
+            // var_dump(['block-updated', $blockUpdated]);
+
+            $blockNew = new Kirby\Cms\Block($blockUpdated);
+            // var_dump($blockNew->layout()->toLayouts()->first());
+            array_push($updatedBlocks, $blockNew);
+
         }
 
     }; // -- end blocks foreach
