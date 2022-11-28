@@ -2,254 +2,57 @@ label: Blocks
 type: blocks
 
 fieldsets:
-  columns:
-    extends: blocks/columns
-    fields:
-      layout:
-        layouts:
-          - "1/1"
-          - "1/2, 1/2"
-          - "1/4, 1/4, 1/4, 1/4"
-        fieldsets:
-          columns:
-            extends: blocks/columns
-            fields:
-              bid:
-                label: Unique ID
-                type: text
-                disabled: true
-                when:
-                  footnote
-
-          heading:
-            extends: blocks/heading
-            fields:
-              bid:
-                label: Unique ID
-                type: text
-                disabled: true
-                when:
-                  footnote
-
-          quote:
-            extends: blocks/quote
-            fields:
-              bid:
-                label: Unique ID
-                type: text
-                disabled: true
-                when:
-                  footnote
-
-          list:
-            extends: blocks/list
-            fields:
-              bid:
-                label: Unique ID
-                type: text
-                disabled: true
-                when:
-                  footnote
-
-          image:
-            extends: blocks/image
-            fields:
-              bid:
-                label: Unique ID
-                type: text
-                disabled: true
-                when:
-                  footnote
-
-          gallery:
-            extends: blocks/gallery
-            fields:
-              bid:
-                label: Unique ID
-                type: text
-                disabled: true
-                when:
-                  footnote
-
-          audio:
-            extends: blocks/audio
-            fields:
-              bid:
-                label: Unique ID
-                type: text
-                disabled: true
-                when:
-                  footnote
-
-          video:
-            extends: blocks/video
-            fields:
-              bid:
-                label: Unique ID
-                type: text
-                disabled: true
-                when:
-                  footnote
-
-          embed:
-            extends: blocks/embed
-            fields:
-              bid:
-                label: Unique ID
-                type: text
-                disabled: true
-                when:
-                  footnote
-
-          page_embed:
-            extends: blocks/page_embed
-            fields:
-              bid:
-                label: Unique ID
-                type: text
-                disabled: true
-                when:
-                  footnote
-
-          text:
-            extends: blocks/text
-            fields:
-              bid:
-                label: Unique ID
-                type: text
-                disabled: true
-                when:
-                  footnote
-                
-              footnotes:
-                label: Footnotes
-                type: structure 
-                fields:
-                  note:
-                    label: Note
-                    type: writer
-                  ref:
-                    label: Ref
-                    type: text
-                    default: 0
-                    disabled: true
-                    when:
-                      note:
-                columns:
-                  note:
-                    width: 1/1
-
-
-
-  columns:
-    extends: blocks/columns
-    fields:
-      bid:
-        label: Unique ID
-        type: text
-        disabled: true
-        when:
-          footnote
+  columns: blocks/columns
 
   heading:
     extends: blocks/heading
     fields:
-      bid:
-        label: Unique ID
-        type: text
-        disabled: true
-        when:
-          footnote
+      bid: fields/bid
 
   quote:
     extends: blocks/quote
     fields:
-      bid:
-        label: Unique ID
-        type: text
-        disabled: true
-        when:
-          footnote
+      bid: fields/bid
 
   list:
     extends: blocks/list
     fields:
-      bid:
-        label: Unique ID
-        type: text
-        disabled: true
-        when:
-          footnote
+      bid: fields/bid
 
   image:
     extends: blocks/image
     fields:
-      bid:
-        label: Unique ID
-        type: text
-        disabled: true
-        when:
-          footnote
+      bid: fields/bid
 
   gallery:
     extends: blocks/gallery
     fields:
-      bid:
-        label: Unique ID
-        type: text
-        disabled: true
-        when:
-          footnote
+      bid: fields/bid
 
   audio:
     extends: blocks/audio
     fields:
-      bid:
-        label: Unique ID
-        type: text
-        disabled: true
-        when:
-          footnote
+      bid: fields/bid
 
   video:
     extends: blocks/video
     fields:
-      bid:
-        label: Unique ID
-        type: text
-        disabled: true
-        when:
-          footnote
+      bid: fields/bid
 
   embed:
     extends: blocks/embed
     fields:
-      bid:
-        label: Unique ID
-        type: text
-        disabled: true
-        when:
-          footnote
+      bid: fields/bid
 
   page_embed:
     extends: blocks/page_embed
     fields:
-      bid:
-        label: Unique ID
-        type: text
-        disabled: true
-        when:
-          footnote
+      bid: fields/bid
 
   text:
     extends: blocks/text
     fields:
-      bid:
-        label: Unique ID
-        type: text
-        disabled: true
-        when:
-          footnote
+      bid: fields/bid
 
       footnotes:
         label: Footnotes

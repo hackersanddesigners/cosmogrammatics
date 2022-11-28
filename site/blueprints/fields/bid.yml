@@ -1,0 +1,5 @@
+label: Unique ID
+type: text
+disabled: true
+when:
+  footnote

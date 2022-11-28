@@ -1,0 +1,83 @@
+name: 
+  en: Columns
+  de: Spalten
+icon: columns
+wysiwyg: true
+
+fields:
+  bid: fields/bid
+  layout:
+    type: layout
+    layouts:
+      - "1/1"
+      - "1/2, 1/2"
+      - "1/4, 1/4, 1/4, 1/4"
+
+    fieldsets:
+      heading:
+        extends: blocks/heading
+        fields:
+          bid: fields/bid
+
+      quote:
+        extends: blocks/quote
+        fields:
+          bid: fields/bid
+
+      list:
+        extends: blocks/list
+        fields:
+          bid: fields/bid
+
+      image:
+        extends: blocks/image
+        fields:
+          bid: fields/bid
+
+      gallery:
+        extends: blocks/gallery
+        fields:
+          bid: fields/bid
+
+      audio:
+        extends: blocks/audio
+        fields:
+          bid: fields/bid
+
+      video:
+        extends: blocks/video
+        fields:
+          bid: fields/bid
+
+      embed:
+        extends: blocks/embed
+        fields:
+          bid: fields/bid
+
+      page_embed:
+        extends: blocks/page_embed
+        fields:
+          bid: fields/bid
+
+      text:
+        extends: blocks/text
+        fields:
+          bid: fields/bid
+            
+          footnotes:
+            label: Footnotes
+            type: structure 
+            fields:
+              note:
+                label: Note
+                type: writer
+              ref:
+                label: Ref
+                type: text
+                default: 0
+                disabled: true
+                when:
+                  note:
+            columns:
+              note:
+                width: 1/1 

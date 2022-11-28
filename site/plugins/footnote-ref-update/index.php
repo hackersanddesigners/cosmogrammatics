@@ -108,19 +108,36 @@ function parseBlocks($blocks, $type) {
         } else {
 
             $blockContent = $block->content()->toArray();
-            array_walk($blockContent, function (&$value, $key) use ($block) {
-                if($key == 'bid'){ 
-                    $value = setBID($block->bid()); 
-                }
-            });
+
+            // if we first make a block-column and then add
+            // a block inside the column, we `bid` field is not
+            // added yet to the block. let's check if it
+            // exists and if not, let's create it first
+
+            if (array_key_exists('bid', $blockContent)) {
+                array_walk($blockContent, function (&$value, $key) use ($block) {
+                    if($key == 'bid'){ 
+                        $value = setBID($block->bid()); 
+                    }
+                });
+
+            } else {
+                // add new `bid` key-value pair to array
+                $blockContent['bid'] = '';
+                $blockContent['bid'] = setBID('');
+            }
 
             $blockUpdated = [
                 'content' => $blockContent,
                 'type' => $block->type(),
             ];
 
-            $blockUpdated = new Kirby\Cms\Block($blockUpdated);
-            array_push($updatedBlocks, $blockUpdated);
+            // here newly added bid value is present
+            // var_dump(['block-updated', $blockUpdated]);
+
+            $blockNew = new Kirby\Cms\Block($blockUpdated);
+            // var_dump($blockNew->layout()->toLayouts()->first());
+            array_push($updatedBlocks, $blockNew);
 
         }
 
