@@ -58,7 +58,8 @@ export default class SelectionObserver {
 
   set selection({ selection, e }) {
     console.log(selection)
-    if ( selection ) {
+    if ( selection && selection.type === 'Range' ) {
+
       // range-offset holds the actual good multi-range DOM elements
       // with correct start + end offset
       // we'll send this array to the backend to do more things
