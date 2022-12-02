@@ -81,10 +81,10 @@ export default class SelectionObserver {
     }
 
     let newObj = {
-      startContainer: getContainerNodeName(obj.startContainer),
-      startOffset: obj.startOffset,
-      endContainer: getContainerNodeName(obj.endContainer),
-      endOffset: getNodeOffset(obj)
+      start_container: getContainerNodeName(obj.startContainer),
+      start_offset: obj.startOffset,
+      end_container: getContainerNodeName(obj.endContainer),
+      end_offset: getNodeOffset(obj)
     }
 
     Object.freeze(newObj)

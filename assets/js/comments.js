@@ -10,7 +10,7 @@ function respond_comment( e ) {
     article_slug     : form.getAttribute( 'data-article-slug' ),
     block_id         : form.getAttribute( 'data-block-id' ),
     selection_type   : form.getAttribute( 'data-block-selection-type' ),
-    selection_coords : window.selectionObserver.rangeOffset,
+    selection_text   : window.selectionObserver.rangeOffset,
     author           : chilren.find( c => c.name == 'author' ).value,
     text             : chilren.find( c => c.name == 'body' ).value,
   })
@@ -77,7 +77,7 @@ function post_comment( comment ) {
     article_slug,
     block_id,
     selection_type,
-    selection_coords,
+    selection_text,
     author,
     text,
   } = comment
@@ -95,7 +95,7 @@ function post_comment( comment ) {
       block_id: block_id,
       text: text,
       selection_type: selection_type,
-      selection_coords: selection_coords
+      selection_text: selection_text
     }
   }
 

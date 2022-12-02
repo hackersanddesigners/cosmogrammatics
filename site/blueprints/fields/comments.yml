@@ -32,34 +32,57 @@ fields:
       video: Video
     width: 1/2
 
-
-  selection_coords:
-    label: Selection coordinates
-    type: entity
+  selection_text:
+    label: Selection Text
+    # type: entity
+    type: structure
     fields:
-      x1:
-        label: x1
+      start_container:
+        label: Start Container
+        type: text
+        width: 1/2
+      start_offset:
+        label: Start Offset
         type: number
         width: 1/2
-      y1:
-        label: y1
-        type: number
+      end_container:
+        label: End Container
+        type: text
         width: 1/2
-      x2:
-        label: x2
-        type: number
-        width: 1/2
-      y2:
-        label: y2
-        type: number
-        width: 1/2
-      t1:
-        label: t1
-        type: number
-        width: 1/2
-      t2:
-        label: t2
+      end_offset:
+        label: End Offset
         type: number
         width: 1/2
 
     width: 1/2
+
+  # selection_coords:
+  #   label: Selection coordinates
+  #   type: entity
+  #   fields:
+  #     x1:
+  #       label: x1
+  #       type: number
+  #       width: 1/2
+  #     y1:
+  #       label: y1
+  #       type: number
+  #       width: 1/2
+  #     x2:
+  #       label: x2
+  #       type: number
+  #       width: 1/2
+  #     y2:
+  #       label: y2
+  #       type: number
+  #       width: 1/2
+  #     t1:
+  #       label: t1
+  #       type: number
+  #       width: 1/2
+  #     t2:
+  #       label: t2
+  #       type: number
+  #       width: 1/2
+
+  #   width: 1/2
