@@ -9,8 +9,8 @@ function respond_comment( e ) {
     csrf             : form.getAttribute( 'data-csrf' ),
     article_slug     : form.getAttribute( 'data-article-slug' ),
     block_id         : form.getAttribute( 'data-block-id' ),
-    selection_type   : form.getAttribute( 'data-selection-type' ),
-    selection_coords : form.getAttribute( 'data-selection-coords' ),
+    selection_type   : form.getAttribute( 'data-block-selection-type' ),
+    selection_coords : window.selectionObserver.rangeOffset,
     author           : chilren.find( c => c.name == 'author' ).value,
     text             : chilren.find( c => c.name == 'body' ).value,
   })
@@ -82,10 +82,7 @@ function post_comment( comment ) {
     text,
   } = comment
 
-  // const ts   = new Date().toISOString().split('.')[0]+"Z"
   const ts   = new Date().toISOString()
-  // should be toLocaleTimeString? or should convert this in kirby?
-
   const url  = `/api/pages/articles+${ article_slug }+comments`
   const body = {
     slug: `test-${ ts }`,

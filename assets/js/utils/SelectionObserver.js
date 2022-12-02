@@ -43,17 +43,71 @@ export default class SelectionObserver {
   }
 
   makeRangeCopy(obj) {
+
+    function getContainerNodeName(node) {
+      // in case the node is #text, go check one level up
+      // nodeType => 3 === nodeName => #text
+      if (node.nodeType === 3) {
+        return node.parentNode.nodeName
+
+      } else {
+        return node.nodeName
+      }
+    }
+
+    function getNodeOffset(obj) {
+      // if startContainer => #text
+      // and endContainer => p, or something similar
+      // eg from text node to a tag node
+      // then usually endOffset is 1 but
+      // then startOffset can be a bigger value than 1
+      // (let's the text selection starts at 4)
+      // in this case, it should be easier to construct
+      // a regex in the backend by knowing the actual
+      // endOffset value in terms of characters, rather
+      // than by knowing it has up-traversed 1 node
+      // q: doing this in the backend?
+
+      // nodeType => 3 === nodeName => #text
+
+      if (obj.startContainer.nodeType === 3
+          && obj.endContainer.nodeName !== undefined) {
+
+        return obj.startContainer.nodeValue.length
+
+      } else {
+        return obj.endOffset
+      }
+    }
+
     let newObj = {
-      startContainer: obj.startContainer,
+      startContainer: getContainerNodeName(obj.startContainer),
       startOffset: obj.startOffset,
-      endContainer: obj.endContainer,
-      endOffset: obj.endOffset,
-      collapsed: obj.collapsed
+      endContainer: getContainerNodeName(obj.endContainer),
+      endOffset: getNodeOffset(obj)
     }
 
     Object.freeze(newObj)
 
     return newObj;
+  }
+
+  getBlockInfo (node) {
+    let el = node
+    // check if node is of type text
+    // if it is, go up one level to select
+    // a node of type tag
+    if (node.nodeType === 3) {
+      el = node.parentNode
+    }
+
+    // find nearest node with this class
+    // eg find in this case top parent node
+    let sectionBlock = el.closest('.block')
+    return {
+      id: sectionBlock.id,
+      type: sectionBlock.dataset.type.split('-').pop()
+    }
   }
 
   set selection({ selection, e }) {
@@ -82,7 +136,13 @@ export default class SelectionObserver {
           }
         }
       }
+
       this.toggle_toolbar( range, e )
+      const blockInfo = this.getBlockInfo(selection.focusNode)
+
+      this.update_form(blockInfo)
+      this.update_window()
+
     }
     this._SELECTION = selection
   }
@@ -121,8 +181,6 @@ export default class SelectionObserver {
   }
 
   toggle_toolbar( range, e ) {
-    // console.log( range )
-    // console.log( range.startContainer == range.endContainer )
     // if ( Math.abs( range.endOffset - range.startOffset ) > 1 ) {
     if ( this.wrappers.length ) {
       this.toolbar.classList.remove( 'hidden' )
@@ -136,6 +194,15 @@ export default class SelectionObserver {
     }
   }
 
+  update_form(blockInfo) {
+    let form = document.querySelector('.toolbar form')
+    form.dataset.blockId = blockInfo.id
+    form.dataset.blockSelectionType = blockInfo.type
+  }
+
+  update_window() {
+    window['selectionObserver'] = this
+  }
 
 }
 
