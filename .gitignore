@@ -62,4 +62,3 @@ vendor
 */fonts/*
 
 *.mjs
-node_modules
