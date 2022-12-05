@@ -6,11 +6,10 @@ use Kirby\Exception\PermissionException;
 
 
 function wrapSelectedText ($text_in, $offset, $id) {
-    // regex match text inside HTML (w/o DOM tags?)
-    // using given offset from text-selection
+    // split text using given offset from text-selection
     // and wrap this text selection around an extra pair of tags
     // (for now <span>{}</span>)
-    // => check if wrap operation is done already
+    // => TODO check if wrap operation is done already
 
     $left_side = str_slice($text_in, 0, $offset['x1']);
     $center_side = str_slice($text_in, $offset['x1'], $offset['y1']);
@@ -165,70 +164,11 @@ function parseBlockSelection($blocks, $block_bid, $comments, $offset, $type) {
 }
 
 
-// // parse block-text and wrap comments pointing to a specific text offset
-// // inside a span tag in order to manipulate it visually with CSS in the frontend
-// // similarly to the `cosmo/footnote-ref` plugin, we need to map through
-// // block-text as well as block->columns->block-text
-// Kirby::plugin('cosmo/block-highlight-comment', [
-//     'hooks' => [
-//         'route:after' => function ($route, $path, $method) {
 
-//             $kirby = kirby();
-//             $request = $kirby->request();
-
-//             // url => api/pages/articles+tottoaa+comments/children
-//             if (Str::startsWith($path, 'api/pages/articles+')
-//                 && Str::endsWith($path, '+comments/children')
-//                 && $method == "POST") {
-
-//                 // <https://getkirby.com/docs/cookbook/forms/user-registration>
-
-//                 // check if CSRF token is valid
-//                 $csrf = $request->csrf();
-//                 if (csrf($csrf) === true) {
-
-//                     $body = $request->body();
-
-//                     // set a new empty collection
-//                     // and then update the var with any comments
-//                     // part of the current article
-//                     $comments = new Collection();
-//                     $page = page($body->get('fullpath'));
-
-//                     // filter article comments by block_id if any
-//                     // else skip
-//                     if ($page->hasChildren()) {
-//                         $block_bid = $body->get('content')['block_bid'];
-
-//                         if ($block_bid != '') {
-//                             $comments = $page->children()->drafts()->filterBy('block_bid', $block_bid);
-
-//                             $offset = $body->get('content')['selection_text'];
-
-//                             $blocks = $page->builder()->toBlocks();
-//                             $updatedBlocks = parseBlockSelection($blocks, $block_bid, $comments, $offset, 'block');
-//                             $blocksNew = new Kirby\Cms\Blocks($updatedBlocks);
-
-//                             // // -- write to file
-//                             // kirby()->impersonate('kirby');
-//                             // $page->update([
-//                             //     'builder' => json_encode($blocksNew->toArray()),
-//                             // ]);
-
-//                         }
-//                     }
-
-//                 } // -- end
-//             }
-//         }
-//     ]
-// ]);
-
-
-
-Kirby::plugin('cosmo/block-methods', [
+Kirby::plugin('cosmo/block-highlight-comment', [
   'blockMethods' => [
-
+    // setup custom thread method
+    // TODO add more commentary
     'threads' => function ( $comments = [] ) {
 
       $threads = [];

@@ -64,7 +64,7 @@ class DefaultBlock extends Block {
     }
 }
 
-Kirby::plugin('my/blockModels', [
+Kirby::plugin('cosmo/set-footnote', [
     'blockModels' => [
         'Kirby\\Cms\\Block' => DefaultBlock::class,
     ]
