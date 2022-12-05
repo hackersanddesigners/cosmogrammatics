@@ -48,10 +48,10 @@ export default class SelectionObserver {
       // in case the node is #text, go check one level up
       // nodeType => 3 === nodeName => #text
       if (node.nodeType === 3) {
-        return node.parentNode.nodeName
+        return node.parentNode.nodeName.toLowerCase()
 
       } else {
-        return node.nodeName
+        return node.nodeName.toLowerCase()
       }
     }
 
@@ -80,11 +80,27 @@ export default class SelectionObserver {
       }
     }
 
+    function getAbsoluteOffset(offset, tag, position) {
+      // let's calculate the "absolute" offset of the
+      // text-selection, by taking into account also
+      // the DOM node tag into the character counting.
+      // we take into account:
+      // - the opening node-container tag
+      
+
+      return offset + ('<' + tag + '>').length
+
+      // if (position === 'start') {
+      //   return offset + ('<' + tag + '>').length
+      // } else if (position === 'end') {
+      //   return offset + ('</' + tag + '>').length
+      // }
+
+    }
+
     let newObj = {
-      start_container: getContainerNodeName(obj.startContainer),
-      start_offset: obj.startOffset,
-      end_container: getContainerNodeName(obj.endContainer),
-      end_offset: getNodeOffset(obj)
+      x1: getAbsoluteOffset(obj.startOffset, getContainerNodeName(obj.startContainer), 'start'),
+      x2: getAbsoluteOffset(obj.endOffset, getContainerNodeName(obj.endContainer), 'end'),
     }
 
     Object.freeze(newObj)
