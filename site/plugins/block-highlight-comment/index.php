@@ -11,23 +11,23 @@ function wrapSelectedText ($text_in, $offset, $id) {
     // (for now <span>{}</span>)
     // => TODO check if wrap operation is done already
 
-    $left_side = str_slice($text_in, 0, $offset['x1']);
-    $center_side = str_slice($text_in, $offset['x1'], $offset['y1']);
-    $right_side = str_slice($text_in, $offset['y1']);
+    // $left_side = str_slice($text_in, 0, $offset['x1']);
+    // $center_side = str_slice($text_in, $offset['x1'], $offset['y1']);
+    // $right_side = str_slice($text_in, $offset['y1']);
 
-    $wrap_before = '<span class="comment-highlight" id="' . $id .'" >';
-    $wrap_after = '</span>';
+    // $wrap_before = '<span class="comment-highlight" id="' . $id .'" >';
+    // $wrap_after = '</span>';
 
-    // // check if wrapping is done already
+    // check if wrapping is done already
     // if (Str::startsWith($left_side, $wrap_before)
     //     OR Str::startsWith($right_side, $wrap_after)) {
     //         return $text_in;
     // };
     // $text_out = $text_in;
 
-    $text_out = $left_side . $wrap_before . $center_side . $wrap_after . $right_side;
+    // $text_out = $left_side . $wrap_before . $center_side . $wrap_after . $right_side;
 
-    return $text_out;
+    // return $text_out;
 }
 
 // <https://stackoverflow.com/a/53985015>
@@ -143,8 +143,8 @@ function parseBlockSelection($blocks, $block_bid, $comments, $offset, $type) {
             // -- update block
             $blockUpdated = [
                 'content' => [
-                  'text' => $text_new,
-                  'footnotes' => $block->footnotes()->toArray(),
+                    'text' => $text_new,
+                    'footnotes' => $block->footnotes()->toArray(),
                 ],
                 'type' => $block->type(),
             ];
@@ -166,118 +166,158 @@ function parseBlockSelection($blocks, $block_bid, $comments, $offset, $type) {
 
 
 Kirby::plugin('cosmo/block-highlight-comment', [
-  'blockMethods' => [
-    // setup custom thread method
-    // TODO add more commentary
-    'threads' => function ( $comments = [] ) {
+    'blockMethods' => [
+        // setup custom thread method
+        // TODO add more commentary
+        'threads' => function ( $comments = [] ) {
 
-      $threads = [];
+            $threads = [];
 
-      // get all comments related to this block
+            // get all comments related to this block
 
-      if ( $comments ) {
-        $block_comments = $comments->filterBy('block_id', $this->bid() );
+            if ( $comments ) {
+                $block_comments = $comments->filterBy('block_id', $this->bid() );
 
-        // for each block_comment check if there are comments
-        // that belong to the same "thread", meaning they share
-        // a selection type and coords
+                // for each block_comment check if there are comments
+                // that belong to the same "thread", meaning they share
+                // a selection type and coords
 
-        foreach( $block_comments as $block_comment ) {
+                foreach( $block_comments as $block_comment ) {
 
-          $type   = $block_comment->selection_type();
-          $coords = $block_comment->selection_coords();
-          $id     = 'b_' . $this->bid() . '_sel_' . $type . $coords ;
+                    $type   = $block_comment->selection_type();
+                    $coords = $block_comment->selection_coords();
+                    $id     = $this->bid() . '_sel_' . $type . $coords ;
 
-          // first, check if thread has already been created.
-          // It can be uniquely identified by its selection type
-          // and coords.
+                    // first, check if thread has already been created.
+                    // It can be uniquely identified by its selection type
+                    // and coords.
 
-          $exists = FALSE;
-          foreach ( $threads as $thr ) {
-            if (
-              $thr['selection_type']->value() == $type->value() &&
-              $thr['selection_coords']->value() == $coords->value()
-            ) {
-              $exists = TRUE;
-              break;
+                    $exists = FALSE;
+                    foreach ( $threads as $thr ) {
+                        if (
+                            $thr['selection_type']->value() == $type->value() &&
+                            $thr['selection_coords']->value() == $coords->value()
+                        ) {
+                            $exists = TRUE;
+                            break;
+                        }
+                    }
+
+                    // if the thread doesn't exist, we proceed with it's
+                    // creation and addition to the $threads array.
+
+                    if ( !$exists ) {
+                        $threads[] = [
+                            'selection_type'   => $type,
+                            'selection_coords' => $coords,
+                            'selection_id'     => $id,
+                            'comments'         => $block_comments
+                            ->filterBy('selection_type', $type )
+                            ->filterBy('selection_coords', $coords )
+                        ];
+                    }
+
+                };
             }
-          }
 
-          // if the thread doesn't exist, we proceed with it's
-          // creation and addition to the $threads array.
+            return $threads;
 
-          if ( !$exists ) {
-            $threads[] = [
-              'selection_type'   => $type,
-              'selection_coords' => $coords,
-              'selection_id'     => $id,
-              'comments'         => $block_comments
-                ->filterBy('selection_type', $type )
-                ->filterBy('selection_coords', $coords )
-            ];
-          }
-
-        };
-      }
-
-      return $threads;
-
-    },
+        },
 
 
+        'highlightComments' => function ( $threads ) {
 
-    'highlightComments' => function ( $threads ) {
+            // original text content of the block
 
-      // original text content of the block
+            $updated = $this;
+            $text_in = $this->text();
 
-      $updated = $this;
-      $text_in = $this->text();
+            foreach ( $threads as $thread ) {
 
-      foreach ( $threads as $thread ) {
+                // if a selection exists and the thread does not target
+                // the block as a whole
 
-        // if a selection exists and the thread does not target
-        // the block as a whole
+                if (
+                    $thread['selection_type']->value() &&
+                    $thread['selection_coords']->value()
+                ) {
 
-        if (
-          $thread['selection_type']->value() &&
-          $thread['selection_coords']->value()
-        ) {
+                    // We get the coordinate values in a format that is
+                    // compatible with andré's wrapSelectedText method.
 
-          // We get the coordinate values in a format that is
-          // compatible with andré's wrapSelectedText method.
+                    $id     = $thread['selection_id'];
+                    // $coords = $thread['selection_coords']->toEntity();
+                    $coords = $thread['selection_coords']->toStructure();
 
-          $id     = $thread['selection_id'];
-          $coords = $thread['selection_coords']->toEntity();
-          $offset = [
-            'x1' => $coords->x1()->value(),
-            'y1' => $coords->y1()->value()
-          ];
+                    // if selecting text across two or more DOM nodes
+                    // we'll have two selection-coords entries
+                    // (eg the offset will be broken down in two parts
+                    // that we need to combine back)
 
-          // We create a new block, with updated text content
-          // that has been highlighted with the selection from
-          // this thread of comments.
+                    // let's compute "absolute" char offset by
+                    // using counting the DOM node tag as well as
+                    // by combining eventual two or more parts
+                    // offset chunks
 
-          $updated = new Kirby\Cms\Block([
-            'type' => $this->type(),
-            'content' => [
-              'text'      => wrapSelectedText( $text_in, $offset, $id ),
-              'footnotes' => $this->footnotes()->toArray(),
-            ]
-          ]);
+                    $offset = [];
+                    $MULTIPLE_OFFSET = $coords->count() > 1;
 
-          // and most important: we reset $text_in to be the
-          // text value of the newly updated block, so we are
-          // incrementing each loop with the new contents.
+                    // dump([$coords->first()->n1()->html()->value(),
+                    //       $coords->first()->n1()->html()->length()]);
 
-          $text_in = $updated->text();
+                    foreach($coords as $coord) {
+                        // offset values are counted w/o taking into
+                        // account the node tag characters, let's do that
 
+                        $x1_container = (
+                            (2 + $coord->n1()->length()) + (3 + $coord->n2()->length())
+                        );
+
+                        $x1_offset = $coord->x1()->value();
+
+                        dump([$x1_container,
+                              $x1_offset]);
+
+                        $offset['x1'] = $x1_container + $x1_offset;
+
+                        // $offset['x1'] = $coord->x1()->value();
+                        // $offset['x2'] = $coord->x2()->value();
+                    };
+
+                    dump($offset);
+                    
+                    // $offset = [
+                    //     'x1' => $coords->x1()->value(),
+                    //     'y1' => $coords->y1()->value()
+                    // ];
+
+                    // We create a new block, with updated text content
+                    // that has been highlighted with the selection from
+                    // this thread of comments.
+
+                    // var_dump([$coords, $offset]);
+                    
+                    $updated = new Kirby\Cms\Block([
+                        'type' => $this->type(),
+                        'content' => [
+                            'text'      => wrapSelectedText( $text_in, $offset, $id ),
+                            'footnotes' => $this->footnotes()->toArray(),
+                        ]
+                    ]);
+
+                    // and most important: we reset $text_in to be the
+                    // text value of the newly updated block, so we are
+                    // incrementing each loop with the new contents.
+
+                    $text_in = $updated->text();
+
+                }
+            }
+
+
+
+            return $updated;
         }
-      }
 
-
-
-      return $updated;
-    }
-
-  ]
+    ]
 ]);
