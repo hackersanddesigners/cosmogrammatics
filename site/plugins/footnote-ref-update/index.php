@@ -132,11 +132,7 @@ function parseBlocks($blocks, $type) {
                 'type' => $block->type(),
             ];
 
-            // here newly added bid value is present
-            // var_dump(['block-updated', $blockUpdated]);
-
             $blockNew = new Kirby\Cms\Block($blockUpdated);
-            // var_dump($blockNew->layout()->toLayouts()->first());
             array_push($updatedBlocks, $blockNew);
 
         }
@@ -149,17 +145,11 @@ function parseBlocks($blocks, $type) {
 }
 
 
-// footnote insertion: add UUID for each footnote
-// <https://getkirby.com/docs/cookbook/templating/update-blocks-programmatically>
-// TODO change plugin name as we update also block->bid in here?
+// set block->bid and footnote ref across blocks
+// both values are generated as UUID
 Kirby::plugin('cosmo/footnote-ref', [
     'hooks' => [
         'page.update:after' => function ($newPage, $oldPage) {
-
-            // -- parse through block-text and replace <article-footnote>
-            //    with actual <a href"{ref}">{ref}</a>
-            //    as well as post-update footnote list ref element
-            //    with same {ref}; {ref} is a UUID generated for each footnote
 
             // check if builder blocks have either type -> text
             // or type -> columns, if the latter map down to find
