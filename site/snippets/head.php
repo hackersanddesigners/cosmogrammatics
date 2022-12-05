@@ -14,6 +14,8 @@
 
   <?= css([ 'assets/css/base.css', '@auto' ]) ?>
   <?= js([ '@auto' ], [ 'type'  => 'module' ]) ?>
+  <?= js([ 'assets/js/templates/article-bundle.js' ], [ 'type'  => 'module' ]) ?>
+  <?= js([ 'assets/js/text-highlight-bundle.js' ], [ 'type'  => 'module' ]) ?>
 
   <?php if ( isset( $skin ) ) {
     snippet( 'style/tag', [
