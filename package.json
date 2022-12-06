@@ -2,13 +2,12 @@
   "name": "cosmogrammatics",
   "version": "1.0.0",
   "scripts": {
-    "build-hl": "esbuild assets/js/text-highlight.js --bundle --outfile=assets/js/text-highlight-bundle.js",
-    "build": "esbuild assets/js/templates/article.js --bundle --outfile=assets/js/templates/article-bundle.js",
-    "watch-js": "node ./node_modules/watchify/bin/cmd.js assets/js/text-highlight.js --debug -o assets/js/text-highlight.min.js -v"
+    "watch": "watchify assets/js/templates/article.js --debug -o assets/js/templates/article.min.js -v",
+    "build": "browserify assets/js/templates/article.js -o assets/js/templates/article.min.js -p tinyify"
   },
   "dependencies": {
     "browserify": "^17.0.0",
-    "esbuild": "^0.15.18",
+    "tinyify": "^4.0.0",
     "watchify": "^4.0.0",
     "web-highlighter": "^0.7.4"
   }

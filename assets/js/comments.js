@@ -1,4 +1,3 @@
-
 function respond_comment( e ) {
   e.preventDefault()
 
@@ -124,7 +123,7 @@ function post_comment( comment ) {
 }
 
 
-export {
+module.exports = {
   respond_comment,
   post_comment
 }
