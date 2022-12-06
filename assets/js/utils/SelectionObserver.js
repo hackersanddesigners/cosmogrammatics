@@ -98,9 +98,55 @@ export default class SelectionObserver {
 
     }
 
+    function getNodePosition(obj) {
+
+      function getChildNodeIndex(child) {
+        // <https://stackoverflow.com/a/23528539>
+        // get index of child node
+        const parent = child.parentNode
+        const index = Array.prototype.indexOf.call(parent.children, child);
+
+        return index
+      }
+
+      console.log('getNodePosition =>', obj)
+
+      // check if start / end container are the same
+      const isSame = obj.startContainer.isEqualNode(obj.endContainer)
+      console.log('is-same =>', isSame);
+
+      if (isSame) {
+        // if the selection is on same node, it's probable
+        // it is on a #text node, check for that and go up one level,
+        // so we can get a proper node-child idx value
+        let child = null;
+        if (obj.startContainer.nodeType === 3) {
+          child = obj.startContainer.parentNode
+
+        } else {
+          child = obj
+        }
+
+        console.log('child =>', child)
+        const index = getChildNodeIndex(child)       
+        return index
+
+      } else {
+
+        // if text-selection spans two or more nodes
+
+        return 0
+      }
+
+    }
+
+    console.log(obj);
+
     let newObj = {
-      x1: getAbsoluteOffset(obj.startOffset, getContainerNodeName(obj.startContainer), 'start'),
-      x2: getAbsoluteOffset(obj.endOffset, getContainerNodeName(obj.endContainer), 'end'),
+      x1: getNodeOffset(obj),
+      x2: getNodeOffset(obj),
+      n: getContainerNodeName(obj.startContainer),
+      idx: getNodePosition(obj)
     }
 
     Object.freeze(newObj)
