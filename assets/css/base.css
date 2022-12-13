@@ -283,3 +283,7 @@ header form.collapsible:focus-within::after {
   border: unset;
   pointer-events: none;
 }
+
+.bgc-accent {
+    background-color: var(--accent);
+}
