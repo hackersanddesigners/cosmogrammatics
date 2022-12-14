@@ -53,6 +53,7 @@ function textHighlight(target, toolbar) {
 
     })
     .on(Highlighter.event.REMOVE, ({ids}) => {
+      // TODO implement remove action
       console.log('remove -', ids);
       // ids.forEach(id => store.remove(id));
     });
@@ -86,8 +87,8 @@ const createTag = (top, left, id) => {
 
 function toggle_toolbar(position, toolbar, sourceID, blockID) {
   const form = toolbar.querySelector('form')
-  form.setAttribute('data-selection-type', 'text')
-  form.setAttribute('data-selection-id', sourceID)
+  form.setAttribute('data-block-selection-type', 'text')
+  form.setAttribute('data-block-selection-text-id', sourceID)
   form.setAttribute('data-block-id', blockID)
 
   toolbar.classList.remove( 'hidden' )

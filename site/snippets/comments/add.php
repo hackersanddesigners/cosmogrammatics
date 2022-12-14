@@ -6,8 +6,8 @@
   data-block-id="<?= isset( $block ) ? $block->bid() : NULL ?>"
   data-article-slug="<?= $page->slug() ?>"
   data-csrf="<?= csrf() ?>"
-  data-selection-type="<?= $selection_type ?? NULL ?>"
-  data-selection-id=""
+  data-block-selection-type="<?= $selection_type ?? NULL ?>"
+  data-block-selection-text-id=""
 >
 
   <input

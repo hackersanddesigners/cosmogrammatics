@@ -31,7 +31,6 @@ class LocalStore {
         }
 
         data.forEach(store => {
-          console.log('store =>', store);
             // update
             if (map[store.id] !== undefined) {
                 stores[map[store.id]] = store;
@@ -61,6 +60,20 @@ class LocalStore {
         }
         stores.splice(index, 1);
         this.jsonToStore(stores);
+    }
+
+    getByID(id) {
+        const stores = this.storeToJson();
+        let index = null;
+        for (let i = 0; i < stores.length; i++) {
+          if (stores[i].id === id) {
+            index = i;
+            break;
+          }
+        }
+
+        const store = stores.find(s => s.id === id);
+        return store;
     }
 
     getAll() {

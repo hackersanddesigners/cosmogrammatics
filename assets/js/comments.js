@@ -1,3 +1,6 @@
+const LocalStore = require('./local.store')
+const store = new LocalStore()
+
 function respond_comment( e ) {
   e.preventDefault()
 
@@ -5,13 +8,13 @@ function respond_comment( e ) {
   const chilren = Array.from( form.children )
 
   post_comment({
-    csrf             : form.getAttribute( 'data-csrf' ),
-    article_slug     : form.getAttribute( 'data-article-slug' ),
-    block_id         : form.getAttribute( 'data-block-id' ),
-    selection_type   : form.getAttribute( 'data-block-selection-type' ),
-    selection_coords : window.selectionObserver.rangeOffset,
-    author           : chilren.find( c => c.name == 'author' ).value,
-    text             : chilren.find( c => c.name == 'body' ).value,
+    csrf              : form.getAttribute( 'data-csrf' ),
+    article_slug      : form.getAttribute( 'data-article-slug' ),
+    block_id          : form.getAttribute( 'data-block-id' ),
+    selection_type    : form.getAttribute( 'data-block-selection-type' ),
+    selection_text_id : form.getAttribute( 'data-block-selection-text-id' ),
+    author            : chilren.find( c => c.name == 'author' ).value,
+    text              : chilren.find( c => c.name == 'body' ).value,
   })
   .then( response => {
     if (response.status === 'ok') {
@@ -68,7 +71,6 @@ function make_comment( data ) {
 
 }
 
-
 function post_comment( comment ) {
 
   const {
@@ -76,10 +78,12 @@ function post_comment( comment ) {
     article_slug,
     block_id,
     selection_type,
-    selection_coords,
+    selection_text_id,
     author,
     text,
   } = comment
+
+  const selection_text = store.getByID(selection_text_id)
 
   const ts   = new Date().toISOString()
   const url  = `/api/pages/articles+${ article_slug }+comments`
@@ -94,7 +98,8 @@ function post_comment( comment ) {
       block_id: block_id,
       text: text,
       selection_type: selection_type,
-      selection_coords: selection_coords
+      selection_text: selection_text,
+      // selection_coords: selection_coords
     }
   }
 
