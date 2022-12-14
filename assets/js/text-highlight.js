@@ -16,6 +16,11 @@ function textHighlight(target, toolbar) {
 
   const store = new LocalStore();
 
+  // restore all highlights to Highlighter instance
+  store.getAll().forEach(hs => {
+    highlighter.fromStore(hs.startMeta, hs.endMeta, hs.text, hs.id)
+  });
+
   // except for the CREATE event
   // any other event is triggered when interacting
   // with an existing selection span
