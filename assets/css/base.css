@@ -36,7 +36,7 @@
   --header-child-collapsed-width: var(--header-height);
   --header-child-expanded-width: calc(  var(--main-width) - var(--header-height) );
   --main-width: min( 100vw, 50rem );
-  --side-width: min( 100%, 15rem );
+  --side-width: min( 100vw, 15rem );
 
   --form-base-height: 2.5rem;
   --form-base-width: 6rem;

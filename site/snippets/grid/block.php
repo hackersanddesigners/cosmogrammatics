@@ -10,14 +10,13 @@
   if ( $block->type() == 'page_embed' ) {
       if ($link = $block->pageurl()->toLinkObject()) {
           if ($pageEmbed = page($link->value())) {
-              $page_id   = 'p_' . $pageEmbed->slug();
-              $page_skin = [
-                  'colors' => $pageEmbed->colors()->toEntity(),
-                  'fonts'  => $pageEmbed->fonts()->toEntity(),
-                  'rules'  => $pageEmbed->css()->toStructure(),
-                  'prefix' => $page_id
-              ];
-              snippet( 'style/tag', $page_skin );
+              $page_id = 'p_' . $pageEmbed->slug();
+              snippet( 'style/tag', [
+                'colors' => $pageEmbed->colors()->toEntity(),
+                'fonts'  => $pageEmbed->fonts()->toEntity(),
+                'rules'  => $pageEmbed->css()->toStructure(),
+                'prefix' => $page_id
+            ] );
           }
       }
   }
@@ -42,8 +41,11 @@
 
   <aside>
     <?php snippet( 'comments/index', [
-      'block'   => $block,
-     'threads' => $threads
+      'block'     => $block,
+      'threads'   => $threads
+    ]) ?>
+    <?php snippet( 'footnotes/index', [
+      'footnotes' => $block->footnotes()->toStructure()
     ]) ?>
   </aside>
 

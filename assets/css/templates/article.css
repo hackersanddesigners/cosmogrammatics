@@ -117,17 +117,30 @@ main .block.page_embed a h1 {
 }
 
 main .row .column .block aside {
-  position: absolute;
-  max-width: 15rem;
-  top: 1rem;
   --n: 1;
-  --df : calc( 1 - var(--cw) * var(--n) );
+  --df: calc( 1 - var(--cw) * var(--n) );
+  position: absolute;
+  top: 1rem;
   left : calc( var(--col-width) + 1rem + var(--df) * var(--main-width));
-  width: var(--side-width);
   z-index: 1;
   border-radius: calc( var(--header-height) / 4);
   transition: left var(--fast) var(--linear);
+  display: flex;
+  align-items: flex-start;
 }
+
+main .row .column .block aside .notes,
+main .row .column .block aside .comments {
+  border-radius: inherit;
+  min-width: var(--side-width);
+}
+
+main .row .column .block aside .notes {
+  /* background-color: var(--back); */
+  padding: 1rem;
+}
+
+
 
 main .row .column:nth-of-type(1) .block aside { --n: 1 }
 main .row .column:nth-of-type(2) .block aside { --n: 2 }
@@ -135,7 +148,6 @@ main .row .column:nth-of-type(3) .block aside { --n: 3 }
 main .row .column:nth-of-type(4) .block aside { --n: 4 }
 main .row .column:nth-of-type(5) .block aside { --n: 5 }
 main .row .column:nth-of-type(6) .block aside { --n: 6 }
-
 
 main .row .column .block aside .thread {
   border-radius: inherit;
@@ -303,20 +315,21 @@ main .notes.column[data-col-width="1/1"] {
   width: 100%;
 }
 
-.notes ol {
+ol.notes {
     padding-left: 0;
     display: inline-table;
     list-style: none;
+    margin: 0;
 }
 
-.notes ol li {
+ol.notes li {
     padding: 0.5rem;
     display: table-row;
     counter-increment: number-list;
     font-family:  var(--footnotes);
 }
 
-.notes ol li::before {
+ol.notes li::before {
     content: counter(number-list) '.';
     display: table-cell;
     text-align: right;
@@ -324,14 +337,14 @@ main .notes.column[data-col-width="1/1"] {
     width: 1.5rem;
 }
 
-.notes ol li:target {
+ol.notes li:target {
   outline-color: var(--accent);
   outline-offset: 3px;
   outline-style: solid;
   outline-width: 2px;
 }
 
-.notes ol li p {
+ol.notes li p {
     margin: 0;
     padding: 0.25rem;
     display: inline;
