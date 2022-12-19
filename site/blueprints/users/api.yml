@@ -3,7 +3,7 @@ description: User with APIs control of the website
 
 permissions:
   access:
-    panel: false
+    panel: true
     site: true
     settings: false
   site:
