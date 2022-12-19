@@ -5,7 +5,7 @@ Kirby::plugin('cosmo/article-comments', [
         'routes' => function ($kirby) {
             return [
                 [
-                    'pattern' => 'cosmo/(:alphanum)',
+                    'pattern' => 'cosmo/(:any)',
                     'action' => function ($alphanum) use ($kirby) {
 
                         $article_path = 'articles/' . $alphanum . '/comments';
