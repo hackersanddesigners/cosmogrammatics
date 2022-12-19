@@ -1,4 +1,4 @@
-const fetchArticleHighlightsFromAPI = require('../fetch-article-highlights-from-API')
+const fetchArticleHighlightsFromAPI = require('../fetch-article-highlights-from-api')
 const textHighlight = require('../text-highlight')
 const { respond_comment, post_comment } = require('../comments')
 
