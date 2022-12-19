@@ -56,9 +56,6 @@ content
 kirby
 vendor
 
-.env
-*.sqlite
-
 */fonts/*
 
 *.mjs
