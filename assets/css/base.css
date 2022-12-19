@@ -38,8 +38,8 @@
   --main-width: min( 100%, 50rem );
   --side-width: min( 100%, 15rem );
 
-  --form-base-height: 2rem;
-  --form-base-width: 2rem;
+  --form-base-height: 2.5rem;
+  --form-base-width: 6rem;
   --form-expanded-height: 8rem;
   --form-expanded-width: var(--side-width);
 

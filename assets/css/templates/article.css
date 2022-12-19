@@ -202,7 +202,7 @@ main form.comment_form {
   height: 100%; */
   display: none;
   overflow: hidden;
-  color: transparent;
+  /* color: transparent; */
 }
 
 main form.comment_form input {

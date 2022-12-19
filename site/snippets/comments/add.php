@@ -12,7 +12,7 @@
 
   <input
     type="text"
-    placeholder="reply..."
+    placeholder="comment..."
     name="body"
   />
 
