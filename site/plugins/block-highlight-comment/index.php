@@ -5,29 +5,49 @@ use Kirby\Cms\Collection;
 use Kirby\Exception\PermissionException;
 
 
-function wrapSelectedText ($text_in, $offset, $id) {
+
+// -- utils
+function adjust_offset ($n, $x) {
+    $x_container = ((2 + $n) + (3 + $n));
+    return $x_container + $x;
+};
+
+function wrapSelectedText ($text_in, $comment_offsets, $id) {
     // split text using given offset from text-selection
     // and wrap this text selection around an extra pair of tags
     // (for now <span>{}</span>)
     // => TODO check if wrap operation is done already
 
-    // $left_side = str_slice($text_in, 0, $offset['x1']);
-    // $center_side = str_slice($text_in, $offset['x1'], $offset['y1']);
-    // $right_side = str_slice($text_in, $offset['y1']);
+    // each new item in the offset array works on a new `<t>` tag
 
-    // $wrap_before = '<span class="comment-highlight" id="' . $id .'" >';
-    // $wrap_after = '</span>';
+    $text = str_replace('</p>', '', $text_in);
+    $p_list = Str::split($text, '<p>');
+    // dump($p_list);
 
-    // check if wrapping is done already
-    // if (Str::startsWith($left_side, $wrap_before)
-    //     OR Str::startsWith($right_side, $wrap_after)) {
-    //         return $text_in;
-    // };
-    // $text_out = $text_in;
+    foreach($comment_offsets as $key => $value) {
+        // dump([$key, $value]);
+        // $left_side = str_slice($text_in, 0, $value['x1']);
+        // $center_side = str_slice($text_in, $value['x1'], $value['x2']);
+        // $right_side = str_slice($text_in, $value['x2']);
 
-    // $text_out = $left_side . $wrap_before . $center_side . $wrap_after . $right_side;
+        // $wrap_before = '<span class="comment-highlight" id="' . $id .'" >';
+        // $wrap_after = '</span>';
 
-    // return $text_out;
+        // // check if wrapping is done already
+        // if (Str::startsWith($left_side, $wrap_before)
+        //     OR Str::startsWith($right_side, $wrap_after)) {
+        //         return $text_in;
+        // };
+        // $text_out = $text_in;
+
+        // $text_out = $left_side . $wrap_before . $center_side . $wrap_after . $right_side;
+
+        // dump([$left_side, $center_side, $right_side]);
+
+    }
+
+    return $text_in;
+
 }
 
 // <https://stackoverflow.com/a/53985015>
@@ -164,7 +184,8 @@ function parseBlockSelection($blocks, $block_bid, $comments, $offset, $type) {
 }
 
 
-
+// -- manipulate block content to add extra spans to highlight
+//    specified content in the offset
 Kirby::plugin('cosmo/block-highlight-comment', [
     'blockMethods' => [
         // setup custom thread method
@@ -184,9 +205,25 @@ Kirby::plugin('cosmo/block-highlight-comment', [
 
                 foreach( $block_comments as $block_comment ) {
 
-                    $type   = $block_comment->selection_type();
+                    $type = $block_comment->selection_type();
                     $coords = $block_comment->selection_coords();
-                    $id     = $this->bid() . '_sel_' . $type . $coords ;
+
+                    $coord_label = [];
+                    foreach($coords->toStructure() as $coord) {
+                        $label = '';
+                        
+                        if ($type == 'text') {
+                            $label = $coord->x1()->value() . '-' . $coord->x2()->value();
+                        } else if ($type == 'audio') {
+                            $label = $coord->t1()->value() . '-' . $coord->t2()->value();
+                        }
+
+                        array_push($coord_label, $label);
+                    };
+                    $coord_id = join("_", $coord_label);
+                    $id = $this->bid() . '_sel_' . $type . '-' . $coord_id;
+
+                    // dump(['id', $id]);
 
                     // first, check if thread has already been created.
                     // It can be uniquely identified by its selection type
@@ -230,12 +267,14 @@ Kirby::plugin('cosmo/block-highlight-comment', [
             // original text content of the block
 
             $updated = $this;
-            $text_in = $this->text();
+            $text_in = parent::text(); 
 
+            $comment_offsets = [];
             foreach ( $threads as $thread ) {
 
                 // if a selection exists and the thread does not target
                 // the block as a whole
+
 
                 if (
                     $thread['selection_type']->value() &&
@@ -245,11 +284,11 @@ Kirby::plugin('cosmo/block-highlight-comment', [
                     // We get the coordinate values in a format that is
                     // compatible with andré's wrapSelectedText method.
 
-                    $id     = $thread['selection_id'];
+                    $id = $thread['selection_id'];
                     // $coords = $thread['selection_coords']->toEntity();
                     $coords = $thread['selection_coords']->toStructure();
 
-                    // if selecting text across two or more DOM nodes
+                    // when selecting text across two or more DOM nodes
                     // we'll have two selection-coords entries
                     // (eg the offset will be broken down in two parts
                     // that we need to combine back)
@@ -259,63 +298,51 @@ Kirby::plugin('cosmo/block-highlight-comment', [
                     // by combining eventual two or more parts
                     // offset chunks
 
-                    $offset = [];
-                    $MULTIPLE_OFFSET = $coords->count() > 1;
-
-                    // dump([$coords->first()->n1()->html()->value(),
-                    //       $coords->first()->n1()->html()->length()]);
-
+                    // IS THIS DATA STRUCTURE NECESSARY?
                     foreach($coords as $coord) {
                         // offset values are counted w/o taking into
                         // account the node tag characters, let's do that
+                        // eg `<p>{...}<\p>`, we only have `p` in this case
+                        // and not the brackets; somehow kirby doesn't print
+                        // correctly the full HTML tag, though it can store it
+                        // just fine.
 
-                        $x1_container = (
-                            (2 + $coord->n1()->length()) + (3 + $coord->n2()->length())
-                        );
+                        $x1 = $coord->x1()->value();
+                        $x2 = $coord->x2()->value();
 
-                        $x1_offset = $coord->x1()->value();
-
-                        dump([$x1_container,
-                              $x1_offset]);
-
-                        $offset['x1'] = $x1_container + $x1_offset;
-
-                        // $offset['x1'] = $coord->x1()->value();
-                        // $offset['x2'] = $coord->x2()->value();
+                        array_push($comment_offsets, [
+                            'x1' => $x1,
+                            'x2' => $x2,
+                        ]);
                     };
-
-                    dump($offset);
-                    
-                    // $offset = [
-                    //     'x1' => $coords->x1()->value(),
-                    //     'y1' => $coords->y1()->value()
-                    // ];
-
-                    // We create a new block, with updated text content
-                    // that has been highlighted with the selection from
-                    // this thread of comments.
-
-                    // var_dump([$coords, $offset]);
-                    
-                    $updated = new Kirby\Cms\Block([
-                        'type' => $this->type(),
-                        'content' => [
-                            'text'      => wrapSelectedText( $text_in, $offset, $id ),
-                            'footnotes' => $this->footnotes()->toArray(),
-                        ]
-                    ]);
-
-                    // and most important: we reset $text_in to be the
-                    // text value of the newly updated block, so we are
-                    // incrementing each loop with the new contents.
-
-                    $text_in = $updated->text();
-
                 }
             }
 
+            // We create a new block, with updated text content
+            // that has been highlighted with the selection from
+            // this thread of comments.
+
+            // $text_updated = wrapSelectedText( $text_in, $offsets, $id );
+
+            // $updated = new Kirby\Cms\Block([
+            //     'type' => $this->type(),
+            //     'content' => [
+            //         'text' => $text_in,
+            //         'footnotes' => $this->footnotes()->toArray(),
+            //     ]
+            // ]);
+
+            // and most important: we reset $text_in to be the
+            // text value of the newly updated block, so we are
+            // incrementing each loop with the new contents.
+            // this bugs out the data structure
+            // $text_in = $updated->text();
 
 
+            $text_updated = wrapSelectedText( $text_in->toString(), $comment_offsets, '' );
+
+            // dump($comment_offsets);
+ 
             return $updated;
         }
 

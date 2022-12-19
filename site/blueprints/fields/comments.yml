@@ -94,11 +94,7 @@ fields:
         type: number
         width: 1/2
       n1:
-        label: Node element 1
-        type: text
-        width: 1/2
-      n2:
-        label: Node element 2
+        label: Node element 
         type: text
         width: 1/2
       t1:
