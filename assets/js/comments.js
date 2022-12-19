@@ -83,6 +83,7 @@ function post_comment( comment ) {
     text,
   } = comment
 
+  // grab text-selection from localStorage
   const selection_text = store.getByID(selection_text_id)
 
   const ts   = new Date().toISOString()

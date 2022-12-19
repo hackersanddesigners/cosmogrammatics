@@ -2,7 +2,7 @@ const textHighlightMergeUnique = require('./text-highlights-merge-unique')
 
 async function fetchArticleHighlightsFromAPI(article_slug) {
   const csrf = document.querySelector('.toolbar > form').getAttribute('data-csrf')
-  
+ 
   const url = `/api/cosmo/${ article_slug }`
   return fetch(url, {
     method: "GET",
@@ -17,7 +17,7 @@ async function fetchArticleHighlightsFromAPI(article_slug) {
 
   })
   .catch(error => {
-    console.log('fetchArticleHighlightsFromAPI =>', error)
+    return []
   });
 
 }
