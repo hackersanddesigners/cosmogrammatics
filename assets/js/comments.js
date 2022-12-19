@@ -32,7 +32,7 @@ function respond_comment( e ) {
       thread.insertBefore(article, form)
 
       // update comment count
-      const comment_count = $('#comment_count')
+      const comment_count = document.querySelector('#comment_count')
       comment_count.innerHTML = new Number( comment_count.innerHTML ) + 1
 
       article.focus()
