@@ -13,7 +13,6 @@
   <meta name="description" content="">
 
   <?= css([ 'assets/css/base.css', '@auto' ]) ?>
-  <?= js([ 'assets/js/templates/article.min.js' ], [ 'type'  => 'module' ]) ?>
 
   <?php if ( isset( $skin ) ) {
     snippet( 'style/tag', [
