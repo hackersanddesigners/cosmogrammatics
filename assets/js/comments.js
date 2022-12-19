@@ -1,3 +1,4 @@
+import { $ } from "./utils/index.js"
 
 function respond_comment( e ) {
   e.preventDefault()
@@ -15,9 +16,9 @@ function respond_comment( e ) {
     text             : chilren.find( c => c.name == 'body' ).value,
   })
   .then( response => {
-    if (response.status === 'ok') {
+    if ( response.status === 'ok' ) {
 
-      // -- form: reset and hide form
+      // f  orm: reset and hide form
       form.reset()
       form.blur()
 
@@ -28,6 +29,10 @@ function respond_comment( e ) {
       // before <form> (blue circle)
       const thread = form.parentNode
       thread.insertBefore(article, form)
+
+      // update comment count
+      const comment_count = $('#comment_count')
+      comment_count.innerHTML = new Number( comment_count.innerHTML ) + 1
 
       article.focus()
 
@@ -45,6 +50,7 @@ function make_comment( data ) {
 
   // -- footer
   const footer = document.createElement('footer')
+  footer.classList.add( 'small_italic' )
   const date = document.createElement('p')
   const timestamp = document.createElement('time')
   // TODO set correct datetime format for timestamp `yyyy-mm-dd hh:mm:ss`

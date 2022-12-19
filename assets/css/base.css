@@ -23,7 +23,7 @@
   --gridshadow: 0 0 0 1px var(--grid);
 
   /* speeds */
-  --fast: 200ms;
+  --fast: 100ms;
 
   /* timing functions */
   --linear: linear;
@@ -35,11 +35,11 @@
   --header-height: 5rem;
   --header-child-collapsed-width: var(--header-height);
   --header-child-expanded-width: calc(  var(--main-width) - var(--header-height) );
-  --main-width: min( 100%, 50rem );
+  --main-width: min( 100vw, 50rem );
   --side-width: min( 100%, 15rem );
 
-  --form-base-height: 2rem;
-  --form-base-width: 2rem;
+  --form-base-height: 2.5rem;
+  --form-base-width: 6rem;
   --form-expanded-height: 8rem;
   --form-expanded-width: var(--side-width);
 

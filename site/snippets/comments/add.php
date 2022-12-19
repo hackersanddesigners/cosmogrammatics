@@ -12,21 +12,26 @@
 
   <input
     type="text"
-    placeholder="reply..."
+    placeholder="comment..."
     name="body"
+    required
   />
 
   <input
     type="text"
     placeholder="author"
     name="author"
+    required
   />
 
-  <label for="comment_input">
-  </label>
-    <p>Press ENTER to post.</p>
   <input
+    name="post_comment"
     type="submit"
     value="post"
   />
+
+  <label for="post_comment">
+    <p class="small_italic">Press ENTER to post.</p>
+  </label>
+
 </form>

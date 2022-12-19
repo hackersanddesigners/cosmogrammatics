@@ -38,42 +38,42 @@ main > .row {
 }
 
 main .row .column {
+  --cw : 1;
   width: 100%;
-  max-width: var(--main-width);
+  --col-width: calc( var(--cw) * var(--main-width) );
+  max-width: var(--col-width);
 }
 
 
 
-main .row .column[data-col-width="1/1"] {
-  max-width: calc( var(--main-width) / 1 );
-}
-main .row .column[data-col-width="1/2"] {
-  max-width: calc( var(--main-width) / 2 );
-}
-main .row .column[data-col-width="1/3"] {
-  max-width: calc( var(--main-width) / 3 );
-}
-main .row .column[data-col-width="1/4"] {
-  max-width: calc( var(--main-width) / 4 );
-}
-main .row .column[data-col-width="1/5"] {
-  max-width: calc( var(--main-width) / 5 );
-}
-main .row .column[data-col-width="1/6"] {
-  max-width: calc( var(--main-width) / 6 );
-}
+main .row .column[data-col-width="1/1"] { --cw : calc( 1 / 1 ) }
+main .row .column[data-col-width="1/2"] { --cw : calc( 1 / 2 ) }
+main .row .column[data-col-width="1/3"] { --cw : calc( 1 / 3 ) }
+main .row .column[data-col-width="1/4"] { --cw : calc( 1 / 4 ) }
+main .row .column[data-col-width="1/5"] { --cw : calc( 1 / 5 ) }
+main .row .column[data-col-width="1/6"] { --cw : calc( 1 / 6 ) }
 
 
 main .block {
-  /* border: var(--grid); */
-  /* border-bottom: none; */
   background-color: var(--back);
   color: var(--fore);
   box-shadow:var(--gridshadow);
   padding: 0.5rem;
-  /* height: 100%; */
-  /* padding-block: 0rem; */
 }
+
+main .block::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--back);
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
+  /* transition: opacity var(--fast) var(--linear); */
+}
+
 
 /* if a block will contain a nested alyopuit inside it, remvoe padding */
 main .block.columns {
@@ -120,15 +120,22 @@ main .row .column .block aside {
   position: absolute;
   max-width: 15rem;
   top: 1rem;
-  right: calc( -1 * var(--side-width) - 1rem );
+  --n: 1;
+  --df : calc( 1 - var(--cw) * var(--n) );
+  left : calc( var(--col-width) + 1rem + var(--df) * var(--main-width));
   width: var(--side-width);
   z-index: 1;
   border-radius: calc( var(--header-height) / 4);
+  transition: left var(--fast) var(--linear);
 }
 
-main .row .column .block.columns .block aside {
-  /* right: -14rem; */
-}
+main .row .column:nth-of-type(1) .block aside { --n: 1 }
+main .row .column:nth-of-type(2) .block aside { --n: 2 }
+main .row .column:nth-of-type(3) .block aside { --n: 3 }
+main .row .column:nth-of-type(4) .block aside { --n: 4 }
+main .row .column:nth-of-type(5) .block aside { --n: 5 }
+main .row .column:nth-of-type(6) .block aside { --n: 6 }
+
 
 main .row .column .block aside .thread {
   border-radius: inherit;
@@ -139,11 +146,15 @@ main .row .column .block aside .thread {
 
 main .row .column .block aside article {
   padding: 1rem;
-  background-color: rgb(251, 233, 255);
-  box-shadow: 0 0 1rem 0 rgb(251, 233, 255);
+  background-color: var(--accent);
+  box-shadow: 0 0 1rem 0 var(--accent);
   margin-bottom: 1rem;
   font-family: var(--comments);
   border-radius: inherit;
+}
+
+main .row .column .block aside article footer {
+  margin-top: 0.5rem;
 }
 
 /* main .row .column .block:not(.columns):focus-within,
@@ -163,19 +174,11 @@ main .row .column .block:focus-within {
 
 
 main .row .column .block:focus-within::before {
-  content: '';
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--back);
   opacity: 0.5;
-  z-index: 0;
-  pointer-events: none;
 }
 
 main .row .column .block:focus-within > aside  {
-  /* right: calc( -1 * var(--side-width) ); */
+  left : calc( var(--col-width) + 1rem );
 }
 
 aside p {
@@ -193,7 +196,7 @@ section .highlight {
 /* comment form */
 
 main form.comment_form {
-  background-color: var(--grid);
+  background-color: var(--accent);
   max-height: var(--form-base-height);
   max-width: var(--form-base-width);
   border-radius: calc( var(--header-height) / 4);
@@ -202,26 +205,39 @@ main form.comment_form {
   height: 100%; */
   display: none;
   overflow: hidden;
-  color: transparent;
+  /* color: transparent; */
+  box-shadow: 0 0 2rem 0 var(--accent);
+  font-family: var(--comments);
+
 }
 
 main form.comment_form input {
   margin: 0.25rem;
-}
-main form.comment_form input[type="text"] {
+  font-family: inherit;
+  width: calc( 100% - 0.5rem );
+  outline-color: var(--grid);
   background-color: inherit;
-  width: calc(100% - 0.5rem);
-  border: unset;
+  /* border: 3px solid var(--grid); */
   padding: 0.25rem;
   color: inherit;
   border-radius: inherit;
 }
-main form.comment_form p {
+main form.comment_form input[type="text"] {
+  border: unset;
+}
+main form.comment_form input[type="submit"] {
+  display: none;
+}
+
+main .small_italic {
   font-size: 0.7rem;
   font-style: italic;
   font-family: var(--comments);
+  line-height: 1;
   opacity: 0.7rem;
-  margin: 0;
+}
+main form.comment_form label p {
+  margin-inline: 0.5rem;
 }
 
 
