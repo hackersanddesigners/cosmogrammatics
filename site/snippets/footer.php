@@ -14,7 +14,9 @@
   }
   ?>
 
-  <?= js([ 'assets/js/templates/article.min.js' ], [ 'type'  => 'module', 'defer' => true ]) ?>
+  <?php if ($page->intendedTemplate() == 'article') {
+    echo js([ 'assets/js/templates/article.min.js' ], [ 'type'  => 'module', 'defer' => true ]);
+  } ?>
 
   <p class="copyright"><?= $site->copyright()->html() ?></p>
 </footer>
