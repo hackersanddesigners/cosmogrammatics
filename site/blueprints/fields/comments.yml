@@ -32,6 +32,46 @@ fields:
       video: Video
     width: 1/2
 
+
+  # selection_text:
+  #   label: Selection text
+  #   type: object
+  #   fields:
+  #     id:
+  #       label: ID
+  #       type: text
+  #     endmeta:
+  #       label: end meta
+  #       type: object
+  #       fields:
+  #         parentindex:
+  #           label: parent index
+  #           type: number
+  #         parenttagname:
+  #           label: parent tag name
+  #           type: text
+  #         textoffset:
+  #           label: text offset
+  #           type: number
+  #     startmeta:
+  #       label: start meta
+  #       type: object
+  #       fields:
+  #         parentindex:
+  #           label: parent index
+  #           type: number
+  #         parenttagname:
+  #           label: parent tag name
+  #           type: text
+  #         textoffset:
+  #           label: text offset
+  #           type: number
+  #     text:
+  #       label: Text
+  #       type: text 
+
+     
+
   selection_coords:
     label: Selection coordinates
     # type: entity
