@@ -45,6 +45,7 @@ function make_comment( data ) {
 
   // -- footer
   const footer = document.createElement('footer')
+  footer.classList.add( 'small_italic' )
   const date = document.createElement('p')
   const timestamp = document.createElement('time')
   // TODO set correct datetime format for timestamp `yyyy-mm-dd hh:mm:ss`

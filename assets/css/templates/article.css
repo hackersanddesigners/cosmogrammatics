@@ -146,6 +146,10 @@ main .row .column .block aside article {
   border-radius: inherit;
 }
 
+main .row .column .block aside article footer {
+  margin-top: 0.5rem;
+}
+
 /* main .row .column .block:not(.columns):focus-within,
 main .row .column .block:not(.columns):focus-within aside article,
 main .row .column .block:not(.columns) aside article:focus-within { */
@@ -203,25 +207,38 @@ main form.comment_form {
   display: none;
   overflow: hidden;
   /* color: transparent; */
+  box-shadow: 0 0 2rem 0 var(--accent);
+  font-family: var(--comments);
+
 }
 
 main form.comment_form input {
   margin: 0.25rem;
-}
-main form.comment_form input[type="text"] {
+  font-family: inherit;
+  width: calc( 100% - 0.5rem );
+  outline-color: var(--grid);
   background-color: inherit;
-  width: calc(100% - 0.5rem);
-  border: unset;
+  /* border: 3px solid var(--grid); */
   padding: 0.25rem;
   color: inherit;
   border-radius: inherit;
 }
-main form.comment_form p {
+main form.comment_form input[type="text"] {
+  border: unset;
+}
+main form.comment_form input[type="submit"] {
+  display: none;
+}
+
+main .small_italic {
   font-size: 0.7rem;
   font-style: italic;
   font-family: var(--comments);
+  line-height: 1;
   opacity: 0.7rem;
-  margin: 0;
+}
+main form.comment_form label p {
+  margin-inline: 0.5rem;
 }
 
 

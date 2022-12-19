@@ -40,9 +40,11 @@
     } ?>
   </div>
 
-  <?php snippet( 'comments/index', [
-    'block'   => $block,
-    'threads' => $threads
-  ]) ?>
+  <aside>
+    <?php snippet( 'comments/index', [
+      'block'   => $block,
+     'threads' => $threads
+    ]) ?>
+  </aside>
 
 </section>
