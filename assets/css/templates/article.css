@@ -174,7 +174,7 @@ main .row .column .block:focus-within {
 
 
 main .row .column .block:focus-within::before {
-  opacity: 0.5;
+  opacity: 0.75;
 }
 
 main .row .column .block:focus-within > aside  {

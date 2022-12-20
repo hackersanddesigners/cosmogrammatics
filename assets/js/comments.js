@@ -19,7 +19,7 @@ function respond_comment( e ) {
   .then( response => {
     if ( response.status === 'ok' ) {
 
-      // f  orm: reset and hide form
+      // form: reset and hide form
       form.reset()
       form.blur()
 
@@ -28,8 +28,24 @@ function respond_comment( e ) {
 
       // append new comment to comment thread
       // before <form> (blue circle)
-      const thread = form.parentNode
-      thread.insertBefore(article, form)
+
+      let thread
+
+      // first check if the form is the toolbar form
+      const form_parent = form.parentNode
+      if ( form_parent.classList.contains( 'toolbar' ) ) {
+        // make a new comment thread for this block
+        thread = make_comment_thread( form )
+        const block_id = form.getAttribute( 'data-block-id' )
+        const block = document.getElementById( block_id )
+        const aside = block.querySelector( 'aside' )
+        const thread_form = Array.from( thread.children )[0]
+        thread.insertBefore( article, thread_form )
+        aside.appendChild( thread )
+      } else {
+        thread = form_parent
+        thread.insertBefore(article, form)
+      }
 
       // update comment count
       const comment_count = document.querySelector('#comment_count')
@@ -41,6 +57,14 @@ function respond_comment( e ) {
   })
 }
 
+
+function make_comment_thread( form ) {
+  const thread = document.createElement( 'section' )
+  thread.classList.add( 'thread' )
+  const thread_form = form.cloneNode( true )
+  thread.appendChild( thread_form )
+  return thread
+}
 
 function make_comment( data ) {
 
