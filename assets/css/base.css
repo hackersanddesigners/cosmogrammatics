@@ -6,6 +6,9 @@
 :root {
 
   /* colors */
+
+  --black: black;
+  --light-red: rgb(252, 97, 86);
   --back: white;
   --fore: black;
   --accent: rgb(222, 199, 227);

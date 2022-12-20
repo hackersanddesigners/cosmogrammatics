@@ -406,7 +406,3 @@ main .notes.column[data-col-width="1/1"] {
 #editor_toolbar h3 {
   margin: 0;
 }
-
-#editor_toolbar.hidden {
-  display: none;
-}
