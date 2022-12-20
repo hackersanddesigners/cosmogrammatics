@@ -141,7 +141,12 @@ main .row .column .block aside .thread {
   border-radius: inherit;
   margin-bottom: 1rem;
   z-index: 1;
+}
 
+main .row .column .block aside .thread.new {
+  position: sticky;
+  top: var(--top);
+  left: var(--left);
 }
 
 main .row .column .block aside article {

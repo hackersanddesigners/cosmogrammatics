@@ -4,6 +4,7 @@ const {
   respond_comment,
   make_comment_el,
   make_comment_thread_el,
+  make_comment_form_el,
 } = require('./comments.js')
 
 // <https://github.com/alienzhou/web-highlighter/blob/master/example/index.js>
@@ -51,14 +52,22 @@ function textHighlight(target, toolbar) {
 
       // what to do if sources is > 1 and we need to position the comment toolbar?
       // pick last source in the list?
-      if (sources.length) {
+
+      if ( sources.length ) {
         let source = sources[0]
         const selectionNode = highlighter.getDoms(source.id)[0]
-        const position = getToolbarPosition(selectionNode);
-
-        const blockID = getBlockID(selectionNode)
-        toggle_toolbar(position, toolbar, source.id, blockID)
+        const block         = selectionNode.closest( 'section .block' )
+        const block_id      = getBlockID( block )
+        const aside         = block.querySelector( 'aside' )
+        const template_form = aside.querySelector( '.thread form' )
+        const form          = make_comment_form_el( template_form, source.id, block_id )
+        const position      = get_position(selectionNode)
+        const thread        = make_comment_thread_el( form, position )
+        aside.appendChild( thread )
+        form.firstElementChild.focus()
         store.save(sources)
+
+        // toggle_toolbar(position, toolbar, source.id, block_id)
       }
 
     })
@@ -71,9 +80,7 @@ function textHighlight(target, toolbar) {
   highlighter.run();
 }
 
-function getBlockID(node) {
-  const block = node.closest('section .block')
-
+function getBlockID( block ) {
   if (block !== undefined && block !== null) {
     if (block.id) {
       return block.id
@@ -118,12 +125,11 @@ function getPosition($node) {
     offset.left += $node.offsetLeft;
     $node = $node.offsetParent;
   }
-
   return offset;
 }
 
 
-function getToolbarPosition(node) {
+function get_position(node) {
   let offset = {
     top: 0,
     left: 0

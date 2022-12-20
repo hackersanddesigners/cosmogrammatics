@@ -3,7 +3,6 @@ const store = new LocalStore()
 
 function respond_comment( e ) {
   e.preventDefault()
-
   const form    = e.target
   const comment = make_comment( form, store )
   post_comment( comment )
@@ -26,7 +25,7 @@ function respond_comment( e ) {
       const form_parent = form.parentNode
       if ( form_parent.classList.contains( 'toolbar' ) ) {
         // make a new comment thread for this block
-        thread = make_comment_thread_el( form )
+        thread = make_comment_thread_el( form.cloneNode( true ) )
         const block_id = form.getAttribute( 'data-block-id' )
         const block = document.getElementById( block_id )
         const aside = block.querySelector( 'aside' )
@@ -81,12 +80,23 @@ function save_comment( comment ) {
 
 }
 
-function make_comment_thread_el( form ) {
+function make_comment_thread_el( form, position ) {
   const thread = document.createElement( 'section' )
   thread.classList.add( 'thread' )
-  const thread_form = form.cloneNode( true )
-  thread.appendChild( thread_form )
+  thread.classList.add( 'new' )
+  thread.appendChild( form )
+  thread.style.setProperty( '--top', position.top + 'px' )
+  thread.style.setProperty( '--left', position.left + 'px' )
   return thread
+}
+
+function make_comment_form_el( template_form, source_id, block_id, position ) {
+  const form = template_form.cloneNode( true )
+  form.setAttribute('data-block-selection-type', 'text')
+  form.setAttribute('data-block-selection-text-id', source_id )
+  form.setAttribute('data-block-id', block_id )
+  form.onsubmit = respond_comment
+  return form
 }
 
 function make_comment_el( data ) {
@@ -155,5 +165,9 @@ function post_comment( comment ) {
 
 module.exports = {
   respond_comment,
-  post_comment
+  post_comment,
+  make_comment_el,
+  make_comment_thread_el,
+  make_comment_form_el,
+
 }
