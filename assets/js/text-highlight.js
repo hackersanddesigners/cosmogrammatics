@@ -47,7 +47,7 @@ function textHighlight(target, toolbar) {
       // what to do if sources is > 1 and we need to position the comment toolbar?
       // pick last source in the list?
       if (sources.length) {
-        let source = sources[sources.length -1]
+        let source = sources[0]
         const selectionNode = highlighter.getDoms(source.id)[0]
         const position = getToolbarPosition(selectionNode);
 
