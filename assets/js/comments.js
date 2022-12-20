@@ -31,9 +31,6 @@ function respond_comment( e ) {
   const thread = form.parentNode
   thread.insertBefore(article, form)
 
-  // update comment count
-  update_own_comment_count()
-
   // set name of author in UI and comments if changed
   const submitted_name = comment.content.user
   const existing_name  = window.commenting_state.author
@@ -72,7 +69,6 @@ function disable_commenting_state() {
   const post_button = editor_toolbar.lastElementChild
   post_button.setAttribute( 'disabled', true )
   editor_toolbar.onsubmit = null
-  update_own_comment_count()
   editor_toolbar.classList.add( 'hidden' )
 }
 
@@ -104,6 +100,14 @@ function set_author_name( author ) {
 
 function save_comment( comment ) {
   window.commenting_state.comments[comment.slug] = comment
+  update_own_comment_count()
+}
+
+function delete_comment( slug ) {
+  delete window.commenting_state.comments[slug]
+  const comment_el = document.getElementById( slug )
+  comment_el.parentElement.removeChild( comment_el )
+  update_own_comment_count()
 }
 
 async function post_comments( e ) {
@@ -157,7 +161,7 @@ function make_comment( form, store ) {
   const text              = chilren.find( c => c.name == 'body' ).value
   const ts                = new Date().toISOString()
   return {
-    slug: `test-${ ts }`,
+    slug: `comment-${ ts }`,
     title: '',
     template: 'comment',
     csrf: csrf,
@@ -195,6 +199,15 @@ function make_comment_form_el( template_form, source_id, block_id, position ) {
 
 function make_comment_el( data ) {
 
+  // -- header
+  const header = document.createElement( 'section' )
+  const delete_button = document.createElement( 'input' )
+  delete_button.setAttribute( 'type', 'button' )
+  delete_button.setAttribute( 'value', 'delete comment' )
+  delete_button.setAttribute( 'name', 'delete_comment' )
+  delete_button.onclick = e => delete_comment( data.slug )
+  header.appendChild( delete_button )
+
   // -- section
   const text_comment = document.createElement('section')
   const section_text = data.content.text
@@ -218,9 +231,11 @@ function make_comment_el( data ) {
 
   // -- append everything to <article>
   const article = document.createElement('article')
+  article.id = data.slug
   article.classList.add( 'mine' )
   article.setAttribute('tabindex', '0')
 
+  article.append(header)
   article.append(text_comment)
   article.append(footer)
 
