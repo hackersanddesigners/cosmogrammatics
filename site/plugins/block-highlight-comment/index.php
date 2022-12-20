@@ -205,13 +205,13 @@ Kirby::plugin('cosmo/block-highlight-comment', [
 
                 foreach( $block_comments as $block_comment ) {
 
-                    $type = $block_comment->selection_type();
+                    $type   = $block_comment->selection_type();
                     $coords = $block_comment->selection_coords();
 
                     $coord_label = [];
                     foreach($coords->toStructure() as $coord) {
                         $label = '';
-                        
+
                         if ($type == 'text') {
                             $label = $coord->x1()->value() . '-' . $coord->x2()->value();
                         } else if ($type == 'audio') {
@@ -267,7 +267,7 @@ Kirby::plugin('cosmo/block-highlight-comment', [
             // original text content of the block
 
             $updated = $this;
-            $text_in = parent::text(); 
+            $text_in = parent::text();
 
             $comment_offsets = [];
             foreach ( $threads as $thread ) {
@@ -342,7 +342,7 @@ Kirby::plugin('cosmo/block-highlight-comment', [
             $text_updated = wrapSelectedText( $text_in->toString(), $comment_offsets, '' );
 
             // dump($comment_offsets);
- 
+
             return $updated;
         }
 

@@ -5,17 +5,8 @@ function respond_comment( e ) {
   e.preventDefault()
 
   const form    = e.target
-  const chilren = Array.from( form.children )
-
-  post_comment({
-    csrf              : form.getAttribute( 'data-csrf' ),
-    article_slug      : form.getAttribute( 'data-article-slug' ),
-    block_id          : form.getAttribute( 'data-block-id' ),
-    selection_type    : form.getAttribute( 'data-block-selection-type' ),
-    selection_text_id : form.getAttribute( 'data-block-selection-text-id' ),
-    author            : chilren.find( c => c.name == 'author' ).value,
-    text              : chilren.find( c => c.name == 'body' ).value,
-  })
+  const comment = make_comment( form, store )
+  post_comment( comment )
   .then( response => {
     if ( response.status === 'ok' ) {
 
@@ -24,7 +15,7 @@ function respond_comment( e ) {
       form.blur()
 
       // create newly posted comment
-      const article = make_comment( response.data )
+      const article = make_comment_el( response.data )
 
       // append new comment to comment thread
       // before <form> (blue circle)
@@ -35,7 +26,7 @@ function respond_comment( e ) {
       const form_parent = form.parentNode
       if ( form_parent.classList.contains( 'toolbar' ) ) {
         // make a new comment thread for this block
-        thread = make_comment_thread( form )
+        thread = make_comment_thread_el( form )
         const block_id = form.getAttribute( 'data-block-id' )
         const block = document.getElementById( block_id )
         const aside = block.querySelector( 'aside' )
@@ -57,8 +48,40 @@ function respond_comment( e ) {
   })
 }
 
+function make_comment( form, store ) {
+  const chilren           = Array.from( form.children )
+  const csrf              = form.getAttribute( 'data-csrf' )
+  const article_slug      = form.getAttribute( 'data-article-slug' )
+  const block_id          = form.getAttribute( 'data-block-id' )
+  const selection_type    = form.getAttribute( 'data-block-selection-type' )
+  const selection_text_id = form.getAttribute( 'data-block-selection-text-id' )
+  const selection_text    = store.getByID(selection_text_id)
+  const author            = chilren.find( c => c.name == 'author' ).value
+  const text              = chilren.find( c => c.name == 'body' ).value
+  const ts                = new Date().toISOString()
+  return {
+    slug: `test-${ ts }`,
+    title: '',
+    template: 'comment',
+    csrf: csrf,
+    content: {
+      user: author,
+      timestamp: ts,
+      article_slug: article_slug,
+      block_id: block_id,
+      text: text,
+      selection_type: selection_type,
+      selection_text: selection_text,
+      // selection_coords: selection_coords
+    }
+  }
+}
 
-function make_comment_thread( form ) {
+function save_comment( comment ) {
+
+}
+
+function make_comment_thread_el( form ) {
   const thread = document.createElement( 'section' )
   thread.classList.add( 'thread' )
   const thread_form = form.cloneNode( true )
@@ -66,7 +89,7 @@ function make_comment_thread( form ) {
   return thread
 }
 
-function make_comment( data ) {
+function make_comment_el( data ) {
 
   // -- section
   const text_comment = document.createElement('section')
@@ -101,47 +124,19 @@ function make_comment( data ) {
 }
 
 function post_comment( comment ) {
-
-  const {
-    csrf,
-    article_slug,
-    block_id,
-    selection_type,
-    selection_text_id,
-    author,
-    text,
-  } = comment
-
-  // grab text-selection from localStorage
-  const selection_text = store.getByID(selection_text_id)
-
-  const ts   = new Date().toISOString()
+  const csrf = comment.csrf
+  const article_slug = comment.content.article_slug
   const url  = `/api/pages/articles+${ article_slug }+comments`
-  const body = {
-    slug: `test-${ ts }`,
-    title: '',
-    template: 'comment',
-    content: {
-      user: author,
-      timestamp: ts,
-      article_slug: article_slug,
-      block_id: block_id,
-      text: text,
-      selection_type: selection_type,
-      selection_text: selection_text,
-      // selection_coords: selection_coords
-    }
-  }
 
   return fetch( `${ url }/children` , {
     method: "POST",
     headers: { "X-CSRF": csrf },
-    body: JSON.stringify( body )
+    body: JSON.stringify( comment )
   })
   .then(response => response.json())
   .then(response => {
 
-    // set comment to be visible
+    // set comment to be published
     return fetch( `${ url }+${ response.data.slug }/status`, {
       method: "PATCH",
       headers: { "X-CSRF": csrf },

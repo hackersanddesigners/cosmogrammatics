@@ -1,5 +1,10 @@
 const Highlighter = require('web-highlighter')
 const LocalStore = require('./local.store')
+const {
+  respond_comment,
+  make_comment_el,
+  make_comment_thread_el,
+} = require('./comments.js')
 
 // <https://github.com/alienzhou/web-highlighter/blob/master/example/index.js>
 function textHighlight(target, toolbar) {
