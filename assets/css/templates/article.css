@@ -158,6 +158,22 @@ main .row .column .block aside article {
   border-radius: inherit;
 }
 
+main .row .column .block aside article.mine {
+  outline-color: var(--accent);
+  outline-offset: 3px;
+  outline-style: dashed;
+  outline-width: 2px;
+}
+
+main .row .column .block aside article.mine .header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+main .row .column .block aside article.mine:focus-within {
+  outline-style: solid;
+}
+
 main .row .column .block aside article footer {
   margin-top: 0.5rem;
 }
@@ -389,6 +405,7 @@ main .notes.column[data-col-width="1/1"] {
     cursor: pointer;
 }
 
+
 #editor_toolbar {
   display: none;
   position: fixed;
@@ -403,10 +420,19 @@ main .notes.column[data-col-width="1/1"] {
   color: var(--black);
 }
 
+#editor_toolbar::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  border: 0.5rem solid var(--light-red);
+}
+
 #editor_toolbar h3 {
   margin: 0;
 }
 
-#editor_toolbar.hidden {
+body:not(.commenting) #editor_toolbar {
   display: none;
 }

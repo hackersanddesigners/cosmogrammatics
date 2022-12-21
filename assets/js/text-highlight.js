@@ -58,10 +58,10 @@ function textHighlight( target, toolbar ) {
         const selectionNode = highlighter.getDoms(source.id)[0]
         const block         = selectionNode.closest( 'section .block' )
         const block_id      = get_block_id( block )
+        const position      = get_position( selectionNode )
         const aside         = block.querySelector( 'aside' )
         const template_form = aside.querySelector( '.thread form' )
         const form          = make_comment_form_el( template_form, source.id, block_id )
-        const position      = get_position( selectionNode )
         const thread        = make_comment_thread_el( form, position )
         aside.appendChild( thread )
         form.firstElementChild.focus()

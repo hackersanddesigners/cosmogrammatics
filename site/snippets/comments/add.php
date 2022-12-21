@@ -4,6 +4,7 @@
   name="comment_form"
   class="comment_form"
   data-block-id="<?= isset( $block ) ? $block->bid() : NULL ?>"
+  data-comment-id=""
   data-article-slug="<?= $page->slug() ?>"
   data-csrf="<?= csrf() ?>"
   data-block-selection-type="<?= $selection_type ?? NULL ?>"
@@ -13,7 +14,7 @@
   <input
     type="text"
     placeholder="comment..."
-    name="body"
+    name="text"
     required
   />
 

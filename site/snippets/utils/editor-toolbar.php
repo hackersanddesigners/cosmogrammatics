@@ -8,12 +8,10 @@
   data-csrf="<?= csrf() ?>"
 >
   <h3>Currently editing <span class="own_comment_count">0</span> comments</h3>
-
   <input
     disabled
     name="post_comments"
     type="submit"
     value="publish comments"
   />
-
 </form>

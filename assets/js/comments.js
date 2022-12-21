@@ -11,143 +11,95 @@ window.commenting_state = {
 function respond_comment( e ) {
   e.preventDefault()
 
+  // enable commenting state if editing the form didnt do so
+  if ( !window.commenting_state.commenting ) {
+    enable_commenting_state()
+  }
+
   // get form from event and make comment from it
-  const form = e.target
+  let form = e.target
   const comment = make_comment( form, store )
-
-  // save comment in array to batch post later
-  save_comment( comment )
-
-  // form: reset and hide form
-  form.reset()
-  form.blur()
-
-  // create newly posted comment
-  const article = make_comment_el( comment )
+  const comment_el = make_comment_el( comment )
 
   // append new comment to comment thread
   // before <form> (blue circle)
-
   const thread = form.parentNode
-  thread.insertBefore(article, form)
+  thread.insertBefore(comment_el, form)
 
-  // set name of author in UI and comments if changed
-  const submitted_name = comment.content.user
-  const existing_name  = window.commenting_state.author
-  if ( existing_name !== submitted_name ) {
-    set_author_name( submitted_name )
+
+  // if the form came from an "edit comment" action, we need
+  // to delete it. We know this if it's got a commment id
+  const comment_id = form.getAttribute( 'data-comment-id' )
+  if ( comment_id ) {
+    form.parentElement.removeChild( form )
+    const comment_el = document.getElementById( comment_id )
+    form = get_nearest_form( comment_el )
   }
 
-  // bring focus to the form to continue commenting
-  form.firstElementChild.focus()
+  reset_and_focus( form, comment )
 
 }
 
 
 
-function update_own_comment_count() {
-  const own_comment_count_els = document.querySelectorAll('.own_comment_count')
-  Array.from( own_comment_count_els ).map( el => {
-    el.innerHTML = Object.values( window.commenting_state.comments ).length
-  })
-}
+
+
+// Commenting is a state of mind
 
 function enable_commenting_state() {
+  // enable commenting in global state
   window.commenting_state.commenting = true
+  // add commenting class to body
+  document.body.classList.add( 'commenting' )
+  // prevent accidental refershes
   window.onbeforeunload = e => { e.preventDefault() }
-  const editor_toolbar = document.getElementById( 'editor_toolbar' )
-  const post_button = editor_toolbar.lastElementChild
-  editor_toolbar.classList.remove( 'hidden' )
-  post_button.removeAttribute( 'disabled' )
-  editor_toolbar.onsubmit = post_comments
+  // update editor toolbar to appear and be usable
+  enable_editor_toolbar()
 }
 
 function disable_commenting_state() {
+  // disable it in our global state
   window.commenting_state.commenting = false
+  // remvoe commenting class from body
+  document.body.classList.remove( 'commenting' )
+  // remove the window reload blocker
   window.onbeforeunload = null
-  const editor_toolbar = document.getElementById( 'editor_toolbar' )
-  const post_button = editor_toolbar.lastElementChild
-  post_button.setAttribute( 'disabled', true )
-  editor_toolbar.onsubmit = null
-  editor_toolbar.classList.add( 'hidden' )
-}
-
-
-function set_author_name( author ) {
-
-  // set it in the global state variable
-  window.commenting_state.author = author
-  Object.values( window.commenting_state.comments ).map( comment => {
-    comment.content.user = author
-  })
-
-  // set it for all the forms
-  const comment_forms = document.querySelectorAll( '.comment_form' )
-  for ( const comment_form of comment_forms ) {
-    const author_input = comment_form.querySelector( 'input[name="author"]' )
-    author_input.value = author
-    author_input.setAttribute('tabindex', '-1')
-  }
-
-  // set it for all of your own comment elements
-  const comment_els = document.querySelectorAll( 'aside article.mine' )
-  for ( const comment_el of comment_els ) {
-    const author_el = comment_el.querySelector( '.author' )
-    author_el.innerHTML = author
-  }
-
-}
-
-function save_comment( comment ) {
-  window.commenting_state.comments[comment.slug] = comment
+  // disable editor toolbar
+  disable_editor_toolbar()
+  // get all edit and delete buttons and remove them
+  freeze_my_comment_els()
+  // update count in UI
   update_own_comment_count()
+}
+
+
+
+function edit_comment( slug ) {
+  const comment = get_comment( slug )
+  const { user, text } = comment.content
+  const comment_el = document.getElementById( slug )
+  const template_form = get_nearest_form( comment_el )
+  const form = make_comment_form_el( template_form )
+  form.setAttribute( 'data-comment-id', slug )
+  form.querySelector( 'input[name="author"]' ).value = user
+  form.querySelector( 'input[name="text"]' ).value = text
+  comment_el.replaceWith( form )
+  form.firstElementChild.focus()
+}
+
+function get_comment_count() {
+  return Object.values( window.commenting_state.comments ).length
+}
+
+function get_comment( slug ) {
+  return window.commenting_state.comments[slug]
 }
 
 function delete_comment( slug ) {
   delete window.commenting_state.comments[slug]
-  const comment_el = document.getElementById( slug )
-  comment_el.parentElement.removeChild( comment_el )
+  delete_comment_el( slug )
   update_own_comment_count()
 }
-
-async function post_comments( e ) {
-  e.preventDefault()
-  for ( const comment of Object.values( window.commenting_state.comments ) ) {
-    const response = await post_comment( comment )
-  }
-  window.commenting_state.comments = {}
-  disable_commenting_state()
-}
-
-function post_comment( comment ) {
-  const csrf = comment.csrf
-  const article_slug = comment.content.article_slug
-  const url  = `/api/pages/articles+${ article_slug }+comments`
-
-  return fetch( `${ url }/children` , {
-    method: "POST",
-    headers: { "X-CSRF": csrf },
-    body: JSON.stringify( comment )
-  })
-  .then(response => response.json())
-  .then(response => {
-
-    // set comment to be published
-    return fetch( `${ url }+${ response.data.slug }/status`, {
-      method: "PATCH",
-      headers: { "X-CSRF": csrf },
-      body: JSON.stringify( { status: 'listed' } )
-    })
-    .then(response => response.json())
-    .then( response => response )
-    .catch( error => console.error( error ) )
-
-  })
-    .then(response => response)
-    .catch(error => console.error(error) )
-
-}
-
 
 function make_comment( form, store ) {
   const chilren           = Array.from( form.children )
@@ -158,10 +110,11 @@ function make_comment( form, store ) {
   const selection_text_id = form.getAttribute( 'data-block-selection-text-id' )
   const selection_text    = store.getByID(selection_text_id)
   const author            = chilren.find( c => c.name == 'author' ).value
-  const text              = chilren.find( c => c.name == 'body' ).value
+  const text              = chilren.find( c => c.name == 'text' ).value
   const ts                = new Date().toISOString()
-  return {
-    slug: `comment-${ ts }`,
+  const comment_id        = form.getAttribute( 'data-comment-id' ) || `comment-${ ts }`
+  const comment           = {
+    slug: comment_id,
     title: '',
     template: 'comment',
     csrf: csrf,
@@ -176,7 +129,145 @@ function make_comment( form, store ) {
       // selection_coords: selection_coords
     }
   }
+  window.commenting_state.comments[comment.slug] = comment
+  update_own_comment_count()
+  return comment
 }
+
+
+
+
+
+
+// JUST API STUFF 💅
+
+async function post_comments( e ) {
+  e.preventDefault()
+  for ( const comment of Object.values( window.commenting_state.comments ) ) {
+    await post_comment( comment )
+  }
+  window.commenting_state.comments = {}
+  disable_commenting_state()
+}
+
+function post_comment( comment ) {
+  const csrf = comment.csrf
+  const article_slug = comment.content.article_slug
+  const url  = `/api/pages/articles+${ article_slug }+comments`
+  return fetch( `${ url }/children` , {
+    method: "POST",
+    headers: { "X-CSRF": csrf },
+    body: JSON.stringify( comment )
+  })
+  .then(response => response.json())
+  .then(response => {
+    // set comment to be published
+    return fetch( `${ url }+${ response.data.slug }/status`, {
+      method: "PATCH",
+      headers: { "X-CSRF": csrf },
+      body: JSON.stringify( { status: 'listed' } )
+    })
+    .then(response => response.json())
+    .then( response => response )
+    .catch( error => console.error( error ) )
+  })
+  .then(response => response)
+  .catch(error => console.error(error) )
+}
+
+
+
+
+
+// MANIPULATING DOM
+
+function update_own_comment_count() {
+  const count = get_comment_count()
+  const own_comment_count_els = document.querySelectorAll('.own_comment_count')
+  Array.from( own_comment_count_els ).map( el => {
+    el.innerHTML = count
+  })
+  if ( count ) {
+    enable_editor_toolbar_post_button()
+  } else {
+    disable_editor_toolbar_post_button()
+  }
+}
+
+function get_nearest_form( comment_el ) {
+  return comment_el.parentElement.querySelector('.comment_form')
+}
+
+function reset_and_focus( form, comment ) {
+  // reset form bring
+  form.reset()
+  // set name of author in UI
+  set_author_name( comment.content.user )
+  // focus to input to continue commenting
+  form.firstElementChild.focus()
+}
+
+function set_author_name( author ) {
+  // set it in the global state variable
+  window.commenting_state.author = author
+  Object.values( window.commenting_state.comments ).map( comment => {
+    comment.content.user = author
+  })
+  // set it for all the forms
+  const comment_forms = document.querySelectorAll( '.comment_form' )
+  for ( const comment_form of comment_forms ) {
+    const author_input = comment_form.querySelector( 'input[name="author"]' )
+    author_input.value = author
+    author_input.setAttribute('tabindex', '-1')
+  }
+  // set it for all of your own comment elements
+  const comment_els = document.querySelectorAll( 'aside article.mine' )
+  for ( const comment_el of comment_els ) {
+    const author_el = comment_el.querySelector( '.author' )
+    author_el.innerHTML = author
+  }
+}
+
+function enable_editor_toolbar() {
+  const editor_toolbar = document.getElementById( 'editor_toolbar' )
+  editor_toolbar.onsubmit = post_comments
+}
+
+function disable_editor_toolbar() {
+  const editor_toolbar = document.getElementById( 'editor_toolbar' )
+  editor_toolbar.onsubmit = null
+}
+
+function enable_editor_toolbar_post_button() {
+  const post_button = document.getElementById( 'editor_toolbar' ).lastElementChild
+  post_button.removeAttribute( 'disabled' )
+}
+
+function disable_editor_toolbar_post_button() {
+  const post_button = document.getElementById( 'editor_toolbar' ).lastElementChild
+  post_button.setAttribute( 'disabled', true )
+}
+
+function freeze_my_comment_els() {
+  const my_comment_els = document.querySelectorAll( 'article.mine' )
+  for ( const comment_el of my_comment_els ) {
+    comment_el.classList.remove( 'mine' )
+    comment_el.removeChild( comment_el.firstElementChild )
+  }
+}
+
+function delete_comment_el( slug ) {
+  const comment_el = document.getElementById( slug )
+  comment_el.parentElement.removeChild( comment_el )
+}
+
+
+
+
+
+
+
+// MAKING HTML ELEMENTS
 
 function make_comment_thread_el( form, position ) {
   const thread = document.createElement( 'section' )
@@ -188,12 +279,16 @@ function make_comment_thread_el( form, position ) {
   return thread
 }
 
-function make_comment_form_el( template_form, source_id, block_id, position ) {
+function make_comment_form_el( template_form, source_id, block_id ) {
   const form = template_form.cloneNode( true )
-  form.setAttribute('data-block-selection-type', 'text')
-  form.setAttribute('data-block-selection-text-id', source_id )
-  form.setAttribute('data-block-id', block_id )
   form.onsubmit = respond_comment
+  form.setAttribute('data-block-selection-type', 'text')
+  if ( source_id ) {
+    form.setAttribute('data-block-selection-text-id', source_id )
+  }
+  if ( block_id ) {
+    form.setAttribute('data-block-id', block_id )
+  }
   return form
 }
 
@@ -201,12 +296,19 @@ function make_comment_el( data ) {
 
   // -- header
   const header = document.createElement( 'section' )
+  header.classList.add( 'header' )
   const delete_button = document.createElement( 'input' )
   delete_button.setAttribute( 'type', 'button' )
   delete_button.setAttribute( 'value', 'delete comment' )
   delete_button.setAttribute( 'name', 'delete_comment' )
   delete_button.onclick = e => delete_comment( data.slug )
   header.appendChild( delete_button )
+  const edit_button = document.createElement( 'input' )
+  edit_button.setAttribute( 'type', 'button' )
+  edit_button.setAttribute( 'value', 'edit comment' )
+  edit_button.setAttribute( 'name', 'edit_comment' )
+  edit_button.onclick = e => edit_comment( data.slug )
+  header.appendChild( edit_button )
 
   // -- section
   const text_comment = document.createElement('section')
