@@ -1,5 +1,7 @@
 <?php
 
+// andré : this should be converted into something for the saelection_coords field.
+
 Kirby::plugin('cosmo/article-comments', [
     'api' => [
         'routes' => function ($kirby) {

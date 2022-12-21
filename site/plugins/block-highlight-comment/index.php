@@ -184,6 +184,10 @@ function parseBlockSelection($blocks, $block_bid, $comments, $offset, $type) {
 }
 
 
+// andré : the selection_coords field is being used here to
+// organize comments into threads. It won't work with the new
+// selection_text field that highlight js introudces
+
 // -- manipulate block content to add extra spans to highlight
 //    specified content in the offset
 Kirby::plugin('cosmo/block-highlight-comment', [
