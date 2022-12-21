@@ -19,9 +19,15 @@ main h1 {
 }
 
 main .stats {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: right;
   text-align: right;
   font-family: var(--comments);
 }
+
+
 
 main section {
 
@@ -118,7 +124,7 @@ main .block.page_embed a h1 {
 
 main .row .column .block aside {
   position: absolute;
-  max-width: 15rem;
+  max-width: var(--side-width);
   top: 1rem;
   --n: 1;
   --df : calc( 1 - var(--cw) * var(--n) );
@@ -382,4 +388,26 @@ main .notes.column[data-col-width="1/1"] {
     background-color: white;
     border: 1px solid black;
     cursor: pointer;
+}
+
+
+/* andré i think you can style different vew modes here */
+
+main:has( select#view_mode option[value="1"]:checked ) {}
+main:has( select#view_mode option[value="1"]:checked ) .thread {
+  display: none;
+}
+main:has( select#view_mode option[value="2"]:checked ) {}
+
+/* default : balanced */
+main:has( select#view_mode option[value="3"]:checked ) {}
+
+main:has( select#view_mode option[value="4"]:checked ) {
+  --main-width: min( 100vw, 30rem );
+  --side-width: min( 100vw, 35rem );
+}
+
+main:has( select#view_mode option[value="5"]:checked ) {
+  --main-width: min( 100vw, 20rem );
+  --side-width: min( 100vw, 45rem );
 }
