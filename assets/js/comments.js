@@ -6,6 +6,7 @@ function respond_comment( e ) {
 
   const form    = e.target
   const comment = make_comment( form, store )
+
   post_comment( comment )
   .then( response => {
     if ( response.status === 'ok' ) {
@@ -59,6 +60,7 @@ function make_comment( form, store ) {
   const author            = chilren.find( c => c.name == 'author' ).value
   const text              = chilren.find( c => c.name == 'body' ).value
   const ts                = new Date().toISOString()
+
   return {
     slug: `test-${ ts }`,
     title: '',

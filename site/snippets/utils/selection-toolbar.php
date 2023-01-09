@@ -1,5 +1,3 @@
-<div
-  class="toolbar hidden"
->
+<div class="toolbar hidden">
   <?= snippet( 'comments/add' ) ?>
 </div>

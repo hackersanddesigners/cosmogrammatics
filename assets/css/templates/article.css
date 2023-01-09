@@ -411,3 +411,9 @@ main:has( select#view_mode option[value="5"]:checked ) {
   --main-width: min( 100vw, 20rem );
   --side-width: min( 100vw, 45rem );
 }
+
+/* for PHP input form */
+.honey {
+  position: absolute;
+  left: -9999px;
+}

@@ -59,6 +59,9 @@ function textHighlight(target, toolbar) {
         const blockID = getBlockID(selectionNode)
         toggle_toolbar(position, toolbar, source.id, blockID)
         store.save(sources)
+
+        const form = toolbar.querySelector('form')
+        form.querySelector('#selection_text').value = JSON.stringify(source)
       }
 
     })
@@ -101,6 +104,10 @@ function toggle_toolbar(position, toolbar, sourceID, blockID) {
   form.setAttribute('data-block-selection-text-id', sourceID)
   form.setAttribute('data-block-id', blockID)
 
+  form.querySelector('#selection_type').value = 'text'
+  form.querySelector('#block_id').value = blockID
+
+  // -- display input form for adding a comment
   toolbar.classList.remove( 'hidden' )
 
   toolbar.style.setProperty( '--top', position.top + 'px' )
