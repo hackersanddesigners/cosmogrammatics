@@ -2,7 +2,7 @@
 
 class LocalStore {
     constructor(id) {
-        this.key = id !== undefined ? `cosmo-highlight-${id}` : 'cosmo-highlight';
+        this.key = id !== undefined ? `cosmo-${id}` : 'cosmo-highlight';
     }
 
     storeToJson() {

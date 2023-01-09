@@ -1,57 +1,69 @@
 const LocalStore = require('./local.store')
 const store = new LocalStore()
+const {commentReviewList} = require('./comment-review.js')
+
 
 function respond_comment( e ) {
   e.preventDefault()
 
   const form    = e.target
-  const comment = make_comment( form, store )
 
-  post_comment( comment )
-  .then( response => {
-    if ( response.status === 'ok' ) {
+  // -- save comment to localStorage under:
+  //    <current-article-url>: [{..}, ...]
 
-      // form: reset and hide form
-      form.reset()
-      form.blur()
+  // to correctly save object into LocalStore
+  // the object needs to have an ID field
+  // else LocalStore will replace the previous
+  // comment with the newest one only
+  let comment = make_comment( form, store )
+  comment['id'] = comment.slug
+  
+  const article_slug = comment.content.article_slug
+  const comment_store = new LocalStore(`comment-${article_slug}`)
+  comment_store.save(comment)
 
-      // create newly posted comment
-      const article = make_comment_el( response.data )
+  commentReviewList(article_slug)
 
-      // append new comment to comment thread
-      // before <form> (blue circle)
 
-      let thread
+  // ---
+  // form: reset and hide form
+  form.reset()
+  form.blur()
 
-      // first check if the form is the toolbar form
-      const form_parent = form.parentNode
-      if ( form_parent.classList.contains( 'toolbar' ) ) {
-        // make a new comment thread for this block
-        thread = make_comment_thread_el( form )
-        const block_id = form.getAttribute( 'data-block-id' )
-        const block = document.getElementById( block_id )
-        const aside = block.querySelector( 'aside' )
-        const thread_form = Array.from( thread.children )[0]
-        thread.insertBefore( article, thread_form )
-        aside.appendChild( thread )
-      } else {
-        thread = form_parent
-        thread.insertBefore(article, form)
-      }
+  // create newly posted comment
+  const article = make_comment_el( comment )
 
-      // update comment count
-      const comment_count = document.querySelector('#comment_count')
-      comment_count.innerHTML = new Number( comment_count.innerHTML ) + 1
+  // append new comment to comment thread
+  // before <form> (blue circle)
 
-      article.focus()
+  let thread
 
-    }
-  })
+  // first check if the form is the toolbar form
+  const form_parent = form.parentNode
+  if ( form_parent.classList.contains( 'toolbar' ) ) {
+    // make a new comment thread for this block
+    thread = make_comment_thread_el( form )
+    const block_id = form.getAttribute( 'data-block-id' )
+    const block = document.getElementById( block_id )
+    const aside = block.querySelector( 'aside' )
+    const thread_form = Array.from( thread.children )[0]
+    thread.insertBefore( article, thread_form )
+    aside.appendChild( thread )
+  } else {
+    thread = form_parent
+    thread.insertBefore(article, form)
+  }
+
+  // update comment count
+  const comment_count = document.querySelector('#comment_count')
+  comment_count.innerHTML = new Number( comment_count.innerHTML ) + 1
+
+  article.focus()
+
 }
 
 function make_comment( form, store ) {
   const chilren           = Array.from( form.children )
-  const csrf              = form.getAttribute( 'data-csrf' )
   const article_slug      = form.getAttribute( 'data-article-slug' )
   const block_id          = form.getAttribute( 'data-block-id' )
   const selection_type    = form.getAttribute( 'data-block-selection-type' )
@@ -62,10 +74,9 @@ function make_comment( form, store ) {
   const ts                = new Date().toISOString()
 
   return {
-    slug: `test-${ ts }`,
-    title: '',
+    slug: ts,
+    title: ts,
     template: 'comment',
-    csrf: csrf,
     content: {
       user: author,
       timestamp: ts,
@@ -104,6 +115,7 @@ function make_comment_el( data ) {
   const date = document.createElement('p')
   const timestamp = document.createElement('time')
   // TODO set correct datetime format for timestamp `yyyy-mm-dd hh:mm:ss`
+  const ts = new Date(data.content.timestamp)
   timestamp.setAttribute('datetime', data.content.timestamp)
   date.append(timestamp)
   date.innerHTML = `On ${data.content.timestamp}`

@@ -10,7 +10,7 @@ function textHighlightMergeUnique(newData) {
   const ids = new Set(localStore.map(d => d.id));
   const highlightsMerged = [...localStore, ...newData.filter(d => !ids.has(d.ID))];
 
-  // the save function checksif the item
+  // the save function checks if the item
   // exists already, so we just pass
   // the entire dataset
   store.save(highlightsMerged)

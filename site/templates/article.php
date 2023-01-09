@@ -9,6 +9,7 @@
     <?php snippet( 'grid/index', [ 'rows' => $page->builder()->toLayouts() ] ) ?>
     <?php snippet( 'footnotes' ) ?>
     <?php snippet( 'utils/selection-toolbar' ) ?>
+    <?php snippet( 'comments/review-list', [ 'comments' => $comments ] ) ?>
   </main>
 
   <?php snippet( 'footer' ) ?>

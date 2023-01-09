@@ -412,8 +412,66 @@ main:has( select#view_mode option[value="5"]:checked ) {
   --side-width: min( 100vw, 45rem );
 }
 
+.hidden {
+    display: none;
+}
+
 /* for PHP input form */
 .honey {
   position: absolute;
   left: -9999px;
+}
+
+
+/* comment-review list */
+
+
+.comment-toggle {
+    width: fit-content;
+    max-width: 9rem;
+}
+
+.comment-review {
+    padding: 2rem 0;
+    flex-direction: column;
+}
+
+.comment-review fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+.comment-data {
+    counter-reset: comment;
+}
+
+.comment-list-wrapper {
+    display: flex;
+    padding-bottom: 1rem;
+}
+
+.comment-list-input {
+    margin: 0;
+    height: 1rem;
+}
+
+.comment-list-label {
+    display: flex;
+    padding-left: 1rem;
+}
+
+.comment-list-label:before {
+    counter-increment: comment;
+    content: counter(comment) ".";
+    padding-right:  1rem;
+}
+
+.comment-list-label p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.comment-list-label p:first-child {
+    padding-bottom: 0.5rem;
 }
