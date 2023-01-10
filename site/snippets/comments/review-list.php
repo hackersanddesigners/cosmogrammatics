@@ -1,4 +1,3 @@
-<?php if ($comments->isNotEmpty()): ?>
 <section class="row comment-review">
   <button class="comment-toggle">Show Comments</button>
 
@@ -16,4 +15,3 @@
     </div>
   </form>
 </section>
-<?php endif ?>
