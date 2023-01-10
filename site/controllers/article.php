@@ -67,8 +67,6 @@ return function ($kirby, $page) {
         // which is JSON stringify value
 
         $body = get('comment_data');
-        file_put_contents('log.txt', json_encode($body));
-        
         foreach($body as $field) {
 
             // get the data and check if it's all good
