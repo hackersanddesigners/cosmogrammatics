@@ -51,7 +51,6 @@ return function ($kirby, $page) {
 
     // -- handling POST request from comment action
 
-
     // check if request is POST and input type submit has been clicked
     if ($kirby->request()->is('POST') && get('post_comment')) {
 
@@ -61,64 +60,79 @@ return function ($kirby, $page) {
             exit;
         }
 
-        // get the data and check if it's all good
-        $ts = date("c");
-        $selection_text = yaml::encode(json_decode(get('selection_text'), true));
+        // we POST a list of fields all named the same
+        // `comment_data[]`, the `[]` put the fields inside
+        // a common array.
+        // let's loop over the array and process each field,
+        // which is JSON stringify value
 
-        $data = [
-            'user' => get('author'),
-            'timestamp' => $ts,
-            'article_slug' => get('article_slug'),
-            'block_id' => get('block_id'),
-            'text' => get('body'),
-            'selection_type' => get('selection_type'),
-            'selection_text' => $selection_text,
-        ];
+        $body = get('comment_data');
+        file_put_contents('log.txt', json_encode($body));
+        
+        foreach($body as $field) {
 
-        $rules = [
-            'user' => ['required'],
-            'text' => ['required'],
-        ];
+            // get the data and check if it's all good
 
-        $messages = [
-            'user' => 'Please set a name',
-            'text' => 'Please write a comment',
-        ];
+            $field = json_decode($field, true);
+            $selection_text = yaml::encode($field['content']['selection_text'], true);
 
-        // if data has some problems stop everything
-        // and refresh page
-        if ($invalid = invalid($data, $rules, $messages)) {
-            go($page->url());
-            exit;
+            $content = $field['content'];
+            $data = [
+                'user' => $content['user'],
+                'timestamp' => $content['timestamp'],
+                'article_slug' => $content['article_slug'],
+                'block_id' => $content['block_id'],
+                'text' => $content['text'],
+                'selection_type' => $content['selection_type'],
+                'selection_text' => $selection_text
+            ];
 
-        } else {
-            // else proceed with requested operation:
-            // - act as the API user
-            // - create subpage for comment
+            $rules = [
+                'user' => ['required'],
+                'text' => ['required'],
+            ];
 
-            $user = $kirby->users()->filterBy('role', '==', 'api')->first();
-            $kirby->impersonate($user->email());
+            $messages = [
+                'user' => 'Please set a name',
+                'text' => 'Please write a comment',
+            ];
 
-            try {
-
-                // make subpage under <current-article>/comments>
-                $comments_subpage = $page->find('comments');
-                
-                $comment = $comments_subpage->createChild([
-                    'slug'     => 'test-' . $ts,
-                    'template' => 'comment',
-                    'content'  => $data
-                ]);
-
-                // done
-                // maybe show an <article>/comment-added subpage
-                // explaining what happened?
+            // if data has some problems stop everything
+            // and refresh page
+            if ($invalid = invalid($data, $rules, $messages)) {
                 go($page->url());
+                exit;
 
-            } catch (Exception $e) {
-                $alert = ['Adding your comments failed: ' . $e->getMessage()];
+            } else {
+                // else proceed with requested operation:
+                // - act as the API user
+                // - create subpage for comment
+
+                $user = $kirby->users()->filterBy('role', '==', 'api')->first();
+                $kirby->impersonate($user->email());
+
+                try {
+
+                    // make subpage under <current-article>/comments>
+                    $comments_subpage = $page->find('comments');
+                
+                    $comment = $comments_subpage->createChild([
+                        'slug'     => $content['timestamp'],
+                        'template' => $field['template'],
+                        'content'  => $data
+                    ]);
+
+                    // done
+                    // maybe show an <article>/comment-added subpage
+                    // explaining what happened?
+                    go($page->url());
+
+                } catch (Exception $e) {
+                    $alert = ['Adding your comments failed: ' . $e->getMessage()];
+                }
             }
-        }
+
+        } // -- ends data loop
 
     }
 

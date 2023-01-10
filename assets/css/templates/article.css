@@ -475,3 +475,9 @@ main:has( select#view_mode option[value="5"]:checked ) {
 .comment-list-label p:first-child {
     padding-bottom: 0.5rem;
 }
+
+.comment-list-remove {
+    max-height: 1.5rem;
+    height: fit-content;
+    cursor: pointer;
+}

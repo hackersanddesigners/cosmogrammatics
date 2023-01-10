@@ -16,7 +16,7 @@ function respond_comment( e ) {
   // else LocalStore will replace the previous
   // comment with the newest one only
   let comment = make_comment( form, store )
-  comment['id'] = comment.slug
+  comment['id'] = comment.content.selection_text.id
   
   const article_slug = comment.content.article_slug
   const comment_store = new LocalStore(`comment-${article_slug}`)

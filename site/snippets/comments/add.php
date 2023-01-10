@@ -20,10 +20,5 @@
 
   <label for="post_comment">
     <p class="small_italic">Press ENTER to post.</p>
-  </label>
-
-  <div class="honey">
-    <label for="website">If you are a human, leave this field empty</label>
-    <input type="website" name="website" id="website" value="<?= isset($data['website']) ? esc($data['website']) : null ?>"/>
-  </div>
+  </label> 
 </form>
