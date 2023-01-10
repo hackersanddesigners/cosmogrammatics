@@ -7,7 +7,7 @@
       <h3>Your unpublished comments</h3>
       <p class="comment-status">You have x unpublished comments.</p>
       <div class="comment-data"></div>
-      <input name="post_comment" type="submit" value="Publish">
+      <input name="post_comment" class="post_comment" type="submit" value="Publish">
     </fieldset>
 
     <div class="honey">

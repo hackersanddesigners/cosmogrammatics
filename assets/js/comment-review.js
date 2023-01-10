@@ -39,6 +39,13 @@ function commentReviewList(article_slug) {
     const el = make_comment_el(comment, idx, article_slug)
     comment_data.append(el)
   })
+
+  const publish = document.querySelector('.post_comment')
+  publish.addEventListener('click', () => {
+    // remove all items from comments store
+    comment_store.removeAll()
+  })
+  
 }
 
 function make_comment_el(comment, idx, article_slug) {
