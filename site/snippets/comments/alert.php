@@ -1,3 +1,4 @@
+<?php if ($alert): ?>
 <section class="row">
   <section class="column alert">
     <ul>
@@ -7,3 +8,4 @@
     </ul>
   </section>
 </section>
+<?php endif ?>
