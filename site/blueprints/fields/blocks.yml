@@ -52,6 +52,15 @@ fieldsets:
   text:
     extends: blocks/text
     fields:
+      info:
+        label: Footnotes info
+        type: info
+        text: |
+          To make a new footnote:
+          - select some text after which the footnote number should appear, and click on the double-quote icon
+          - add a new item to the Footnote list section here below, with the content of the footnote; you can re-order the Footnote table list as well
+          - the numbering happens automatically, so don't worry about that
+
       bid: fields/bid
 
       footnotes:
