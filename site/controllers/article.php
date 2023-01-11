@@ -123,6 +123,8 @@ return function ($kirby, $page) {
                         'template' => $field['template'],
                         'content'  => $data
                     ]);
+
+                    $comment = $comment->changeStatus('listed');
  
                 } catch (Exception $e) {
                     array_push($alert, $e->getMessage());
