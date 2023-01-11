@@ -1,9 +1,21 @@
+/* this rules override kirby-writer-mark own counter-reset rule
+to start from outside the text-input area
+else when opening a text pane in the sidebar the counting works
+only on a per-paragraph (?) line.
+*/
 body {
-  counter-reset: footnote;
+  counter-reset: footnotes;
+}
+
+.ref-ft {
+  text-decoration: none;
+  color: var(--fore);
+  vertical-align: super;
+  font-size: smaller;
 }
 
 .ref-ft:after {
-    counter-increment: footnote;
-    content: "[" counter(footnote) "]";
+    counter-increment: footnotes;
+    content: "[" counter(footnotes) "]";
     padding-left: 0.15rem;
 }
