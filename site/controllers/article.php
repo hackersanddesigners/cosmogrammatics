@@ -67,6 +67,7 @@ return function ($kirby, $page) {
         // which is JSON stringify value
 
         $body = get('comment_data');
+        
         foreach($body as $field) {
 
             // get the data and check if it's all good
@@ -119,18 +120,19 @@ return function ($kirby, $page) {
                         'template' => $field['template'],
                         'content'  => $data
                     ]);
-
-                    // done
-                    // maybe show an <article>/comment-added subpage
-                    // explaining what happened?
-                    go($page->url());
-
+ 
                 } catch (Exception $e) {
                     $alert = ['Adding your comments failed: ' . $e->getMessage()];
                 }
             }
 
         } // -- ends data loop
+
+
+        // => done!
+        // maybe show an <article>/comment-added subpage
+        // explaining what happened?
+        go($page->url());
 
     }
 
