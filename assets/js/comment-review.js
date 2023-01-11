@@ -42,6 +42,8 @@ function commentReviewList(article_slug) {
 
   const publish = document.querySelector('.post_comment')
   publish.addEventListener('click', () => {
+    // if comments are 0, disable button or display message?
+
     // remove all items from comments store
     comment_store.removeAll()
   })

@@ -51,6 +51,9 @@ return function ($kirby, $page) {
 
     // -- handling POST request from comment action
 
+    $alert = [];
+    $data = [];
+
     // check if request is POST and input type submit has been clicked
     if ($kirby->request()->is('POST') && get('post_comment')) {
 
@@ -122,7 +125,7 @@ return function ($kirby, $page) {
                     ]);
  
                 } catch (Exception $e) {
-                    $alert = ['Adding your comments failed: ' . $e->getMessage()];
+                    array_push($alert, $e->getMessage());
                 }
             }
 
@@ -142,7 +145,9 @@ return function ($kirby, $page) {
     return [
       'comments'  => $comments,
       'footnotes' => $footnotes_list,
-      'skin'      => $skin
+      'skin'      => $skin,
+      'data'      => $data,
+      'alert'     => $alert
     ];
 
 };

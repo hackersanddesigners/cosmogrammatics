@@ -8,8 +8,12 @@
   data-block-selection-type="<?= $selection_type ?? NULL ?>"
   data-block-selection-text-id=""
 >
-  <input type="text" placeholder="comment..." id="body" name="body" required>
-  <input type="text" placeholder="author" id="author" name="author" required>
+
+  <label for="body"></label>
+  <input type="text" placeholder="comment..." id="body" name="body" value="<?= $data['text'] ?? null ?>" required>
+
+  <label for="author"></label>
+  <input type="text" placeholder="author" id="author" name="author" value="<?= $data['user'] ?? null ?>" required>
 
   <input type="hidden" id="article_slug" name="article_slug" value="<?= $page->slug() ?>">
   <input type="hidden" id="block_id" name="block_id" value="<?= isset( $block ) ? $block->bid() : NULL ?>">

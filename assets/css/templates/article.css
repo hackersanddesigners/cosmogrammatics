@@ -481,3 +481,7 @@ main:has( select#view_mode option[value="5"]:checked ) {
     height: fit-content;
     cursor: pointer;
 }
+
+.alert {
+    border: 1px solid red;
+}
