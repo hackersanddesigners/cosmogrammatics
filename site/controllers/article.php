@@ -76,11 +76,11 @@ return function ($kirby, $page) {
 
             $content = $field['content'];
             $data = [
-                'user' => $content['user'],
+                'user' => esc($content['user']),
                 'timestamp' => $content['timestamp'],
                 'article_slug' => $content['article_slug'],
                 'block_id' => $content['block_id'],
-                'text' => $content['text'],
+                'text' => esc($content['text']),
                 'selection_type' => $content['selection_type'],
                 'selection_text' => $selection_text
             ];

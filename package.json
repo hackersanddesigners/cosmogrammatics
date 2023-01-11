@@ -9,6 +9,7 @@
     "browserify": "^17.0.0",
     "tinyify": "^4.0.0",
     "watchify": "^4.0.0",
-    "web-highlighter": "^0.7.4"
+    "web-highlighter": "^0.7.4",
+    "xss": "^1.0.14"
   }
 }

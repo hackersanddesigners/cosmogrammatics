@@ -1,6 +1,7 @@
 const LocalStore = require('./local.store')
 const store = new LocalStore()
 const {commentReviewList} = require('./comment-review.js')
+const xss = require('xss')
 
 
 function respond_comment( e ) {
@@ -69,8 +70,8 @@ function make_comment( form, store ) {
   const selection_type    = form.getAttribute( 'data-block-selection-type' )
   const selection_text_id = form.getAttribute( 'data-block-selection-text-id' )
   const selection_text    = store.getByID(selection_text_id)
-  const author            = chilren.find( c => c.name == 'author' ).value
-  const text              = chilren.find( c => c.name == 'body' ).value
+  const author            = xss(chilren.find( c => c.name == 'author' ).value)
+  const text              = xss(chilren.find( c => c.name == 'body' ).value)
   const ts                = new Date().toISOString()
 
   return {
@@ -88,10 +89,6 @@ function make_comment( form, store ) {
       // selection_coords: selection_coords
     }
   }
-}
-
-function save_comment( comment ) {
-
 }
 
 function make_comment_thread_el( form ) {
