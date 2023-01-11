@@ -257,6 +257,7 @@ main .toolbar {
   top: var(--top);
   left: var(--left);
 }
+
 main .toolbar form.comment_form {
   /* display: unset; */
 }
@@ -273,6 +274,16 @@ main form.comment_form:focus-within {
 main .toolbar.hidden {
   --top: -999px;
   --left: -999px;
+}
+
+.toolbar-btn-wrapper {
+    position: relative
+}
+
+.toolbar-btn-hide {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
 }
 
 main .row .column .block:not(.columns):hover form.comment_form,

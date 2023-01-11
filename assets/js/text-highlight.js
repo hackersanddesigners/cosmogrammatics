@@ -112,6 +112,15 @@ function toggle_toolbar(position, toolbar, sourceID, blockID) {
 
   toolbar.style.setProperty( '--top', position.top + 'px' )
   toolbar.style.setProperty( '--left', position.left + 'px' )
+
+
+  // handle click button to hide
+  const btn_hide = toolbar.querySelector('.toolbar-btn-hide')
+  btn_hide.addEventListener('click', () => {
+    toolbar.classList.add( 'hidden' )
+    toolbar.style.removeProperty('--top')
+    toolbar.style.removeProperty('--left')
+  })
 }
 
 // <https://github.com/alienzhou/web-highlighter/blob/master/example/index.js#L55-L67>

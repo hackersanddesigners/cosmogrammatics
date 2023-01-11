@@ -16,6 +16,5 @@
       'selection_type'   => $thread['selection_type'],
       'selection_coords' => $thread['selection_coords']
     ])
-
   ?>
 </section>

@@ -8,7 +8,6 @@
   data-block-selection-type="<?= $selection_type ?? NULL ?>"
   data-block-selection-text-id=""
 >
-
   <label for="body"></label>
   <input type="text" placeholder="comment..." id="body" name="body" value="<?= $data['text'] ?? null ?>" required>
 
