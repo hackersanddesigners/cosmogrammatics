@@ -134,37 +134,4 @@ function make_comment_el( data ) {
 
 }
 
-function post_comment( comment ) {
-  const csrf = comment.csrf
-  const article_slug = comment.content.article_slug
-  const url  = `/api/pages/articles+${ article_slug }+comments`
-
-  return fetch( `${ url }/children` , {
-    method: "POST",
-    headers: { "X-CSRF": csrf },
-    body: JSON.stringify( comment )
-  })
-  .then(response => response.json())
-  .then(response => {
-
-    // set comment to be published
-    return fetch( `${ url }+${ response.data.slug }/status`, {
-      method: "PATCH",
-      headers: { "X-CSRF": csrf },
-      body: JSON.stringify( { status: 'listed' } )
-    })
-    .then(response => response.json())
-    .then( response => response )
-    .catch( error => console.error( error ) )
-
-  })
-    .then(response => response)
-    .catch(error => console.error(error) )
-
-}
-
-
-module.exports = {
-  respond_comment,
-  post_comment
-}
+module.exports = { respond_comment }
