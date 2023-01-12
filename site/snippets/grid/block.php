@@ -24,16 +24,6 @@
 
 
   $threads = $block->threads( $comments );
-
-  $selection_coords = '';
-foreach($threads as $thread) {
-    // dump($thread['selection_id']);
-    // dump($thread['selection_coords']);
-}
-  // if ($block->selection_coords()->isNotEmpty()) {
-  //     // dump($block->selection_coords()->toStructure());
-  // }
-
 ?>
 
 <section
