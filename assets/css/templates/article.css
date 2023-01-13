@@ -250,7 +250,8 @@ main form.comment_form label p {
 main .toolbar {
   position: absolute;
   width: var(--side-width);
-  height: var(--side-width);
+  /* height: var(--side-width); */
+  height: fit-content;
   z-index: 10;
   --top: 0;
   --left: 0;
@@ -284,6 +285,7 @@ main .toolbar.hidden {
     position: absolute;
     bottom: 0.5rem;
     right: 0.5rem;
+    cursor: pointer;
 }
 
 main .row .column .block:not(.columns):hover form.comment_form,
