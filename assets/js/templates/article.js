@@ -5,13 +5,21 @@ const LocalStore = require('../local.store')
 const {commentReviewToggle, commentReviewList} = require('../comment-review.js')
 
 
+const article_slug = window.location.pathname.split('/').pop().split('/').join('+')
 const comment_forms = document.querySelectorAll( '.comment_form' )
-for ( const comment_form of comment_forms ) {
+
+const user_store = new LocalStore('user')
+const user = user_store.getByID(article_slug)
+
+for (const comment_form of comment_forms) {
+  if (user !== undefined) {
+    comment_form.querySelector('#author').value = user.value
+  }
+
   comment_form.onsubmit = respond_comment
 }
 
 // synchronize text-highlights backend data with localStorage
-const article_slug = window.location.pathname.split('/').pop().split('/').join('+')
 
 ;(async() => {
   await fetchArticleHighlightsFromAPI(article_slug)

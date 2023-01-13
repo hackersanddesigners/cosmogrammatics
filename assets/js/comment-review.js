@@ -41,16 +41,34 @@ function commentReviewList(article_slug) {
   const status = document.querySelector('.comment-status')
   status.innerHTML = `You have ${comments.length} unpublished comments.`
 
-  // assume first comment done on the page sets the username
-  // for the time being (until username is explicitly edited)
-  const username_value = comments[0].content.user
-  console.log('username_value =>', username_value)
+  // save username into a different, own store
+  // so we can more easily fetch it and pre-add it
+  // to any other comment done afterwards
+  const user_store = new LocalStore('user')
+  const user = user_store.getByID(article_slug)
 
+  let username = {id: '', value: ''}
+  if (user === undefined) {
+    username['id'] = `${article_slug}`
+
+    if (comments.length > 0) {
+      username['value'] = comments[0].content.user
+    }
+
+    user_store.save(username)
+
+  } else {
+    username = user
+  }
+
+  // -- set username to comment-list-status area
   const username_edit = document.querySelector('.comment-username-wrapper')
   const username_input = username_edit.querySelector('input')
-  username_input.value = username_value
+  username_input.value = username.value
+
   // set input text width to specific username length
   username_input.style.width = `${username_input.value.length +1}ch`
+  // --
 
   const username_edit_btn = document.querySelector('.comment-username-edit-btn')
   username_edit_btn.addEventListener('click', (e) => {
