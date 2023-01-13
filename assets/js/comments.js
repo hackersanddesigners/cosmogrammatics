@@ -7,7 +7,7 @@ const xss = require('xss')
 function respond_comment( e ) {
   e.preventDefault()
 
-  const form    = e.target
+  const form = e.target
 
   // -- save comment to localStorage under:
   //    <current-article-url>: [{..}, ...]
@@ -16,7 +16,7 @@ function respond_comment( e ) {
   // the object needs to have an ID field
   // else LocalStore will replace the previous
   // comment with the newest one only
-  let comment = make_comment( form, store )
+  let comment = make_comment(form, store)
   comment['id'] = comment.content.selection_text.id
   
   const article_slug = comment.content.article_slug
@@ -24,7 +24,6 @@ function respond_comment( e ) {
   comment_store.save(comment)
 
   commentReviewList(article_slug)
-
 
   // ---
   // form: reset and hide form
@@ -44,12 +43,15 @@ function respond_comment( e ) {
   if ( form_parent.classList.contains( 'toolbar' ) ) {
     // make a new comment thread for this block
     thread = make_comment_thread_el( form )
+
     const block_id = form.getAttribute( 'data-block-id' )
     const block = document.getElementById( block_id )
     const aside = block.querySelector( 'aside' )
     const thread_form = Array.from( thread.children )[0]
+ 
     thread.insertBefore( article, thread_form )
     aside.appendChild( thread )
+
   } else {
     thread = form_parent
     thread.insertBefore(article, form)
