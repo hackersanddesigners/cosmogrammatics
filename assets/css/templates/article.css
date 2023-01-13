@@ -478,12 +478,16 @@ main:has( select#view_mode option[value="5"]:checked ) {
     padding-right:  1rem;
 }
 
-.comment-list-label p {
+.comment-label-wrapper {
+    padding-right: 1rem;
+}
+
+.comment-label-wrapper p {
     margin-top: 0;
     margin-bottom: 0;
 }
 
-.comment-list-label p:first-child {
+.comment-label-wrapper p:first-child {
     padding-bottom: 0.5rem;
 }
 
@@ -491,6 +495,10 @@ main:has( select#view_mode option[value="5"]:checked ) {
     max-height: 1.5rem;
     height: fit-content;
     cursor: pointer;
+}
+
+.comment-list-show-highlight {
+    padding-right: 1rem;
 }
 
 .alert {
