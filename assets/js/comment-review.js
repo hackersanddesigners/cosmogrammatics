@@ -84,7 +84,10 @@ function commentReviewList(article_slug) {
 
       username_input.focus()
     }
-  })   
+  })
+
+  // -- edit comment text
+  
 
   // -- publish selected comments
   const publish = document.querySelector('.post_comment')
@@ -99,10 +102,12 @@ function commentReviewList(article_slug) {
 
 function make_comment_el(comment, idx, article_slug) {
 
+  // -- wrapper node
   const wrapper = document.createElement('div')
   wrapper.classList.add('comment-list-wrapper')
   wrapper.setAttribute('id', comment.content.selection_text.id)
 
+  // -- input checkbox
   const comment_input = document.createElement('input')
   comment_input.setAttribute('type', 'checkbox')
   comment_input.setAttribute('id', '')
@@ -110,15 +115,16 @@ function make_comment_el(comment, idx, article_slug) {
   comment_input.setAttribute('checked', 'checked')
   comment_input.classList.add('comment-list-input')
 
+  // -- label
   const comment_label = document.createElement('label')
   comment_label.setAttribute('for', '<id>')
   comment_label.classList.add('comment-list-label')
 
-  // text
+  // -- text
   const comment_text = document.createElement('p')
   comment_text.append(comment.content.text)
 
-  // date
+  // -- date
   const comment_date = document.createElement('p')
   const timestamp = document.createElement('time')
   timestamp.setAttribute('datetime', comment.content.timestamp)
@@ -126,12 +132,14 @@ function make_comment_el(comment, idx, article_slug) {
   comment_date.append(timestamp)
   comment_date.innerHTML = `on ${comment.content.timestamp}` 
 
+  // -- hidden input to send data via POST request
   const comment_obj_data = document.createElement('input')
   comment_obj_data.setAttribute('type', 'hidden')
   comment_obj_data.setAttribute('id', `comment_data[]`)
   comment_obj_data.setAttribute('name', `comment_data[]`)
   comment_obj_data.setAttribute('value', JSON.stringify(comment))
 
+  // -- comment remove button
   const comment_remove = document.createElement('button')
   comment_remove.setAttribute('type', 'button')
   comment_remove.innerHTML = 'Remove'
@@ -166,14 +174,19 @@ function make_comment_el(comment, idx, article_slug) {
 
   // --
 
+  // -- append above nodes to label wrapper node
   const comment_label_wrapper = document.createElement('div')
+  comment_label_wrapper.classList.add('comment-label-wrapper')
   comment_label_wrapper.append(comment_text)
   comment_label_wrapper.append(comment_date)
   comment_label_wrapper.append(comment_obj_data)
 
+  // -- append wrapper nodes to label node
   comment_label.append(comment_label_wrapper)
+  comment_label.append(show_text_selection)
   comment_label.append(comment_remove)
 
+  // -- append input and label nodes to root wrapper node
   wrapper.append(comment_input)
   wrapper.append(comment_label)
 
