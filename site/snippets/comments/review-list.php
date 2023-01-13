@@ -4,7 +4,15 @@
   <form action="<?= $page->url() ?>" method="POST" class="comment-list hidden">
     <fieldset>
       <h3>Your unpublished comments</h3>
-      <p class="comment-status">You have x unpublished comments.</p>
+      <div class="comment-header">
+        <p class="comment-status">You have x unpublished comments.</p>
+        <div class="comment-username-wrapper">
+          <label for="comment-username">Username:</label>
+          <input type="text" id="comment-username" name="comment-username" value="" readonly="readonly">
+          <button type="button" class="comment-username-edit-btn">Edit</button>
+        </div>
+      </div>
+
       <div class="comment-data"></div>
       <input name="post_comment" class="post_comment" type="submit" value="Publish">
     </fieldset>

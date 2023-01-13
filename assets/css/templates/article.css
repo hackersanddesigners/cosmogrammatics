@@ -496,3 +496,40 @@ main:has( select#view_mode option[value="5"]:checked ) {
 .alert {
     border: 1px solid red;
 }
+
+
+.comment-header {
+    display: flex;
+    flex-direction: row;
+    padding: 0 0 1.5rem 0;
+}
+
+.comment-status {
+    width: 50%;
+    margin: 0;
+}
+
+.comment-username-wrapper {
+    width: 50%;
+    /* display: flex; */
+    /* flex-direction: row; */
+    /* align-content: baseline; */
+}
+
+.comment-username-wrapper label {
+    padding-top: 0.25rem;
+}
+
+.comment-username-wrapper input[type=text] {
+    border: none;
+}
+
+.comment-username {
+    padding-right: 0.5rem;
+}
+
+.comment-username-edit-btn {
+    /* max-height: 1.5rem; */
+    /* height: fit-content; */
+    cursor: pointer;
+}
