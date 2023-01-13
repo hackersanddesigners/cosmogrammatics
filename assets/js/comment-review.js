@@ -97,6 +97,23 @@ function commentReviewList(article_slug) {
     // remove all items from comments store
     comment_store.removeAll()
   })
+
+  // -- remove all comments
+  const remove_all = document.querySelector('.comment-remove-all')
+  remove_all.addEventListener('click', () => {
+    comments.map(comment => {
+      const comment_id = comment.id
+
+      const tip = document.querySelector(`[data-id="${comment_id}"]`)
+      if (tip !== null) {
+        tip.remove()
+      }
+    })
+
+    // remove all comments
+    comment_store.removeAll()
+
+  })
   
 }
 

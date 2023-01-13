@@ -15,6 +15,7 @@
 
       <div class="comment-data"></div>
       <input name="post_comment" class="post_comment" type="submit" value="Publish">
+      <button type="button" class="comment-remove-all">Remove all comments</button>
     </fieldset>
 
     <div class="honey">
