@@ -110,7 +110,7 @@ function parseBlocks($blocks, $type) {
             $blockContent = $block->content()->toArray();
 
             // if we first make a block-column and then add
-            // a block inside the column, we `bid` field is not
+            // a block inside the column, the `bid` field is not
             // added yet to the block. let's check if it
             // exists and if not, let's create it first
 
