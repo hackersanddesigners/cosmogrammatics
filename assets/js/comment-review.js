@@ -117,7 +117,6 @@ function commentReviewList(article_slug) {
       inputs.forEach(input => {
         if (input.checked) {
           const comment_id = input.parentNode.id
-          console.log('comment_id =>', comment_id)
           comment_store.remove(comment_id)
         }
       })
@@ -158,31 +157,22 @@ function make_comment_el(comment, idx, article_slug) {
   // -- input checkbox
   const comment_input = document.createElement('input')
   comment_input.setAttribute('type', 'checkbox')
-  comment_input.setAttribute('id', `comment-list-${idx}`)
-  comment_input.setAttribute('name', `comment-list`)
+  comment_input.setAttribute('id', `comment_data[]`)
+  comment_input.setAttribute('name', `comment_data[]`)
   comment_input.classList.add('comment-list-input')
 
+  // set / remove data from input-checkbox field
+  // whenever the checkbox is clicked
   comment_input.addEventListener('click', (e) => {
-    // create / remove input hidden field
-    // whenever the checkbox is clicked
-
-    console.log('comment-input =>', e.target)
     const checkbox = e.target
 
     if (checkbox.checked) {
-      // add input-hidden field
-      const comment_obj_data = document.createElement('input')
-      comment_obj_data.setAttribute('type', 'hidden')
-      comment_obj_data.setAttribute('id', `comment_data[]`)
-      comment_obj_data.setAttribute('name', `comment_data[]`)
-      comment_obj_data.setAttribute('value', JSON.stringify(comment))
-
-      comment_label_wrapper.append(comment_obj_data)
+      // add data to input-checkbox
+      checkbox.value = JSON.stringify(comment)
 
     } else {
-      // remove input-hidden field
-      const input_hidden = comment_label_wrapper.querySelector('input[type=hidden]')
-      input_hidden.remove()
+      // reset data from input-checkbox
+      checkbox.value = ''
 
     }
   })
