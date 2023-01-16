@@ -143,23 +143,24 @@ function make_comment_el(comment, idx, article_slug) {
   // -- input checkbox
   const comment_input = document.createElement('input')
   comment_input.setAttribute('type', 'checkbox')
-  comment_input.setAttribute('id', '')
-  comment_input.setAttribute('name', '')
+  comment_input.setAttribute('id', `comment-list-${idx}`)
+  comment_input.setAttribute('name', `comment-list-${idx}`)
   comment_input.setAttribute('checked', 'checked')
   comment_input.classList.add('comment-list-input')
 
   // -- label
   const comment_label = document.createElement('label')
-  comment_label.setAttribute('for', '<id>')
+  comment_label.setAttribute('for', `comment-list-${idx}`)
   comment_label.classList.add('comment-list-label')
 
   // -- text
   const comment_input_text = document.createElement('input')
   comment_input_text.setAttribute('type', 'text')
-  comment_input_text.setAttribute('id', 'comment-list-text')
+  comment_input_text.setAttribute('id', `comment-list-text-${idx}`)
   comment_input_text.setAttribute('text', 'comment-list-text')
   comment_input_text.setAttribute('value', comment.content.text)
   comment_input_text.setAttribute('readonly', 'readonly')
+
 
   // -- date
   const comment_date = document.createElement('p')
