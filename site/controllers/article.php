@@ -71,6 +71,11 @@ return function ($kirby, $page) {
 
         $body = get('comment_data');
         
+        if ($body == null) {
+            go($page->url());
+            exit;
+        };
+        
         foreach($body as $field) {
 
             // get the data and check if it's all good
