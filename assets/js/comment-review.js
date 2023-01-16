@@ -106,12 +106,27 @@ function commentReviewList(article_slug) {
 
   // -- publish selected comments
   const publish = document.querySelector('.post_comment')
-  publish.addEventListener('click', () => {
-    // if comments are 0, disable button or display message?
 
-    // remove all items from comments store
-    comment_store.removeAll()
-  })
+  if (comments.length > 0) {
+    publish.removeAttribute('disabled')
+
+    // remove all input-checked items from comments store
+    publish.addEventListener('click', (e) => {
+      const inputs = Array.from(document.querySelectorAll('.comment-list-input'))
+
+      inputs.forEach(input => {
+        if (input.checked) {
+          const comment_id = input.parentNode.id
+          console.log('comment_id =>', comment_id)
+          comment_store.remove(comment_id)
+        }
+      })
+
+    })
+
+  } else {
+    publish.setAttribute('disabled', 'disabled')
+  }
 
   // -- remove all comments
   const remove_all = document.querySelector('.comment-remove-all')
@@ -144,9 +159,33 @@ function make_comment_el(comment, idx, article_slug) {
   const comment_input = document.createElement('input')
   comment_input.setAttribute('type', 'checkbox')
   comment_input.setAttribute('id', `comment-list-${idx}`)
-  comment_input.setAttribute('name', `comment-list-${idx}`)
-  comment_input.setAttribute('checked', 'checked')
+  comment_input.setAttribute('name', `comment-list`)
   comment_input.classList.add('comment-list-input')
+
+  comment_input.addEventListener('click', (e) => {
+    // create / remove input hidden field
+    // whenever the checkbox is clicked
+
+    console.log('comment-input =>', e.target)
+    const checkbox = e.target
+
+    if (checkbox.checked) {
+      // add input-hidden field
+      const comment_obj_data = document.createElement('input')
+      comment_obj_data.setAttribute('type', 'hidden')
+      comment_obj_data.setAttribute('id', `comment_data[]`)
+      comment_obj_data.setAttribute('name', `comment_data[]`)
+      comment_obj_data.setAttribute('value', JSON.stringify(comment))
+
+      comment_label_wrapper.append(comment_obj_data)
+
+    } else {
+      // remove input-hidden field
+      const input_hidden = comment_label_wrapper.querySelector('input[type=hidden]')
+      input_hidden.remove()
+
+    }
+  })
 
   // -- label
   const comment_label = document.createElement('label')
@@ -169,14 +208,7 @@ function make_comment_el(comment, idx, article_slug) {
 
   comment_date.append(timestamp)
   comment_date.innerHTML = `on ${comment.content.timestamp}` 
-
-  // -- hidden input to send data via POST request
-  const comment_obj_data = document.createElement('input')
-  comment_obj_data.setAttribute('type', 'hidden')
-  comment_obj_data.setAttribute('id', `comment_data[]`)
-  comment_obj_data.setAttribute('name', `comment_data[]`)
-  comment_obj_data.setAttribute('value', JSON.stringify(comment))
-
+ 
   // -- comment edit button
   const comment_edit = document.createElement('button')
   comment_edit.setAttribute('type', 'button')
@@ -255,7 +287,6 @@ function make_comment_el(comment, idx, article_slug) {
   comment_label_wrapper.classList.add('comment-label-wrapper')
   comment_label_wrapper.append(comment_input_text)
   comment_label_wrapper.append(comment_date)
-  comment_label_wrapper.append(comment_obj_data)
 
   // -- append wrapper nodes to label node
   comment_label.append(comment_label_wrapper)
