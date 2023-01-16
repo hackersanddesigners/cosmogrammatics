@@ -92,6 +92,8 @@ function commentReviewList(article_slug) {
       // toggle styles
 
       target.textContent = 'Save'
+
+      moveCaretToEnd(username_input)
       
       username_input.removeAttribute('readonly')
       username_input.style.width = 'auto'
@@ -201,6 +203,8 @@ function make_comment_el(comment, idx, article_slug) {
       // toggle styles
 
       target.textContent = 'Save'
+
+      moveCaretToEnd(comment_input_text)
       
       comment_input_text.removeAttribute('readonly')
       comment_input_text.style.width = 'auto'
@@ -265,6 +269,19 @@ function make_comment_el(comment, idx, article_slug) {
 
   return wrapper
 
+}
+
+
+// <https://stackoverflow.com/a/4716021>
+function moveCaretToEnd(el) {
+  if (typeof el.selectionStart == "number") {
+    el.selectionStart = el.selectionEnd = el.value.length;
+  } else if (typeof el.createTextRange != "undefined") {
+    el.focus();
+    var range = el.createTextRange();
+    range.collapse(false);
+    range.select();
+  }
 }
 
 module.exports = { commentReviewToggle, commentReviewList }
