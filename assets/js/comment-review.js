@@ -76,14 +76,11 @@ function commentReviewList(article_slug) {
     
     if (target.textContent === 'Save') {
       // save input text
-      // => replace all comment.content.user w/ value in input text?
-      comments.map(comment => {
-        comment.content.user = username_input.value
-        comment_store.save(comment)
-      })
+      username.value = username_input.value
+      user_store.save(username)
 
       // reset styles
-      target.textContent = 'Save'
+      target.textContent = 'Edit'
 
       username_input.setAttribute('readonly', 'readonly')
       username_input.style.width = `${username_input.value.length +1}ch`
