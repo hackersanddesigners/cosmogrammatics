@@ -262,7 +262,9 @@ function make_comment_el(comment, idx, article_slug) {
   // -- add link to text-selection span
   const highlight_id = comment.content.selection_text.id
   const target = document.querySelector(`[data-highlight-id="${highlight_id}"]`)
-  target.setAttribute('id', highlight_id) 
+  if (target !== null) {
+    target.setAttribute('id', highlight_id) 
+  }
 
   const show_text_selection = document.createElement('a')
   show_text_selection.setAttribute('href', `#${highlight_id}`)
