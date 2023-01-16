@@ -48,12 +48,21 @@ function respond_comment( e ) {
     thread = make_comment_thread_el( form )
 
     const block_id = form.getAttribute( 'data-block-id' )
-    const block = document.getElementById( block_id )
-    const aside = block.querySelector( 'aside' )
-    const thread_form = Array.from( thread.children )[0]
- 
-    thread.insertBefore( article, thread_form )
-    aside.appendChild( thread )
+    console.log('block_id =>', [form, block_id])
+    if (block_id !== '') {
+      const block = document.getElementById( block_id )
+      const aside = block.querySelector( 'aside' )
+      const thread_form = Array.from( thread.children )[0]
+      
+      thread.insertBefore( article, thread_form )
+      aside.appendChild( thread )
+
+      // hide input-form
+      form_parent.classList.add('hidden')
+      form_parent.style.removeProperty('--top')
+      form_parent.style.removeProperty('--left')
+
+    }
 
   } else {
     thread = form_parent
