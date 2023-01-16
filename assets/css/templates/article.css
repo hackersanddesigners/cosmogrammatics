@@ -484,7 +484,7 @@ main:has( select#view_mode option[value="5"]:checked ) {
     padding-right: 1rem;
 }
 
-#comment-list-text {
+.comment-label-wrapper input[type=text] {
     margin-bottom: 1rem;
 }
 
@@ -538,12 +538,13 @@ main:has( select#view_mode option[value="5"]:checked ) {
     padding-top: 0.25rem;
 }
 
-#comment-list-text {
+.comment-label-wrapper input[type=text] {
     border: none;
 }
 
 .comment-username-wrapper input[type=text] {
     border: none;
+    margin-right: 1rem;
 }
 
 .comment-username {
