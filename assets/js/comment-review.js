@@ -4,8 +4,8 @@ const store = new LocalStore()
 // -- comment-review
 //    display unpublished comments
 //    saved in localStorage,
-//    allow to remove unwanted ones
-//    (maybe edit even?) and then
+//    allow to remove unwanted ones,
+//    edit them, and then selectively
 //    publish them all in one go
 
 
@@ -41,25 +41,15 @@ function commentReviewList(article_slug) {
   const status = document.querySelector('.comment-status')
   status.innerHTML = `You have ${comments.length} unpublished comments.`
 
-  // save username into a different, own store
-  // so we can more easily fetch it and pre-add it
-  // to any other comment done afterwards
-  const user_store = new LocalStore('user')
-  const user = user_store.getByID(article_slug)
-
-  let username = {id: '', value: ''}
-  if (user === undefined) {
-    username['id'] = `${article_slug}`
-
-    if (comments.length > 0) {
-      username['value'] = comments[0].content.user
-    }
-
-    user_store.save(username)
-
-  } else {
-    username = user
+  // -- save username into a different, own store
+  //    so we can more easily fetch it and pre-add it
+  //    to any other comment done afterwards
+  let user_name = ''
+  if (comments.length > 0) {
+    user_name = comments[0].content.user
   }
+
+  const username = setUsername(user_name, article_slug)
 
   // -- set username to comment-list-status area
   const username_edit = document.querySelector('.comment-username-wrapper')
@@ -308,4 +298,28 @@ function moveCaretToEnd(el) {
   }
 }
 
-module.exports = { commentReviewToggle, commentReviewList }
+// save username into a different, own store
+// so we can more easily fetch it and pre-add it
+// to any other comment done afterwards
+function setUsername(name, article_slug) {
+
+  const user_store = new LocalStore('user')
+  const user = user_store.getByID(article_slug)
+
+  let username = {id: '', value: ''}
+
+  if (user === undefined || user.value === '') {
+    username['id'] = `${article_slug}`
+    username['value'] = name
+
+    user_store.save(username)
+
+  } else {
+    username = user
+  }
+
+  return username
+
+}
+
+module.exports = { commentReviewToggle, commentReviewList, setUsername }

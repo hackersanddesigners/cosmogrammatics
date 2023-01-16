@@ -2,7 +2,7 @@ const LocalStore = require('./local.store')
 const store = new LocalStore()
 const {commentReviewList} = require('./comment-review.js')
 const xss = require('xss')
-
+const { setUsername } = require('./comment-review')
 
 function respond_comment( e ) {
   e.preventDefault()
@@ -18,6 +18,9 @@ function respond_comment( e ) {
   // comment with the newest one only
   let comment = make_comment(form, store)
   comment['id'] = comment.content.selection_text.id
+
+  // save username to local.store if not set yet
+  setUsername(comment.content.user, comment.content.article_slug)
   
   const article_slug = comment.content.article_slug
   const comment_store = new LocalStore(`comment-${article_slug}`)
