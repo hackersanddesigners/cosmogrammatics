@@ -102,10 +102,8 @@ function commentReviewList(article_slug) {
 
       username_input.focus()
     }
-  })
 
-  // -- edit comment text
-  
+  })
 
   // -- publish selected comments
   const publish = document.querySelector('.post_comment')
@@ -136,6 +134,7 @@ function commentReviewList(article_slug) {
 }
 
 function make_comment_el(comment, idx, article_slug) {
+  const comment_store = new LocalStore(`comment-${article_slug}`)
 
   // -- wrapper node
   const wrapper = document.createElement('div')
@@ -156,8 +155,12 @@ function make_comment_el(comment, idx, article_slug) {
   comment_label.classList.add('comment-list-label')
 
   // -- text
-  const comment_text = document.createElement('p')
-  comment_text.append(comment.content.text)
+  const comment_input_text = document.createElement('input')
+  comment_input_text.setAttribute('type', 'text')
+  comment_input_text.setAttribute('id', 'comment-list-text')
+  comment_input_text.setAttribute('text', 'comment-list-text')
+  comment_input_text.setAttribute('value', comment.content.text)
+  comment_input_text.setAttribute('readonly', 'readonly')
 
   // -- date
   const comment_date = document.createElement('p')
@@ -174,13 +177,49 @@ function make_comment_el(comment, idx, article_slug) {
   comment_obj_data.setAttribute('name', `comment_data[]`)
   comment_obj_data.setAttribute('value', JSON.stringify(comment))
 
+  // -- comment edit button
+  const comment_edit = document.createElement('button')
+  comment_edit.setAttribute('type', 'button')
+  comment_edit.innerHTML = 'Edit'
+  comment_edit.classList.add('comment-list-edit')
+
+  comment_edit.addEventListener('click', (e) => {
+    const target = e.target
+
+    if (target.textContent === 'Save') {
+      // save input text
+      comment.content.text = comment_input_text.value
+      comment_store.save(comment)
+
+      // reset styles
+      target.textContent = 'Edit'
+
+      comment_input_text.setAttribute('readonly', 'readonly')
+      comment_input_text.style.width = `${comment_input_text.value.length +1}ch`
+      comment_input_text.style.border = 'none'
+
+      document.querySelector('body').focus()
+
+    } else if (target.textContent === 'Edit') {
+      // toggle styles
+
+      target.textContent = 'Save'
+      
+      comment_input_text.removeAttribute('readonly')
+      comment_input_text.style.width = 'auto'
+      comment_input_text.style.border = 'auto'
+
+      comment_input_text.focus()
+    }
+
+  })
+
   // -- comment remove button
   const comment_remove = document.createElement('button')
   comment_remove.setAttribute('type', 'button')
   comment_remove.innerHTML = 'Remove'
   comment_remove.classList.add('comment-list-remove')
 
-  const comment_store = new LocalStore(`comment-${article_slug}`)
   comment_remove.addEventListener('click', () => {
     comment_store.remove(comment.content.selection_text.id)
     commentReviewList(article_slug)      
@@ -212,14 +251,15 @@ function make_comment_el(comment, idx, article_slug) {
   // -- append above nodes to label wrapper node
   const comment_label_wrapper = document.createElement('div')
   comment_label_wrapper.classList.add('comment-label-wrapper')
-  comment_label_wrapper.append(comment_text)
+  comment_label_wrapper.append(comment_input_text)
   comment_label_wrapper.append(comment_date)
   comment_label_wrapper.append(comment_obj_data)
 
   // -- append wrapper nodes to label node
   comment_label.append(comment_label_wrapper)
-  comment_label.append(show_text_selection)
+  comment_label.append(comment_edit)
   comment_label.append(comment_remove)
+  comment_label.append(show_text_selection)
 
   // -- append input and label nodes to root wrapper node
   wrapper.append(comment_input)

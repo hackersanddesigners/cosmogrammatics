@@ -484,6 +484,10 @@ main:has( select#view_mode option[value="5"]:checked ) {
     padding-right: 1rem;
 }
 
+#comment-list-text {
+    margin-bottom: 1rem;
+}
+
 .comment-label-wrapper p {
     margin-top: 0;
     margin-bottom: 0;
@@ -493,10 +497,18 @@ main:has( select#view_mode option[value="5"]:checked ) {
     padding-bottom: 0.5rem;
 }
 
+.comment-list-edit {
+    max-height: 1.5rem;
+    height: fit-content;
+    cursor: pointer;
+    margin-right: 1rem;
+}
+
 .comment-list-remove {
     max-height: 1.5rem;
     height: fit-content;
     cursor: pointer;
+    margin-right: 1rem;
 }
 
 .comment-list-show-highlight {
@@ -506,7 +518,6 @@ main:has( select#view_mode option[value="5"]:checked ) {
 .alert {
     border: 1px solid red;
 }
-
 
 .comment-header {
     display: flex;
@@ -521,13 +532,14 @@ main:has( select#view_mode option[value="5"]:checked ) {
 
 .comment-username-wrapper {
     width: 50%;
-    /* display: flex; */
-    /* flex-direction: row; */
-    /* align-content: baseline; */
 }
 
 .comment-username-wrapper label {
     padding-top: 0.25rem;
+}
+
+#comment-list-text {
+    border: none;
 }
 
 .comment-username-wrapper input[type=text] {
@@ -539,7 +551,5 @@ main:has( select#view_mode option[value="5"]:checked ) {
 }
 
 .comment-username-edit-btn {
-    /* max-height: 1.5rem; */
-    /* height: fit-content; */
     cursor: pointer;
 }
