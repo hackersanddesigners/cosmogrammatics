@@ -1,12 +1,10 @@
 <?php
 
   // page identifier used as class for styling
-
   $page_id = 'p_' . $page->slug();
 
   // if the block is an embed, make another <style> tag that
   // is scoped with the embedded pages' styles.
-
   if ( $block->type() == 'page_embed' ) {
       if ($link = $block->pageurl()->toLinkObject()) {
           if ($pageEmbed = page($link->value())) {
@@ -44,7 +42,7 @@
   <aside>
     <?php snippet( 'comments/index', [
       'block'   => $block,
-     'threads' => $threads
+      'threads' => $threads
     ]) ?>
   </aside>
 
