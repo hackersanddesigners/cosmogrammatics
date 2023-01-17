@@ -31,8 +31,7 @@ for (const comment_form of comment_forms) {
   comment_form.onsubmit = respond_comment
 }
 
-// synchronize text-highlights backend data with localStorage
-
+// -- synchronize text-highlights backend data with localStorage
 ;(async() => {
   await fetchArticleHighlightsFromAPI(article_slug)
 })()

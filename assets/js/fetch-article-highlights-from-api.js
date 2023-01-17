@@ -7,7 +7,7 @@ async function fetchArticleHighlightsFromAPI(article_slug) {
     .then(response => response.json())
     .then(response => {
       const newData = response
-      textHighlightMergeUnique(newData)
+      textHighlightMergeUnique(newData, article_slug)
 
     })
   .catch(error => {

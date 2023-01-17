@@ -16,10 +16,15 @@ function textHighlight(target, toolbar, article_slug) {
     },
   })
 
-  const store = new LocalStore();
+  // -- restore all comments (drafts and published)
+  //    which are mapped only to text-highlights with actual
+  //    comments attached to it
 
-  // restore all highlights to Highlighter instance
-  store.getAll().forEach(hs => {
+  const highlight_store = new LocalStore()
+
+  const comment_store = new LocalStore(`comment-${article_slug}`)
+  comment_store.getAll().forEach(comment => {
+    const hs = comment.content.selection_text
     highlighter.fromStore(hs.startMeta, hs.endMeta, hs.text, hs.id)
   });
 
@@ -58,9 +63,8 @@ function textHighlight(target, toolbar, article_slug) {
         const positionToolbar = getCoords(selectionNode)
         toggle_toolbar(positionToolbar, toolbar, source.id, blockID, user)
         
-        // -- save text-selection to store
-        // comment_store.save(sources)
-        store.save(source)
+        // -- save text-selection to highlight_store
+        highlight_store.save(source)
 
         const form = toolbar.querySelector('form')
         form.querySelector('#selection_text').value = JSON.stringify(source)

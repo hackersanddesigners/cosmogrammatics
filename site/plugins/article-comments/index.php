@@ -17,19 +17,32 @@ Kirby::plugin('cosmo-api/article-comments', [
                         $startMeta = $selection_text->startMeta()->toObject();
 
                         $highlight = [
-                            '__isHighlightSource' => $selection_text->__isHighlightSource()->value(),
-                            'endMeta' => [
-                                'parentIndex' => $endMeta->parentIndex()->value(),
-                                'parentTagName' => $endMeta->parentTagName()->value(),
-                                'textOffset' => $endMeta->textOffset()->value(),
+                            'content' => [
+                                'user' => $comment->user()->value(),
+                                'timestamp' => $comment->timestamp()->value(),
+                                'article_slug' => $comment->article_slug()->value(),
+                                'block_id' => $comment->block_id()->value(),
+                                'text' => $comment->text()->value(),
+                                'selection_type' => $comment->selection_type()->value(),
+                                'selection_text' => [
+                                    'startMeta' => [
+                                        'parentIndex' => $startMeta->parentIndex()->value(),
+                                        'parentTagName' => $startMeta->parentTagName()->value(),
+                                        'textOffset' => $startMeta->textOffset()->value(),
+                                    ],
+                                    'endMeta' => [
+                                        'parentIndex' => $endMeta->parentIndex()->value(),
+                                        'parentTagName' => $endMeta->parentTagName()->value(),
+                                        'textOffset' => $endMeta->textOffset()->value(),
+                                    ],
+                                    'text' => $selection_text->text()->value(),
+                                    'id' => $selection_text->id()->value(),
+                                    '__isHighlightSource' => $selection_text->__isHighlightSource()->value(),
+                                ],
                             ],
-                            'id' => $selection_text->id()->value(),
-                            'startMeta' => [
-                                'parentIndex' => $startMeta->parentIndex()->value(),
-                                'parentTagName' => $startMeta->parentTagName()->value(),
-                                'textOffset' => $startMeta->textOffset()->value(),
-                            ],
-                            'text' => $selection_text->text()->value()
+                            'id' => $comment->id(),
+                            'slug' => $comment->slug(),
+                            'title' => $comment->title()->value(),
                         ];
 
                         array_push($text_highlights, $highlight);
