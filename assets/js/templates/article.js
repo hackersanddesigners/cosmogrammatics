@@ -36,10 +36,9 @@ for (const comment_form of comment_forms) {
   await fetchArticleHighlightsFromAPI(article_slug)
 })()
 
-const article_element    = document.querySelector( 'main' )
-const selection_toolbar  = document.querySelector( '.toolbar' )
+const article_element = document.querySelector( 'main' )
+const selection_toolbar = document.querySelector( '.toolbar' )
 const textRange = textHighlight(article_element, selection_toolbar, article_slug)
-
 
 // comment-review list
 commentReviewToggle()
