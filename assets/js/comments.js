@@ -1,10 +1,10 @@
 const LocalStore = require('./local.store')
 const store = new LocalStore()
-const {commentReviewList} = require('./comment-review.js')
+const { commentReviewList } = require('./comment-review.js')
 const xss = require('xss')
 const { setUsername } = require('./comment-review')
 
-function respond_comment( e ) {
+function respond_comment(e) {
   e.preventDefault()
 
   const form = e.target
@@ -19,61 +19,20 @@ function respond_comment( e ) {
   let comment = make_comment(form, store)
   comment['id'] = comment.content.selection_text.id
 
-  // save username to local.store if not set yet
+  // -- save username to local.store if not set yet
   setUsername(comment.content.user, comment.content.article_slug)
   
   const article_slug = comment.content.article_slug
   const comment_store = new LocalStore(`comment-${article_slug}`)
   comment_store.save(comment)
-
+ 
+  // -- set comment-review list
   commentReviewList(article_slug)
 
-  // ---
-  // form: reset and hide form
-  form.reset()
-  form.blur()
-
-  // create newly posted comment
-  const article = make_comment_el( comment )
-
-  // append new comment to comment thread
-  // before <form> (blue circle)
-
-  let thread
-
-  // first check if the form is the toolbar form
-  const form_parent = form.parentNode
-  if ( form_parent.classList.contains( 'toolbar' ) ) {
-    // make a new comment thread for this block
-    thread = make_comment_thread_el( form )
-
-    const block_id = form.getAttribute( 'data-block-id' )
-    console.log('block_id =>', [form, block_id])
-    if (block_id !== '') {
-      const block = document.getElementById( block_id )
-      const aside = block.querySelector( 'aside' )
-      const thread_form = Array.from( thread.children )[0]
-      
-      thread.insertBefore( article, thread_form )
-      aside.appendChild( thread )
-
-      // hide input-form
-      form_parent.classList.add('hidden')
-      form_parent.style.removeProperty('--top')
-      form_parent.style.removeProperty('--left')
-
-    }
-
-  } else {
-    thread = form_parent
-    thread.insertBefore(article, form)
-  }
-
-  // update comment count
-  const comment_count = document.querySelector('#comment_count')
-  comment_count.innerHTML = new Number( comment_count.innerHTML ) + 1
-
-  article.focus()
+  // -- create and append newly posted comment
+  const article_comment = make_comment_el(comment)
+  createComment(form, article_comment, comment)
+  article_comment.focus()
 
 }
 
@@ -113,8 +72,7 @@ function make_comment_thread_el( form ) {
   return thread
 }
 
-function make_comment_el( data ) {
-
+function make_comment_el(data) {
   // -- section
   const text_comment = document.createElement('section')
   const section_text = data.content.text
@@ -125,6 +83,7 @@ function make_comment_el( data ) {
   footer.classList.add( 'small_italic' )
   const date = document.createElement('p')
   const timestamp = document.createElement('time')
+
   // TODO set correct datetime format for timestamp `yyyy-mm-dd hh:mm:ss`
   const ts = new Date(data.content.timestamp)
   timestamp.setAttribute('datetime', data.content.timestamp)
@@ -149,4 +108,58 @@ function make_comment_el( data ) {
 
 }
 
-module.exports = { respond_comment }
+function createComment(form, article, comment) {
+  // -- append new comment to comment thread
+  //    before <form> (blue circle)
+  let thread
+
+  // form: reset and hide form
+  form.reset()
+  form.blur()
+  
+  // check if the form is the toolbar form
+  const form_parent = form.parentNode
+  if (form_parent.classList.contains('toolbar')) {
+
+    // make a new comment thread for this block
+    thread = make_comment_thread_el(form)
+
+    const block_id = form.getAttribute('data-block-id')
+    console.log('block_id =>', [form, block_id])
+
+    if (block_id !== '') {
+      const block = document.getElementById(block_id)
+      const aside = block.querySelector('aside')
+      const thread_form = Array.from(thread.children)[0]
+      
+      thread.insertBefore(article, thread_form)
+      aside.appendChild(thread)
+
+      // hide input-form
+      form_parent.classList.add('hidden')
+      form_parent.style.removeProperty('--top')
+      form_parent.style.removeProperty('--left')
+    }
+
+  } else {
+    thread = form_parent
+    thread.insertBefore(article, form)
+  }
+
+  updateCommentCounter('increase', 1)
+
+}
+
+function commentsArticle(comment, form) {
+  const article_comment = make_comment_el(comment)
+
+  form.setAttribute('data-block-selection-type', comment.content.selection_type)
+  form.setAttribute('data-block-selection-text-id', comment.content.selection_text.id)
+  form.querySelector('#selection_type').value = comment.content.selection_type
+  form.querySelector('#block_id').value = comment.content.block_id
+  // form.querySelector('#author').value = comment.content.user
+
+  createComment(form, article_comment, comment)
+}
+
+module.exports = { respond_comment, commentsArticle }
