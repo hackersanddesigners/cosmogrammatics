@@ -340,3 +340,22 @@ function removeCommentDOM(highlight_id) {
 
 }
 
+function updateCommentCounter(op, amount) {
+  // update comment count
+  const comment_count = document.querySelector('#comment_count')
+  const current_count = new Number(comment_count.innerHTML)
+
+  if (op === 'increase') {
+    comment_count.innerHTML = current_count + amount
+
+  } else if (op === 'decrease') {
+    const result = current_count - amount
+    comment_count.innerHTML = result < 0 ? 0 : result
+  }
+
+}
+
+module.exports = { commentReviewToggle,
+                   commentReviewList,
+                   setUsername,
+                   updateCommentCounter }

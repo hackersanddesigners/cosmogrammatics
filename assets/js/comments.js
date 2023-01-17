@@ -1,8 +1,7 @@
 const LocalStore = require('./local.store')
 const store = new LocalStore()
-const { commentReviewList } = require('./comment-review.js')
 const xss = require('xss')
-const { setUsername } = require('./comment-review')
+const { commentReviewList, setUsername, updateCommentCounter } = require('./comment-review')
 
 function respond_comment(e) {
   e.preventDefault()
