@@ -140,6 +140,7 @@ function make_comment_el( data ) {
   // -- append everything to <article>
   const article = document.createElement('article')
   article.setAttribute('tabindex', '0')
+  article.setAttribute('data-text-selection-id', data.content.selection_text.id)
 
   article.append(text_comment)
   article.append(footer)

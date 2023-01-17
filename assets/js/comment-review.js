@@ -95,9 +95,13 @@ function commentReviewList(article_slug) {
   })
 
   // -- publish selected comments
+  //    & remove all comments
   const publish = document.querySelector('.post_comment')
+  const remove_all = document.querySelector('.comment-remove-all')
 
   if (comments.length > 0) {
+
+    // -- publish selected comments
     publish.removeAttribute('disabled')
 
     // remove all input-checked items from comments store
@@ -116,21 +120,17 @@ function commentReviewList(article_slug) {
     // -- remove all comments
     remove_all.removeAttribute('disabled')
 
+    remove_all.addEventListener('click', () => {
+      comments.map(comment => {
+        const highlight_id = comment.content.selection_text.id
+        removeCommentDOM(highlight_id)
+      })
 
-  // -- remove all comments
-  const remove_all = document.querySelector('.comment-remove-all')
-  remove_all.addEventListener('click', () => {
-    comments.map(comment => {
-      const comment_id = comment.id
-
-      const tip = document.querySelector(`[data-id="${comment_id}"]`)
-      if (tip !== null) {
-        tip.remove()
-      }
+      comment_store.removeAll()
+      commentReviewList(article_slug)
     })
 
-    // remove all comments
-    comment_store.removeAll()
+    updateCommentCounter('decrease', comments.length)
 
   } else {
     publish.setAttribute('disabled', 'disabled')
@@ -182,7 +182,6 @@ function make_comment_el(comment, idx, article_slug) {
   comment_input_text.setAttribute('text', 'comment-list-text')
   comment_input_text.setAttribute('value', comment.content.text)
   comment_input_text.setAttribute('readonly', 'readonly')
-
 
   // -- date
   const comment_date = document.createElement('p')
@@ -237,13 +236,15 @@ function make_comment_el(comment, idx, article_slug) {
   comment_remove.innerHTML = 'Remove'
   comment_remove.classList.add('comment-list-remove')
 
+  const highlight_id = comment.content.selection_text.id
+
   comment_remove.addEventListener('click', () => {
-    comment_store.remove(comment.content.selection_text.id)
-    commentReviewList(article_slug)      
+    removeCommentDOM(highlight_id)
+    comment_store.remove(highlight_id)
+    commentReviewList(article_slug)
   })
 
   // -- add link to text-selection span
-  const highlight_id = comment.content.selection_text.id
   const target = document.querySelector(`[data-highlight-id="${highlight_id}"]`)
   if (target !== null) {
     target.setAttribute('id', highlight_id) 
@@ -325,4 +326,17 @@ function setUsername(name, article_slug) {
 
 }
 
-module.exports = { commentReviewToggle, commentReviewList, setUsername }
+function removeCommentDOM(highlight_id) {
+  // remove text-highlight
+  const tip = document.querySelector(`[data-highlight-id="${highlight_id}"]`)
+  if (tip !== null) {
+    tip.remove()
+  }
+
+  const article_comment = document.querySelector(`[data-text-selection-id="${highlight_id}"]`)
+  if (article_comment !== null) {
+    article_comment.remove()
+  }
+
+}
+
