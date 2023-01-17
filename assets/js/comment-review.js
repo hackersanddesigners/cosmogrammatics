@@ -112,10 +112,10 @@ function commentReviewList(article_slug) {
       })
 
     })
+ 
+    // -- remove all comments
+    remove_all.removeAttribute('disabled')
 
-  } else {
-    publish.setAttribute('disabled', 'disabled')
-  }
 
   // -- remove all comments
   const remove_all = document.querySelector('.comment-remove-all')
@@ -132,7 +132,10 @@ function commentReviewList(article_slug) {
     // remove all comments
     comment_store.removeAll()
 
-  })
+  } else {
+    publish.setAttribute('disabled', 'disabled')
+    remove_all.setAttribute('disabled', 'disabled')
+  }
   
 }
 
