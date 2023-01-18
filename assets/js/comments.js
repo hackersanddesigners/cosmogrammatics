@@ -111,7 +111,7 @@ function make_comment_el(data) {
 
 function createComment(form, article, comment) {
   // -- append new comment to comment thread
-  //    before <form> (blue circle)
+  //    before <form>
   let thread
 
   // form: reset and hide form

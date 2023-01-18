@@ -139,12 +139,6 @@ function textHighlight(target, toolbar, article_slug) {
     };
   }
 
-  function update_form(blockInfo) {
-    let form = document.querySelector('.toolbar form')
-    form.dataset.blockId = blockInfo.id
-    form.dataset.blockSelectionType = blockInfo.type
-  }
-
 }
 
 module.exports = textHighlight;
