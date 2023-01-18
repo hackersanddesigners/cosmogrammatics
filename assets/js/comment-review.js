@@ -104,21 +104,19 @@ function commentReviewList(article_slug) {
   const remove_all = document.querySelector('.comment-remove-all')
 
   if (comments.length > 0) {
-
     // -- publish selected comments
     publish.removeAttribute('disabled')
 
-    // remove all input-checked items from comments store
-    publish.addEventListener('click', (e) => {
+    publish.addEventListener('click', () => {
       const inputs = Array.from(document.querySelectorAll('.comment-list-input'))
 
-      inputs.forEach(input => {
+      // remove all input-checked items from comments store
+      inputs.map(input => {
         if (input.checked) {
-          const comment_id = input.parentNode.id
-          comment_store.remove(comment_id)
+          const highlight_id = input.parentNode.id
+          comment_store.remove(highlight_id)
         }
       })
-
     })
  
     // -- remove all comments
