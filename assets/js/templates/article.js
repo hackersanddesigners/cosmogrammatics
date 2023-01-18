@@ -27,18 +27,19 @@ for (const comment_form of comment_forms) {
   }
 
   // -- setup article's draft comments
-  //    check if comment has status field (that we add
-  //    when fetching published comments from backend)
+  //    check if comment has `status: draft` 
   //    and matches current block-id
   const blockID = comment_form.dataset.blockId
-  const comment = comments.find(comment => {
+  const comments_draft = comments.filter(comment => {
     if (comment.status === 'draft' && comment.content.block_id === blockID) {
       return comment
     }
   })
 
-  if (comment !== undefined) {
-    commentsArticle(comment, comment_form)
+  if (comments_draft.length > 0) {
+    comments_draft.map(comment => {
+      commentsArticle(comment, comment_form)
+    })
   }
 
   comment_form.onsubmit = respond_comment
