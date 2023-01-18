@@ -26,9 +26,16 @@ for (const comment_form of comment_forms) {
     comment_form.querySelector('#author').value = user.value
   }
 
-  // -- setup article's comments
+  // -- setup article's draft comments
+  //    check if comment has status field (that we add
+  //    when fetching published comments from backend)
+  //    and matches current block-id
   const blockID = comment_form.dataset.blockId
-  const comment = comments.find(comment => comment.content.block_id === blockID)
+  const comment = comments.find(comment => {
+    if (comment.status === 'draft' && comment.content.block_id === blockID) {
+      return comment
+    }
+  })
 
   if (comment !== undefined) {
     commentsArticle(comment, comment_form)
