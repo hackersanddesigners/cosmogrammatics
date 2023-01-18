@@ -30,7 +30,9 @@ function commentReviewList(article_slug) {
  
   // -- populate comment-data w/ unpublished comments from local-storage
   const comment_store = new LocalStore(`comment-${article_slug}`)
-  const comments = comment_store.getAll() 
+  let comments = comment_store.getAll() 
+  comments = comments.filter(comment => 'status' in comment === false)
+  console.log('comments review =>', comments)
 
   comments.map((comment, idx) => {
     const el = make_comment_el(comment, idx, article_slug)

@@ -43,6 +43,7 @@ Kirby::plugin('cosmo-api/article-comments', [
                             'id' => $comment->id(),
                             'slug' => $comment->slug(),
                             'title' => $comment->title()->value(),
+                            'status' => 'published'
                         ];
 
                         array_push($text_highlights, $highlight);

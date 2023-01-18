@@ -8,7 +8,7 @@ function textHighlightMergeUnique(newData, article_slug) {
 
   // <https://stackoverflow.com/a/54134237>
   const ids = new Set(comments.map(d => d.id));
-  const highlightsMerged = [...comments, ...newData.filter(d => !ids.has(d.ID))];
+  const highlightsMerged = [...comments, ...newData].filter(d => !ids.has(d.ID));
 
   // the save function checks if the item
   // exists already, so we just pass
