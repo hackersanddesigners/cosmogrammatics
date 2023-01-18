@@ -31,8 +31,10 @@ function commentReviewList(article_slug) {
   // -- populate comment-data w/ unpublished comments from local-storage
   const comment_store = new LocalStore(`comment-${article_slug}`)
   let comments = comment_store.getAll() 
-  comments = comments.filter(comment => 'status' in comment === false)
-  console.log('comments review =>', comments)
+
+  // remove published comments from list
+  // we display in comment-review only draft comments 
+  comments = comments.filter(comment => comment.status === 'draft')
 
   comments.map((comment, idx) => {
     const el = make_comment_el(comment, idx, article_slug)
@@ -162,13 +164,16 @@ function make_comment_el(comment, idx, article_slug) {
     const checkbox = e.target
 
     if (checkbox.checked) {
+      // set comment to published
       // add data to input-checkbox
+      comment['status'] = 'published'
       checkbox.value = JSON.stringify(comment)
 
     } else {
+      // put back comment to draft
       // reset data from input-checkbox
+      comment['status'] = 'draft'
       checkbox.value = ''
-
     }
   })
 

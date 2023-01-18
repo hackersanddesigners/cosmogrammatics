@@ -50,6 +50,7 @@ function make_comment( form, store ) {
     slug: ts,
     title: ts,
     template: 'comment',
+    status: 'draft',
     content: {
       user: author,
       timestamp: ts,
