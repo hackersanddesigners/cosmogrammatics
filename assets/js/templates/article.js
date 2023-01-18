@@ -6,6 +6,12 @@ const {commentReviewToggle, commentReviewList} = require('../comment-review.js')
 
 
 const article_slug = window.location.pathname.split('/').pop().split('/').join('+')
+
+// -- synchronize text-highlights backend data with localStorage
+;(async() => {
+  await fetchArticleHighlightsFromAPI(article_slug)
+})()
+
 const comment_forms = document.querySelectorAll( '.comment_form' )
 
 const user_store = new LocalStore('user')
@@ -30,11 +36,6 @@ for (const comment_form of comment_forms) {
 
   comment_form.onsubmit = respond_comment
 }
-
-// -- synchronize text-highlights backend data with localStorage
-;(async() => {
-  await fetchArticleHighlightsFromAPI(article_slug)
-})()
 
 const article_element = document.querySelector( 'main' )
 const selection_toolbar = document.querySelector( '.toolbar' )
