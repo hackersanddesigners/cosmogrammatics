@@ -554,3 +554,7 @@ main:has( select#view_mode option[value="5"]:checked ) {
 .comment-username-edit-btn {
     cursor: pointer;
 }
+
+.comment-draft {
+    border: 1px dashed green;
+}
