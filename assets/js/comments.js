@@ -158,7 +158,9 @@ function commentsArticle(comment, form) {
   form.setAttribute('data-block-selection-text-id', comment.content.selection_text.id)
   form.querySelector('#selection_type').value = comment.content.selection_type
   form.querySelector('#block_id').value = comment.content.block_id
-  // form.querySelector('#author').value = comment.content.user
+  // we use setAttribute to force adding the value, else
+  // for some reasons it would not work
+  form.querySelector('#author').setAttribute('value',comment.content.user)
 
   createComment(form, article_comment, comment)
 }
