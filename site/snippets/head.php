@@ -12,7 +12,13 @@
 
   <meta name="description" content="">
 
-  <?= css([ 'assets/css/base.css', '@auto' ]) ?>
+  <?php
+    if ($page->intendedTemplate() == 'article') {
+      echo Bnomei\Fingerprint::css('assets/css/templates/article.css');
+    };
+
+    echo Bnomei\Fingerprint::css('assets/css/base.css');
+  ?>
 
   <?php if ( isset( $skin ) ) {
     snippet( 'style/tag', [
