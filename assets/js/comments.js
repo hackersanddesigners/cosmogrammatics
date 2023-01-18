@@ -154,13 +154,15 @@ function createComment(form, article, comment) {
 function commentsArticle(comment, form) {
   const article_comment = make_comment_el(comment)
 
+  // set missing data to be used with the input-form
   form.setAttribute('data-block-selection-type', comment.content.selection_type)
   form.setAttribute('data-block-selection-text-id', comment.content.selection_text.id)
   form.querySelector('#selection_type').value = comment.content.selection_type
   form.querySelector('#block_id').value = comment.content.block_id
+
   // we use setAttribute to force adding the value, else
   // for some reasons it would not work
-  form.querySelector('#author').setAttribute('value',comment.content.user)
+  form.querySelector('#author').setAttribute('value', comment.content.user)
 
   createComment(form, article_comment, comment)
 }
