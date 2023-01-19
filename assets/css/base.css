@@ -104,10 +104,16 @@ img {
 }
 
 html, body {
-  margin: 0; padding: 0;
+  margin: 0;
+  padding: 0;
   background-color: var(--back);
   color: var(--fore);
   font-family: 'authentic';
+  font-size: 0.9rem;
+}
+
+input, select, button {
+    font-size: 0.75rem;
 }
 
 body {
@@ -122,10 +128,9 @@ header {
   display: flex;
   align-items: center;
   height: var(--header-height);
-  /* border-top: var(--thin); */
   border-bottom: var(--thin);
   z-index: 1;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 header a.skip-to-main {
@@ -189,10 +194,9 @@ header .title {
 
 header .title a {
   text-decoration: none;
-  font-size: 3rem;
+  font-size: 1.5rem;
   font-weight: lighter;
   text-transform: lowercase;
-
 }
 
 
@@ -293,4 +297,24 @@ header form.collapsible:focus-within::after {
 
 .bgc-accent {
     background-color: var(--accent);
+}
+
+
+@media screen and (min-width: 600px) {
+    html, body {
+        font-size: 16px;
+    }
+
+    input, select, button {
+        font-size: 0.9rem;
+    }
+
+    header {
+        font-size: 1.5rem;
+    }
+
+    header .title a {
+        font-size: 3rem;
+    }
+
 }
