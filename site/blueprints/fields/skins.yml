@@ -22,7 +22,7 @@ fields:
         label: Accent
         width: 1/2
         type: colors
-        default: "#dfc9e4"
+        default: "#dec7e399"
       grid:
         label: Gridlines
         width: 1/2

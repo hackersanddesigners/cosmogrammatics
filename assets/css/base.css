@@ -8,7 +8,7 @@
   /* colors */
   --back: white;
   --fore: black;
-  --accent: rgb(222, 199, 227);
+  --accent: rgb(222, 199, 227, 0.6);
   --grid: rgb(12, 206, 255);
 
   /* fonts */
