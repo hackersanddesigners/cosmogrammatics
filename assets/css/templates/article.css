@@ -36,6 +36,7 @@ main section {
 
 main .row {
   display: flex;
+  flex-direction: column;
 }
 
 main > .row:first-child {
@@ -50,12 +51,9 @@ main > .row {
 main .row .column {
   --cw : 1;
   width: 100%;
-  --col-width: calc( var(--cw) * var(--main-width) );
   max-width: var(--col-width);
   margin: 0 auto;
 }
-
-
 
 main .row .column[data-col-width="1/1"] { --cw : calc( 1 / 1 ) }
 main .row .column[data-col-width="1/2"] { --cw : calc( 1 / 2 ) }
@@ -63,6 +61,18 @@ main .row .column[data-col-width="1/3"] { --cw : calc( 1 / 3 ) }
 main .row .column[data-col-width="1/4"] { --cw : calc( 1 / 4 ) }
 main .row .column[data-col-width="1/5"] { --cw : calc( 1 / 5 ) }
 main .row .column[data-col-width="1/6"] { --cw : calc( 1 / 6 ) }
+
+@media screen and (min-width: 600px) {
+    main .row {
+        display: flex;
+        flex-direction: row;
+    }
+
+    main .row .column {
+        --col-width: calc( var(--cw) * var(--main-width) );
+    }
+
+}
 
 main > .row:first-child .block {
     clip-path: inset(0px -1px -1px -1px);
