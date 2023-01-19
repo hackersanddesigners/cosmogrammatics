@@ -14,5 +14,6 @@
   </main>
 
   <?php snippet( 'footer' ) ?>
+  <div class="focus-overlay"></div>
 
 </body>

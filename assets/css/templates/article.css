@@ -62,18 +62,18 @@ main .block {
   padding: 0.5rem;
 }
 
-main .block::before {
-  content: '';
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--back);
-  opacity: 0;
-  z-index: 0;
-  pointer-events: none;
-  /* transition: opacity var(--fast) var(--linear); */
-}
+/* main .block::before { */
+/*   content: ''; */
+/*   position: fixed; */
+/*   top: 0; left: 0; */
+/*   width: 100%; */
+/*   height: 100%; */
+/*   background-color: var(--back); */
+/*   opacity: 0; */
+/*   z-index: 0; */
+/*   pointer-events: none; */
+/*   /\* transition: opacity var(--fast) var(--linear); *\/ */
+/* } */
 
 
 /* if a block will contain a nested alyopuit inside it, remvoe padding */
@@ -167,15 +167,33 @@ main .row .column .block aside article:focus-within {
   box-shadow: 0 0 2rem 0 var(--accent);
 }
 
-main .row .column .block:focus-within {
+main .row .column .block.selected:focus-within {
   z-index: 10;
   box-shadow: 0 0 2rem 0 var(--accent), var(--gridshadow);
-  /* filter: drop-shadow(0 0 500rem var(--grid)); */
+  filter: drop-shadow(0 0 500rem rgb(0, 0, 0, 0.5));
+  transform: scale(1.1); 
+}
+
+main .row .column .block.selected:focus-within form.comment_form {
+    z-index: 10;
+    box-shadow: 0 0 1rem 0 rgb(0, 0, 0, 0.5);
+    opacity: 1;
+    background-color: var(--back);
 }
 
 
 main .row .column .block:focus-within::before {
-  opacity: 0.75;
+  /* opacity: 0.75; */
+}
+
+.focus-overlay.active {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(0, 0, 0, 0.2);
 }
 
 main .row .column .block:focus-within > aside  {
@@ -287,8 +305,7 @@ main .row .column .block:not(.columns):hover form.comment_form,
 main .row .column .block:not(.columns):focus-within aside .thread:first-of-type form.comment_form,
 main .row .column .block:not(.columns) aside .thread form.comment_form:focus-within,
 main .row .column .block:not(.columns) aside .thread:focus-within form.comment_form  {
-  display: block;
-  /* position: absolute; */
+  display: block; 
 }
 
 

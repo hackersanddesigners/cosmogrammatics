@@ -167,4 +167,27 @@ function commentsArticle(comment, form) {
   createComment(form, article_comment, comment)
 }
 
-module.exports = { respond_comment, commentsArticle }
+function blockFocus() {
+  // block-focus overlay
+
+  const blocks = Array.from(document.querySelectorAll('.block'))
+        .filter(block => !block.classList.contains('columns'))
+
+  const focusOverlay = document.querySelector('.focus-overlay')
+  
+  blocks.forEach(block => {
+    block.addEventListener('focus', (e) => {
+      e.target.classList.add('selected')
+      focusOverlay.classList.toggle('active')
+    })
+
+    block.addEventListener('blur', (e) => {
+      e.target.classList.remove('selected')
+      focusOverlay.classList.toggle('active')
+    })
+  })
+}
+
+module.exports = { respond_comment,
+                   commentsArticle,
+                   blockFocus }

@@ -1,6 +1,6 @@
 const fetchArticleHighlightsFromAPI = require('../fetch-article-highlights-from-api')
 const textHighlight = require('../text-highlight')
-const { respond_comment, commentsArticle } = require('../comments')
+const { respond_comment, commentsArticle, blockFocus } = require('../comments')
 const LocalStore = require('../local.store')
 const {commentReviewToggle, commentReviewList} = require('../comment-review.js')
 
@@ -52,3 +52,5 @@ const textRange = textHighlight(article_element, selection_toolbar, article_slug
 // comment-review list
 commentReviewToggle()
 commentReviewList(article_slug)
+
+blockFocus()
