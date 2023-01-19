@@ -2,6 +2,7 @@
   action="<?= $page->url() ?>"
   method="POST"
   name="comment_form"
+  pattern="[a-zA-Z0-9]+[a-zA-Z0-9 ]+"
   class="comment_form"
   data-block-id="<?= isset( $block ) ? $block->bid() : NULL ?>"
   data-article-slug="<?= $page->slug() ?>"

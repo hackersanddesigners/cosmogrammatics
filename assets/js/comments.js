@@ -8,6 +8,7 @@ function respond_comment(e) {
 
   const form = e.target
 
+  
   // -- save comment to localStorage under:
   //    <current-article-url>: [{..}, ...]
 
@@ -16,6 +17,10 @@ function respond_comment(e) {
   // else LocalStore will replace the previous
   // comment with the newest one only
   let comment = make_comment(form, store)
+  if (!comment) {
+    return
+  }
+
   comment['id'] = comment.content.selection_text.id
 
   // -- save username to local.store if not set yet
@@ -36,14 +41,37 @@ function respond_comment(e) {
 }
 
 function make_comment( form, store ) {
-  const chilren           = Array.from( form.children )
+
+  // -- check if text-comment is not empty,
+  //    eg just empty spaces
+
+  const children = Array.from(form.children)
+  const input_body = children.find( c => c.name == 'body' )
+
+  const input_text = xss(input_body.value.trim())
+  if (input_text === '') {
+    // stop operation
+    input_body.value = input_body.value.trim()
+    input_body.focus()
+    input_body.placeholder = 'Please add some text'
+
+    input_body.style.border = '1px solid red'
+
+    setTimeout(() => {
+      input_body.style.border = ''
+      input_body.placeholder = 'comment...'
+    }, '3000')
+
+    return false
+  }
+
   const article_slug      = form.getAttribute( 'data-article-slug' )
   const block_id          = form.getAttribute( 'data-block-id' )
   const selection_type    = form.getAttribute( 'data-block-selection-type' )
   const selection_text_id = form.getAttribute( 'data-block-selection-text-id' )
   const selection_text    = store.getByID(selection_text_id)
-  const author            = xss(chilren.find( c => c.name == 'author' ).value)
-  const text              = xss(chilren.find( c => c.name == 'body' ).value)
+  const author            = xss(children.find( c => c.name == 'author' ).value)
+  const text              = input_text
   const ts                = new Date().toISOString()
 
   return {
