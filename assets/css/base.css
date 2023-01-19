@@ -92,12 +92,12 @@
   position: relative;
 }
 
-*:focus {
-  outline-color: var(--accent);
-  outline-offset: 3px;
-  outline-style: solid;
-  outline-width: 2px;
-}
+/* *:focus { */
+/*   outline-color: var(--accent); */
+/*   outline-offset: 3px; */
+/*   outline-style: solid; */
+/*   outline-width: 2px; */
+/* } */
 
 img {
   max-width: 100%;
