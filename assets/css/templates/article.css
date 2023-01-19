@@ -52,6 +52,7 @@ main .row .column {
   width: 100%;
   --col-width: calc( var(--cw) * var(--main-width) );
   max-width: var(--col-width);
+  margin: 0 auto;
 }
 
 
