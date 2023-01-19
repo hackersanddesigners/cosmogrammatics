@@ -15,7 +15,7 @@
   --title: 'title', 'Times New Roman', Times, serif;
   --body: 'body', 'authentic', Arial, Helvetica, sans-serif;
   --comments: 'comments', 'Courier New', Courier, monospace;
-  --footnotes: 'footnotes', 'Courier New', Courier, monospace;
+  --footnotes: 'footnotes', 'authentic', Arial, Helvetica, sans-serif;
 
   /* borders */
   --thin: 0.25px solid;

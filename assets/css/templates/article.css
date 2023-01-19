@@ -350,7 +350,8 @@ main .notes.column[data-col-width="1/1"] {
     padding: 0.5rem;
     display: table-row;
     counter-increment: number-list;
-    font-family:  var(--footnotes);
+    font-family: var(--footnotes);
+    font-weight: bold
 }
 
 .notes ol li::before {
