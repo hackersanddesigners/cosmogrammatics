@@ -154,6 +154,12 @@ main .row .column .block aside article {
   border-radius: inherit;
 }
 
+main .row .column .block aside article.comment-draft {
+    background: var(--back);
+    border: 1px solid var(--fore);
+    border-radius: 24px 24px 24px 0;
+}
+
 main .row .column .block aside article footer {
   margin-top: 0.5rem;
 }
@@ -566,10 +572,6 @@ main:has( select#view_mode option[value="5"]:checked ) {
 
 .comment-username-edit-btn {
     cursor: pointer;
-}
-
-.comment-draft {
-    border: 1px dashed var(--fore);
 }
 
 
