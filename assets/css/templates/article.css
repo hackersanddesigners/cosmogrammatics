@@ -38,6 +38,10 @@ main .row {
   display: flex;
 }
 
+main > .row:first-child {
+    border-top: none;
+}
+
 main > .row {
   border-top: var(--gridline);
   padding-inline: calc( var(--header-height) / 2 );
@@ -59,6 +63,9 @@ main .row .column[data-col-width="1/4"] { --cw : calc( 1 / 4 ) }
 main .row .column[data-col-width="1/5"] { --cw : calc( 1 / 5 ) }
 main .row .column[data-col-width="1/6"] { --cw : calc( 1 / 6 ) }
 
+main > .row:first-child .block {
+    clip-path: inset(0px -1px -1px -1px);
+}
 
 main .block {
   background-color: var(--back);
