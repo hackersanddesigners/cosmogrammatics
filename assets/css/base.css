@@ -217,6 +217,13 @@ header .collapsible {
 
 }
 
+header nav.collapsible {
+  margin-right: auto;
+}
+
+header form.collapsible {
+  margin-left: auto;
+}
 
 header nav.collapsible::after,
 header form.collapsible::after {

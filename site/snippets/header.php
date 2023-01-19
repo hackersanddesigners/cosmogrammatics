@@ -33,10 +33,10 @@
       <?php endforeach ?>
     </ul>
   </nav>
-  <?php snippet( 'search' ) ?>
-  <span class="title">
+  <div class="title">
     <a href="<?= $site->url() ?>">
       <?= $site->title()->html() ?>
     </a>
-  </span>
+  </div>
+  <?php snippet( 'search' ) ?>
 </header>
