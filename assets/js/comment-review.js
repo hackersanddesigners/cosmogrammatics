@@ -136,10 +136,13 @@ function commentReviewList(article_slug) {
       const target = e.target
       const operation = target.textContent
 
-      if (target.textContent === 'save') {
-        target.textContent = 'edit'
-      } else if (target.textContent === 'edit') {
-        target.textContent = 'save'
+      const isInputSelected = inputs.find(input => input.checked)
+      if (isInputSelected) {
+        if (target.textContent === 'save') {
+          target.textContent = 'edit'
+        } else if (target.textContent === 'edit') {
+          target.textContent = 'save'
+        }
       }
 
       inputs.map((input, idx) => {
