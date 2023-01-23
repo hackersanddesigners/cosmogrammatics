@@ -22,8 +22,10 @@ function textHighlight(target, toolbar, article_slug) {
 
   const comment_store = new LocalStore(`comment-${article_slug}`)
   comment_store.getAll().forEach(comment => {
-    const hs = comment.content.selection_text
-    highlighter.fromStore(hs.startMeta, hs.endMeta, hs.text, hs.id)
+    if (typeof comment === 'object') {
+      const hs = comment.content.selection_text
+      highlighter.fromStore(hs.startMeta, hs.endMeta, hs.text, hs.id)
+    }
   });
 
   const highlight_store = new LocalStore()

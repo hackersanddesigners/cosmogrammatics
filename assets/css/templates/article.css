@@ -1,6 +1,14 @@
 
 /* main as article */
 
+.font-size-micro h1 {
+    font-size: 1.25rem;
+}
+
+.font-size-micro > * {
+    font-size: 45%;
+}
+
 main {
     display: flex;
     flex-direction: column;
@@ -441,21 +449,31 @@ main .notes.column[data-col-width="1/1"] {
 }
 
 
-/* andré i think you can style different vew modes here */
+/* view-mode */
 
-main:has( select#view_mode option[value="1"]:checked ) {}
-main:has( select#view_mode option[value="1"]:checked ) .thread {
-  display: none;
+.view-options input[type=radio]:checked ~ label {
+   border-bottom: 1px solid var(--fore);
 }
-main:has( select#view_mode option[value="2"]:checked ) {}
-
-/* default : balanced */
-main:has( select#view_mode option[value="3"]:checked ) {}
+                                    
 
 main:has( select#view_mode option[value="4"]:checked ) {
   --main-width: min( 100vw, 30rem );
   --side-width: min( 100vw, 35rem );
 }
+
+
+/* main:has( select#view_mode option[value="1"]:checked ) .thread { */
+/*   display: none; */
+/* } */
+/* main:has( select#view_mode option[value="2"]:checked ) {} */
+
+/* /\* default : balanced *\/ */
+/* main:has( select#view_mode option[value="3"]:checked ) {} */
+
+/* main:has( select#view_mode option[value="4"]:checked ) { */
+/*   --main-width: min( 100vw, 30rem ); */
+/*   --side-width: min( 100vw, 35rem ); */
+/* } */
 
 main:has( select#view_mode option[value="5"]:checked ) {
   --main-width: min( 100vw, 20rem );
@@ -620,3 +638,4 @@ main:has( select#view_mode option[value="5"]:checked ) {
 .comment-edit {
     margin-right: 0.5rem;
 }
+
