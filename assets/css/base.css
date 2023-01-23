@@ -1,6 +1,28 @@
 @font-face {
-  font-family: authentic;
-  src: url(/assets/css/fonts/AUTHENTICSans-60.otf);
+  font-family: "Authentic Regular";
+  src: url("/assets/css/fonts/AUTHENTICSans-60.woff2") format("woff2"),
+       url("/assets/css/fonts/AUTHENTICSans-60.woff") format("woff"),
+       url("/assets/css/fonts/AUTHENTICSans-60.otf") format("opentype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Authentic Semi Bold";
+  src: url("/assets/css/fonts/AUTHENTICSans-90.woff2") format("woff2"),
+       url("/assets/css/fonts/AUTHENTICSans-90.woff") format("woff"),
+       url("/assets/css/fonts/AUTHENTICSans-90.otf") format("opentype");
+  font-style: normal;
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Authentic Bold";
+  src: url("/assets/css/fonts/AUTHENTICSans-130.woff2") format("woff2"),
+       url("/assets/css/fonts/AUTHENTICSans-130.woff") format("woff"),
+       url("/assets/css/fonts/AUTHENTICSans-130.otf") format("opentype");
+  font-style: normal;
+  font-weight: 700;
 }
 
 :root {
@@ -13,9 +35,9 @@
 
   /* fonts */
   --title: 'title', 'Times New Roman', Times, serif;
-  --body: 'body', 'authentic', Arial, Helvetica, sans-serif;
+  --body: 'body', 'Authentic Regular', Arial, Helvetica, sans-serif;
   --comments: 'comments', 'Courier New', Courier, monospace;
-  --footnotes: 'footnotes', 'authentic', Arial, Helvetica, sans-serif;
+  --footnotes: 'footnotes', 'Authentic Bold', Arial, Helvetica, sans-serif;
 
   /* borders */
   --thin: 0.25px solid;
@@ -108,7 +130,7 @@ html, body {
   padding: 0;
   background-color: var(--back);
   color: var(--fore);
-  font-family: 'authentic';
+  font-family: 'Authentic Regular';
   font-size: 0.9rem;
 }
 
@@ -120,7 +142,9 @@ body {
   counter-reset: footnote;
 }
 
-
+b, strong {
+    font-family: 'Authentic Bold';
+}
 
 /* header */
 
