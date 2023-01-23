@@ -457,15 +457,15 @@ main:has( select#view_mode option[value="5"]:checked ) {
 
 /* comment-review list */
 
-
-.comment-toggle {
-    width: fit-content;
-    max-width: 9rem;
+.comment-review {
+    flex-direction: column;
 }
 
-.comment-review {
-    padding: 2rem 0;
-    flex-direction: column;
+.comment-review,
+.comment-review input, 
+.comment-review button,
+.comment-review select {
+    font-size: 0.75rem;
 }
 
 .comment-review fieldset {
@@ -517,16 +517,10 @@ main:has( select#view_mode option[value="5"]:checked ) {
 }
 
 .comment-list-edit {
-    max-height: 1.5rem;
-    height: fit-content;
-    cursor: pointer;
     margin-right: 1rem;
 }
 
 .comment-list-remove {
-    max-height: 1.5rem;
-    height: fit-content;
-    cursor: pointer;
     margin-right: 1rem;
 }
 
@@ -588,4 +582,20 @@ main:has( select#view_mode option[value="5"]:checked ) {
     main .row .column {
         --col-width: calc( var(--cw) * var(--main-width) );
     }
+}
+
+.button {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: rgb(179, 179, 179);
+    border-bottom: 1px solid rgb(179, 179, 179);
+    max-height: 1.5rem;
+    height: fit-content;
+}
+
+.button:not(:disabled) {
+    cursor: pointer;
+    color: var(--fore);
+    border-bottom: 1px solid var(--fore);
 }

@@ -2,7 +2,7 @@ const fetchArticleHighlightsFromAPI = require('../fetch-article-highlights-from-
 const textHighlight = require('../text-highlight')
 const { respond_comment, commentsArticle, blockFocus } = require('../comments')
 const LocalStore = require('../local.store')
-const {commentReviewToggle, commentReviewList} = require('../comment-review.js')
+const { commentReviewList } = require('../comment-review.js')
 
 
 const article_slug = window.location.pathname.split('/').pop().split('/').join('+')
@@ -50,7 +50,6 @@ const selection_toolbar = document.querySelector( '.toolbar' )
 const textRange = textHighlight(article_element, selection_toolbar, article_slug)
 
 // comment-review list
-commentReviewToggle()
 commentReviewList(article_slug)
 
 blockFocus()

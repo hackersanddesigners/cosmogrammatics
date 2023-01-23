@@ -8,16 +8,6 @@ const store = new LocalStore()
 //    edit them, and then selectively
 //    publish them all in one go
 
-
-function commentReviewToggle() {
-  const comment_toggle = document.querySelector('.comment-toggle')
-  const comment_list = document.querySelector('.comment-list')
- 
-  comment_toggle.addEventListener('click', () => {
-    comment_list.classList.toggle('hidden')
-  })
-}
-
 function commentReviewList(article_slug) {
 
   // -- init, view reset
@@ -62,13 +52,14 @@ function commentReviewList(article_slug) {
 
   // set input text width to specific username length
   username_input.style.width = `${username_input.value.length +1}ch`
-  // --
 
+  const user_store = new LocalStore('user')
   const username_edit_btn = document.querySelector('.comment-username-edit-btn')
+
   username_edit_btn.addEventListener('click', (e) => {
     const target = e.target
     
-    if (target.textContent === 'Save') {
+    if (target.textContent.toLowerCase() === 'save') {
       // save input text
       username.value = username_input.value
       user_store.save(username)
@@ -82,7 +73,7 @@ function commentReviewList(article_slug) {
 
       document.querySelector('body').focus()
 
-    } else if (target.textContent === 'Edit') {
+    } else if (target.textContent.toLowerCase() === 'edit') {
       // toggle styles
 
       target.textContent = 'Save'
@@ -90,7 +81,7 @@ function commentReviewList(article_slug) {
       moveCaretToEnd(username_input)
       
       username_input.removeAttribute('readonly')
-      username_input.style.width = 'auto'
+      // username_input.style.width = 'auto'
       username_input.style.border = 'auto'
 
       username_input.focus()
@@ -98,45 +89,122 @@ function commentReviewList(article_slug) {
 
   })
 
-  // -- publish selected comments
-  //    & remove all comments
-  const publish = document.querySelector('.post_comment')
-  const remove_all = document.querySelector('.comment-remove-all')
+  // -- publish, edit and remove selected comments
+  const publish_btn = document.querySelector('.post_comment')
+  const edit_btn = document.querySelector('.comment-edit')
+  const remove_btn = document.querySelector('.comment-remove')
 
   if (comments.length > 0) {
+    const inputs = Array.from(document.querySelectorAll('.comment-list-input'))
+
     // -- publish selected comments
-    publish.removeAttribute('disabled')
+    publish_btn.removeAttribute('disabled')
 
-    publish.addEventListener('click', () => {
-      const inputs = Array.from(document.querySelectorAll('.comment-list-input'))
+    publish_btn.addEventListener('click', (e) => {
 
-      // remove all input-checked items from comments store
+      inputs.map(input => {
+        
+        if (input.checked) {
+          const highlight_id = input.parentNode.id
+          const comment = comments.find(comment => {
+            if (comment.content.selection_text.id === highlight_id) {
+              return comment
+            }
+          })
+
+          comment['status'] = 'published'
+          input.value = JSON.stringify(comment)
+
+          // remove selected input-checked items from comments store
+          comment_store.remove(highlight_id)
+
+        } else {
+          input.value = ''
+
+        }
+
+      })
+
+    })
+
+    // -- edit selected comments
+    edit_btn.removeAttribute('disabled')
+
+    edit_btn.addEventListener('click', (e) => {
+      e.preventDefault()
+
+      const target = e.target
+      const operation = target.textContent
+
+      if (target.textContent === 'save') {
+        target.textContent = 'edit'
+      } else if (target.textContent === 'edit') {
+        target.textContent = 'save'
+      }
+
+      inputs.map((input, idx) => {
+        
+        if (input.checked) {
+
+          const highlight_id = input.parentNode.id
+          const comment = comments.find(comment => {
+            if (comment.content.selection_text.id === highlight_id) {
+              return comment
+            }
+          })
+
+          const comment_input_text = input.parentNode.querySelector('.comment-label-wrapper > input')
+
+          if (operation === 'save') {
+
+            // save input text
+            comment.content.text = comment_input_text.value
+            comment_store.save(comment)
+
+            comment_input_text.setAttribute('readonly', 'readonly')
+            // comment_input_text.style.width = `${comment_input_text.value.length +1}ch`
+            comment_input_text.style.borderColor = 'transparent'
+
+            document.querySelector('body').focus()
+
+          } else if (operation === 'edit') {
+
+            moveCaretToEnd(comment_input_text)
+            
+            comment_input_text.removeAttribute('readonly')
+            comment_input_text.style.width = 'auto'
+            comment_input_text.style.borderColor = 'black'
+
+          }
+
+        }
+
+      })
+
+    })
+ 
+    // -- remove selected comments
+    remove_btn.removeAttribute('disabled')
+
+    remove_btn.addEventListener('click', (e) => {
+      e.preventDefault()
+
       inputs.map(input => {
         if (input.checked) {
           const highlight_id = input.parentNode.id
           comment_store.remove(highlight_id)
+          removeCommentDOM(highlight_id)
         }
       })
-    })
- 
-    // -- remove all comments
-    remove_all.removeAttribute('disabled')
 
-    remove_all.addEventListener('click', () => {
-      comments.map(comment => {
-        const highlight_id = comment.content.selection_text.id
-        removeCommentDOM(highlight_id)
-      })
-
-      comment_store.removeAll()
       commentReviewList(article_slug)
+      updateCommentCounter('decrease', comments.length)
     })
-
-    updateCommentCounter('decrease', comments.length)
 
   } else {
-    publish.setAttribute('disabled', 'disabled')
-    remove_all.setAttribute('disabled', 'disabled')
+    publish_btn.setAttribute('disabled', 'disabled')
+    edit_btn.setAttribute('disabled', 'disabled')
+    remove_btn.setAttribute('disabled', 'disabled')
   }
   
 }
@@ -156,25 +224,6 @@ function make_comment_el(comment, idx, article_slug) {
   comment_input.setAttribute('name', `comment_data[]`)
   comment_input.classList.add('comment-list-input')
 
-  // set / remove data from input-checkbox field
-  // whenever the checkbox is clicked
-  comment_input.addEventListener('click', (e) => {
-    const checkbox = e.target
-
-    if (checkbox.checked) {
-      // set comment to published
-      // add data to input-checkbox
-      comment['status'] = 'published'
-      checkbox.value = JSON.stringify(comment)
-
-    } else {
-      // put back comment to draft
-      // reset data from input-checkbox
-      comment['status'] = 'draft'
-      checkbox.value = ''
-    }
-  })
-
   // -- label
   const comment_label = document.createElement('label')
   comment_label.setAttribute('for', `comment-list-${idx}`)
@@ -188,68 +237,8 @@ function make_comment_el(comment, idx, article_slug) {
   comment_input_text.setAttribute('value', comment.content.text)
   comment_input_text.setAttribute('readonly', 'readonly')
 
-  // -- date
-  const comment_date = document.createElement('p')
-  const timestamp = document.createElement('time')
-  timestamp.setAttribute('datetime', comment.content.timestamp)
-
-  comment_date.append(timestamp)
-  comment_date.innerHTML = `on ${comment.content.timestamp}` 
- 
-  // -- comment edit button
-  const comment_edit = document.createElement('button')
-  comment_edit.setAttribute('type', 'button')
-  comment_edit.innerHTML = 'Edit'
-  comment_edit.classList.add('comment-list-edit')
-
-  comment_edit.addEventListener('click', (e) => {
-    const target = e.target
-
-    if (target.textContent === 'Save') {
-      // save input text
-      comment.content.text = comment_input_text.value
-      comment_store.save(comment)
-
-      // reset styles
-      target.textContent = 'Edit'
-
-      comment_input_text.setAttribute('readonly', 'readonly')
-      comment_input_text.style.width = `${comment_input_text.value.length +1}ch`
-      comment_input_text.style.border = 'none'
-
-      document.querySelector('body').focus()
-
-    } else if (target.textContent === 'Edit') {
-      // toggle styles
-
-      target.textContent = 'Save'
-
-      moveCaretToEnd(comment_input_text)
-      
-      comment_input_text.removeAttribute('readonly')
-      comment_input_text.style.width = 'auto'
-      comment_input_text.style.border = 'auto'
-
-      comment_input_text.focus()
-    }
-
-  })
-
-  // -- comment remove button
-  const comment_remove = document.createElement('button')
-  comment_remove.setAttribute('type', 'button')
-  comment_remove.innerHTML = 'Remove'
-  comment_remove.classList.add('comment-list-remove')
-
-  const highlight_id = comment.content.selection_text.id
-
-  comment_remove.addEventListener('click', () => {
-    removeCommentDOM(highlight_id)
-    comment_store.remove(highlight_id)
-    commentReviewList(article_slug)
-  })
-
   // -- add link to text-selection span
+  const highlight_id = comment.content.selection_text.id
   const target = document.querySelector(`[data-highlight-id="${highlight_id}"]`)
   if (target !== null) {
     target.setAttribute('id', highlight_id) 
@@ -257,7 +246,7 @@ function make_comment_el(comment, idx, article_slug) {
 
   const show_text_selection = document.createElement('a')
   show_text_selection.setAttribute('href', `#${highlight_id}`)
-  show_text_selection.innerHTML = 'Show Text Selection'
+  show_text_selection.innerHTML = 'Show'
   show_text_selection.classList.add('comment-list-show-highlight')
 
   show_text_selection.addEventListener('click', (e) => {
@@ -271,19 +260,14 @@ function make_comment_el(comment, idx, article_slug) {
     }, '3000')
   })
 
-  // --
-
   // -- append above nodes to label wrapper node
   const comment_label_wrapper = document.createElement('div')
   comment_label_wrapper.classList.add('comment-label-wrapper')
   comment_label_wrapper.append(comment_input_text)
-  comment_label_wrapper.append(comment_date)
 
   // -- append wrapper nodes to label node
   comment_label.append(comment_label_wrapper)
-  comment_label.append(comment_edit)
-  comment_label.append(comment_remove)
-  comment_label.append(show_text_selection)
+  comment_label_wrapper.append(show_text_selection)
 
   // -- append input and label nodes to root wrapper node
   wrapper.append(comment_input)
@@ -360,7 +344,6 @@ function updateCommentCounter(op, amount) {
 
 }
 
-module.exports = { commentReviewToggle,
-                   commentReviewList,
+module.exports = { commentReviewList,
                    setUsername,
                    updateCommentCounter }
