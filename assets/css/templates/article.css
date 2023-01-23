@@ -2,9 +2,9 @@
 /* main as article */
 
 main {
+    display: flex;
+    flex-direction: column;
 }
-
-
 
 main h1 {
   font-size: 3rem;
@@ -14,13 +14,31 @@ main h1 {
   font-family: var(--title);
 }
 
-main .stats {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  justify-content: right;
-  text-align: right;
-  font-family: var(--comments);
+.view-comment-options-wrapper {
+    padding: 1rem;
+}
+
+main .stats,
+main .stats input, 
+main .stats button,
+main .stats select {
+  font-size: 0.75rem;
+  padding: 0 0 1rem 0;
+}
+
+main .stats p {
+    margin: 0;
+    padding-bottom: 0.25rem;
+    font-family: 'Authentic Bold';
+}
+
+main .content-wrapper {
+    width: 100%;
+}
+
+.view-options legend {
+    padding: 0 0 0.25rem 0;
+    font-family: 'Authentic Bold';
 }
 
 main .row {
@@ -41,7 +59,7 @@ main .row .column {
   --cw : 1;
   width: 100%;
   max-width: var(--col-width);
-  margin: 0 auto;
+  margin: 0 auto 0 0;
 }
 
 main .row .column[data-col-width="1/1"] { --cw : calc( 1 / 1 ) }
@@ -351,7 +369,7 @@ main .notes.column[data-col-width="1/1"] {
     display: table-row;
     counter-increment: number-list;
     font-family: var(--footnotes);
-    font-weight: bold
+    font-size: 0.9rem;
 }
 
 .notes ol li::before {
@@ -533,9 +551,14 @@ main:has( select#view_mode option[value="5"]:checked ) {
 }
 
 .comment-header {
-    display: flex;
-    flex-direction: row;
-    padding: 0 0 1.5rem 0;
+    padding: 0 0 1rem 0;
+}
+
+.comment-status {
+    font-size: inherit;
+    font-family: 'Authentic Bold';
+    margin: 0;
+    padding-bottom: 1rem;
 }
 
 .comment-username-wrapper label {
