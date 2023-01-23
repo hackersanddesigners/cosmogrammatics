@@ -2,9 +2,7 @@
   <div class="column" data-col-span="12" data-col-width="1/4">
     <form action="<?= $page->url() ?>" method="POST" class="comment-list">
       <fieldset>
-        <h3>Your unpublished comments:</h3>
         <div class="comment-header">
-          <p class="comment-status">You have x unpublished comments.</p>
           <div class="comment-username-wrapper">
             <label for="comment-username">Username:</label>
             <input type="text" id="comment-username" name="comment-username" value="" readonly="readonly">
@@ -12,10 +10,11 @@
           </div>
         </div>
 
+        <h3 class="comment-status">No unpublished comments</h3>
         <div class="comment-data"></div>
-        <input name="post_comment" class="button post_comment" type="submit" value="publish">
-        <button type="button" class="button comment-edit">edit</button>
-        <button type="button" class="button comment-remove">remove</button>
+        <input name="post_comment" class="hidden button post_comment" type="submit" value="publish">
+        <button type="button" class="hidden button comment-edit">edit</button>
+        <button type="button" class="hidden button comment-remove">remove</button>
       </fieldset>
 
       <div class="honey">

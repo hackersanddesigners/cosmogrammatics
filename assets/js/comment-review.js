@@ -32,8 +32,10 @@ function commentReviewList(article_slug) {
   })
 
   // -- setup comment status and username
-  const status = document.querySelector('.comment-status')
-  status.innerHTML = `You have ${comments.length} unpublished comments.`
+  if (comments.length ) {
+    const comment_status = document.querySelector('.comment-status')
+    comment_status.innerHTML = 'Your unpublished comments:'
+  }
 
   // -- save username into a different, own store
   //    so we can more easily fetch it and pre-add it
@@ -98,7 +100,7 @@ function commentReviewList(article_slug) {
     const inputs = Array.from(document.querySelectorAll('.comment-list-input'))
 
     // -- publish selected comments
-    publish_btn.removeAttribute('disabled')
+    publish_btn.classList.remove('hidden')
 
     publish_btn.addEventListener('click', (e) => {
 
@@ -128,7 +130,7 @@ function commentReviewList(article_slug) {
     })
 
     // -- edit selected comments
-    edit_btn.removeAttribute('disabled')
+    edit_btn.classList.remove('hidden')
 
     edit_btn.addEventListener('click', (e) => {
       e.preventDefault()
@@ -187,7 +189,7 @@ function commentReviewList(article_slug) {
     })
  
     // -- remove selected comments
-    remove_btn.removeAttribute('disabled')
+    remove_btn.classList.remove('hidden')
 
     remove_btn.addEventListener('click', (e) => {
       e.preventDefault()
@@ -205,9 +207,9 @@ function commentReviewList(article_slug) {
     })
 
   } else {
-    publish_btn.setAttribute('disabled', 'disabled')
-    edit_btn.setAttribute('disabled', 'disabled')
-    remove_btn.setAttribute('disabled', 'disabled')
+    publish_btn.classList.add('hidden')
+    edit_btn.classList.add('hidden')
+    remove_btn.classList.add('hidden')
   }
   
 }
