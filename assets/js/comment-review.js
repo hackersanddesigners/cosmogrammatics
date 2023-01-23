@@ -59,30 +59,30 @@ function commentReviewList(article_slug) {
   username_edit_btn.addEventListener('click', (e) => {
     const target = e.target
     
-    if (target.textContent.toLowerCase() === 'save') {
+    if (target.textContent === 'save') {
       // save input text
       username.value = username_input.value
       user_store.save(username)
 
       // reset styles
-      target.textContent = 'Edit'
+      target.textContent = 'edit'
 
       username_input.setAttribute('readonly', 'readonly')
       username_input.style.width = `${username_input.value.length +1}ch`
-      username_input.style.border = 'none'
+      username_input.style.borderColor = 'transparent'
 
       document.querySelector('body').focus()
 
-    } else if (target.textContent.toLowerCase() === 'edit') {
+    } else if (target.textContent === 'edit') {
       // toggle styles
 
-      target.textContent = 'Save'
+      target.textContent = 'save'
 
       moveCaretToEnd(username_input)
       
       username_input.removeAttribute('readonly')
-      // username_input.style.width = 'auto'
-      username_input.style.border = 'auto'
+      username_input.style.width = 'auto'
+      username_input.style.borderColor = 'black'
 
       username_input.focus()
     }

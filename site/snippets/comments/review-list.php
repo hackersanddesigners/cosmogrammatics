@@ -8,7 +8,7 @@
           <div class="comment-username-wrapper">
             <label for="comment-username">Username:</label>
             <input type="text" id="comment-username" name="comment-username" value="" readonly="readonly">
-            <button type="button" class="comment-username-edit-btn">edit</button>
+            <button type="button" class="button comment-username-edit-btn">edit</button>
           </div>
         </div>
 

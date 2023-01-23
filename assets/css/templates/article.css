@@ -538,25 +538,17 @@ main:has( select#view_mode option[value="5"]:checked ) {
     padding: 0 0 1.5rem 0;
 }
 
-.comment-status {
-    width: 50%;
-    margin: 0;
-}
-
-.comment-username-wrapper {
-    width: 50%;
-}
-
 .comment-username-wrapper label {
     padding-top: 0.25rem;
 }
 
 .comment-label-wrapper input[type=text] {
-    border: none;
+    border: 1px solid transparent;
+    margin-bottom: 0;
 }
 
 .comment-username-wrapper input[type=text] {
-    border: none;
+    border: 1px solid transparent;
     margin-right: 1rem;
 }
 
@@ -564,12 +556,13 @@ main:has( select#view_mode option[value="5"]:checked ) {
     padding-right: 0.5rem;
 }
 
-.comment-username-edit-btn {
-    cursor: pointer;
-}
-
-
 @media screen and (min-width: 600px) {
+
+    main {
+        display: flex;
+        flex-direction: row;
+    }
+
     main h1 {
         font-size: 6rem;
     }
@@ -598,4 +591,9 @@ main:has( select#view_mode option[value="5"]:checked ) {
     cursor: pointer;
     color: var(--fore);
     border-bottom: 1px solid var(--fore);
+}
+
+.post_comment,
+.comment-edit {
+    margin-right: 0.5rem;
 }
