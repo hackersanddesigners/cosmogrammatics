@@ -6,8 +6,9 @@ const LocalStore = require('./local.store')
 function textHighlight(target, toolbar, article_slug) {
 
   const highlighter = new Highlighter({
+    $root: document.querySelector('.content-wrapper'),
     wrapTag: 'span',
-    exceptSelectors: ['.highlight-tip']
+    exceptSelectors: ['.highlight-tip', 'aside']
   })
 
   highlighter.setOption({
