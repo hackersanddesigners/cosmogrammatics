@@ -56,9 +56,5 @@ content
 kirby
 vendor
 
-*/fonts/*
-
 *.mjs
 node_modules
-assets/js/*.min.js
-assets/js/*/*.min.js
