@@ -11,6 +11,11 @@ sections:
     template: comment
     layout: table
     columns:
-      slug:
-        value: '{{ page.article_slug }}'
+      block_id:
+        label: Block ID
+        value: '{{ page.block_id }}'
+      selection_type:
+        label: Selection type
+        value: '{{ page.selection_type }}'
+      
         
