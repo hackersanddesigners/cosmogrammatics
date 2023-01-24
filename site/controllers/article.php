@@ -81,7 +81,11 @@ return function ($kirby, $page) {
             // get the data and check if it's all good
 
             $field = json_decode($field, true);
-            $selection_text = yaml::encode($field['content']['selection_text'], true);
+
+            $selection_text = NULL;
+            if (array_key_exists('selection_text', $field['content'])) {
+                $selection_text = yaml::encode($field['content']['selection_text'], true);
+            }
 
             $content = $field['content'];
             $data = [
