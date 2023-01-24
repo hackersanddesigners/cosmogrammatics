@@ -340,10 +340,15 @@ function removeCommentDOM(highlight_id) {
     tip.remove()
   }
 
+  // remove article-comment from draft list
   const article_comment = document.querySelector(`[data-text-selection-id="${highlight_id}"]`)
   if (article_comment !== null) {
     article_comment.remove()
   }
+
+  // remove article block highlight, if any
+  const block = document.querySelector(`.content-wrapper #${highlight_id}`)
+  block.classList.remove('block-highlight')
 
 }
 
