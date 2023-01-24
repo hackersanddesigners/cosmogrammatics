@@ -639,3 +639,6 @@ main:has( select#view_mode option[value="5"]:checked ) {
     margin-right: 0.5rem;
 }
 
+.block-highlight {
+    border: 4px solid var(--accent);
+}
