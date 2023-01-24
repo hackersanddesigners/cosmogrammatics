@@ -120,11 +120,18 @@ function make_comment_el(data) {
   const date = document.createElement('p')
   const timestamp = document.createElement('time')
 
-  // TODO set correct datetime format for timestamp `yyyy-mm-dd hh:mm:ss`
-  const ts = new Date(data.content.timestamp)
+  const ts = new Date(data.content.timestamp).toLocaleDateString('nl-NL', {
+    timeZone: 'Europe/Berlin',
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric'
+  })
   timestamp.setAttribute('datetime', data.content.timestamp)
   date.append(timestamp)
-  date.innerHTML = `On ${data.content.timestamp}`
+  date.innerHTML = `On ${ts}`
 
   const user = document.createElement('p')
   user.innerHTML = `by ${data.content.user}`
