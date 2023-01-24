@@ -2,7 +2,6 @@
 
 <body class="<?= $page->template() ?>">
   <?php snippet('header') ?>
-
   <main id="main">
     <div class="view-comment-options-wrapper">
       <?php snippet( 'grid/stats' ) ?>
