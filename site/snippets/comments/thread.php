@@ -3,7 +3,6 @@
 
     $thread = $thread ?? [
       'selection_type'   => NULL,
-      'selection_coords' => NULL,
       'comments'         => []
     ];
 
@@ -13,8 +12,7 @@
 
     snippet( 'comments/add', [
       'block'            => $block,
-      'selection_type'   => $thread['selection_type'],
-      'selection_coords' => $thread['selection_coords']
+      'selection_type'   => $block->type()
     ])
   ?>
 </section>

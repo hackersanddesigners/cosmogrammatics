@@ -67,7 +67,8 @@ function textHighlight(target, toolbar, article_slug) {
 
         // -- toggle comment input form
         const positionToolbar = getCoords(selectionNode)
-        toggle_toolbar(positionToolbar, toolbar, source.id, blockID, user)
+        const block_type = 'text'
+        toggle_toolbar(positionToolbar, toolbar, block_type, source.id, blockID, user)
         
         // -- save text-selection to highlight_store
         highlight_store.save(source)
@@ -102,13 +103,13 @@ function textHighlight(target, toolbar, article_slug) {
     return ''
   }
 
-  function toggle_toolbar(position, toolbar, sourceID, blockID, user) {
+  function toggle_toolbar(position, toolbar, blockType, sourceID, blockID, user) {
     const form = toolbar.querySelector('form')
-    form.setAttribute('data-block-selection-type', 'text')
+    form.setAttribute('data-block-selection-type', blockType)
     form.setAttribute('data-block-comment-id', sourceID)
     form.setAttribute('data-block-id', blockID)
 
-    form.querySelector('#selection_type').value = 'text'
+    form.querySelector('#selection_type').value = blockType
     form.querySelector('#block_id').value = blockID
     form.querySelector('#author').value = user.value
 
