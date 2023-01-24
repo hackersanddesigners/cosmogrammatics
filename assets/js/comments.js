@@ -16,12 +16,17 @@ function respond_comment(e) {
   // the object needs to have an ID field
   // else LocalStore will replace the previous
   // comment with the newest one only
+  // nb: check if selection-type => text
   let comment = make_comment(form, store)
   if (!comment) {
     return
   }
 
-  comment['id'] = comment.content.selection_text.id
+  if (comment.content.selection_text !== undefined) {
+    comment['id'] = comment.content.selection_text.id
+  } else {
+    comment['id'] = comment.content.block_id
+  }
 
   // -- save username to local.store if not set yet
   setUsername(comment.content.user, comment.content.article_slug)
@@ -41,10 +46,13 @@ function respond_comment(e) {
 }
 
 function make_comment( form, store ) {
+  // -- comment can either be text-selection
+  //    or block-level comment
+  //    how to avoid breaking the commenting system
+  //    if there's no `selection_text`
 
   // -- check if text-comment is not empty,
   //    eg just empty spaces
-
   const children = Array.from(form.children)
   const input_body = children.find( c => c.name == 'body' )
 
@@ -127,7 +135,8 @@ function make_comment_el(data) {
   // -- append everything to <article>
   const article = document.createElement('article')
   article.setAttribute('tabindex', '0')
-  article.setAttribute('data-text-selection-id', data.content.selection_text.id)
+  article.setAttribute('data-text-selection-id', data.id)
+  
   article.classList.add('comment-draft')
 
   article.append(text_comment)
@@ -184,7 +193,8 @@ function commentsArticle(comment, form) {
 
   // set missing data to be used with the input-form
   form.setAttribute('data-block-selection-type', comment.content.selection_type)
-  form.setAttribute('data-block-selection-text-id', comment.content.selection_text.id)
+  form.setAttribute('data-block-selection-text-id', comment.id)
+
   form.querySelector('#selection_type').value = comment.content.selection_type
   form.querySelector('#block_id').value = comment.content.block_id
 

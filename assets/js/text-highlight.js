@@ -20,12 +20,15 @@ function textHighlight(target, toolbar, article_slug) {
   // -- restore all comments (drafts and published)
   //    which are mapped only to text-highlights with actual
   //    comments attached to it
-
+  //    OR are block-level comments
   const comment_store = new LocalStore(`comment-${article_slug}`)
   comment_store.getAll().forEach(comment => {
+
     if (typeof comment === 'object') {
-      const hs = comment.content.selection_text
-      highlighter.fromStore(hs.startMeta, hs.endMeta, hs.text, hs.id)
+      if ('content' in comment && comment.content.selection_text !== undefined) {
+        const hs = comment.content.selection_text
+        highlighter.fromStore(hs.startMeta, hs.endMeta, hs.text, hs.id)
+      }
     }
   });
 

@@ -109,8 +109,14 @@ function commentReviewList(article_slug) {
         if (input.checked) {
           const highlight_id = input.parentNode.id
           const comment = comments.find(comment => {
-            if (comment.content.selection_text.id === highlight_id) {
-              return comment
+            if (comment.content.selection_text !== undefined) {
+              if (comment.content.selection_text.id === highlight_id) {
+                return comment
+              }
+            } else {
+              if (comment.content.block_id === highlight_id) {
+                return comment
+              }
             }
           })
 
@@ -153,8 +159,14 @@ function commentReviewList(article_slug) {
 
           const highlight_id = input.parentNode.id
           const comment = comments.find(comment => {
-            if (comment.content.selection_text.id === highlight_id) {
-              return comment
+            if (comment.content.selection_text !== undefined) {
+              if (comment.content.selection_text.id === highlight_id) {
+                return comment
+              }
+            } else {
+              if (comment.content.block_id === highlight_id) {
+                return comment
+              }
             }
           })
 
@@ -220,7 +232,7 @@ function make_comment_el(comment, idx, article_slug) {
   // -- wrapper node
   const wrapper = document.createElement('div')
   wrapper.classList.add('comment-list-wrapper')
-  wrapper.setAttribute('id', comment.content.selection_text.id)
+  wrapper.setAttribute('id', comment.id)
 
   // -- input checkbox
   const comment_input = document.createElement('input')
@@ -243,7 +255,8 @@ function make_comment_el(comment, idx, article_slug) {
   comment_input_text.setAttribute('readonly', 'readonly')
 
   // -- add link to text-selection span
-  const highlight_id = comment.content.selection_text.id
+  const highlight_id = comment.id
+
   const target = document.querySelector(`[data-highlight-id="${highlight_id}"]`)
   if (target !== null) {
     target.setAttribute('id', highlight_id) 
