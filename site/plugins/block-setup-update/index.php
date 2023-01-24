@@ -151,7 +151,7 @@ function parseBlocks($blocks, $type) {
 
 // set block->bid and footnote ref across blocks
 // both values are generated as UUID
-Kirby::plugin('cosmo/footnote-ref', [
+Kirby::plugin('cosmo/block-setup-update', [
     'hooks' => [
         'page.update:after' => function ($newPage, $oldPage) {
 

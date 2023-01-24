@@ -1,5 +1,5 @@
 {
-    "name": "hd/footnote-ref-update",
+    "name": "hd/block-setup-update",
     "description": "Set block->bid and footnote ref across blocks both values are generated as UUID",
     "version": "1.0.0",
     "license": "MIT",
