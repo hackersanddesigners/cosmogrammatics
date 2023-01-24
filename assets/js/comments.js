@@ -184,6 +184,12 @@ function createComment(form, article, comment) {
     thread.insertBefore(article, form)
   }
 
+  // if comment is at block-level, highlight block
+  if (comment.content.selection_text === undefined) {
+    const block = document.querySelector(`.content-wrapper #${comment.id}`)
+    block.classList.add('block-highlight')
+  }
+
   updateCommentCounter('increase', 1)
 
 }
@@ -203,14 +209,6 @@ function commentsArticle(comment, form) {
   form.querySelector('#author').setAttribute('value', comment.content.user)
 
   createComment(form, article_comment, comment)
-
-  // if comment is at block-level, highlight block
-  if (comment.content.selection_text === undefined) {
-    const block = document.querySelector(`#${comment.id}`)
-    console.log('comment block =>', comment, block)
-
-    block.classList.add('block-highlight')
-  }
 }
 
 function blockFocus() {
