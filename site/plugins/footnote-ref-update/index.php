@@ -4,10 +4,14 @@ use Kirby\Uuid\Uuid;
 
 
 function setBID($bid) {
-    if ($bid == NULL || $bid->exists() == false || $bid->isEmpty()) {
+    // check if bid is empty and generate a new one
+    // else return the existing bid value
+
+    if ($bid->isValid('empty')) {
         return 'b_' . Uuid::generate();
+
     } else {
-        return $bid;
+        return $bid->value();
     }
 }
 
