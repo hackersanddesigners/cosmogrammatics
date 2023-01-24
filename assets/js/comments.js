@@ -76,8 +76,8 @@ function make_comment( form, store ) {
   const article_slug      = form.getAttribute( 'data-article-slug' )
   const block_id          = form.getAttribute( 'data-block-id' )
   const selection_type    = form.getAttribute( 'data-block-selection-type' )
-  const selection_text_id = form.getAttribute( 'data-block-selection-text-id' )
-  const selection_text    = store.getByID(selection_text_id)
+  const comment_id        = form.getAttribute( 'data-block-comment-id' )
+  const selection_text    = store.getByID(comment_id)
   const author            = xss(children.find( c => c.name == 'author' ).value)
   const text              = input_text
   const ts                = new Date().toISOString()
@@ -193,7 +193,7 @@ function commentsArticle(comment, form) {
 
   // set missing data to be used with the input-form
   form.setAttribute('data-block-selection-type', comment.content.selection_type)
-  form.setAttribute('data-block-selection-text-id', comment.id)
+  form.setAttribute('data-block-comment-id', comment.id)
 
   form.querySelector('#selection_type').value = comment.content.selection_type
   form.querySelector('#block_id').value = comment.content.block_id

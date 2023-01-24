@@ -105,7 +105,7 @@ function textHighlight(target, toolbar, article_slug) {
   function toggle_toolbar(position, toolbar, sourceID, blockID, user) {
     const form = toolbar.querySelector('form')
     form.setAttribute('data-block-selection-type', 'text')
-    form.setAttribute('data-block-selection-text-id', sourceID)
+    form.setAttribute('data-block-comment-id', sourceID)
     form.setAttribute('data-block-id', blockID)
 
     form.querySelector('#selection_type').value = 'text'

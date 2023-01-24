@@ -7,7 +7,7 @@
   data-block-id="<?= isset( $block ) ? $block->bid() : NULL ?>"
   data-article-slug="<?= $page->slug() ?>"
   data-block-selection-type="<?= $selection_type ?? NULL ?>"
-  data-block-selection-text-id=""
+  data-block-comment-id=""
 >
   <label for="body"></label>
   <input type="text" placeholder="comment..." id="body" name="body" value="<?= $data['text'] ?? null ?>" required>
