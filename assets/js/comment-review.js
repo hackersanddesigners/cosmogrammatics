@@ -209,8 +209,10 @@ function commentReviewList(article_slug) {
       inputs.map(input => {
         if (input.checked) {
           const highlight_id = input.parentNode.id
-          comment_store.remove(highlight_id)
-          removeCommentDOM(highlight_id)
+          if (highlight_id !== '') {
+            comment_store.remove(highlight_id)
+            removeCommentDOM(highlight_id)
+          }
         }
       })
 
