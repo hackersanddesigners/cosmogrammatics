@@ -168,22 +168,19 @@ function createComment(form, article, comment) {
 
     // make a new comment thread for this block
     thread = make_comment_thread_el(form)
-
     const block_id = form.getAttribute('data-block-id')
 
-    if (block_id !== '') {
-      const block = document.querySelector(`.content-wrapper section#${block_id}`)
-      const aside = block.querySelector('aside')
-      const thread_form = Array.from(thread.children)[0]
-      
-      thread.insertBefore(article, thread_form)
-      aside.appendChild(thread)
+    const block = document.querySelector(`.content-wrapper section#${block_id}`)
+    const aside = block.querySelector('aside')
+    const thread_form = Array.from(thread.children)[0]
+    
+    thread.insertBefore(article, thread_form)
+    aside.appendChild(thread)
 
-      // hide input-form
-      form_parent.classList.add('hidden')
-      form_parent.style.removeProperty('--top')
-      form_parent.style.removeProperty('--left')
-    }
+    // hide input-form
+    form_parent.classList.add('hidden')
+    form_parent.style.removeProperty('--top')
+    form_parent.style.removeProperty('--left')
 
   } else {
     thread = form_parent
