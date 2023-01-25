@@ -642,3 +642,16 @@ main:has( select#view_mode option[value="5"]:checked ) {
 .block-highlight {
     border: 4px solid var(--accent);
 }
+
+.article-authors {
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.article-author:not(:last-child) {
+    padding-right: 1rem;
+}
+
+
+
+

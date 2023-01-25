@@ -11,6 +11,8 @@ tabs:
   article:
     label: ✍️ Article 📑
     fields:
+      authors:
+        type: tags
       builder: fields/blocks
 
   skin:

@@ -7,4 +7,6 @@ subpage_builder:
     num: 1
 
 fields:
+  authors:
+    type: tags
   builder: fields/blocks
