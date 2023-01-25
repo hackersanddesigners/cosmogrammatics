@@ -1,0 +1,12 @@
+{
+    "name": "hd/block-comment-thread",
+  "description": "Filter and organize published comments by thread (same block-id and type)",
+    "version": "1.0.0",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "André Fincato",
+            "email": "andre@hackersanddesigners.nl"
+        }
+    ]
+}

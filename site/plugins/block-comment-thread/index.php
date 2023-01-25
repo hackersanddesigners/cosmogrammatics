@@ -3,7 +3,7 @@
 // -- setup custom thread method:
 //    get all comments related to this block:
 //    - filter by block_id
-Kirby::plugin('cosmo/block-highlight-comment', [
+Kirby::plugin('cosmo/block-comment-thread', [
 
     'blockMethods' => [
         'threads' => function ($comments = []) {
