@@ -1,21 +1,23 @@
 <?php
 
-// use Kirby\Cms\Page;
-// use Kirby\Cms\Collection;
-// use Kirby\Exception\PermissionException;
-
-
-// -- setup custom thread method
+// -- setup custom thread method:
+//    get all comments related to this block:
+//    - filter by block_id
 Kirby::plugin('cosmo/block-highlight-comment', [
 
     'blockMethods' => [
-        // TODO add more commentary
         'threads' => function ($comments = []) {
 
+            // originally this function was meant to filter comments also
+            // by selection_coords (an object containing x1-3, y1-3, t1-2
+            // set of fields to store any type of block selection (text, image,
+            // audio, video, ...).
+            // as of <2023-01-25> we ended up using a specific JS plugin to handle
+            // text-selection in the frontend and adding block-level commenting
+            // besides this; so: no another selection coords are needed and we're
+            // not filtering by this field for the time being.
+
             $threads = [];
-
-            // get all comments related to this block
-
             if ($comments) {
                 $block_comments = $comments->filterBy('block_id', $this->bid() );
 
@@ -25,33 +27,14 @@ Kirby::plugin('cosmo/block-highlight-comment', [
 
                 foreach( $block_comments as $block_comment ) {
 
-                    $type   = $block_comment->selection_type();
-                    $coords = $block_comment->selection_coords();
-
-                    $coord_label = [];
-                    foreach($coords->toStructure() as $coord) {
-                        $label = '';
-
-                        if ($type == 'text') {
-                            $label = $coord->x1()->value() . '-' . $coord->x2()->value();
-                        } else if ($type == 'audio') {
-                            $label = $coord->t1()->value() . '-' . $coord->t2()->value();
-                        }
-
-                        array_push($coord_label, $label);
-                    };
-                    $coord_id = join("_", $coord_label);
-                    $id = $this->bid() . '_sel_' . $type . '-' . $coord_id;
+                    $type = $block_comment->selection_type();
 
                     // first, check if thread has already been created.
                     // It can be uniquely identified by its selection type
                     // and coords.
                     $exists = FALSE;
-                    foreach ( $threads as $thr ) {
-                        if (
-                            $thr['selection_type']->value() == $type->value() &&
-                            $thr['selection_coords']->value() == $coords->value()
-                        ) {
+                    foreach ($threads as $thr) {
+                        if ($thr['selection_type']->value() == $type->value()) {
                             $exists = TRUE;
                             break;
                         }
@@ -59,14 +42,11 @@ Kirby::plugin('cosmo/block-highlight-comment', [
 
                     // if the thread doesn't exist, we proceed with it's
                     // creation and addition to the $threads array.
-                    if ( !$exists ) {
+                    if (!$exists) {
                         $threads[] = [
                             'selection_type'   => $type,
-                            'selection_coords' => $coords,
-                            'selection_id'     => $id,
                             'comments'         => $block_comments
-                            ->filterBy('selection_type', $type )
-                            ->filterBy('selection_coords', $coords )
+                            ->filterBy('selection_type', $type)
                         ];
                     }
 
