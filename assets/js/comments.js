@@ -193,8 +193,6 @@ function createComment(form, article, comment) {
     block.classList.add('block-highlight')
   }
 
-  updateCommentCounter('increase', 1)
-
 }
 
 function commentsArticle(comment, form) {
