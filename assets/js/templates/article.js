@@ -1,4 +1,4 @@
-const fetchArticleHighlightsFromAPI = require('../fetch-article-highlights-from-api')
+const highlightsSync = require('../highlights-sync')
 const textHighlight = require('../text-highlight')
 const { respond_comment, commentsArticle, blockFocus } = require('../comments')
 const LocalStore = require('../local.store')
@@ -10,7 +10,7 @@ const article_slug = window.location.pathname.split('/').pop().split('/').join('
 
 // -- synchronize text-highlights backend data with localStorage
 ;(async() => {
-  await fetchArticleHighlightsFromAPI(article_slug)
+  await highlightsSync(article_slug)
 })()
 
 const comment_forms = document.querySelectorAll( '.comment_form' )

@@ -1,6 +1,6 @@
 const LocalStore = require('./local.store')
 
-async function fetchArticleHighlightsFromAPI(article_slug) {
+async function highlightsSync(article_slug) {
   const url = `/cosmo-api/${ article_slug }`
 
   return fetch(url)
@@ -39,4 +39,4 @@ function textHighlightMergeUnique(newData, article_slug) {
   comment_store.save(highlights)
 }
 
-module.exports = fetchArticleHighlightsFromAPI
+module.exports = highlightsSync
