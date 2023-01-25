@@ -35,7 +35,7 @@
     <?php if ( $block->layout()->isNotEmpty() ) {
       snippet( 'grid/index', [ 'rows' => $block->layout()->toLayouts() ] );
     } else {
-      echo $block->highlightComments( $threads );
+      echo $block;
     } ?>
   </div>
 
