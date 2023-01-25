@@ -12,3 +12,11 @@ columns:
     label: Timestamp
   text:
     label: Text
+  image: false 
+  info: false 
+  block_id:
+    label: Block ID
+    value: '{{ page.block_id }}'
+  selection_type:
+    label: Selection type
+    value: '{{ page.selection_type }}'

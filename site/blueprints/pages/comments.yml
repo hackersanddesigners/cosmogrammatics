@@ -7,10 +7,12 @@ sections:
   comments:
     label: Comments
     type: pages
-    info: "{{ page.text }}"
     template: comment
     layout: table
     columns:
+      image: false 
+      text: false
+      info: false 
       block_id:
         label: Block ID
         value: '{{ page.block_id }}'
