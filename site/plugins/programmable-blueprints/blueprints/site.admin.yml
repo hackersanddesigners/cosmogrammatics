@@ -3,9 +3,11 @@ title: Site
 columns:
   - width: 1/2
     sections:
-      pages:
-        label: All pages
-        type: pages
+      site: sections/site
+
+  - width: 1/2
+    sections:
+      default: sections/default
 
   - width: 1/1
     sections:

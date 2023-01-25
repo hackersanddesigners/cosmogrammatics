@@ -1,0 +1,11 @@
+type: pages
+headline: Pages
+templates: default
+empty: No page yet
+layout: table
+image: false 
+info: false
+columns:
+  modified:
+    label: Last Modified
+    value: '{{ page.modified('d/m/Y H:i') }}'

@@ -1,7 +1,15 @@
 type: pages
 headline: Articles
 parent: site.find('articles')
-info: "{{ page.title }}"
-template: article
+templates: article
 empty: No article yet
-layout: table
+layout: table 
+image: false 
+info: false
+columns:
+  authors:
+    label: Authors
+    value: '{{ page.authors }}'
+  modified:
+    label: Last Modified
+    value: '{{ page.modified('d/m/Y H:i') }}'
