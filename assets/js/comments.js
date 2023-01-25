@@ -172,16 +172,19 @@ function createComment(form, article, comment) {
 
     if (block_id !== '') {
       const block = document.querySelector(`.content-wrapper section#${block_id}`)
-      const aside = block.querySelector('aside')
-      const thread_form = Array.from(thread.children)[0]
-      
-      thread.insertBefore(article, thread_form)
-      aside.appendChild(thread)
 
-      // hide input-form
-      form_parent.classList.add('hidden')
-      form_parent.style.removeProperty('--top')
-      form_parent.style.removeProperty('--left')
+      if (block !== null) {
+        const aside = block.querySelector('aside')
+        const thread_form = Array.from(thread.children)[0]
+        
+        thread.insertBefore(article, thread_form)
+        aside.appendChild(thread)
+
+        // hide input-form
+        form_parent.classList.add('hidden')
+        form_parent.style.removeProperty('--top')
+        form_parent.style.removeProperty('--left')
+      }
     }
 
   } else {
@@ -192,7 +195,9 @@ function createComment(form, article, comment) {
   // if comment is at block-level, highlight block
   if (comment.content.selection_text === undefined && comment.id !== '') {
     const block = document.querySelector(`.content-wrapper #${comment.id}`)
-    block.classList.add('block-highlight')
+    if (block !== null) {
+      block.classList.add('block-highlight')
+    }
   }
 
 }

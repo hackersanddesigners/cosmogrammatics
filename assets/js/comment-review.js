@@ -350,7 +350,9 @@ function removeCommentDOM(highlight_id) {
 
   // remove article block highlight, if any
   const block = document.querySelector(`.content-wrapper #${highlight_id}`)
-  block.classList.remove('block-highlight')
+  if (block !== null) {
+    block.classList.remove('block-highlight')
+  }
 
 }
 
