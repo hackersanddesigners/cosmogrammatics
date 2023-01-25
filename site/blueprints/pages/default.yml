@@ -1,9 +1,16 @@
-title: Default Page
+title: Page
 
 permissions:
   extends: options/permissions
 
+tabs:
 
-fields:
-  builder: fields/blocks
-      
+  article:
+    label: ✍️ Article 📑
+    fields:
+      builder: fields/blocks
+
+  skin:
+    label: 💅 Fashun 💄
+    fields:
+      skin: fields/skins
