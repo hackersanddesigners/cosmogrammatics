@@ -4,6 +4,7 @@ const { respond_comment, commentsArticle, blockFocus } = require('../comments')
 const LocalStore = require('../local.store')
 const { commentReviewList } = require('../comment-review')
 const viewMode = require('../view-mode')
+const footnotesDesign = require('../footnotes-design')
 
 
 const article_slug = window.location.pathname.split('/').pop().split('/').join('+')
@@ -57,3 +58,6 @@ viewMode()
 commentReviewList(article_slug)
 
 blockFocus()
+
+// footnotes design
+footnotesDesign()
