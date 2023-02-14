@@ -7,30 +7,16 @@
   </a>
   <nav tabindex="0" class="collapsible">
     <ul>
-      <?php foreach ( [
-           (object)[
-          'name' => 'About',
-          'href' => '/about',
-        ], (object)[
-          'name' => 'Get Involved',
-          'href' => '/contribute',
-        ], (object)[
-          'name' => 'Contact',
-          'href' => '/contact',
-        ], (object)[
-          'name' => 'Imprint',
-          'href' => '/imprint',
-        ],
-      ] as $nav_item ): ?>
-        <li>
+      <?php foreach($site->pages()->listed() as $nav_item): ?>
+      <li>
           <a
-            href="<?= $nav_item->href ?>"
-            title="<?= $nav_item->href ?>"
+            href="<?= $nav_item->url() ?>"
+            title="<?= $nav_item->url() ?>"
           >
-            <?= $nav_item->name ?>
+            <?= $nav_item->title() ?>
           </a>
         </li>
-      <?php endforeach ?>
+      <?php endforeach; ?>
     </ul>
   </nav>
   <div class="title">
