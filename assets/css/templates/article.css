@@ -541,6 +541,11 @@ main:has( select#view_mode option[value="5"]:checked ) {
     font-size: 0.75rem;
 }
 
+.comment-review input[type="submit"], 
+.comment-review button {
+    font-family: 'Authentic Bold';
+}
+
 .comment-review fieldset {
     border: none;
     margin: 0;
@@ -549,11 +554,12 @@ main:has( select#view_mode option[value="5"]:checked ) {
 
 .comment-data {
     counter-reset: comment;
+    padding-bottom: 1rem;
 }
 
 .comment-list-wrapper {
     display: flex;
-    padding-bottom: 1rem;
+    align-items: center;
 }
 
 .comment-list-input {
@@ -563,13 +569,14 @@ main:has( select#view_mode option[value="5"]:checked ) {
 
 .comment-list-label {
     display: flex;
-    padding-left: 1rem;
+    align-items: baseline;
+    padding-left: 0.5rem;
 }
 
 .comment-list-label:before {
     counter-increment: comment;
     content: counter(comment) ".";
-    padding-right:  1rem;
+    padding-right: 0.25rem;
 }
 
 .comment-label-wrapper {
@@ -599,6 +606,11 @@ main:has( select#view_mode option[value="5"]:checked ) {
 
 .comment-list-show-highlight {
     padding-right: 1rem;
+    cursor: pointer;
+}
+
+.comment-list-text {
+    cursor: pointer;
 }
 
 .alert {
@@ -623,6 +635,8 @@ main:has( select#view_mode option[value="5"]:checked ) {
 .comment-label-wrapper input[type=text] {
     border: 1px solid transparent;
     margin-bottom: 0;
+    padding: 0;
+    cursor: pointer;
 }
 
 .comment-username-wrapper input[type=text] {

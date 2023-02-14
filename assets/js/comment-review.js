@@ -266,24 +266,36 @@ function make_comment_el(comment, idx, article_slug) {
 
   const show_text_selection = document.createElement('a')
   show_text_selection.setAttribute('href', `#${highlight_id}`)
-  show_text_selection.innerHTML = 'Show'
   show_text_selection.classList.add('comment-list-show-highlight')
 
   show_text_selection.addEventListener('click', (e) => {
     // set border around text-selection for a
     // specific amount of time, then reset the style
 
+    e.preventDefault()
+
+    // target.scrollIntoView({behavior: 'smooth'})
+    const targetPos = target.getBoundingClientRect().top + window.scrollY
+    let offsetPosition = targetPos - 20;
+    window.scroll({
+      top: offsetPosition,
+      left: 0,
+      behavior: 'smooth'
+    })
+
     target.style.border = '1px solid blue'
 
     setTimeout(() => {
       target.style.border = ''
     }, '3000')
+
   })
 
   // -- append above nodes to label wrapper node
   const comment_label_wrapper = document.createElement('div')
   comment_label_wrapper.classList.add('comment-label-wrapper')
-  comment_label_wrapper.append(comment_input_text)
+  // comment_label_wrapper.append(comment_input_text)
+  show_text_selection.append(comment_input_text)
 
   // -- append wrapper nodes to label node
   comment_label.append(comment_label_wrapper)
