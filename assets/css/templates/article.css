@@ -211,7 +211,6 @@ main .row .column .block.selected:focus-within {
   z-index: 10;
   box-shadow: 0 0 2rem 0 var(--accent), var(--gridshadow);
   filter: drop-shadow(0 0 500rem rgb(0, 0, 0, 0.5));
-  transform: scale(1.1); 
 }
 
 main .row .column .block.selected:focus-within form.comment_form {
