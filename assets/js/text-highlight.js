@@ -8,7 +8,7 @@ function textHighlight(target, toolbar, article_slug) {
   const highlighter = new Highlighter({
     $root: document.querySelector('.content-wrapper'),
     wrapTag: 'span',
-    exceptSelectors: ['.block-title', '.highlight-tip', 'aside']
+    exceptSelectors: ['.highlight-tip', 'aside']
   })
 
   highlighter.setOption({
