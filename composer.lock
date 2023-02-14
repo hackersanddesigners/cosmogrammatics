@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "76101dfa9c1cb03f07bb420741a834f7",
+    "content-hash": "4a405d81953b113bf8ee237ea2967be8",
     "packages": [
         {
             "name": "bnomei/kirby3-fingerprint",
@@ -1785,6 +1785,44 @@
                 "source": "https://github.com/Seldaek/cli-prompt/tree/1.0.4"
             },
             "time": "2020-12-15T21:32:01+00:00"
+        },
+        {
+            "name": "sylvainjule/bouncer",
+            "version": "1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sylvainjule/kirby-bouncer.git",
+                "reference": "78cb66679b48a0da538a40a4c93fbd50f05b1135"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sylvainjule/kirby-bouncer/zipball/78cb66679b48a0da538a40a4c93fbd50f05b1135",
+                "reference": "78cb66679b48a0da538a40a4c93fbd50f05b1135",
+                "shasum": ""
+            },
+            "require": {
+                "getkirby/composer-installer": "^1.1"
+            },
+            "type": "kirby-plugin",
+            "extra": {
+                "installer-name": "bouncer"
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sylvain Julé",
+                    "email": "contact@sylvain-jule.fr"
+                }
+            ],
+            "description": "Restrict access of a user role to a specific page (and its children) in the panel.",
+            "support": {
+                "issues": "https://github.com/sylvainjule/kirby-bouncer/issues",
+                "source": "https://github.com/sylvainjule/kirby-bouncer/tree/1.0.6"
+            },
+            "time": "2022-08-03T14:11:21+00:00"
         },
         {
             "name": "sylvainjule/embed",

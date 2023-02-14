@@ -31,7 +31,8 @@
     "timoetting/kirby-color": "^1.0",
     "oblik/kirby-link-field": "^4.0",
     "oblik/kirby-entity-field": "^2.0",
-    "bnomei/kirby3-fingerprint": "^3.2"
+    "bnomei/kirby3-fingerprint": "^3.2",
+    "sylvainjule/bouncer": "^1.0"
   },
   "config": {
     "allow-plugins": {

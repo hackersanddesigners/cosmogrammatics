@@ -26,5 +26,16 @@ permissions:
     sort: true
     update: true
   site: false
-  user: true
+  user:
+    changeRole: false
+    delete: false
+    update: false
   users: false
+
+fields:
+  canaccess:
+    label: 'The user will only be able to access:'
+    type: pages
+    multiple: false
+    options: query
+    query: site.find("articles").children
