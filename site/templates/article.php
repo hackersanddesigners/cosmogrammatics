@@ -4,8 +4,10 @@
   <?php snippet('header') ?>
   <main id="main">
     <div class="view-comment-options-wrapper">
-      <?php snippet( 'grid/stats' ) ?>
-      <?php snippet( 'comments/review-list' ) ?>
+      <div class="view-comment-options-wrapper-extra">
+        <?php snippet( 'grid/stats' ) ?>
+        <?php snippet( 'comments/review-list' ) ?>
+      </div>
     </div>
     <div class="content-wrapper">
       <?php snippet( 'grid/title' ) ?>

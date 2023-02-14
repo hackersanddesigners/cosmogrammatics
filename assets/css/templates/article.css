@@ -23,7 +23,15 @@ main h1 {
 }
 
 .view-comment-options-wrapper {
+    display: relative;
+}
+
+/* position: sticky does not work if parent element is
+   set to display: flex, let's wrap that up, yo. */ 
+.view-comment-options-wrapper-extra {
     padding: 1rem;
+    position: sticky;
+    top: -1px;
 }
 
 main .stats,
