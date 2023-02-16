@@ -6,7 +6,17 @@ subpage_builder:
     template: comments
     num: 1
 
-fields:
-  authors:
-    type: tags
-  builder: fields/blocks
+
+tabs:
+
+  article:
+    label: ✍️ Article 📑
+    fields:
+      authors:
+        type: tags
+      builder: fields/blocks
+
+  skin:
+    label: 💅 Fashun 💄
+    fields:
+      skin: fields/skins
