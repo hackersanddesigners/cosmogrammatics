@@ -4,7 +4,7 @@ fields:
   source_file:
     label: File upload
     type: files
-    query: page.audio.template('audio')
+    query: page.parent.children.listed.audio
     uploads: audio
     multiple: false
   title:

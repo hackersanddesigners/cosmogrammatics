@@ -4,7 +4,7 @@ fields:
   source_file:
     label: File upload
     type: files
-    query: page.video.template('video')
+    query: page.parent.children.listed.videos
     uploads: video
     multiple: false
   title:
