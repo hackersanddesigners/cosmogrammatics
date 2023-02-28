@@ -19,9 +19,6 @@
           }
       }
   }
-
-
-  $threads = $block->threads( $comments );
 ?>
 
 <section
@@ -39,11 +36,16 @@
     } ?>
   </div>
 
+  <?php if ($page->intendedTemplate() == 'article'): ?>
   <aside>
-    <?php snippet( 'comments/index', [
-      'block'   => $block,
-      'threads' => $threads
-    ]) ?>
+      $threads = $block->threads( $comments );
+
+      snippet( 'comments/index', [
+        'block'   => $block,
+        'threads' => $threads
+      ])
+    ?>
   </aside>
+  <?php endif ?>
 
 </section>

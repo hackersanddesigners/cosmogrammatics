@@ -17,6 +17,10 @@
       echo Bnomei\Fingerprint::css('assets/css/templates/article.css');
     };
 
+    if ($page->intendedTemplate() == 'default') {
+      echo Bnomei\Fingerprint::css('assets/css/templates/default.css');
+    };
+
     echo Bnomei\Fingerprint::css('assets/css/base.css');
   ?>
 
