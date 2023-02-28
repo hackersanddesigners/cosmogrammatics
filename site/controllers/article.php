@@ -39,6 +39,10 @@ return function ($kirby, $page) {
             foreach($footnotes as $footnote) {
                 array_push($footnotes_list, $footnote);
             };
+        } else if ($block->type() === 'quote') {
+            if ($block->citation()->isNotEmpty()) {
+                array_push($footnotes_list, $block);
+            }
         }
     }
 

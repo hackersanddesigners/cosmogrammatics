@@ -3,11 +3,19 @@
    <ol>
    <?php
        foreach($footnotes as $footnote):
-       $ref = $footnote->ref();
+         // footnotes are normal ones added inline in the block
+         // or the citation author from a block-quote
+         if ($footnote->type() == 'quote') {
+           $note = $footnote->citation();
+           $ref = $footnote->id();
+         } else {
+           $note = $footnote->note();
+           $ref = $footnote->ref();
+         }
     ?>
-        <li id="note-ref-<?= $ref ?>">
-            <?= $footnote->note() ?>
-        </li>
+      <li id="note-ref-<?= $ref ?>">
+          <?= $note ?>
+      </li>
     <?php endforeach ?>
    </ol>
 <?php endif ?>
