@@ -97,14 +97,18 @@ function footnotesDesign() {
         const id = ref.id.split('-').pop()
         const note = notes.find(note => note.id.split('-').pop() === id)
 
-        // set note to footnote-ref top position
-        if (note.previousElementSibling) {
-          top = solveFor(note, top, notesWrap.getBoundingClientRect().top)
-        }
+        if (note) {
 
-        note.style.position = 'absolute'
-        note.style.top = `${top}px`
-        // --
+          // set note to footnote-ref top position
+          if (note.previousElementSibling) {
+            top = solveFor(note, top, notesWrap.getBoundingClientRect().top)
+          }
+
+          note.style.position = 'absolute'
+          note.style.top = `${top}px`
+          // --
+
+        }
 
       })
 
