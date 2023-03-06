@@ -8,7 +8,6 @@ async function highlightsSync(article_slug) {
     .then(response => {
       const newData = response
       textHighlightMergeUnique(newData, article_slug)
-
     })
   .catch(error => {
     return []
@@ -19,6 +18,7 @@ async function highlightsSync(article_slug) {
 function textHighlightMergeUnique(newData, article_slug) {
   // merge this array of text-highlights (newData)
   // w/ current localStorage['comment-{article-slug}']
+  // filter out comments w/o block_id for backward support
 
   // when removing comment from backend only, we need force
   // remove it from frontend as well: how to?
@@ -29,7 +29,7 @@ function textHighlightMergeUnique(newData, article_slug) {
   const highlightsMerged = [...comments, ...newData]
   const highlights = highlightsMerged.filter((value, index, self) => {
     return index === self.findIndex(t => {
-      return t.id === value.id
+      return t.id === value.id && t.content.block_id !== null
     })
   })
 
