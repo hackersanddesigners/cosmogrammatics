@@ -249,6 +249,42 @@ function blockFocus() {
   })
 }
 
+function comments(article_slug) {
+  const user_store = new LocalStore('user')
+  const user = user_store.getByID(article_slug)
+
+  const comment_store = new LocalStore(`comment-${article_slug}`)
+  const comments = comment_store.getAll()
+  const comment_forms = document.querySelectorAll( '.comment_form' )
+
+  for (const comment_form of comment_forms) {
+    // -- set comment to default username if there's any
+    if (user !== undefined) {
+      comment_form.querySelector('#author').value = user.value
+    }
+
+    // -- setup article's draft comments
+    //    check if comment has `status: draft` 
+    //    and matches current block-id
+    const blockID = comment_form.dataset.blockId
+    const comments_draft = comments.filter(comment => {
+      if (comment.status === 'draft' && comment.content.block_id === blockID) {
+        return comment
+      }
+    })
+
+    if (comments_draft.length > 0) {
+      comments_draft.map(comment => {
+        commentsArticle(comment, comment_form)
+      })
+    }
+
+    comment_form.onsubmit = respond_comment
+  }
+
+}
+
 module.exports = { respond_comment,
                    commentsArticle,
-                   blockFocus }
+                   blockFocus,
+                   comments }
