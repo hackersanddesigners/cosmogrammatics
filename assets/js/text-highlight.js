@@ -34,6 +34,16 @@ async function textHighlight(target, toolbar, article_slug) {
       if ('content' in comment && comment.content.selection_text !== undefined) {
         const hs = comment.content.selection_text
         highlighter.fromStore(hs.startMeta, hs.endMeta, hs.text, hs.id)
+
+
+        // if comment is at block-level, highlight block
+        if (comment.content.selection_text.text === null && comment.content.block_id !== '') {
+          const block = document.querySelector(`.content-wrapper #${comment.content.block_id}`)
+          if (block !== null) {
+            block.classList.add('block-highlight')
+          }
+        }
+
       }
     }
   });
