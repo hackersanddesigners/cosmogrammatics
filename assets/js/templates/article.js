@@ -1,5 +1,5 @@
 const textHighlight = require('../text-highlight')
-const { respond_comment, commentsArticle, blockFocus, comments } = require('../comments')
+const { blockFocus, comments } = require('../comments')
 const LocalStore = require('../local.store')
 const { commentReviewList } = require('../comment-review')
 const viewMode = require('../view-mode')

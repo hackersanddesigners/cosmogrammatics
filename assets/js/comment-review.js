@@ -1,5 +1,4 @@
 const LocalStore = require('./local.store')
-const store = new LocalStore()
 
 // -- comment-review
 //    display unpublished comments

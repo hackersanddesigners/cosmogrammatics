@@ -48,7 +48,7 @@ async function textHighlight(target, toolbar, article_slug) {
     }
   });
 
-  const highlight_store = new LocalStore()
+  const highlight_store = new LocalStore(`comment-${article_slug}`)
 
   // except for the CREATE event
   // any other event is triggered when interacting

@@ -1,5 +1,4 @@
 const LocalStore = require('./local.store')
-const store = new LocalStore()
 const xss = require('xss')
 const { commentReviewList, setUsername, updateCommentCounter } = require('./comment-review')
 
@@ -17,7 +16,10 @@ function respond_comment(e) {
   // else LocalStore will replace the previous
   // comment with the newest one only
   // nb: check if selection-type => text
-  let comment = make_comment(form, store)
+
+  const article_slug = window.location.pathname.split('/').pop().split('/').join('+')
+  const comment_store = new LocalStore(`comment-${article_slug}`)
+  let comment = make_comment(form, comment_store)
   if (!comment) {
     return
   }
@@ -31,8 +33,6 @@ function respond_comment(e) {
   // -- save username to local.store if not set yet
   setUsername(comment.content.user, comment.content.article_slug)
   
-  const article_slug = comment.content.article_slug
-  const comment_store = new LocalStore(`comment-${article_slug}`)
   comment_store.save(comment)
  
   // -- set comment-review list
