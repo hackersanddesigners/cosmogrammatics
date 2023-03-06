@@ -67,6 +67,7 @@ fieldsets:
         label: Footnotes
         type: structure
         fields:
+          bid: fields/bid
           note:
             label: Footnote
             type: writer

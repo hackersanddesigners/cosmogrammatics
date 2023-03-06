@@ -13,7 +13,7 @@
            $ref = $footnote->ref();
          }
     ?>
-      <li id="note-ref-<?= $ref ?>">
+      <li id="note-ref-<?= $ref ?>" data-bid="<?= $footnote->bid() ?>">
           <?= $note ?>
       </li>
     <?php endforeach ?>

@@ -105,6 +105,11 @@ function textHighlight(target, toolbar, article_slug) {
       if (block.id) {
         return block.id
       }
+    } else if (node.parentNode.dataset.bid !== undefined) {
+      // this checks if instead of a block we're highlighting
+      // a footnote with DOM <li id=note-ref-<ref> data-bid=<bid>>
+      return node.parentNode.dataset.bid
+
     }
 
     return null

@@ -89,6 +89,7 @@ function parseBlocks($blocks, $type) {
 
                 $ref_new = makeRef($footnote->ref()->value());
                 $new_footnote = array(
+                    'bid' => setBID($footnote->bid()),
                     'note' => $footnote->note()->value(),
                     'ref' => $ref_new, 
                 );
