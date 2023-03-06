@@ -62,6 +62,13 @@ function textHighlight(target, toolbar, article_slug) {
         const selectionNode = highlighter.getDoms(source.id)[0]
         const blockID = getBlockID(selectionNode)
 
+        if (blockID == null) {
+          // if blockID is missing or not set,
+          // stop everything
+          removeSelection(highlighter, source.id)
+          return
+        }
+
         const user_store = new LocalStore('user')
         const user = user_store.getByID(article_slug)
 
@@ -100,7 +107,7 @@ function textHighlight(target, toolbar, article_slug) {
       }
     }
 
-    return ''
+    return null
   }
 
   function toggle_toolbar(position, toolbar, blockType, sourceID, blockID, user) {
