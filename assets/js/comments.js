@@ -56,7 +56,12 @@ function make_comment( form, store ) {
   const children = Array.from(form.children)
   const input_body = children.find( c => c.name == 'body' )
 
-  const input_text = xss(input_body.value.trim())
+  const input_text = xss(input_body.value.trim(), {
+    whiteList:          {},        // empty, means filter out all tags
+    stripIgnoreTag:     true,      // filter out all HTML not in the whilelist
+    stripIgnoreTagBody: ['script'] // the script tag is a special case, we need to filter out its content
+  })
+
   if (input_text === '') {
     // stop operation
     input_body.value = input_body.value.trim()
@@ -78,7 +83,11 @@ function make_comment( form, store ) {
   const selection_type    = form.getAttribute( 'data-block-selection-type' )
   const comment_id        = form.getAttribute( 'data-block-comment-id' )
   const selection_text    = store.getByID(comment_id)
-  const author            = xss(children.find( c => c.name == 'author' ).value)
+  const author            = xss(children.find( c => c.name == 'author' ).value, {
+    whiteList:          {},        // empty, means filter out all tags
+    stripIgnoreTag:     true,      // filter out all HTML not in the whilelist
+    stripIgnoreTagBody: ['script'] // the script tag is a special case, we need to filter out its content
+  })
   const text              = input_text
   const ts                = new Date().toISOString()
 
