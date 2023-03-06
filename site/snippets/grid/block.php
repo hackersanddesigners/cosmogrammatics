@@ -37,6 +37,7 @@
     } ?>
   </div>
 
+<?php if ($page->intendedTemplate() == 'article'): ?>
   <aside>
     <?php
      $threads = $block->threads( $comments );
@@ -48,5 +49,6 @@
 
     ?>
   </aside>
+<?php endif ?>
 
 </section>
