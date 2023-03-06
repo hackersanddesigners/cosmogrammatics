@@ -19,5 +19,6 @@ sections:
       selection_type:
         label: Selection type
         value: '{{ page.selection_type }}'
-      
-        
+      text:
+        label: Text
+        value: '{{ page.text }}'
