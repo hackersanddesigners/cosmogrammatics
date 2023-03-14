@@ -58,3 +58,7 @@ vendor
 
 *.mjs
 node_modules
+
+
+.php-version
+composer.phar
