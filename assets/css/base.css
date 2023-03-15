@@ -324,6 +324,56 @@ header form.collapsible:focus-within::after {
 }
 
 
+/* displaying stats */
+
+.stats,
+.stats input,
+.stats button,
+.stats select {
+  font-size: 0.75rem;
+  padding: 0 0 1rem 0;
+}
+
+.stats p {
+    margin: 0;
+    padding-bottom: 0.25rem;
+    font-family: 'Authentic Bold';
+}
+
+
+/* Article List  */
+
+ul.article-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.article-list li {
+}
+
+a.article-link {
+  text-align: center;
+  padding: 0.5rem;
+  display: block;
+  text-decoration: none;
+  color: var(--fore);
+  background-color: var(--back);
+  box-shadow: var(--gridshadow);
+}
+
+a.article-link h1 {
+  font-size: 3rem;
+  margin-block: 0;
+  margin-inline: 1rem;
+  font-family: var(--title);
+}
+
+a.article-link img {
+  width: 100%;
+}
+
+
 @media screen and (min-width: 600px) {
     html, body {
         font-size: 16px;

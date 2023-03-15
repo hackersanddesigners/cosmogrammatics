@@ -40,13 +40,10 @@
 <?php if ($page->intendedTemplate() == 'article'): ?>
   <aside>
     <?php
-     $threads = $block->threads( $comments );
-
      snippet( 'comments/index', [
        'block'   => $block,
-       'threads' => $threads
+       'threads' => $block->threads( $comments )
      ]);
-
     ?>
   </aside>
 <?php endif ?>

@@ -1,22 +1,13 @@
-<?php snippet('head') ?>
+<?php snippet( 'head' ) ?>
 
 <body class="<?= $page->template() ?>">
 
-  <?php snippet('header') ?>
+ <?php snippet( 'header' ) ?>
 
   <main id="main">
-    <h2>Published articles:</h2>
-    <ul>
-    <?php foreach ($articles as $article): ?>
-      <li>
-        <a href="<?= $article->url() ?>">
-          <?= $article->title()->html() ?>
-        </a>
-      </li>
-      <?php endforeach ?>
-    </ul>
+    <?php snippet('article-list' ) ?>
   </main>
 
-  <?php snippet('footer') ?>
+  <?php snippet( 'footer' ) ?>
 
 </body>

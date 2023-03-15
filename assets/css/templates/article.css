@@ -34,19 +34,7 @@ main h1 {
     top: -1px;
 }
 
-main .stats,
-main .stats input, 
-main .stats button,
-main .stats select {
-  font-size: 0.75rem;
-  padding: 0 0 1rem 0;
-}
 
-main .stats p {
-    margin: 0;
-    padding-bottom: 0.25rem;
-    font-family: 'Authentic Bold';
-}
 
 main .content-wrapper {
     width: 100%;

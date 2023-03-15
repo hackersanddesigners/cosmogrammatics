@@ -1,0 +1,31 @@
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+main ul.article-list {
+  margin: 1rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+main ul.article-list li {
+  flex-basis: calc( ( 100% - 2rem ) / 3 );
+  min-width: 24rem;
+}
+
+
+@media screen and (max-width: 600px) {
+
+  main ul.article-list {
+    margin: 0.5rem;
+    display: block;
+  }
+
+  main ul.article-list li {
+    margin-bottom: 0.5rem;
+  }
+
+}
