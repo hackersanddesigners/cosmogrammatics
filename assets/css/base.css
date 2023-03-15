@@ -429,3 +429,19 @@ a.article-link img {
     }
 
 }
+
+@media print {
+
+  header,
+  aside,
+  .notes,
+  .view-comment-options-wrapper
+  {
+    display: none;
+  }
+
+  main {
+    padding: 1rem;
+  }
+
+}
