@@ -16,10 +16,11 @@
   <?php if ($page->intendedTemplate() == 'article'): ?>
     <aside>
       <?php
-       snippet( 'comments/index', [
-         'block'   => $block,
-         'threads' => $block->threads( $comments )
-       ]);
+        snippet( 'utils/click2copy', [ 'url' => '#' . $block->bid() ] );
+        snippet( 'comments/index', [
+          'block'   => $block,
+          'threads' => $block->threads( $comments )
+        ]);
       ?>
     </aside>
   <?php endif ?>

@@ -328,6 +328,14 @@ main .row .column .block:not(.columns) aside .thread:focus-within form.comment_f
   display: block; 
 }
 
+main .row .column .block a.click-copy {
+  opacity: 0;
+}
+
+main .row .column .block:not(.columns):hover a.click-copy,
+main .row .column .block:not(.columns):focus-within a.click-copy {
+  opacity: 1;
+}
 
 
 
