@@ -131,13 +131,6 @@ main .block .caption {
 main .block figure {
   margin-inline: unset;
 }
-main .block.page_embed a {
-  text-decoration: none;
-  color: var(--fore)
-}
-
-main .block.page_embed a h1 {
-}
 
 main .row .column .block aside {
   position: absolute;

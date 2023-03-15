@@ -367,6 +367,7 @@ a.article-link h1 {
   margin-block: 0;
   margin-inline: 1rem;
   font-family: var(--title);
+  color: var(--accent);
 }
 
 a.article-link img {
