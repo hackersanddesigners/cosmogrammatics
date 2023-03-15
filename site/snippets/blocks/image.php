@@ -43,10 +43,10 @@ if ($blockParentID != $articleID) {
 <figure<?= Html::attr(['data-ratio' => $ratio, 'data-crop' => $crop], null, ' ') ?>>
   <?php if ($link->isNotEmpty()): ?>
   <a href="<?= Str::esc($link->toUrl()) ?>">
-    <img src="<?= $src ?>" alt="<?= $alt->esc() ?>">
+    <img preload="metadata" src="<?= $src ?>" alt="<?= $alt->esc() ?>">
   </a>
   <?php else: ?>
-  <img src="<?= $src ?>" alt="<?= $alt->esc() ?>">
+  <img preload="metadata" src="<?= $src ?>" alt="<?= $alt->esc() ?>">
   <?php endif ?>
 
   <?php if ($caption->isNotEmpty()): ?>
