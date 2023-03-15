@@ -132,6 +132,11 @@ main .block figure {
   margin-inline: unset;
 }
 
+main .block figure.orphan_image {
+  border: var(--gridline);
+  padding: 0.5rem;
+}
+
 main .row .column .block aside {
   position: absolute;
   max-width: var(--side-width);

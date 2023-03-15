@@ -40,7 +40,10 @@ if ($blockParentID != $articleID) {
 
 ?>
 <?php if ($src): ?>
-<figure<?= Html::attr(['data-ratio' => $ratio, 'data-crop' => $crop], null, ' ') ?>>
+<figure
+  <?= Html::attr(['data-ratio' => $ratio, 'data-crop' => $crop], null, ' ') ?>
+  class="<?= $fileEmbed ? 'orphan_image' : '' ?>"
+>
   <?php if ($link->isNotEmpty()): ?>
   <a href="<?= Str::esc($link->toUrl()) ?>">
     <img preload="metadata" src="<?= $src ?>" alt="<?= $alt->esc() ?>">
@@ -49,13 +52,13 @@ if ($blockParentID != $articleID) {
   <img preload="metadata" src="<?= $src ?>" alt="<?= $alt->esc() ?>">
   <?php endif ?>
 
-  <?php if ($caption->isNotEmpty()): ?>
   <figcaption>
-    <?= $caption ?>
+    <?php if ($caption->isNotEmpty()): ?>
+      <p><?= $caption ?></p>
+    <?php endif ?>
+    <?php if ($fileEmbed): ?>
+      <a href="<?= url($fileEmbed) ?>">This files originates in the cosmogram <i><b><?= page($fileEmbed)->title() ?></b></i>.</a>
+    <?php endif ?>
   </figcaption>
-  <?php endif ?>
-<?php if ($fileEmbed): ?>
-    <a href="<?= url($fileEmbed) ?>">source</a>
-  <?php endif ?>
 </figure>
 <?php endif ?>
