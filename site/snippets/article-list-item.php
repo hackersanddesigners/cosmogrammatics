@@ -1,6 +1,5 @@
 <?php
 
-  // article identifier used as class for styling
   $id   = 'a_' . $article->slug();
   $skin = [
       'colors' => $article->colors()->toEntity(),
@@ -17,6 +16,7 @@
   href="<?= $article->url() ?>"
   title="<?= $article->title() ?>"
 >
+
   <?= $article->image() ?>
 
   <h1><?= $article->title()->html() ?></h1>

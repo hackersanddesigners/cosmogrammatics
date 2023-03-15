@@ -13,15 +13,15 @@
     } ?>
   </div>
 
-<?php if ($page->intendedTemplate() == 'article'): ?>
-  <aside>
-    <?php
-     snippet( 'comments/index', [
-       'block'   => $block,
-       'threads' => $block->threads( $comments )
-     ]);
-    ?>
-  </aside>
-<?php endif ?>
+  <?php if ($page->intendedTemplate() == 'article'): ?>
+    <aside>
+      <?php
+       snippet( 'comments/index', [
+         'block'   => $block,
+         'threads' => $block->threads( $comments )
+       ]);
+      ?>
+    </aside>
+  <?php endif ?>
 
 </section>
