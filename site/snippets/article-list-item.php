@@ -1,19 +1,19 @@
 <?php
 
-  // page identifier used as class for styling
-  $page_id = 'p_' . $article->slug();
-  $page_skin = [
+  // article identifier used as class for styling
+  $id   = 'a_' . $article->slug();
+  $skin = [
       'colors' => $article->colors()->toEntity(),
       'fonts'  => $article->fonts()->toEntity(),
       'rules'  => $article->css()->toStructure(),
-      'prefix' => $page_id
+      'prefix' => $id
   ];
-  snippet( 'style/tag', $page_skin );
+  snippet( 'style/tag', $skin );
 
 ?>
 
 <a
-  class="article-link <?= $page_id ?>"
+  class="article-link <?= $id ?>"
   href="<?= $article->url() ?>"
   title="<?= $article->title() ?>"
 >
