@@ -1,5 +1,5 @@
 <div class="stats">
-  <p><span id="comment_count"><?= $comments->count() ?></span> comments</p>
+  <?php snippet( 'comments/count', [ 'comments' => $comments ]  ) ?>
   <div class="view-options">
     <fieldsets>
       <legend>view</legend>

@@ -21,20 +21,13 @@
 
   <h1><?= $article->title()->html() ?></h1>
 
-  <?php if ($authors = $article->authors()): ?>
-    <div class="article-authors">
-    <?php foreach ($authors->split(',') as $author): ?>
-      <span class="article-author"><?= $author ?></span>
-    <?php endforeach ?>
-    </div>
-  <?php endif ?>
-
-  <?php if ($comments = $article->children()->children()->listed() ): ?>
-    <div class="stats">
-      <p><span id="comment_count">
-        <?= $comments->count() ?></span> comments
-     </p>
-    </div>
-  <?php endif ?>
+  <?php
+    if ( $authors = $article->authors() ) {
+      snippet( 'grid/authors', [ 'authors' => $authors ] );
+    }
+    if ( $comments = $article->children()->children()->listed() ) {
+      snippet( 'comments/count', [ 'comments' => $comments ] );
+    }
+  ?>
 
 </a>
