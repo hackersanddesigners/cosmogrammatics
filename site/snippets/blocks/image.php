@@ -26,19 +26,25 @@ if ($block->location() == 'web') {
 // it throws "cannot redeclare function"
 // alles gut, oke.
 
+
 $fileEmbed = null;
-$blockParentID = $block->parent()->id();
-$imageID = $image->id();
 
-$file_tokens = explode('/', $imageID);
-array_pop($file_tokens);
-$articleID = implode('/', $file_tokens);
+if ($src) {
 
-if ($blockParentID != $articleID) {
+  $blockParentID = $block->parent()->id();
+  $imageID = $image->id();
+
+  $file_tokens = explode('/', $imageID);
+  array_pop($file_tokens);
+  $articleID = implode('/', $file_tokens);
+
+  if ($blockParentID != $articleID) {
     $fileEmbed = $articleID;
+  }
 }
 
 ?>
+
 <?php if ($src): ?>
 <figure
   <?= Html::attr(['data-ratio' => $ratio, 'data-crop' => $crop], null, ' ') ?>

@@ -8,8 +8,8 @@
   <div class="contents">
     <?php if ( $block->layout()->isNotEmpty() ) {
       snippet( 'grid/index', [ 'rows' => $block->layout()->toLayouts() ] );
-    } else {
-      echo $block;
+    } else if ($block->isNotEmpty()) {
+        echo $block;
     } ?>
   </div>
 
