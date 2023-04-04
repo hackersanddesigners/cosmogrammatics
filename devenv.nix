@@ -28,4 +28,6 @@
     "gd"
   ];
 
+  languages.javascript.enable = true;
+
 }
