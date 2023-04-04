@@ -2,10 +2,14 @@
 
 return function ($page) {
 
-    $articles = page('articles')->children()->listed();
+  $articles = page('articles')->children()->listed();
 
-    return [
-        'articles' => $articles,
-    ];
+  // search query
+  $query = get('q');
+
+  return [
+    'articles' => $articles,
+    'query' => $query,
+  ];
 
 };

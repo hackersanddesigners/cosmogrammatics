@@ -2,7 +2,7 @@
 
 <body class="<?= $page->template() ?>">
 
- <?php snippet( 'header' ) ?>
+ <?php snippet( 'header', ['query' => $query] ) ?>
 
   <main id="main">
     <?php snippet('article-list' ) ?>

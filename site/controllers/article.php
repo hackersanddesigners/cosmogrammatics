@@ -4,6 +4,9 @@ return function ($kirby, $page) {
 
     // -- preparing data for template
 
+    // search query
+    $query = get('q');
+
     // <article>/comments/<[comment-1, comment-2, ...]>
     $comments = $page->children()->children()->listed();
 
@@ -158,6 +161,7 @@ return function ($kirby, $page) {
     // -- return data
 
     return [
+      'query'     => $query,
       'comments'  => $comments,
       'footnotes' => $footnotes_list,
       'skin'      => $skin,

@@ -24,5 +24,5 @@
       <?= $site->title()->html() ?>
     </a>
   </div>
-  <?php snippet( 'search' ) ?>
+  <?php snippet( 'search', ['query' => $query] ) ?>
 </header>

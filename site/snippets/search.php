@@ -5,9 +5,12 @@
   class="collapsible"
 >
   <input
-    id="search"
     type="search"
+    aria-label="Search"
+    id="search"
+    name="q"
     placeholder="Search cosmograms..."
+    value="<?= html($query) ?>"
   />
   <input
     type="submit"

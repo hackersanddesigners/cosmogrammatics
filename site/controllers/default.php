@@ -4,6 +4,9 @@ return function ($kirby, $page) {
 
     // -- preparing data for template
 
+    // search query
+    $query = get('q');
+
     // footnotes
     $footnotes_list = [];
 
@@ -49,6 +52,7 @@ return function ($kirby, $page) {
     // -- return data
 
     return [
+      'query'     => $query,
       'footnotes' => $footnotes_list,
       'skin'      => $skin,
     ];
