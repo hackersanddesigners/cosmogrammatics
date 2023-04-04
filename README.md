@@ -6,6 +6,16 @@ Testing out if the kirby CMS can be stretched to build what we need.
 
 ## Setup
 
+You can use `devenv` to create a working shell environment dedicated to the project (with PHP, npm, etc) or simply install the belowed required software.
+
+If going with devenv, simply start a new shell:
+
+```
+devenv shell
+```
+
+then follow the rest of the setup to setup Composer and npm.
+
 - install PHP (>=7.4.0 <8.2.0) (check `composer.json`'s `require` field)
 - install [Composer](https://getcomposer.org/doc/00-intro.md)
 
@@ -37,9 +47,31 @@ To run the backend, Kirby suggests to setup a full-on server environment (eg wit
 php -S localhost:8000 kirby/router.php
 ```
 
+
+If going with devenv, you can instead enter a new shell:
+
+```
+devenv shell
+```
+
+then run this devenv script:
+
+```
+run-server
+```
+
+which will run `php -S localhost:8000 kirby/router.php`.
+
 Otherwise you can use something like [valet](https://laravel.com/docs/9.x/valet) or anything else [listed here](https://getkirby.com/docs/cookbook/setup/development-environment).
 
 Check [Kirby's own guide](https://getkirby.com/docs/guide/quickstart#requirements) as a reference.
+
+## Frontend
+
+When working on the js-side of the frontend (eg the article's commenting system), there's two npm scripts available:
+
+- `npm run watch`: to run a local instance of the scripts; any change to any js files will trigger a new version of the final script output
+- `npm run build`: to build a compressed, smaller version of the final js bundle
 
 ## Authors
 
