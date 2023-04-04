@@ -35,12 +35,14 @@ fields:
     fieldsets:
       - heading
       - text
-      - column
+      - columns
 ```
 
 For the output see the [block documentation](https://getkirby.com/docs/reference/panel/fields/blocks#blocks-in-your-templates)
 
 ## Customization
+
+**Customize column block for a single block field**
 
 Just extend the column block like this:
 
@@ -65,4 +67,13 @@ fields:
               - text
 ```
 
-To customize the ouput copy `column.php` from `site/plugins/column-block/snippets/blocks` to `site/snippets/blocks` and edit it.
+**Customize column block globally**
+
+Copy `columns.yml` from `site/plugins/column-block/blueprints/blocks/`to `site/blueprints/blocks/` and edit it.
+
+**Customize the output**
+
+Copy `columns.php` from `site/plugins/column-block/snippets/blocks` to `site/snippets/blocks` and edit it.
+
+
+Need help? See [this post](https://forum.getkirby.com/t/plug-in-column-block/27056) from the Kirby forum.
