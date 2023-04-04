@@ -62,3 +62,7 @@ node_modules
 
 .php-version
 composer.phar
+
+# Devenv
+.devenv*
+devenv.local.nix
