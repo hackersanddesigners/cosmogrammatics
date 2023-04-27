@@ -40,7 +40,8 @@ main .content-wrapper {
     width: 100%;
 }
 
-.view-options legend {
+.view-options legend,
+.export-options legend {
     padding: 0 0 0.25rem 0;
     font-family: 'Authentic Bold';
 }
@@ -504,6 +505,11 @@ main .notes.column[data-col-width="1/1"] {
 
 .view-options input[type=radio]:checked ~ label {
    border-bottom: 1px solid var(--fore);
+}
+
+
+.export-options input[type=button] {
+  padding: 0 0.25rem;
 }
 
 

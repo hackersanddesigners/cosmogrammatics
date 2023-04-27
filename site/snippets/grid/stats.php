@@ -21,4 +21,18 @@
       </div>
     </fieldsets>
   </div>
+  <div class="export-options">
+    <fieldsets>
+      <legend>export</legend>
+      <div>
+        <input
+          type="button"
+          value="print"
+          onclick="window.print()"
+          id="4"
+        >
+        <label for="4">download as PDF</label>
+      </div>
+    </fieldsets>
+  </div>
 </div>
