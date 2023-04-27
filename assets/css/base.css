@@ -132,6 +132,7 @@ html, body {
   color: var(--fore);
   font-family: 'Authentic Regular';
   font-size: 0.9rem;
+  scroll-behavior: smooth;
 }
 
 input, select, button {

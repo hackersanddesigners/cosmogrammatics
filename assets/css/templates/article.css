@@ -389,17 +389,19 @@ main .notes.column[data-col-width="1/1"] {
 }
 
 .notes {
-  padding: 0 0.5rem;
+  margin-left: 0.5rem;
+  padding-top: 1rem;
+  width: calc( var(--side-width) + 1rem );
 }
 
 .notes ol {
     padding-left: 0;
-    display: inline-table;
+    /* display: inline-table; */
     list-style: none;
 }
 
 .notes ol li {
-    padding: 0.5rem;
+    padding: 0 0.5rem;
     /* display: table-row; */
     counter-increment: number-list;
     font-family: var(--footnotes);
@@ -409,13 +411,13 @@ main .notes.column[data-col-width="1/1"] {
     background-color: var(--back);
     display: block;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-
     /* trick to hide top rim of overflown text */
-    padding-bottom: 0.14em;
+    padding-bottom: 0.3em;
+
 }
 
 
@@ -455,7 +457,7 @@ main .notes.column[data-col-width="1/1"] {
         position: absolute;
         top: 0;
         height: 100%;
-        border-left: 1px solid red;
+        /* border-left: 1px solid red; */
     }
 
     main .notes.column[data-col-width="1/1"] {
