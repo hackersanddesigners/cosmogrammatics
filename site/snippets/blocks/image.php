@@ -55,7 +55,9 @@ if ($src) {
     <img preload="metadata" src="<?= $src ?>" alt="<?= $alt->esc() ?>">
   </a>
   <?php else: ?>
-  <img preload="metadata" src="<?= $src ?>" alt="<?= $alt->esc() ?>">
+  <a href="<?= $src ?>">
+    <img preload="metadata" src="<?= $src ?>" alt="<?= $alt->esc() ?>">
+  </a>
   <?php endif ?>
 
   <figcaption>

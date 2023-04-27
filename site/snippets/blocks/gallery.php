@@ -8,7 +8,9 @@ $ratio   = $block->ratio()->or('auto');
   <ol>
     <?php foreach ($block->images()->toFiles() as $image): ?>
     <li>
-      <?= $image ?>
+      <a href="<?= $image->url() ?>">
+        <?= $image ?>
+      </a>
     </li>
     <?php endforeach ?>
     </ol>
