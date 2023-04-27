@@ -12,6 +12,7 @@
 
         <h3 class="comment-status">No unpublished comments</h3>
         <div class="comment-data"></div>
+        <p class="comment-status"><small><i>Once published, comments can not be edited.</i></small></p>
         <input name="post_comment" class="hidden button post_comment" type="submit" value="publish">
         <button type="button" class="hidden button comment-edit">edit</button>
         <button type="button" class="hidden button comment-remove">remove</button>

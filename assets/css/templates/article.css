@@ -27,7 +27,7 @@ main h1 {
 }
 
 /* position: sticky does not work if parent element is
-   set to display: flex, let's wrap that up, yo. */ 
+   set to display: flex, let's wrap that up, yo. */
 .view-comment-options-wrapper-extra {
     padding: 1rem;
     position: sticky;
@@ -101,6 +101,25 @@ main .block {
 /* if a block will contain a nested alyopuit inside it, remvoe padding */
 main .block.columns {
   padding: 0;
+}
+
+main .block.gallery ol {
+  /* position: fixed;
+  left: 0; */
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: flex-start;
+  width: 100%;
+  overflow: scroll;
+}
+
+main .block.gallery li {
+}
+main .block.gallery li img {
+  max-width: var(--main-width);
+  max-height: 90vh;
 }
 
 main .block a {
@@ -225,6 +244,7 @@ main .row .column .block:focus-within > aside  {
   left : calc( var(--col-width) + 1rem );
 }
 
+
 aside p {
   margin-block: 0;
 }
@@ -330,7 +350,7 @@ main .row .column .block:not(.columns):hover form.comment_form,
 main .row .column .block:not(.columns):focus-within aside .thread:first-of-type form.comment_form,
 main .row .column .block:not(.columns) aside .thread form.comment_form:focus-within,
 main .row .column .block:not(.columns) aside .thread:focus-within form.comment_form  {
-  display: block; 
+  display: block;
 }
 
 main .row .column .block a.click-copy {
@@ -485,7 +505,7 @@ main .notes.column[data-col-width="1/1"] {
 .view-options input[type=radio]:checked ~ label {
    border-bottom: 1px solid var(--fore);
 }
-                                    
+
 
 main:has( select#view_mode option[value="4"]:checked ) {
   --main-width: min( 100vw, 30rem );
@@ -529,13 +549,13 @@ main:has( select#view_mode option[value="5"]:checked ) {
 }
 
 .comment-review,
-.comment-review input, 
+.comment-review input,
 .comment-review button,
 .comment-review select {
     font-size: 0.75rem;
 }
 
-.comment-review input[type="submit"], 
+.comment-review input[type="submit"],
 .comment-review button {
     font-family: 'Authentic Bold';
 }
@@ -696,7 +716,3 @@ main:has( select#view_mode option[value="5"]:checked ) {
 .article-author:not(:last-child) {
     padding-right: 1rem;
 }
-
-
-
-
