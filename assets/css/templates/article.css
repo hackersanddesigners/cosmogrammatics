@@ -389,9 +389,9 @@ main .notes.column[data-col-width="1/1"] {
 }
 
 .notes {
-  margin-left: 0.5rem;
-  padding-top: 1rem;
-  width: calc( var(--side-width) + 1rem );
+  margin-left: 0rem;
+  /* padding-top: 1rem; */
+  width: calc( 2 * var(--side-width) + 4rem );
 }
 
 .notes ol {
@@ -401,14 +401,16 @@ main .notes.column[data-col-width="1/1"] {
 }
 
 .notes ol li {
-    padding: 0 0.5rem;
+    padding: 0;
+    padding-left: calc( var( --side-width ) + 2rem );
     /* display: table-row; */
+        border-top: 1px solid red;
+
     counter-increment: number-list;
     font-family: var(--footnotes);
     font-size: 0.9rem;
     line-height: 1rem;
 
-    background-color: var(--back);
     display: block;
     display: -webkit-box;
     -webkit-line-clamp: 4;
@@ -433,18 +435,24 @@ main .notes.column[data-col-width="1/1"] {
 .notes ol li:target {
   -webkit-line-clamp: 100000;
   z-index: 100000;
+  border-top: 3px solid red;
 }
 .notes ol li:target {
-  outline-color: var(--accent);
+  /* outline-color: var(--accent);
   outline-offset: 3px;
   outline-style: solid;
-  outline-width: 2px;
+  outline-width: 2px; */
+  border-right: 3px solid red;
 }
 
 .notes ol li p {
     margin: 0;
-    padding: 0.25rem;
-    display: inline;
+    /* padding: 0.25rem; */
+    /* display: inline; */
+  /* display: inline-block; */
+  background-color: var(--back);
+  padding-right: 0.5rem;
+  padding-top: 0.5rem;
 }
 
 .note-ref-backlink {
@@ -472,13 +480,13 @@ main .notes.column[data-col-width="1/1"] {
     }
 
     .notes ol li {
-        /* display: flex;
-        align-items: baseline;
-        padding: 0; */
+        /* display: flex; */
+        /* align-items: baseline; */
+        /* padding: 0; */
     }
 
     .notes ol li p {
-        padding: 0;
+        /* padding: 0; */
     }
 }
 
