@@ -383,9 +383,13 @@ main .row .column .block:not(.columns):focus-within a.click-copy {
 /* <2022-11-14T10:58> andré: bad CSS */
 
 main .notes.column[data-col-width="1/1"] {
-  max-width: calc( var(--main-width) / 1 );
-  padding: 0 0 0 calc( var(--header-height) / 2 );
-  width: 100%;
+  /* max-width: calc( var(--main-width) / 1 ); */
+  /* padding: 0 0 0 calc( var(--header-height) / 2 ); */
+  /* width: 100%; */
+}
+
+.notes {
+  padding: 0 0.5rem;
 }
 
 .notes ol {
@@ -396,11 +400,24 @@ main .notes.column[data-col-width="1/1"] {
 
 .notes ol li {
     padding: 0.5rem;
-    display: table-row;
+    /* display: table-row; */
     counter-increment: number-list;
     font-family: var(--footnotes);
     font-size: 0.9rem;
+    line-height: 1rem;
+
+    background-color: var(--back);
+    display: block;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    /* trick to hide top rim of overflown text */
+    padding-bottom: 0.14em;
 }
+
 
 .notes ol li::before {
     content: counter(number-list) '.';
@@ -410,6 +427,11 @@ main .notes.column[data-col-width="1/1"] {
     width: 1.5rem;
 }
 
+.notes ol li:hover,
+.notes ol li:target {
+  -webkit-line-clamp: 100000;
+  z-index: 100000;
+}
 .notes ol li:target {
   outline-color: var(--accent);
   outline-offset: 3px;
@@ -437,8 +459,8 @@ main .notes.column[data-col-width="1/1"] {
     }
 
     main .notes.column[data-col-width="1/1"] {
-        max-width: calc( var(--main-width) / 1 );
-        padding: 0 1.5rem 0 calc( var(--header-height) / 2 );
+        /* max-width: calc( var(--main-width) / 1 ); */
+        /* padding: 0 0.25rem 0 calc( var(--header-height) / 2 ); */
     }
 
     .notes ol {
@@ -448,9 +470,9 @@ main .notes.column[data-col-width="1/1"] {
     }
 
     .notes ol li {
-        display: flex;
+        /* display: flex;
         align-items: baseline;
-        padding: 0;
+        padding: 0; */
     }
 
     .notes ol li p {
