@@ -716,3 +716,7 @@ main:has( select#view_mode option[value="5"]:checked ) {
 .article-author:not(:last-child) {
     padding-right: 1rem;
 }
+
+blockquote footer a.ref-ft {
+  display: none;
+}
