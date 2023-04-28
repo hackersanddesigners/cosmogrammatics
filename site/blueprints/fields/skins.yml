@@ -21,12 +21,12 @@ fields:
         label: Accent
         width: 1/2
         type: colors
-        default: "#dec7e399"
+        default: "#fffd7c"
       grid:
         label: Gridlines
         width: 1/2
         type: colors
-        default: "#0aceff"
+        default: "#dedad5"
 
   fonts:
     label: Typefaces

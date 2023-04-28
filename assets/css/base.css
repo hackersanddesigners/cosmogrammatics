@@ -290,9 +290,9 @@ header form.collapsible::after {
   content: '';
   position: absolute;
   top: -0.25px; right: 0;
-  height: var( --header-height ); width: var( --header-height );
+  height: var( --header-height );
+  width: var( --header-height );
   background-color: var(--back);
-  /* background-image: url( "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4'%3E%3Cpath d='M0%2C0 L1%2C0 M0%2C0.5 L1%2C0.5 M0%2C1 L1%2C1'/%3E%3C/svg%3E" ) */
   /* M0,0 L1,0 M0,0.5 L1,0.5 M0,1 L1,1 */
   border-radius: var( --header-height );
   display: flex;
@@ -302,14 +302,27 @@ header form.collapsible::after {
 }
 
 header nav.collapsible::after {
-  content: '≡';
-  padding-top: 0.25rem;
-  font-size: 4rem;
-  font-weight: 100;
+  /* content: '≡'; */
+  /* content: ''; */
+  /* padding-top: 0.25rem; */
+  /* font-size: 4rem; */
+  /* font-weight: 100; */
 }
 
 header form.collapsible::after {
   pointer-events: none;
+}
+
+header nav.collapsible::before {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  background-image:  url( ../images/menu.svg );
+  background-size: cover;
+  /* url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpolygon fill='%23cc3f47' points='957 450 539 900 1396 900'/%3E%3Cpolygon fill='%23b3373e' points='957 450 872.9 900 1396 900'/%3E%3Cpolygon fill='%23c8364e' points='-60 900 398 662 816 900'/%3E%3Cpolygon fill='%23b02f44' points='337 900 398 662 816 900'/%3E%3Cpolygon fill='%23c22f55' points='1203 546 1552 900 876 900'/%3E%3Cpolygon fill='%23ab294b' points='1203 546 1552 900 1162 900'/%3E%3Cpolygon fill='%23bb285c' points='641 695 886 900 367 900'/%3E%3Cpolygon fill='%23a52351' points='587 900 641 695 886 900'/%3E%3Cpolygon fill='%23b32362' points='1710 900 1401 632 1096 900'/%3E%3Cpolygon fill='%239f1f57' points='1710 900 1401 632 1365 900'/%3E%3Cpolygon fill='%23aa2068' points='1210 900 971 687 725 900'/%3E%3Cpolygon fill='%23971c5d' points='943 900 1210 900 971 687'/%3E%3C/svg%3E"); */
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 
 header form.collapsible::before {
