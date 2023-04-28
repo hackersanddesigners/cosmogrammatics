@@ -2,50 +2,77 @@
 /* main as article */
 
 .font-size-micro h1 {
-    font-size: 1.25rem;
+  font-size: 1.25rem;
 }
 
 .font-size-micro > * {
-    font-size: 45%;
+  font-size: 45%;
 }
 
 main {
-    display: flex;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--body);
+  font-size: 1.25rem;
 }
 
 main h1 {
-  font-size: 3rem;
-  text-align: center;
-  margin-block: 0;
-  margin-inline: 1rem;
-  font-family: var(--title);
+font-size: 3rem;
+text-align: center;
+margin-block: 0;
+margin-inline: 1rem;
+font-family: var(--title);
+line-height: 1;
+padding-top: 1rem;
 }
 
+.view-comment-options-wrapper {
+  display: relative;
+  min-width: 14rem;
+}
+
+/* position: sticky does not work if parent element is
+ set to display: flex, let's wrap that up, yo. */
+.view-comment-options-wrapper-extra {
+  padding: 1rem;
+  position: sticky;
+  top: -1px;
+}
+
+
+
 main .content-wrapper {
-    margin-right: auto;
-    margin-left: auto;
+  width: 100%;
+}
+
+.view-options legend,
+.export-options legend {
+  padding: 0 0 0.25rem 0;
+  font-family: 'Authentic Bold';
 }
 
 main .row {
-  display: flex;
-  flex-direction: column;
+display: flex;
+flex-direction: column;
 }
 
 main > .row:first-child {
-    border-top: none;
+  border-top: none;
 }
 
 main > .row {
-  border-top: var(--gridline);
-  padding-inline: calc( var(--header-height) / 2 );
+border-top: var(--gridline);
+padding-inline: calc( var(--header-height) / 2 );
 }
 
 main .row .column {
-  --cw : 1;
-  /* width: 100%; */
-  max-width: var(--col-width);
-  margin: 0 auto 0 0;
+--cw : 1;
+width: 100%;
+max-width: var(--col-width);
+margin: 0 auto 0 0;
+}
+.default main {
+margin-left: 14rem;
 }
 
 main .row .column[data-col-width="1/1"] { --cw : calc( 1 / 1 ) }
@@ -56,14 +83,14 @@ main .row .column[data-col-width="1/5"] { --cw : calc( 1 / 5 ) }
 main .row .column[data-col-width="1/6"] { --cw : calc( 1 / 6 ) }
 
 main > .row:first-child .block {
-    clip-path: inset(0px -1px -1px -1px);
+  clip-path: inset(0px -1px -1px -1px);
 }
 
 main .block {
-  background-color: var(--back);
-  color: var(--fore);
-  box-shadow:var(--gridshadow);
-  padding: 0.5rem;
+background-color: var(--back);
+color: var(--fore);
+box-shadow:var(--gridshadow);
+padding: 1rem !important;
 }
 
 /* main .block::before { */
@@ -82,56 +109,76 @@ main .block {
 
 /* if a block will contain a nested alyopuit inside it, remvoe padding */
 main .block.columns {
-  padding: 0;
+padding: 0 !important;
+}
+
+main .block.gallery ol {
+/* position: fixed;
+left: 0; */
+display: flex;
+list-style: none;
+margin: 0;
+padding: 0;
+align-items: flex-start;
+width: 100%;
+overflow: scroll;
+}
+
+main .block.gallery li {
+}
+main .block.gallery li img {
+max-width: var(--main-width);
+max-height: 90vh;
 }
 
 main .block a {
-  color: var(--accent);
+/* color: var(--accent); */
 }
 
 
 main .row .column .block .contents {
-  max-width: var(--main-width);
+max-width: var(--main-width);
 }
 
 main .row .column .block .contents > *:nth-child(1) {
-  margin-block-start: 0;
+margin-block-start: 0;
 }
 
 main .row .column .block .contents > *:nth-last-child(1) {
-  margin-block-end: 0;
+margin-block-end: 0;
 }
 
 main .block video,
 main .block audio {
-  width: 100%;
+width: 100%;
 }
 main .block figcaption,
 main .block .caption {
-  font-style: italic;
+/* font-style: italic; */
+margin-top:0.5rem;
+font-size: 0.9rem;
 }
 main .block figure {
-  margin-inline: unset;
-}
-main .block.page_embed a {
-  text-decoration: none;
-  color: var(--fore)
+margin-inline: unset;
 }
 
-main .block.page_embed a h1 {
+main .block figure.orphan_image {
+/* border: var(--gridline); */
+padding: 0.5rem;
+/* background-color: limegreen; */
 }
 
 main .row .column .block aside {
-  position: absolute;
-  max-width: var(--side-width);
-  top: 1rem;
-  --n: 1;
-  --df : calc( 1 - var(--cw) * var(--n) );
-  left : calc( var(--col-width) + 1rem + var(--df) * var(--main-width));
-  width: var(--side-width);
-  z-index: 1;
-  border-radius: calc( var(--header-height) / 4);
-  transition: left var(--fast) var(--linear);
+position: absolute;
+max-width: var(--side-width);
+top: 1rem;
+--n: 1;
+--df : calc( 1 - var(--cw) * var(--n) );
+left : calc( var(--col-width) + 1rem + var(--df) * var(--main-width));
+width: var(--side-width);
+z-index: 1;
+border-radius: calc( var(--header-height) / 4);
+transition: left var(--fast) var(--linear);
 }
 
 main .row .column:nth-of-type(1) .block aside { --n: 1 }
@@ -142,176 +189,664 @@ main .row .column:nth-of-type(5) .block aside { --n: 5 }
 main .row .column:nth-of-type(6) .block aside { --n: 6 }
 
 
+main .row .column .block aside .thread {
+border-radius: inherit;
+margin-bottom: 1rem;
+z-index: 1;
+
+}
+
+main .row .column .block aside article {
+padding: 1rem;
+background-color: var(--accent);
+box-shadow: 0 0 1rem 0 rgb(0, 0, 0, 0.5);
+margin-bottom: 1rem;
+font-family: var(--comments);
+border-radius: inherit;
+}
+
+main .row .column .block aside article.comment-draft {
+  background: var(--back);
+  border: 1px solid var(--fore);
+  border-radius: 24px 24px 24px 0;
+}
+
+main .row .column .block aside article footer {
+margin-top: 0.5rem;
+}
+
+/* main .row .column .block:not(.columns):focus-within,
+main .row .column .block:not(.columns):focus-within aside article,
+main .row .column .block:not(.columns) aside article:focus-within { */
+main .row .column .block:focus-within,
+main .row .column .block:focus-within aside article,
+main .row .column .block aside article:focus-within {
+box-shadow: 0 0 2rem 0 var(--accent);
+}
+
+main .row .column .block.selected:focus-within {
+z-index: 10;
+box-shadow: 0 0 2rem 0 var(--accent), var(--gridshadow);
+filter: drop-shadow(0 0 500rem rgb(0, 0, 0, 0.5));
+}
+
+main .row .column .block.selected:focus-within form.comment_form {
+  z-index: 10;
+  box-shadow: 0 0 1rem 0 rgb(0, 0, 0, 0.5);
+  opacity: 1;
+  background-color: var(--back);
+}
+
+
+main .row .column .block:focus-within::before {
+/* opacity: 0.75; */
+}
+
+.focus-overlay.active {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(0, 0, 0, 0.2);
+}
+
+main .row .column .block:focus-within > aside  {
+left : calc( var(--col-width) + 1rem );
+}
+
+
+aside p {
+margin-block: 0;
+}
+
+.comment-highlight,
+section .highlight {
+display: inline;
+background-color: var(--accent);
+}
+
+
+
+/* comment form */
+
+main form.comment_form {
+background-color: var(--accent);
+max-height: var(--form-base-height);
+max-width: var(--form-base-width);
+border-radius: calc( var(--header-height) / 4);
+padding: 0.25rem;
+/* width: 100%;
+height: 100%; */
+display: none;
+overflow: hidden;
+/* color: transparent; */
+box-shadow: 0 0 2rem 0 var(--accent);
+font-family: var(--comments);
+
+}
+
+main form.comment_form input {
+margin: 0.25rem;
+font-family: inherit;
+width: calc( 100% - 0.5rem );
+outline-color: var(--grid);
+background-color: inherit;
+/* border: 3px solid var(--grid); */
+padding: 0.25rem;
+color: inherit;
+border-radius: inherit;
+}
+main form.comment_form input[type="text"] {
+border: unset;
+}
+main form.comment_form input[type="submit"] {
+display: none;
+}
+
+main .small_italic {
+font-size: 0.7rem;
+font-style: italic;
+font-family: var(--comments);
+line-height: 1;
+opacity: 0.7rem;
+}
+main form.comment_form label p {
+margin-inline: 0.5rem;
+}
+
+
+main .toolbar {
+position: absolute;
+width: var(--side-width);
+/* height: var(--side-width); */
+height: fit-content;
+z-index: 10;
+--top: 0;
+--left: 0;
+top: var(--top);
+left: var(--left);
+}
+
+main .toolbar form.comment_form {
+/* display: unset; */
+}
+
+main .toolbar:not(.hidden) form.comment_form,
+main form.comment_form:focus-within {
+max-height: var(--form-expanded-height);
+max-width: var(--form-expanded-width);
+color: var(--fore);
+display: block;
+overflow: visible;
+}
+
+main .toolbar.hidden {
+--top: -999px;
+--left: -999px;
+}
+
+.toolbar-btn-wrapper {
+  position: relative
+}
+
+.toolbar-btn-hide {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  cursor: pointer;
+}
+
+main .row .column .block:not(.columns):hover form.comment_form,
+main .row .column .block:not(.columns):focus-within aside .thread:first-of-type form.comment_form,
+main .row .column .block:not(.columns) aside .thread form.comment_form:focus-within,
+main .row .column .block:not(.columns) aside .thread:focus-within form.comment_form  {
+display: block;
+}
+
+main .row .column .block a.click-copy {
+opacity: 0;
+font-size: 14px;
+}
+
+main .row .column .block:not(.columns):hover a.click-copy,
+main .row .column .block:not(.columns):focus-within a.click-copy {
+opacity: 1;
+}
+
+
+
+/* <2022-11-11T11:12> andré: move this where it makes more sense to you karlito */
+.ref-ft {
+text-decoration: none;
+color: var(--fore);
+vertical-align: super;
+font-size: smaller;
+}
+
+
 .ref-ft:after {
-    counter-increment: footnote;
-    content: "[" counter(footnote) "]";
-    padding-left: 0.15rem;
+  counter-increment: footnote;
+  content: "[" counter(footnote) "]";
+  padding-left: 0.15rem;
 }
 
 /* <2022-11-14T10:58> andré: bad CSS */
 
 main .notes.column[data-col-width="1/1"] {
-  max-width: calc( var(--main-width) / 1 );
-  padding: 0 0 0 calc( var(--header-height) / 2 );
-  width: 100%;
+/* max-width: calc( var(--main-width) / 1 ); */
+/* padding: 0 0 0 calc( var(--header-height) / 2 ); */
+/* width: 100%; */
+}
+
+
+.block.page_embed {
+padding: 0 !important;
+margin-inline: 4rem;
+}
+.block.page_embed aside {
+margin-left: -4rem;
+}
+
+.notes {
+margin-left: 0rem;
+opacity: 0;
+animation: fade_in 1s linear forwards;
+}
+
+@keyframes fade_in {
+0% {
+  opacity: 0;
+}
+50% {
+  opacity: 0;
+}
+100% {
+  opacity: 1;
+}
 }
 
 .notes ol {
-    padding-left: 0;
-    display: inline-table;
-    list-style: none;
+  padding-left: 0;
+  display: inline-table;
+  list-style: none;
 }
 
 .notes ol li {
-    padding: 0.5rem;
-    display: table-row;
-    counter-increment: number-list;
-    font-family: var(--footnotes);
-    font-size: 0.9rem;
+  padding: 0;
+  padding-left: calc( var( --side-width ) + 2rem );
+  display: table-row;
+  border-top: var(--gridline);
+
+  counter-increment: number-list;
+  font-family: var(--footnotes);
+  font-size: 0.9rem;
+  line-height: 1rem;
+
+  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* trick to hide top rim of overflown text */
+  padding-bottom: 0.3em;
+  padding-top: 0.5rem;
+
 }
+
 
 .notes ol li::before {
-    content: counter(number-list) '.';
-    display: table-cell;
-    text-align: right;
-    padding: 0 0.3rem 0 0;
-    width: 1.5rem;
+  content: counter(number-list) '.';
+  display: table-cell;
+  text-align: right;
+  padding: 0 0.3rem 0 0;
+  width: 1.5rem;
 }
 
+.notes ol li:hover,
 .notes ol li:target {
-  outline-color: var(--accent);
-  outline-offset: 3px;
-  outline-style: solid;
-  outline-width: 2px;
+-webkit-line-clamp: 100000;
+z-index: 100000;
+/* border-top: 3px solid red; */
+}
+.notes ol li:target {
+/* outline-color: var(--accent);
+outline-offset: 3px;
+outline-style: solid;
+outline-width: 2px; */
+/* border-right: 3px solid red; */
 }
 
 .notes ol li p {
-    margin: 0;
-    padding: 0.25rem;
-    display: inline;
+  margin: 0;
+  /* padding: 0.25rem; */
+  /* display: inline; */
+/* display: inline-block; */
+background-color: white;
+padding-right: 0.5rem;
+padding-top: 0.5rem;
 }
 
 .note-ref-backlink {
-  padding-left: 0.3rem;
+padding-left: 0.3rem;
 }
 
 
 @media screen and (min-width: 600px) {
-    .notes {
-        position: absolute;
-        top: 0;
-        height: 100%;
-        /* border-left: 1px solid red; */
-    }
+  .notes {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: calc( 2 * var(--side-width) + 4rem );
+      /* border-left: 1px solid red; */
 
-    main .notes.column[data-col-width="1/1"] {
-        max-width: calc( var(--main-width) / 1 );
-        padding: 0 1.5rem 0 calc( var(--header-height) / 2 );
-    }
+  }
 
-    .notes ol {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-    }
+  main .notes.column[data-col-width="1/1"] {
+      /* max-width: calc( var(--main-width) / 1 ); */
+      /* padding: 0 0.25rem 0 calc( var(--header-height) / 2 ); */
+  }
 
-    .notes ol li {
-        display: flex;
-        align-items: baseline;
-        padding: 0;
-    }
+  .notes ol {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+  }
 
-    .notes ol li p {
-        padding: 0;
-    }
+  .notes ol li {
+      /* display: flex; */
+      /* align-items: baseline; */
+      /* padding: 0; */
+  }
+
+  .notes ol li p {
+    background-color: var(--back);
+
+      /* padding: 0; */
+  }
 }
 
 /* block-embed iframe */
 
 .block-embed-container {
-  position: relative;
+position: relative;
 }
 
 .block-embed-preview {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+position: relative;
+z-index: 1;
+display: flex;
+justify-content: center;
+align-items: center;
 }
 
 .block-embed-preview iframe {
-  max-width: 100% !important;
+max-width: 100% !important;
 }
 
 .block-embed-container[data-provider="youtube"] .block-embed-preview iframe, .block-embed-container[data-provider="vimeo"] .block-embed-preview iframe {
-  width: 100%;
-  aspect-ratio: 16/9;
-  height: auto;
+width: 100%;
+aspect-ratio: 16/9;
+height: auto;
 }
 
 .block-embed-preview-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
-    width: 100%;
-    height: 100%;
-    background: #efefef url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXR0ZXJuIGlkPSJhIiB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPjxwYXRoIGZpbGw9InJnYmEoMCwgMCwgMCwgMC4yKSIgZD0iTTAgMGgxMHYxMEgwem0xMCAxMGgxMHYxMEgxMHoiLz48L3BhdHRlcm4+PHJlY3QgZmlsbD0idXJsKCNhKSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIvPjwvc3ZnPg==);
-    opacity: .45;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  background: #efefef url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXR0ZXJuIGlkPSJhIiB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPjxwYXRoIGZpbGw9InJnYmEoMCwgMCwgMCwgMC4yKSIgZD0iTTAgMGgxMHYxMEgwem0xMCAxMGgxMHYxMEgxMHoiLz48L3BhdHRlcm4+PHJlY3QgZmlsbD0idXJsKCNhKSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIvPjwvc3ZnPg==);
+  opacity: .45;
+}
+
+.highlight-tip {
+  z-index: 3;
+  background-color: white;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+
+/* view-mode */
+
+.view-options input[type=radio]:checked ~ label {
+ border-bottom: 1px solid var(--fore);
+}
+
+
+.export-options input[type=button] {
+padding: 0 0.25rem;
+}
+
+
+main:has( select#view_mode option[value="4"]:checked ) {
+--main-width: min( 100vw, 30rem );
+--side-width: min( 100vw, 35rem );
+}
+
+
+/* main:has( select#view_mode option[value="1"]:checked ) .thread { */
+/*   display: none; */
+/* } */
+/* main:has( select#view_mode option[value="2"]:checked ) {} */
+
+/* /\* default : balanced *\/ */
+/* main:has( select#view_mode option[value="3"]:checked ) {} */
+
+/* main:has( select#view_mode option[value="4"]:checked ) { */
+/*   --main-width: min( 100vw, 30rem ); */
+/*   --side-width: min( 100vw, 35rem ); */
+/* } */
+
+main:has( select#view_mode option[value="5"]:checked ) {
+--main-width: min( 100vw, 20rem );
+--side-width: min( 100vw, 45rem );
 }
 
 .hidden {
-    display: none;
+  display: none;
+}
+
+/* for PHP input form */
+.honey {
+position: absolute;
+left: -9999px;
+}
+
+
+/* comment-review list */
+
+.comment-review {
+  flex-direction: column;
+}
+
+.comment-review,
+.comment-review input,
+.comment-review button,
+.comment-review select {
+  font-size: 0.75rem;
+}
+
+.comment-review input[type="submit"],
+.comment-review button {
+  font-family: 'Authentic Bold';
+}
+
+.comment-review fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.comment-data {
+  counter-reset: comment;
+  padding-bottom: 1rem;
+}
+
+.comment-list-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.comment-list-input {
+  margin: 0;
+  height: 1rem;
+}
+
+.comment-list-label {
+  display: flex;
+  align-items: baseline;
+  padding-left: 0.5rem;
+}
+
+.comment-list-label:before {
+  counter-increment: comment;
+  content: counter(comment) ".";
+  padding-right: 0.25rem;
+}
+
+.comment-label-wrapper {
+  padding-right: 1rem;
+}
+
+.comment-label-wrapper input[type=text] {
+  margin-bottom: 1rem;
+}
+
+.comment-label-wrapper p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.comment-label-wrapper p:first-child {
+  padding-bottom: 0.5rem;
+}
+
+.comment-list-edit {
+  margin-right: 1rem;
+}
+
+.comment-list-remove {
+  margin-right: 1rem;
+}
+
+.comment-list-show-highlight {
+  padding-right: 1rem;
+  cursor: pointer;
+}
+
+.comment-list-text {
+  cursor: pointer;
+}
+
+.alert {
+  border: 1px solid red;
+}
+
+.comment-header {
+  padding: 0 0 1rem 0;
+}
+
+.comment-status {
+  font-size: inherit;
+  font-family: 'Authentic Bold';
+  margin: 0;
+  padding-bottom: 1rem;
+}
+
+.comment-username-wrapper label {
+  padding-top: 0.25rem;
+}
+
+.comment-label-wrapper input[type=text] {
+  border: 1px solid transparent;
+  margin-bottom: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.comment-username-wrapper input[type=text] {
+  border: 1px solid transparent;
+  margin-right: 1rem;
+}
+
+.comment-username {
+  padding-right: 0.5rem;
+}
+
+.article-authors {
+padding: 2rem 0;
+text-align: center;
+font-size: 1.5rem;
 }
 
 
 @media screen and (min-width: 600px) {
 
-    main {
-        display: flex;
-        flex-direction: row;
-    }
+  main {
+      display: flex;
+      flex-direction: row;
+  }
 
-    main h1 {
-        font-size: 6rem;
-    }
+  main h1 {
+      font-size: 5rem;
+  }
 
-    main .row {
-        display: flex;
-        flex-direction: row;
-    }
+  main .row {
+      display: flex;
+      flex-direction: row;
+  }
 
-    main .row .column {
-        --col-width: calc( var(--cw) * var(--main-width) );
-    }
+  main .row .column {
+      --col-width: calc( var(--cw) * var(--main-width) );
+  }
+  .article-authors {
+    font-size: 2rem;
+  }
+
+
 }
 
 .button {
-    background: transparent;
-    border: none;
-    padding: 0;
-    color: rgb(179, 179, 179);
-    border-bottom: 1px solid rgb(179, 179, 179);
-    max-height: 1.5rem;
-    height: fit-content;
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: rgb(179, 179, 179);
+  border-bottom: 1px solid rgb(179, 179, 179);
+  max-height: 1.5rem;
+  height: fit-content;
 }
 
 .button:not(:disabled) {
-    cursor: pointer;
-    color: var(--fore);
-    border-bottom: 1px solid var(--fore);
+  cursor: pointer;
+  color: var(--fore);
+  border-bottom: 1px solid var(--fore);
+}
+
+.post_comment,
+.comment-edit {
+  margin-right: 0.5rem;
 }
 
 .block-highlight {
-    border: 4px solid var(--accent);
+  /* border: 4px solid var(--accent); */
 }
 
-.article-authors {
-    padding: 3rem 0;
-    text-align: center;
-}
+
+
+
+
+
 
 .article-author:not(:last-child) {
-    padding-right: 1rem;
+  padding-right: 1rem;
+}
+
+
+
+
+main .block.quote {
+
+margin-left: 4rem;
+margin-right: 4rem;
+}
+
+main .block.quote aside {
+margin-left: -4rem;
+}
+
+
+
+
+
+
+
+
+
+main blockquote {
+  font-size: 2rem;
+  margin: 0;
+padding: 1rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+main blockquote footer a.ref-ft {
+display: none;
 }

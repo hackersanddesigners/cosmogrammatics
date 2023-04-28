@@ -71,6 +71,9 @@ main .row .column {
   max-width: var(--col-width);
   margin: 0 auto 0 0;
 }
+.default main {
+  margin-left: 14rem;
+}
 
 main .row .column[data-col-width="1/1"] { --cw : calc( 1 / 1 ) }
 main .row .column[data-col-width="1/2"] { --cw : calc( 1 / 2 ) }
