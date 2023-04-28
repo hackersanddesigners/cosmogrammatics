@@ -19,4 +19,8 @@ $ratio   = $block->ratio()->or('auto');
     <?= $caption ?>
   </figcaption>
   <?php endif ?>
+  <div class="controls">
+    <span class="left"><</span>
+    <span class="right">></span>
+  </div>
 </figure>

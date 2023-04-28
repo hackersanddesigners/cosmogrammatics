@@ -4,9 +4,11 @@ const LocalStore = require('../local.store')
 const { commentReviewList } = require('../comment-review')
 const viewMode = require('../view-mode')
 const footnotesDesign = require('../footnotes-design')
+const gallery = require('../gallery.js')
 
 ;(async() => {
-  
+
+
   const article_slug = window.location.pathname.split('/').pop().split('/').join('+')
 
   // text-highlight
@@ -28,5 +30,8 @@ const footnotesDesign = require('../footnotes-design')
 
   // footnotes design
   footnotesDesign()
+
+  const gallery_init  = gallery.init()
+
 
 })()

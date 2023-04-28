@@ -125,10 +125,45 @@ main .block.gallery ol {
 }
 
 main .block.gallery li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  min-width: calc( var(--main-width) - 2rem);
+  height: 70vh;
 }
-main .block.gallery li img {
-  max-width: var(--main-width);
-  max-height: 90vh;
+main .block.gallery li a {
+  width: 100%;
+}
+
+
+main .block.gallery .controls {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  opacity: 0;
+  transition: opacity var(--fast) ease;
+}
+
+main .block.gallery .controls:hover {
+  opacity: 1;
+}
+
+main .block.gallery .controls span {
+  width: var(--header-height);
+  height: var(--header-height);
+  border-radius: var(--header-height);
+  background-color: var(--back);
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
 main .block a {
