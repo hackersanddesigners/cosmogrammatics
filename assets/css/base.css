@@ -456,6 +456,10 @@ a.article-link img {
   width: 100%;
 }
 
+a.article-link .article-authors {
+  padding: 1rem 0;
+}
+
 
 @media screen and (min-width: 600px) {
     html, body {
