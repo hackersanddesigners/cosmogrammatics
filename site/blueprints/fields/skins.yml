@@ -12,7 +12,6 @@ fields:
         width: 1/2
         type: colors
         default: "#ffffff"
-        # contrast: {{ page.fore.value }}
       fore:
         label: Foreground
         width: 1/2

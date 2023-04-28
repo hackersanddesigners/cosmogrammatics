@@ -34,8 +34,9 @@
   --grid: rgb(12, 206, 255);
 
   /* fonts */
-  --title: 'title', 'Times New Roman', Times, serif;
-  --body: 'body', 'Authentic Regular', Arial, Helvetica, sans-serif;
+  /* --title: 'title', 'Times New Roman', Times, serif; */
+  --title: 'title', 'Authentic Bold', Arial, Helvetica, sans-serif;
+  --body: 'body', 'Authentic Semi Bold', Arial, Helvetica, sans-serif;
   --comments: 'comments', 'Courier New', Courier, monospace;
   --footnotes: 'footnotes', 'Authentic Bold', Arial, Helvetica, sans-serif;
 
@@ -54,7 +55,7 @@
   --radical2: 1.41421356;
 
   /* default mesaurements */
-  --header-height: 5rem;
+  --header-height: calc( 5rem );
   --header-child-collapsed-width: var(--header-height);
   --header-child-expanded-width: calc(  var(--main-width) - var(--header-height) );
   --main-width: min( 100vw, 50rem );
@@ -125,6 +126,24 @@ img {
   max-width: 100%;
 }
 
+a,
+a:hover,
+a:active {
+  color: rgba(0,0,0,1);
+  /* text-decoration: none; */
+  /* border-bottom: 1px solid; */
+}
+a:visited {
+  color: rgba(0,0,0,0.5);
+}
+
+a:hover,
+a:active {
+  /* text-decoration-style: wavy; */
+  text-decoration-thickness: 2px;
+}
+
+
 html, body {
   margin: 0;
   padding: 0;
@@ -152,11 +171,17 @@ b, strong {
 header {
   display: flex;
   align-items: center;
-  height: var(--header-height);
+  height: calc( 2px + var(--header-height) );
   border-bottom: var(--thin);
   z-index: 1;
+  background-color: var(--back);
   font-size: 1rem;
+  max-width: 100vw;
+  /* position: sticky;
+  top: 0; */
+  border-bottom: var(--gridline);
 }
+
 
 header a.skip-to-main {
   z-index: 1;
@@ -205,6 +230,11 @@ header form input[type="search"] {
   font-size: inherit;
   padding-inline: 1rem;
 }
+
+header form input[type="search"]:focus-within {
+  outline: none;
+}
+
 
 header form input[type="submit"] {
   display: none;
@@ -390,6 +420,7 @@ ul.article-list li {
 }
 
 a.article-link {
+  --gridshadow: 0 0 0 1px var(--grid);
   text-align: center;
   padding: 0.5rem;
   display: block;
@@ -404,7 +435,7 @@ a.article-link h1 {
   margin-block: 0;
   margin-inline: 1rem;
   font-family: var(--title);
-  color: var(--accent);
+  color: var(--fore);
 }
 
 a.article-link img {
@@ -423,7 +454,26 @@ a.article-link img {
 
     header {
         font-size: 1.5rem;
+        /* border: 1px solid black;
+
+        border:var(--gridline); */
+
     }
+    .article header {
+      animation: change_width var(--fast) ease forwards;
+    }
+
+    @keyframes change_width {
+      from {
+        max-width: 100vw;
+        margin-left: 0rem;
+      }
+      to {
+        max-width:  var(--main-width);
+        margin-left: 14rem;
+      }
+    }
+
 
     header .title a {
         font-size: 3rem;

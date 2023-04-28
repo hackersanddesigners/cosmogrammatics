@@ -65,7 +65,7 @@ if ($src) {
       <p><?= $caption ?></p>
     <?php endif ?>
     <?php if ($fileEmbed): ?>
-      <a href="<?= url($fileEmbed) ?>">This files originates in the cosmogram <i><b><?= page($fileEmbed)->title() ?></b></i>.</a>
+      This file originates in the cosmogram <a href="<?= url($fileEmbed) ?>"><i><?= page($fileEmbed)->title() ?></i>.</a>
     <?php endif ?>
   </figcaption>
 </figure>
