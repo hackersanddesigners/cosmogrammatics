@@ -612,6 +612,11 @@ main .notes.column[data-col-width="1/1"] {
    border-bottom: 1px solid var(--fore);
 }
 
+.view-options {
+  /* FREEZE */
+  display: none;
+}
+
 
 .export-options input[type=button] {
   padding: 0 0.25rem;
