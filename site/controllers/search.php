@@ -3,11 +3,11 @@
 return function ($site) {
 
   $query = get('q');
-  $results = $site->index()->listed()->search($query);
-
+  $results = page('articles')->children()->listed()->search($query);
+  // $site->index()
   return [
     'query' => $query,
-    'results' => $results,
+    'articles' => $results,
   ];
 
 };

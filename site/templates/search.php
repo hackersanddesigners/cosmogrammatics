@@ -1,18 +1,11 @@
 <?php snippet('head') ?>
 
 <body class="<?= $page->template() ?>">
-  <?php snippet( 'header' ) ?>
+  <?php snippet( 'header', ['query' => $query] ) ?>
 
   <main id="main">
-    <ul>
-      <?php foreach($results as $result): ?>
-        <li>
-          <a href="<?= $result->url() ?>">
-            <?= $result->title() ?>
-          </a>
-        </li>
-      <?php endforeach ?>
-    </ul>
+    <h2 class="query_display">Search results for query "<i><?= $query ?></i>"</h2>
+    <?php snippet('article-list' ) ?>
   </main>
 
   <?php snippet( 'footer' ) ?>

@@ -412,6 +412,8 @@ a.click-copy::after {
 }
 
 
+
+
 a.click-copy:hover::after {
   display: block;
 }
@@ -420,7 +422,32 @@ a.click-copy:active::after {
   content: "Copied!";
 }
 
+ul.article-list {
+  margin: 1rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
 
+ ul.article-list li {
+  flex-basis: calc( ( 100% - 2rem ) / 3 );
+  min-width: 24rem;
+}
+
+
+@media screen and (max-width: 600px) {
+
+   ul.article-list {
+    margin: 0.5rem;
+    display: block;
+  }
+
+   ul.article-list li {
+    margin-bottom: 0.5rem;
+  }
+
+}
 
 /* Article List  */
 
@@ -514,4 +541,10 @@ a.article-link .article-authors {
     padding: 1rem;
   }
 
+}
+
+
+.query_display {
+  margin: 2rem 10rem;
+  font-size: 2rem;
 }
