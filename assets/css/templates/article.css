@@ -879,6 +879,7 @@ padding: 1rem;
   main iframe {
     width: 100%;
     min-height: 80vh;
+    border: none;
   }
 
 
