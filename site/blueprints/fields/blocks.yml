@@ -44,6 +44,11 @@ fieldsets:
     fields:
       bid: fields/bid
 
+  iframe:
+    extends: blocks/iframe
+    fields:
+      bid: fields/bid
+
   page_embed:
     extends: blocks/page_embed
     fields:
