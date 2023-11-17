@@ -58,7 +58,7 @@
   --header-height: calc( 5rem );
   --header-child-collapsed-width: var(--header-height);
   --header-child-expanded-width: calc(  var(--main-width) - var(--header-height) );
-  --main-width: min( 100vw, 50rem );
+  --main-width: min( 100vw, 60rem );
   --side-width: min( 100%, 15rem );
 
   --form-base-height: 2.5rem;
