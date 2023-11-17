@@ -23,15 +23,15 @@
   </div>
   <div class="export-options">
     <fieldsets>
-      <legend>export</legend>
+      <!-- <legend>print</legend> -->
       <div>
+        <label for="4">Export as</label>
         <input
           type="button"
-          value="print"
+          value="PDF"
           onclick="window.print()"
           id="4"
         >
-        <label for="4">download as PDF</label>
       </div>
     </fieldsets>
   </div>
