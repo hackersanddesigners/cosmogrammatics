@@ -453,7 +453,7 @@ ul.article-list li {
 a.article-link {
   --gridshadow: 0 0 0 1px var(--grid);
   text-align: center;
-  padding: 0.5rem;
+  padding: 1rem;
   display: block;
   text-decoration: none;
   color: var(--fore);
