@@ -887,9 +887,9 @@ main:has( select#view_mode option[value="5"]:checked ) {
 
 
 main .block.quote {
-
   margin-left: 4rem;
   margin-right: 4rem;
+  margin-top: 1px;
 }
 
 main .block.quote aside {
@@ -906,8 +906,7 @@ main .block.quote aside {
 
 main blockquote {
     font-size: 2rem;
-    margin: 0;
-padding: 1rem;
+    padding: 1rem;
   }
 
 
