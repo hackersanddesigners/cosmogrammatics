@@ -511,7 +511,7 @@ a.article-link .article-authors {
         border:var(--gridline); */
 
     }
-    .default header,
+    /* .default header,
     .article header {
       animation: change_width var(--fast) ease forwards;
     }
@@ -525,7 +525,7 @@ a.article-link .article-authors {
         max-width:  var(--main-width);
         margin-left: 14rem;
       }
-    }
+    } */
 
 
     header .title a {
