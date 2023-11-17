@@ -96,6 +96,7 @@ main .block {
   color: var(--fore);
   box-shadow:var(--gridshadow);
   padding: 1rem !important;
+  line-height: 1.2;
 }
 
 /* main .block::before { */
@@ -453,8 +454,9 @@ main .row .column .block:not(.columns):focus-within a.click-copy {
 .ref-ft {
   text-decoration: none;
   color: var(--fore);
-  vertical-align: super;
-  font-size: smaller;
+  /* vertical-align: super; */
+  vertical-align: top;
+  font-size: 0.6em;
 }
 
 
