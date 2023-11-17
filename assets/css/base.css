@@ -426,12 +426,14 @@ ul.article-list {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 2rem;
+  justify-content: center;
+  align-content: flex-start;
 }
 
  ul.article-list li {
-  flex-basis: calc( ( 100% - 2rem ) / 3 );
-  min-width: 24rem;
+  flex-basis: calc( ( 100% - 4rem ) / 3 );
+  min-width: 22rem;
 }
 
 
@@ -443,7 +445,7 @@ ul.article-list {
   box-sizing: border-box;
   list-style: none;
   margin: 0rem;
-  padding: 1rem;
+  padding: 2rem;
 }
 
 ul.article-list li {
@@ -481,13 +483,13 @@ a.article-link .article-authors {
 @media screen and (max-width: 600px) {
 
   ul.article-list {
-   margin: 0.5rem;
+   margin: 2rem;
    display: block;
    padding: 0;
  }
 
   ul.article-list li {
-   margin-bottom: 0.5rem;
+   margin-bottom: 2rem;
  }
 
 }
