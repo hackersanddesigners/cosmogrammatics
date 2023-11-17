@@ -5,6 +5,8 @@ const { commentReviewList } = require('../comment-review')
 const viewMode = require('../view-mode')
 const footnotesDesign = require('../footnotes-design')
 const gallery = require('../gallery.js')
+const full_screen_images = require('../full-screen-images')
+
 
 ;(async() => {
 
@@ -31,7 +33,11 @@ const gallery = require('../gallery.js')
   // footnotes design
   footnotesDesign()
 
+  // init galleries
   const gallery_init  = gallery.init()
+
+  // init full screen images
+  const full_screen_images_init = full_screen_images.init()
 
 
 })()

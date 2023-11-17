@@ -201,12 +201,44 @@ main .block .caption {
 main .block figure {
   margin-inline: unset;
 }
+body div.fullscreen {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body div.fullscreen img {
+  max-width: 95vw;
+  max-height: 95vh;
+}
+body div.fullscreen span {
+  position: absolute;
+  top: 0; right: 0;
+  width: var(--header-height);
+  height: var(--header-height);
+  border-radius: var(--header-height);
+  background-color: var(--back);
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin: 2.5vh;
+}
 
 main .block figure.orphan_image {
   /* border: var(--gridline); */
   padding: 0.5rem;
   /* background-color: limegreen; */
 }
+
 
 main .row .column .block aside {
   position: absolute;
