@@ -12,6 +12,7 @@
 main {
     display: flex;
     flex-direction: column;
+    justify-content: center ;
     font-family: var(--body);
     font-size: 1.25rem;
 }
@@ -29,6 +30,7 @@ main h1 {
 .view-comment-options-wrapper {
     display: relative;
     min-width: 14rem;
+    /* margin-left: -15rem; */
 }
 
 /* position: sticky does not work if parent element is
@@ -43,6 +45,9 @@ main h1 {
 
 main .content-wrapper {
     width: 100%;
+    max-width: calc( var(--main-width) + 14rem );
+    overflow: visible;
+    /* flex-grow: 1; */
 }
 
 .view-options legend,
