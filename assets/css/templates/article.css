@@ -918,18 +918,3 @@ main blockquote {
     min-height: 80vh;
     border: none;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-main blockquote footer a.ref-ft {
-  display: none;
-}
