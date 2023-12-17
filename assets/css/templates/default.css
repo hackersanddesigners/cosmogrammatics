@@ -87,10 +87,10 @@ main > .row:first-child .block {
 }
 
 main .block {
-background-color: var(--back);
-color: var(--fore);
-box-shadow:var(--gridshadow);
-padding: 1rem !important;
+    background-color: var(--back);
+    color: var(--fore);
+    box-shadow: var(--gridshadow);
+    padding: 1rem !important;
 }
 
 /* main .block::before { */
@@ -190,19 +190,19 @@ main .row .column:nth-of-type(6) .block aside { --n: 6 }
 
 
 main .row .column .block aside .thread {
-border-radius: inherit;
-margin-bottom: 1rem;
-z-index: 1;
+    border-radius: inherit;
+    margin-bottom: 1rem;
+    z-index: 1;
 
 }
 
 main .row .column .block aside article {
-padding: 1rem;
-background-color: var(--accent);
-box-shadow: 0 0 1rem 0 rgb(0, 0, 0, 0.5);
-margin-bottom: 1rem;
-font-family: var(--comments);
-border-radius: inherit;
+    padding: 1rem;
+    background-color: var(--accent);
+    box-shadow: 0 0 1rem 0 rgb(0, 0, 0, 0.5);
+    margin-bottom: 1rem;
+    font-family: var(--comments);
+    border-radius: inherit;
 }
 
 main .row .column .block aside article.comment-draft {
@@ -212,16 +212,7 @@ main .row .column .block aside article.comment-draft {
 }
 
 main .row .column .block aside article footer {
-margin-top: 0.5rem;
-}
-
-/* main .row .column .block:not(.columns):focus-within,
-main .row .column .block:not(.columns):focus-within aside article,
-main .row .column .block:not(.columns) aside article:focus-within { */
-main .row .column .block:focus-within,
-main .row .column .block:focus-within aside article,
-main .row .column .block aside article:focus-within {
-box-shadow: 0 0 2rem 0 var(--accent);
+  margin-top: 0.5rem;
 }
 
 main .row .column .block.selected:focus-within {
