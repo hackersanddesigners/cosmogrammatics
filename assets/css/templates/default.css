@@ -394,10 +394,11 @@ font-size: smaller;
 
 /* <2022-11-14T10:58> andré: bad CSS */
 
-main .notes.column[data-col-width="1/1"] {
-/* max-width: calc( var(--main-width) / 1 ); */
-/* padding: 0 0 0 calc( var(--header-height) / 2 ); */
-/* width: 100%; */
+@media screen and (min-width: 800px) {
+    main .notes.column[data-col-width="1/1"] {
+	max-width: calc( calc(var(--main-width) / 1) + 1px );
+	width: calc(100% + 1px);
+    }
 }
 
 
@@ -410,9 +411,9 @@ margin-left: -4rem;
 }
 
 .notes {
-margin-left: 0rem;
-opacity: 0;
-animation: fade_in 1s linear forwards;
+    margin-left: 0rem;
+    opacity: 0;
+    animation: fade_in 0.15s linear forwards;
 }
 
 @keyframes fade_in {
@@ -428,34 +429,21 @@ animation: fade_in 1s linear forwards;
 }
 
 .notes ol {
-  padding-left: 0;
+  padding-left: 1rem;
   display: inline-table;
   list-style: none;
+  width: 100%;
 }
 
 .notes ol li {
   padding: 0;
-  padding-left: calc( var( --side-width ) + 2rem );
   display: table-row;
-  border-top: var(--gridline);
-
   counter-increment: number-list;
   font-family: var(--footnotes);
   font-size: 0.9rem;
   line-height: 1rem;
-
-  display: block;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  /* trick to hide top rim of overflown text */
-  padding-bottom: 0.3em;
   padding-top: 0.5rem;
-
 }
-
 
 .notes ol li::before {
   content: counter(number-list) '.';
@@ -481,50 +469,35 @@ outline-width: 2px; */
 
 .notes ol li p {
   margin: 0;
-  /* padding: 0.25rem; */
-  /* display: inline; */
-/* display: inline-block; */
-background-color: white;
-padding-right: 0.5rem;
-padding-top: 0.5rem;
+  background-color: white;
+  padding-right: 0.5rem;
 }
 
 .note-ref-backlink {
-padding-left: 0.3rem;
+    display: none;
 }
 
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 800px) {
   .notes {
-      position: absolute;
-      top: 0;
-      height: 100%;
-      width: calc( 2 * var(--side-width) + 4rem );
-      /* border-left: 1px solid red; */
-
-  }
-
-  main .notes.column[data-col-width="1/1"] {
-      /* max-width: calc( var(--main-width) / 1 ); */
-      /* padding: 0 0.25rem 0 calc( var(--header-height) / 2 ); */
+      border-right: 1px solid black;
   }
 
   .notes ol {
       width: 100%;
       height: 100%;
       margin: 0;
-  }
-
-  .notes ol li {
-      /* display: flex; */
-      /* align-items: baseline; */
-      /* padding: 0; */
+      padding-top: 2rem;
   }
 
   .notes ol li p {
-    background-color: var(--back);
+      background-color: var(--back);
+      padding-bottom: 0.5rem;
+  }
 
-      /* padding: 0; */
+  .note-ref-backlink {
+      display: inline-block;
+      padding-left: 0.3rem;
   }
 }
 
@@ -745,7 +718,7 @@ font-size: 1.5rem;
 }
 
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 800px) {
 
   main {
       display: flex;

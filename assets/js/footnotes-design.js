@@ -2,7 +2,7 @@ function footnotesDesign() {
 
   function smallScreen(refs, notesWrap, notes) {
 
-    if (window.innerWidth <= 600) { 
+    if (window.innerWidth <= 800) { 
 
       notesWrap.classList.add('hidden')
 
@@ -60,8 +60,7 @@ function footnotesDesign() {
   }
 
   function bigScreen() {
-
-    if (window.innerWidth >= 600) { 
+    if (window.innerWidth >= 800) { 
 
       // -- reset from small-screen when window-resizing
       notesWrap.classList.remove('hidden')
@@ -72,46 +71,6 @@ function footnotesDesign() {
           note.removeAttribute('style')
         })
       }
-      // --
-
-
-      // -- set notes-wrap
-      //    we set notes-wrap to left => content-block width?
-      //    TODO double check this, as the code should be
-      //    => `sideColumn.width + contentBlock.width` instead
-      let sideColumn = document.querySelector('.view-comment-options-wrapper')
-      let sideColumnRect = sideColumn.getBoundingClientRect()
-
-      let contentBlock = document.querySelector('.content-wrapper .row .column')
-      let contentBlockRect = contentBlock.getBoundingClientRect()
-
-      notesWrap.style.left = `${contentBlockRect.width}px`
-
-      // -- position notes aligned to footnote-ref
-      refs.forEach(ref  => {
-
-        // get footnote-ref top position
-        let top = Math.round(ref.getBoundingClientRect().top - notesWrap.getBoundingClientRect().top)
-
-        // get note
-        const id = ref.id.split('-').pop()
-        const note = notes.find(note => note.id.split('-').pop() === id)
-
-        if (note) {
-
-          // set note to footnote-ref top position
-          if (note.previousElementSibling) {
-            top = solveFor(note, top, notesWrap.getBoundingClientRect().top)
-          }
-
-          note.style.position = 'absolute'
-          note.style.top = `${top}px`
-          // --
-
-        }
-
-      })
-
     }
   }
 
@@ -122,17 +81,7 @@ function footnotesDesign() {
     const previousElTop = parseInt(previousEl.style.top, 10)
     const previousElBottom = previousEl.getBoundingClientRect().bottom - parentTop
 
-    // check for overlaps
-    if (currentTop === previousElTop) {
-      const newTop = currentTop + previousEl.getBoundingClientRect().height
-      return newTop
-    } else if (currentTop < previousElBottom) {
-      const newTop = previousElBottom
-      return newTop
-    } else {
-      return currentTop
-    } 
-
+    return currentTop
   }
 
 
