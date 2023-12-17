@@ -65,6 +65,13 @@ function commentReviewList(article_slug) {
       username.value = username_input.value
       user_store.save(username)
 
+      // force-add every comment-thread input form
+      // to display the newly set `username`
+      const comment_threads = Array.from(document.querySelectorAll('.comment_form'));
+      comment_threads.map(thread => {
+	thread.querySelector('#author').value = username_input.value;
+      });
+
       // reset styles
       target.textContent = 'edit'
 
