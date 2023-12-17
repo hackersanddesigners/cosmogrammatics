@@ -563,7 +563,7 @@ main .notes.column[data-col-width="1/1"] {
 }
 
 .note-ref-backlink {
-  padding-left: 0.3rem;
+    display: none;
 }
 
 
@@ -598,6 +598,9 @@ main .notes.column[data-col-width="1/1"] {
       background-color: var(--back);
 
         /* padding: 0; */
+    .note-ref-backlink {
+	display: inline-block;
+        padding-left: 0.3rem;
     }
 }
 

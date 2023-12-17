@@ -9,13 +9,13 @@
            $note = $footnote->citation();
            $ref = $footnote->id();
          } else {
-           $note = $footnote->note();
+           $note = $footnote->note()->inline();
            $ref = $footnote->ref();
          }
     ?>
-      <li id="note-ref-<?= $ref ?>" data-bid="<?= $footnote->bid() ?>">
-          <?= $note ?>
-      </li>
+     <li id="note-ref-<?= $ref ?>" data-bid="<?= $footnote->bid() ?>">
+       <p><?= $note ?><a href="#ft-<?= $ref ?>" class="note-ref-backlink">↩</a></p>
+     </li>
     <?php endforeach ?>
    </ol>
 <?php endif ?>
