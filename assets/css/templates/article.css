@@ -45,7 +45,7 @@ main h1 {
 
 main .content-wrapper {
     width: 100%;
-    max-width: calc( var(--main-width) + 14rem );
+    max-width: calc( var(--main-width) + 17rem );
     overflow: visible;
     border-left: 1px solid black;
 }
