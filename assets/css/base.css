@@ -536,6 +536,12 @@ a.article-link .article-authors {
 
 @media print {
 
+  * {
+    -webkit-print-color-adjust: economy ;   /* Chrome, Safari 6 – 15.3, Edge */
+    color-adjust: economy ;                 /* Firefox 48 – 96 */
+    print-color-adjust: economy ;           /* Firefox 97+, Safari 15.4+ */
+}
+
   header,
   aside,
   .notes,
