@@ -8,16 +8,21 @@ module.exports = {
       const right = gallery.querySelector( '.right' )
       const rem = parseFloat(getComputedStyle(document.documentElement).fontSize)
 
-      right.onclick = () => { list.scroll({
-        left: list.scrollLeft + gallery.offsetWidth - 2 * rem,
-        behavior: "smooth"
-      })}
+      right.onclick = e => {
+        e.preventDefault()
+        list.scroll({
+          left: list.scrollLeft + gallery.offsetWidth - 2 * rem,
+          behavior: "smooth"
+        })
+      }
 
-      left.onclick = () => { list.scroll({
-        left: list.scrollLeft - gallery.offsetWidth + 2 * rem,
-        behavior: "smooth"
-      })}
-
+      left.onclick = e => {
+        e.preventDefault()
+        list.scroll({
+          left: list.scrollLeft - gallery.offsetWidth + 2 * rem,
+          behavior: "smooth"
+        })
+      }
 
     }
 

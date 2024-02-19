@@ -45,7 +45,7 @@ main h1 {
 
 main .content-wrapper {
     width: 100%;
-    max-width: calc( var(--main-width) + 14rem );
+    max-width: calc( var(--main-width) + 17rem );
     overflow: visible;
     border-left: 1px solid black;
 }
@@ -169,6 +169,7 @@ main .block.gallery .controls span {
   align-items: center;
   font-size: 1.5rem;
   cursor: pointer;
+  user-select: none;
 }
 
 main .block a {
