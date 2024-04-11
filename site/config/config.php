@@ -14,6 +14,32 @@ return [
         'translations' => []
     ],
 
+    'thumbs' => [
+        'srcsets' => [
+            'default' => [
+                '400w'  => ['width' => 400],
+                '600w'  => ['width' => 600],
+                '900w'  => ['width' => 900],
+                '1200w' => ['width' => 1200],
+                '1800w' => ['width' => 1800]
+            ],
+            'avif' => [
+                '400w'  => ['width' => 400, 'format' => 'avif'],
+                '600w'  => ['width' => 600, 'format' => 'avif'],
+                '900w'  => ['width' => 900, 'format' => 'avif'],
+                '1200w' => ['width' => 1200, 'format' => 'avif'],
+                '1800w' => ['width' => 1800, 'format' => 'avif']
+            ],
+            'webp' => [
+                '400w'  => ['width' => 400, 'format' => 'webp'],
+                '600w'  => ['width' => 600, 'format' => 'webp'],
+                '900w'  => ['width' => 900, 'format' => 'webp'],
+                '1200w' => ['width' => 1200, 'format' => 'webp'],
+                '1800w' => ['width' => 1800, 'format' => 'webp']
+            ],
+        ]
+    ],
+
     // 'routes' => [
     //     [
     //         'pattern' => 'sitemap.xml',
