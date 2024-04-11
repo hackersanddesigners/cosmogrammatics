@@ -60,22 +60,24 @@ if ($src) {
       <a href="<?= Str::esc($link->toUrl()) ?>">
 	<img
 	  preload="metadata"
-		   alt="<?= $alt->esc() ?>"
-		   src="<?= $src ?>"
-		   srcset="<?= $block->srcset() ?>"
-		   sizes="<?= $sizes ?>"
-		   width="<?= $img_width ?>"
+	  alt="<?= $alt->esc() ?>"
+	  src="<?= $src ?>"
+	  srcset="<?= $block->srcset() ?>"
+	  sizes="<?= $sizes ?>"
+	  width="<?= $img_width ?>"
+	  height="auto"
 	>
       </a>
     <?php else: ?>
       <a href="<?= $src ?>">
 	<img
 	  preload="metadata"
-		   alt="<?= $alt->esc() ?>"
-		   src="<?= $src ?>"
-		   srcset="<?= $block->srcset() ?>"
-		   sizes="<?= $sizes ?>"
-		   width="<?= $img_width ?>"
+	  alt="<?= $alt->esc() ?>"
+	  src="<?= $src ?>"
+	  srcset="<?= $block->srcset() ?>"
+	  sizes="<?= $sizes ?>"
+	  width="<?= $img_width ?>"
+	  height="auto"
 	>
       </a>
     <?php endif ?>

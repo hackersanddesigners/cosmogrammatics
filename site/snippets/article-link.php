@@ -73,6 +73,7 @@ if ($src) {
 	  sizes="<?= $sizes ?>"
 	  width="<?= $img_width ?>"
 	  height="<?= $img_height ?>"
+	  height="auto"
 	>
       <?php else: ?>
 	<img
@@ -82,6 +83,7 @@ if ($src) {
 	  srcset="<?= $block_image->srcset() ?>"
 	  sizes="<?= $sizes ?>"
 	  width="<?= $img_width ?>"
+	  height="auto"
 	>
       <?php endif ?>
     </figure>
