@@ -30,28 +30,28 @@ This field is provided under the type `colors`:
 
 ### Dynamic contrast options
 
-In order to set contrast colors, it possible to either query another field:
+In order to set contrast colors, it possible to query another field:
 
-```
+```yml
 colors:
     type: colors
     label: Colors
     contrast:
-      type: query
-      query: site.contrasts
+        type: query
+        query: site.contrasts
 ```
 
-You will have to make sure that the references field returns either a single color or an array of colors. Use methods like `split` to handle comma-separated strings, e. g. `site.constrasts.split`.
+You will have to make sure that the references field returns either a single color or an array of colors. Use methods like `split` to handle comma-separated strings, e. g. `site.contrasts.split`.
 
 If you'd like to reference a field on the same page as your colors field, you'll have to watch for changes in order to get live updates:
 
-```
+```yml
 colors:
     type: colors
     label: Colors
     contrast:
-      type: watch
-      field: contrasts
+        type: watch
+        field: contrasts
 contrasts:
     type: text
     label: Contrast colors
@@ -59,14 +59,14 @@ contrasts:
 
 If you need to split values of the watched field, you have to define the split character as well:
 
-```
+```yml
 colors:
     type: colors
     label: Colors
     contrast:
-      type: watch
-      field: contrasts
-      split: ','
+        type: watch
+        field: contrasts
+        split: ','
 contrasts:
     type: text
     label: Contrast colors

@@ -27,8 +27,31 @@ class Bouncer {
                 'path'  => '/account'
             ];
             $allowed[] = [
+                'title' => 'Login',
+                'path'  => '/login'
+            ];
+            $allowed[] = [
                 'title' => 'Logout',
                 'path'  => '/logout'
+            ];
+            $allowed[] = [
+                'title' => 'Reset password',
+                'path'  => '/reset-password'
+            ];
+        }
+
+        return $allowed;
+    }
+    
+    private static function getChildrenFiles(Kirby\Cms\Page $page) {
+        if (!($page->hasFiles())) { return []; }
+        
+        $allowed = [];
+        $files   = $page->files();
+        foreach($files as $f) {
+            $allowed[] = [
+                'title' => $f->title()->value(),
+                'path'  => $f->panel()->url(true)
             ];
         }
 
@@ -36,10 +59,15 @@ class Bouncer {
     }
 
     private static function getChildren(Kirby\Cms\Page $page) {
-        if (!($page->hasChildren() || $page->hasDrafts())) { return []; }
+        if (!($page->hasChildren() || $page->hasDrafts() || $page->hasFiles())) { return []; }
 
         $allowed = [];
         $pages   = $page->childrenAndDrafts();
+        
+        if($page->hasFiles()){
+            $files = static::getChildrenFiles($page);
+            $allowed  = array_merge($allowed, $files);
+        }
 
         foreach($pages as $p) {
             $allowed[] = [

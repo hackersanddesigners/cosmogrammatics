@@ -1,6 +1,6 @@
 @import '_variables.scss';
 
-.k-input[data-theme="field"][data-type="embed"] {
+.k-embed-field {
     .k-input-icon {
         width: auto;
         .k-embed-infos {
@@ -31,12 +31,12 @@
                 }
                 &-synced, &-failed {
                     font-size: 0.8rem;
-                    padding: 3px 5px 3px 6px;
+                    padding: 2px 5px 2px 6px;
                     display: inline-block;
                     border-radius: 3px;
                 }
                 &-synced {
-                    background: #b9ca88;
+                    background: var(--color-green-300);
                     display: flex;
                     align-items: center;
                     .checkmark {
@@ -58,7 +58,7 @@
                     }
                 }
                 &-failed {
-                    background: #ffced3;
+                    background: var(--color-red-300);
                     display: flex;
                     align-items: center;
                     .cross {
@@ -118,7 +118,7 @@
         background: $color-light url($pattern);
         opacity: 0.45;
     }
-    &[data-provider=youtube],  
+    &[data-provider=youtube],
     &[data-provider=vimeo] {
         .preview-content {
             padding: 0;
@@ -131,14 +131,13 @@
     }
 }
 
-.k-embed-field-preview-icon {
-    background: #b9ca88;
-    width: 18px;
-    height: 18px;
-    line-height: 18px;
-    border-radius: 50%;
-    display: inline-block;
-    font-size: .75em;
-    margin-left: .5em;
-    text-align: center;
+.k-embed-field-preview {
+    padding: 0.375rem var(--table-cell-padding);
+    &-inner {
+        overflow: hidden;
+    }
+    .k-embed-icon {
+        --fit: cover;
+        --back: var(--pattern);
+    }
 }

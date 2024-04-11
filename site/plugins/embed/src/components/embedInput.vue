@@ -12,10 +12,13 @@ export default {
     },
     methods: {
         onInput(value) {
-            if(value == '' || !this.isValidUrl(value)) {
+            if(value == '' || !this.isEmbeddableUrl(value)) {
                 this.media = {}
                 this.emitInput(value)
                 return false;
+            }
+            if(value.includes('https://www.instagram.com')) {
+                value = value.split('?')[0].replace(/\/$/, "");
             }
 
             this.$emit('startLoading')
@@ -68,7 +71,7 @@ export default {
                       document.body.appendChild(embed);
             }
         },
-        isValidUrl(value) {
+        isEmbeddableUrl(value) {
             if(!isUrl(value)) return false
             if(this.provider && !matchProvider(value, this.provider)) return false
             return true
