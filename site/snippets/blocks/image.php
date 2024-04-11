@@ -9,12 +9,18 @@ $ratio   = $block->ratio()->or('auto');
 $src     = null;
 
 if ($block->location() == 'web') {
-    $src = $block->src()->esc();
+  $src = $block->src()->resize(950)->esc();
 } elseif ($image = $block->image()->toFile()) {
-    $alt = $alt ?? $image->alt();
-    $src = $image->url();
+  $alt = $alt ?? $image->alt();
+  $src = $image->resize(950)->url();
 }
 
+// <https://getkirby.com/docs/cookbook/performance/responsive-images>
+$sizes = "(min-width: 1200px) 80vw,
+  100vw";
+
+$img_width = $block->resize(1800)->width();
+// --
 
 // -- is-file-embed
 // check if current file
@@ -32,7 +38,7 @@ $fileEmbed = null;
 if ($src) {
 
   $blockParentID = $block->parent()->id();
-  $imageID = $image->id();
+  $imageID = $block->id();
 
   $file_tokens = explode('/', $imageID);
   array_pop($file_tokens);
@@ -52,11 +58,49 @@ if ($src) {
 >
   <?php if ($link->isNotEmpty()): ?>
   <a href="<?= Str::esc($link->toUrl()) ?>">
-    <img preload="metadata" src="<?= $src ?>" alt="<?= $alt->esc() ?>">
+    <picture>
+      <source
+	srcset="<?= $block->srcset('avif') ?>"
+	sizes="<?= $sizes ?>"
+	type="image/avif"
+      >
+      <source
+	srcset="<?= $block->srcset('webp') ?>"
+	sizes="<?= $sizes ?>"
+	type="image/webp"
+      >
+      <img
+	preload="metadata"
+	alt="<?= $alt->esc() ?>"
+	src="<?= $src ?>"
+	srcset="<?= $block->srcset() ?>"
+	sizes="<?= $sizes ?>"
+	width="<?= $img_width ?>"
+      >
+    </picture>
   </a>
   <?php else: ?>
   <a href="<?= $src ?>">
-    <img preload="metadata" src="<?= $src ?>" alt="<?= $alt->esc() ?>">
+    <picture>
+      <source
+	srcset="<?= $block->srcset('avif') ?>"
+	sizes="<?= $sizes ?>"
+	type="image/avif"
+      >
+      <source
+	srcset="<?= $block->srcset('webp') ?>"
+	sizes="<?= $sizes ?>"
+	type="image/webp"
+      >
+      <img
+	preload="metadata"
+	alt="<?= $alt->esc() ?>"
+	src="<?= $src ?>"
+	srcset="<?= $block->srcset() ?>"
+	sizes="<?= $sizes ?>"
+	width="<?= $img_width ?>"
+      >
+    </picture>
   </a>
   <?php endif ?>
 
