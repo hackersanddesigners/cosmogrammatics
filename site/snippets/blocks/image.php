@@ -52,65 +52,41 @@ if ($src) {
 ?>
 
 <?php if ($src): ?>
-<figure
-  <?= Html::attr(['data-ratio' => $ratio, 'data-crop' => $crop], null, ' ') ?>
-  class="<?= $fileEmbed ? 'orphan_image' : '' ?>"
->
-  <?php if ($link->isNotEmpty()): ?>
-  <a href="<?= Str::esc($link->toUrl()) ?>">
-    <picture>
-      <source
-	srcset="<?= $block->srcset('avif') ?>"
-	sizes="<?= $sizes ?>"
-	type="image/avif"
-      >
-      <source
-	srcset="<?= $block->srcset('webp') ?>"
-	sizes="<?= $sizes ?>"
-	type="image/webp"
-      >
-      <img
-	preload="metadata"
-	alt="<?= $alt->esc() ?>"
-	src="<?= $src ?>"
-	srcset="<?= $block->srcset() ?>"
-	sizes="<?= $sizes ?>"
-	width="<?= $img_width ?>"
-      >
-    </picture>
-  </a>
-  <?php else: ?>
-  <a href="<?= $src ?>">
-    <picture>
-      <source
-	srcset="<?= $block->srcset('avif') ?>"
-	sizes="<?= $sizes ?>"
-	type="image/avif"
-      >
-      <source
-	srcset="<?= $block->srcset('webp') ?>"
-	sizes="<?= $sizes ?>"
-	type="image/webp"
-      >
-      <img
-	preload="metadata"
-	alt="<?= $alt->esc() ?>"
-	src="<?= $src ?>"
-	srcset="<?= $block->srcset() ?>"
-	sizes="<?= $sizes ?>"
-	width="<?= $img_width ?>"
-      >
-    </picture>
-  </a>
-  <?php endif ?>
+  <figure
+    <?= Html::attr(['data-ratio' => $ratio, 'data-crop' => $crop], null, ' ') ?>
+    class="<?= $fileEmbed ? 'orphan_image' : '' ?>"
+  >
+    <?php if ($link->isNotEmpty()): ?>
+      <a href="<?= Str::esc($link->toUrl()) ?>">
+	<img
+	  preload="metadata"
+		   alt="<?= $alt->esc() ?>"
+		   src="<?= $src ?>"
+		   srcset="<?= $block->srcset() ?>"
+		   sizes="<?= $sizes ?>"
+		   width="<?= $img_width ?>"
+	>
+      </a>
+    <?php else: ?>
+      <a href="<?= $src ?>">
+	<img
+	  preload="metadata"
+		   alt="<?= $alt->esc() ?>"
+		   src="<?= $src ?>"
+		   srcset="<?= $block->srcset() ?>"
+		   sizes="<?= $sizes ?>"
+		   width="<?= $img_width ?>"
+	>
+      </a>
+    <?php endif ?>
 
-  <figcaption>
-    <?php if ($caption->isNotEmpty()): ?>
-      <p><?= $caption ?></p>
-    <?php endif ?>
-    <?php if ($fileEmbed): ?>
-      This file originates in the cosmogram <a href="<?= url($fileEmbed) ?>"><i><?= page($fileEmbed)->title() ?></i>.</a>
-    <?php endif ?>
-  </figcaption>
-</figure>
+    <figcaption>
+      <?php if ($caption->isNotEmpty()): ?>
+	<p><?= $caption ?></p>
+      <?php endif ?>
+      <?php if ($fileEmbed): ?>
+	This file originates in the cosmogram <a href="<?= url($fileEmbed) ?>"><i><?= page($fileEmbed)->title() ?></i>.</a>
+      <?php endif ?>
+    </figcaption>
+  </figure>
 <?php endif ?>

@@ -64,38 +64,26 @@ if ($src) {
       <?= Html::attr(['data-ratio' => $ratio, 'data-crop' => $crop], null, ' ') ?>
       class="<?= $fileEmbed ? 'orphan_image' : '' ?>"
     >
-      <picture>
-        <source
-          srcset="<?= $block_image->srcset('avif') ?>"
-          sizes="<?= $sizes ?>"
-          type="image/avif"
-        >
-        <source
-          srcset="<?= $block_image->srcset('webp') ?>"
-          sizes="<?= $sizes ?>"
-          type="image/webp"
-        >
-	<?php if ($link->isNotEmpty()): ?>
-	  <img
-	    preload="metadata"
-	    alt="<?= $alt->esc() ?>"
-	    src="<?= $src ?>"
-	    srcset="<?= $block_image->srcset() ?>"
-	    sizes="<?= $sizes ?>"
-	    width="<?= $img_width ?>"
-	    height="<?= $img_height ?>"
-	  >
-	<?php else: ?>
-	  <img
-	    preload="metadata"
-	    alt="<?= $alt->esc() ?>"
-	    src="<?= $src ?>"
-	    srcset="<?= $block_image->srcset() ?>"
-	    sizes="<?= $sizes ?>"
-	    width="<?= $img_width ?>"
-	  >
-      </picture>
-	<?php endif ?>
+      <?php if ($link->isNotEmpty()): ?>
+	<img
+	  preload="metadata"
+	  alt="<?= $alt->esc() ?>"
+	  src="<?= $src ?>"
+	  srcset="<?= $block_image->srcset() ?>"
+	  sizes="<?= $sizes ?>"
+	  width="<?= $img_width ?>"
+	  height="<?= $img_height ?>"
+	>
+      <?php else: ?>
+	<img
+	  preload="metadata"
+	  alt="<?= $alt->esc() ?>"
+	  src="<?= $src ?>"
+	  srcset="<?= $block_image->srcset() ?>"
+	  sizes="<?= $sizes ?>"
+	  width="<?= $img_width ?>"
+	>
+      <?php endif ?>
     </figure>
   <?php endif ?>
   
