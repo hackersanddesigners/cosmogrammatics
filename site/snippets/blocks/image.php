@@ -7,19 +7,20 @@ $crop    = $block->crop()->isTrue();
 $link    = $block->link();
 $ratio   = $block->ratio()->or('auto');
 $src     = null;
+$img_width = null;
 
 if ($block->location() == 'web') {
   $src = $block->src()->resize(950)->esc();
+  $img_width = $block->src()->resize(1800)->width();
 } elseif ($image = $block->image()->toFile()) {
   $alt = $alt ?? $image->alt();
   $src = $image->resize(950)->url();
+  $img_width = $image->resize(1800)->width();
 }
 
 // <https://getkirby.com/docs/cookbook/performance/responsive-images>
 $sizes = "(min-width: 1200px) 80vw,
   100vw";
-
-$img_width = $block->resize(1800)->width();
 // --
 
 // -- is-file-embed
